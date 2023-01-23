@@ -1,0 +1,1467 @@
+<!doctype html>
+<html lang=en>
+   <head>
+      <meta charset=utf-8>
+      <meta name=viewport content="width=device-width, initial-scale=1, maximum-scale=1">
+      <meta name=robots content="index, follow">
+      <meta name=description content="Daytrip API Reference">
+      <title>Daytrip API Reference</title>
+      <link rel=icon href=images/bookmark.adfb7694.png>
+      <link href=css/screen.21a86285.css rel=stylesheet media=screen>
+      <link href=css/print.0babe0f0.css rel=stylesheet media=print>
+      <link href=css/highlight-monokai.f7211925.css rel=stylesheet media=screen,print>
+      <script src=js/all.c545053d.js></script>
+   </head>
+   <body class="" data-languages="[&#34;bash&#34;,&#34;python&#34;,&#34;javascript&#34;]">
+      <a href=# id=nav-button>
+         <span>NAV <img alt=navbar class=image-navbar src=images/navbar.adfb7694.png></span>
+      </a>
+      <div class=tocify-wrapper>
+         <img alt=logo class=image-logo src=images/logo.cebfff19.png>
+         <div class=lang-selector>
+            <a href=# data-language-name="bash">bash</a>
+            <a href=# data-language-name="python">python</a>
+            <a href=# data-language-name="javascript">javascript</a>
+         </div>
+         <div class=search>
+            <input type=text class=search id=input-search placeholder="Search">
+         </div>
+         <ul class=search-results></ul>
+         <div id=toc></div>
+      </div>
+      <div class=page-wrapper>
+         <div class=dark-box></div>
+         <div class=content>
+            <h1 id="introduction">Introduction</h1>
+            <p>DISCLAIMER: THIS VERSION OF THE API IS CURRENTLY IN DEVELOPMENT AND WILL BE READY FOR INTEGRATION IN MARCH 2023. BUT THE API CONTRACT DESCRIBED BELOW IS FINAL.</p>
+            <p>The Daytrip API is organized around REST. Our API accepts JSON-encoded request bodies, returns JSON-encoded responses, and uses standard HTTP response codes and verbs.</p>
+            <p>The API can be used to search for trip options, customize a trip with stops, book a trip, get details about a booking or cancel a booking.</p>
+            <h2 id="contacts">Contacts</h2>
+            <h3 id="onboarding">Onboarding</h3>
+            <p>If you want to integrate with our API, contact us at <a href="mailto:&#112;&#x61;&#x72;&#116;&#110;&#x65;&#x72;&#115;&#64;&#x6d;&#121;&#100;&#97;&#121;&#116;&#x72;&#105;&#112;&#46;&#99;&#111;&#x6d;">&#112;&#x61;&#x72;&#116;&#110;&#x65;&#x72;&#115;&#64;&#x6d;&#121;&#100;&#97;&#121;&#116;&#x72;&#105;&#112;&#46;&#99;&#111;&#x6d;</a> to get a partner account and an API key. </p>
+            <h3 id="customer-support-emergency">Customer support emergency</h3>
+            <p>To solve problems with bookings created via the API you can contact <a href="mailto:&#100;&#x61;&#121;&#x74;&#114;&#105;&#x70;&#64;&#109;&#121;&#x64;&#x61;&#121;&#116;&#x72;&#x69;&#x70;&#x2e;&#99;&#111;&#109;">&#100;&#x61;&#121;&#x74;&#114;&#105;&#x70;&#64;&#109;&#121;&#x64;&#x61;&#121;&#116;&#x72;&#x69;&#x70;&#x2e;&#99;&#111;&#109;</a> or call <a href="tel:+442033181119">+44 20 3318 1119</a>.</p>
+            <h1 id="environments">Environments</h1>
+            <p>Daytrip offers a sandbox environment where you can test your integration with the API without creating real bookings. All the code examples provided in this documentation are using this sandbox environment. Each environment requires a different API key. When your integration is ready and tested against the sandbox environment, you can request an API key for the production environment.</p>
+            <h2 id="urls">URLs</h2>
+            <table>
+               <thead>
+                  <tr>
+                     <th>Environment</th>
+                     <th>Base partner API url</th>
+                  </tr>
+               </thead>
+               <tbody>
+                  <tr>
+                     <td>Sandbox</td>
+                     <td><a href="https://api.staging.mydaytrip.net/partners/v3/">https://api.staging.mydaytrip.net/partners/v3/</a></td>
+                  </tr>
+                  <tr>
+                     <td>Production</td>
+                     <td><a href="https://api.mydaytrip.com/partners/v3/">https://api.mydaytrip.com/partners/v3/</a></td>
+                  </tr>
+               </tbody>
+            </table>
+            <h1 id="authentication">Authentication</h1>
+            <blockquote>
+               <p>To authorize your requests, add the <code>x-api-key</code> header like this:</p>
+            </blockquote>
+            <pre class="highlight bash"><code>curl <span class="hljs-string">&quot;https://api.staging.mydaytrip.net/partners/v3/trip/search&quot;</span>
+  -H <span class="hljs-string">&quot;x-api-key: your-api-key&quot;</span></code></pre><pre class="highlight javascript"><code></code></pre><pre class="highlight python"><code></code></pre>
+            <blockquote>
+               <p>Make sure to replace <code>your-api-key</code> with your API key.</p>
+            </blockquote>
+            <p>Daytrip API uses API keys to allow access to the API. The API key needs to be included in the <code>x-api-key</code> header with each API request.</p>
+            <p>Your API key carries many privileges, so be sure to keep it secure! Do not share your secret API key in publicly accessible areas such as GitHub, client-side code, and so forth.</p>
+            <h1 id="errors">Errors</h1>
+            <p>Daytrip uses conventional HTTP response codes to indicate the success or failure of an API request. In general: codes in the 2xx range indicate success. Codes in the 4xx range indicate an error that failed given the information provided (e.g., a required parameter was omitted, no trip was found for given parameters, etc.). Codes in the 5xx range indicate an error with Daytrip&#39;s servers (these are rare).</p>
+            <table>
+               <thead>
+                  <tr>
+                     <th>HTTP Code</th>
+                     <th>Meaning</th>
+                  </tr>
+               </thead>
+               <tbody>
+                  <tr>
+                     <td>400</td>
+                     <td>Bad Request - Missing mandatory parameters, wrong types of parameters or not a valid json.</td>
+                  </tr>
+                  <tr>
+                     <td>401</td>
+                     <td>Unauthorized - API key is missing or invalid.</td>
+                  </tr>
+                  <tr>
+                     <td>403</td>
+                     <td>Forbidden - The requested operation is forbidden.</td>
+                  </tr>
+                  <tr>
+                     <td>404</td>
+                     <td>Not Found - No trips found, trip option not found, booking not found, endpoint does not exist.</td>
+                  </tr>
+                  <tr>
+                     <td>500</td>
+                     <td>Internal Server Error - We had a problem with our service. Please retry your request.</td>
+                  </tr>
+                  <tr>
+                     <td>503</td>
+                     <td>Service Unavailable - We had a problem with our service. Please retry your request.</td>
+                  </tr>
+               </tbody>
+            </table>
+            <h1 id="debugging">Debugging</h1>
+            <p>Every response from the Daytrip APi contains a <code>x-correlation-id</code> header with a unique identifier of the HTTP call. If you send us this identifier, we can give you more detailed info about what went wrong with your call.</p>
+            <p>If you are using correlation ids on your side as well, you can send us <code>x-correlation-id</code> header with your requests and we will use your own correlation id value.</p>
+            <p><a href="https://microsoft.github.io/code-with-engineering-playbook/observability/correlation-id/">About correlation ids</a></p>
+            <h1 id="trip-api">Trip API</h1>
+            <p>A trip is a representation of passenger transportation from point A to point B. Each search will usually return multiple trip options that can be booked. Options can differ by vehicle type or by being private or shared with other travelers. Shared trips have predefined pick up and drop off points and departure times. For private trips pick up and drop off points as well as departure time are matching the search request. Private trips can also be customized by adding stops if available.</p>
+            <h2 id="flows">Flows</h2>
+            <p>Trip API can be used to search for trip options, customizing an option with stops and then booking the option. </p>
+            <h3 id="simple-trip">Simple trip</h3>
+            <p>A typical simple flow without stop customization would look like this:</p>
+            <ol>
+               <li>call <a href="#search-endpoint">/search</a> endpoint to get possible options</li>
+               <li>call <a href="#book-endpoint">/book</a> endpoint to book the chosen option</li>
+               <li><code>optional</code> - call <a href="#details-endpoint">/details</a> endpoint to get trip and booking details</li>
+            </ol>
+            <h3 id="trip-with-a-stop">Trip with a stop</h3>
+            <p>A flow with adding stops would look like this:</p>
+            <ol>
+               <li>call <a href="#search-endpoint">/search</a> endpoint to get possible options</li>
+               <li>call <a href="#customize-endpoint">/customize</a> endpoint to add stops to the chosen option</li>
+               <li>call <a href="#book-endpoint">/book</a> endpoint to book the customized option</li>
+               <li><code>optional</code> - call <a href="#details-endpoint">/details</a> endpoint to get trip and booking details</li>
+            </ol>
+            <h3 id="cancelling-a-trip">Cancelling a trip</h3>
+            <p>A flow to book a trip, get details about it and then cancel it would look like this:</p>
+            <ol>
+               <li>call <a href="#search-endpoint">/search</a> endpoint to get possible options</li>
+               <li>call <a href="#book-endpoint">/book</a> endpoint to book the chosen option</li>
+               <li><code>optional</code> - call <a href="#details-endpoint">/details</a> endpoint to get trip and booking details</li>
+               <li>call <a href="#cancel-endpoint">/cancel</a> endpoint to cancel the booking</li>
+               <li><code>optional</code> - call <a href="#details-endpoint">/details</a> endpoint to get trip and booking details (status should be &quot;Cancelled&quot;)</li>
+            </ol>
+            <h3 id="updates">Updates</h3>
+            <p>If you want to make pick up, drop off, passenger count or departure time changes to the booking you need to cancel it and create it again. For small adjustments like changing passenger phone number or email please contact our <a href="#contacts">support</a>.</p>
+            <h2 id="search-endpoint">Search endpoint</h2>
+            <blockquote>
+               <p>To search for a trip from Prague to Vienna for two passengers, use this call:</p>
+            </blockquote>
+            <pre class="highlight bash"><code>curl <span class="hljs-string">&quot;https://api.staging.mydaytrip.net/partners/v3/trip/search?originLongitude=14.2559&amp;originLatitude=50.10&amp;destinationLongitude=16.3738&amp;destinationLatitude=48.2082&amp;departureTime=1766227088&amp;passengersCount=2&quot;</span>
+  -H <span class="hljs-string">&quot;x-api-key: your-api-key&quot;</span></code></pre><pre class="highlight javascript"><code></code></pre><pre class="highlight python"><code></code></pre>
+            <blockquote>
+               <p>The above call returns JSON structured like this:</p>
+            </blockquote>
+            <pre class="highlight json"><code><span class="hljs-punctuation">{</span>
+   <span class="hljs-attr">&quot;searchId&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;f0e34a1b-2b3d-4747-b426-292633b615b4&quot;</span><span class="hljs-punctuation">,</span>
+   <span class="hljs-attr">&quot;expiresAt&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;2022-12-04T18:00:00Z&quot;</span><span class="hljs-punctuation">,</span>
+   <span class="hljs-attr">&quot;passengersCount&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">2</span><span class="hljs-punctuation">,</span>
+   <span class="hljs-attr">&quot;currency&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;EUR&quot;</span><span class="hljs-punctuation">,</span>
+   <span class="hljs-attr">&quot;options&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-punctuation">[</span>
+      <span class="hljs-punctuation">{</span>
+         <span class="hljs-attr">&quot;id&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;1d32109f-c2e2-44fe-b2cf-461ef3730541&quot;</span><span class="hljs-punctuation">,</span>
+         <span class="hljs-attr">&quot;type&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;Private&quot;</span><span class="hljs-punctuation">,</span>
+         <span class="hljs-attr">&quot;distanceKm&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">334</span><span class="hljs-punctuation">,</span>
+         <span class="hljs-attr">&quot;travelTimeMinutes&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">208</span><span class="hljs-punctuation">,</span>
+         <span class="hljs-attr">&quot;pickUp&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-punctuation">{</span>
+            <span class="hljs-attr">&quot;lat&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">50.10</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;lon&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">14.25</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;time&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;2022-12-05T18:00:00Z&quot;</span>
+         <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+         <span class="hljs-attr">&quot;dropOff&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-punctuation">{</span>
+            <span class="hljs-attr">&quot;lat&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">48.20</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;lon&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">16.37</span>
+         <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+         <span class="hljs-attr">&quot;pricing&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-punctuation">{</span>
+            <span class="hljs-attr">&quot;totalPrice&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">260</span>
+         <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+         <span class="hljs-attr">&quot;vehicle&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-punctuation">{</span>
+            <span class="hljs-attr">&quot;type&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;Sedan&quot;</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;maxPassengers&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">3</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;description&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;Sedan comparable to a Volkswagen Passat, up to 3 passengers with luggage.&quot;</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;image&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;https://daytrip.imgix.net/site/sedan.png&quot;</span>
+         <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+         <span class="hljs-attr">&quot;luggage&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-punctuation">{</span>
+            <span class="hljs-attr">&quot;maxTotalCarryons&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">3</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;maxTotalSuitcases&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">3</span>
+         <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+         <span class="hljs-attr">&quot;availableChildSeatTypes&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-punctuation">[</span>
+            <span class="hljs-punctuation">{</span>
+               <span class="hljs-attr">&quot;childSeatType&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;RearFacing&quot;</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;description&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;Rear-facing infant seat&quot;</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;ageFrom&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">0</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;ageTo&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">1</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;weightInPoundsFrom&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">0</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;weightInPoundsTo&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">26</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;weightInKilosFrom&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">0</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;weightInKilosTo&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">10</span>
+            <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-punctuation">{</span>
+               <span class="hljs-attr">&quot;childSeatType&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;ForwardFacing&quot;</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;description&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;Forward-facing w/harness&quot;</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;ageFrom&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">1</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;ageTo&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">4</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;weightInPoundsFrom&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">18</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;weightInPoundsTo&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">36</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;weightInKilosFrom&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">8</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;weightInKilosTo&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">16</span>
+            <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-punctuation">{</span>
+               <span class="hljs-attr">&quot;childSeatType&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;BoosterSeat&quot;</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;description&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;Booster seat with high back&quot;</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;ageFrom&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">4</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;ageTo&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">6</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;weightInPoundsFrom&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">30</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;weightInPoundsTo&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">50</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;weightInKilosFrom&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">14</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;weightInKilosTo&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">23</span>
+            <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-punctuation">{</span>
+               <span class="hljs-attr">&quot;childSeatType&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;Booster&quot;</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;description&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;Backless booster&quot;</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;ageFrom&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">6</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;ageTo&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">12</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;weightInPoundsFrom&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">44</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;weightInPoundsTo&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">72</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;weightInKilosFrom&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">20</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;weightInKilosTo&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">33</span>
+            <span class="hljs-punctuation">}</span>
+         <span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+         <span class="hljs-attr">&quot;possibleStops&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-punctuation">[</span>
+            <span class="hljs-punctuation">{</span>
+               <span class="hljs-attr">&quot;id&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;d280ce2a-6224-4d95-af17-a250f81b97dd&quot;</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;price&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">31</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;Lednice Chateau and Park&quot;</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;image&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;https://daytrip.imgix.net/lednice-chateau-and-park4.jpg&quot;</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;title&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;Vacation like a King&quot;</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;perex&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;This UNESCO-listed chateau and sprawling park was the Lichtenstein&#x27;s holiday home - exactly the kind of extravagance you&#x27;d expect from a dynasty with their own country. &quot;</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;description&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;The Liechtensteins really came into the money with the fortunes seized from Czech noblemen after their victory at the Battle of White Mountain in 1620, and Lednice was one of the presents they bought themselves. In the mid-19th century the baroque manor was given a complete makeover in the &#x27;Windsor Gothic&#x27; style, leaving it as we see it today: a shameless flaunting of fabulous wealth, a slap in the face to anyone foolish enough to think that the French Revolution had ended high-living in Europe. The surrounding English landscape park, the largest in the country, is an incomparable swath of green, sprinkled with Romantic follies. There&#x27;s also a monumental greenhouse open all year round, overflowing with exotic growths gathered by an army of botanists across the Americas. The greenhouse&#x27;s exoticism is echoed by the charming minaret, constructed at the turn of the 18th century, bringing a whiff of Morocco to Moravia.\nFor more info: www.zamek-lednice.com&quot;</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;durationInMinutes&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">60</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;order&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">1</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;timezone&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;Europe/Prague&quot;</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;country&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-punctuation">{</span>
+                  <span class="hljs-attr">&quot;englishName&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;Czech Republic&quot;</span>
+               <span class="hljs-punctuation">}</span>
+            <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-punctuation">{</span>
+               <span class="hljs-attr">&quot;id&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;4ee58c0c-4e56-46ef-bd22-406a1bc60e1c&quot;</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;price&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">28</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;Mikulov&quot;</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;image&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;https://daytrip.imgix.net/510.jpg&quot;</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;title&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;The Heart of Czech Wine Country&quot;</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;perex&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;A town with a history as deep and flavourful as its wine, Mikulov provides a perfect combination of relaxation and exploration.&quot;</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;description&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;Often favoured by visitors with a more active approach to life, Mikulov has much to offer. Surrounded by idyllic countryside, crisscrossed by bicycle paths and marked hiking trails, and the nearby Nové Mlýny lakes, there is something for everyone to enjoy. After all that fresh air, a glass of wine will be more than welcome, and fortunately, Mikulov is the centre for Czech wine making. Due to a high concentration of limestone in the local soil, wine from this region has a unique character and distinct taste. If you like your wine with a side-serving of history, Mikulov Castle dates from the 1730s, and the Dietrichstein Tomb is the final resting place of a Bohemian noble family. Mikulov is also significant for its strong Jewish history. In the early 1800s Mikulov&#x27;s Jewish Quarter was the largest in Moravia with half the town&#x27;s inhabitants being of Jewish faith.&quot;</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;durationInMinutes&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">60</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;order&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">2</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;timezone&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;Europe/Prague&quot;</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;country&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-punctuation">{</span>
+                  <span class="hljs-attr">&quot;englishName&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;Czech Republic&quot;</span>
+               <span class="hljs-punctuation">}</span>
+            <span class="hljs-punctuation">}</span>
+         <span class="hljs-punctuation">]</span>
+      <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-punctuation">{</span>
+         <span class="hljs-attr">&quot;id&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;b071e9f8-54d9-44be-bb5f-feae5aafd771&quot;</span><span class="hljs-punctuation">,</span>
+         <span class="hljs-attr">&quot;type&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;Private&quot;</span><span class="hljs-punctuation">,</span>
+         <span class="hljs-attr">&quot;distanceKm&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">334</span><span class="hljs-punctuation">,</span>
+         <span class="hljs-attr">&quot;travelTimeMinutes&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">208</span><span class="hljs-punctuation">,</span>
+         <span class="hljs-attr">&quot;pickUp&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-punctuation">{</span>
+            <span class="hljs-attr">&quot;lat&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">50.10</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;lon&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">14.25</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;time&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;2022-12-05T18:00:00Z&quot;</span>
+         <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+         <span class="hljs-attr">&quot;dropOff&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-punctuation">{</span>
+            <span class="hljs-attr">&quot;lat&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">48.20</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;lon&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">16.37</span>
+         <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+         <span class="hljs-attr">&quot;pricing&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-punctuation">{</span>
+            <span class="hljs-attr">&quot;totalPrice&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">320</span>
+         <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+         <span class="hljs-attr">&quot;vehicle&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-punctuation">{</span>
+            <span class="hljs-attr">&quot;type&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;MPV&quot;</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;maxPassengers&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">4</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;description&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;Compact MPV comparable to a Volkswagen Touran, up to 4 passengers with luggage.&quot;</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;image&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;https://daytrip.imgix.net/site/mpv.png&quot;</span>
+         <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+         <span class="hljs-attr">&quot;luggage&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-punctuation">{</span>
+            <span class="hljs-attr">&quot;maxTotalCarryons&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">4</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;maxTotalSuitcases&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">4</span>
+         <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+         <span class="hljs-attr">&quot;availableChildSeatTypes&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-punctuation">[</span>
+            <span class="hljs-punctuation">{</span>
+               <span class="hljs-attr">&quot;childSeatType&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;RearFacing&quot;</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;description&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;Rear-facing infant seat&quot;</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;ageFrom&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">0</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;ageTo&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">1</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;weightInPoundsFrom&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">0</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;weightInPoundsTo&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">26</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;weightInKilosFrom&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">0</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;weightInKilosTo&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">10</span>
+            <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-punctuation">{</span>
+               <span class="hljs-attr">&quot;childSeatType&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;ForwardFacing&quot;</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;description&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;Forward-facing w/harness&quot;</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;ageFrom&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">1</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;ageTo&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">4</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;weightInPoundsFrom&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">18</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;weightInPoundsTo&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">36</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;weightInKilosFrom&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">8</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;weightInKilosTo&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">16</span>
+            <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-punctuation">{</span>
+               <span class="hljs-attr">&quot;childSeatType&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;BoosterSeat&quot;</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;description&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;Booster seat with high back&quot;</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;ageFrom&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">4</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;ageTo&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">6</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;weightInPoundsFrom&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">30</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;weightInPoundsTo&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">50</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;weightInKilosFrom&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">14</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;weightInKilosTo&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">23</span>
+            <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-punctuation">{</span>
+               <span class="hljs-attr">&quot;childSeatType&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;Booster&quot;</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;description&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;Backless booster&quot;</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;ageFrom&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">6</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;ageTo&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">12</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;weightInPoundsFrom&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">44</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;weightInPoundsTo&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">72</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;weightInKilosFrom&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">20</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;weightInKilosTo&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">33</span>
+            <span class="hljs-punctuation">}</span>
+         <span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+         <span class="hljs-attr">&quot;possibleStops&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-punctuation">[</span>
+            <span class="hljs-punctuation">{</span>
+               <span class="hljs-attr">&quot;id&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;d280ce2a-6224-4d95-af17-a250f81b97dd&quot;</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;price&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">31</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;Lednice Chateau and Park&quot;</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;image&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;https://daytrip.imgix.net/lednice-chateau-and-park4.jpg&quot;</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;title&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;Vacation like a King&quot;</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;perex&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;This UNESCO-listed chateau and sprawling park was the Lichtenstein&#x27;s holiday home - exactly the kind of extravagance you&#x27;d expect from a dynasty with their own country. &quot;</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;description&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;The Liechtensteins really came into the money with the fortunes seized from Czech noblemen after their victory at the Battle of White Mountain in 1620, and Lednice was one of the presents they bought themselves. In the mid-19th century the baroque manor was given a complete makeover in the &#x27;Windsor Gothic&#x27; style, leaving it as we see it today: a shameless flaunting of fabulous wealth, a slap in the face to anyone foolish enough to think that the French Revolution had ended high-living in Europe. The surrounding English landscape park, the largest in the country, is an incomparable swath of green, sprinkled with Romantic follies. There&#x27;s also a monumental greenhouse open all year round, overflowing with exotic growths gathered by an army of botanists across the Americas. The greenhouse&#x27;s exoticism is echoed by the charming minaret, constructed at the turn of the 18th century, bringing a whiff of Morocco to Moravia.\nFor more info: www.zamek-lednice.com&quot;</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;durationInMinutes&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">60</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;order&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">1</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;timezone&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;Europe/Prague&quot;</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;country&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-punctuation">{</span>
+                  <span class="hljs-attr">&quot;englishName&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;Czech Republic&quot;</span>
+               <span class="hljs-punctuation">}</span>
+            <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-punctuation">{</span>
+               <span class="hljs-attr">&quot;id&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;4ee58c0c-4e56-46ef-bd22-406a1bc60e1c&quot;</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;price&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">28</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;Mikulov&quot;</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;image&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;https://daytrip.imgix.net/510.jpg&quot;</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;title&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;The Heart of Czech Wine Country&quot;</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;perex&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;A town with a history as deep and flavourful as its wine, Mikulov provides a perfect combination of relaxation and exploration.&quot;</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;description&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;Often favoured by visitors with a more active approach to life, Mikulov has much to offer. Surrounded by idyllic countryside, crisscrossed by bicycle paths and marked hiking trails, and the nearby Nové Mlýny lakes, there is something for everyone to enjoy. After all that fresh air, a glass of wine will be more than welcome, and fortunately, Mikulov is the centre for Czech wine making. Due to a high concentration of limestone in the local soil, wine from this region has a unique character and distinct taste. If you like your wine with a side-serving of history, Mikulov Castle dates from the 1730s, and the Dietrichstein Tomb is the final resting place of a Bohemian noble family. Mikulov is also significant for its strong Jewish history. In the early 1800s Mikulov&#x27;s Jewish Quarter was the largest in Moravia with half the town&#x27;s inhabitants being of Jewish faith.&quot;</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;durationInMinutes&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">60</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;order&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">2</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;timezone&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;Europe/Prague&quot;</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;country&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-punctuation">{</span>
+                  <span class="hljs-attr">&quot;englishName&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;Czech Republic&quot;</span>
+               <span class="hljs-punctuation">}</span>
+            <span class="hljs-punctuation">}</span>
+         <span class="hljs-punctuation">]</span>
+      <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-punctuation">{</span>
+         <span class="hljs-attr">&quot;id&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;282a8a94-2a18-42f6-9af6-c53b13d007cb&quot;</span><span class="hljs-punctuation">,</span>
+         <span class="hljs-attr">&quot;type&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;Shared&quot;</span><span class="hljs-punctuation">,</span>
+         <span class="hljs-attr">&quot;distanceKm&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">350</span><span class="hljs-punctuation">,</span>
+         <span class="hljs-attr">&quot;travelTimeMinutes&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">235</span><span class="hljs-punctuation">,</span>
+         <span class="hljs-attr">&quot;pickUp&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-punctuation">{</span>
+            <span class="hljs-attr">&quot;lat&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">50.12</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;lon&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">14.27</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;time&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;2022-12-05T19:00:00Z&quot;</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;description&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;In front of the hotel Europa&quot;</span>
+         <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+         <span class="hljs-attr">&quot;dropOff&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-punctuation">{</span>
+            <span class="hljs-attr">&quot;lat&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">48.21</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;lon&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">16.36</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;description&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;Next to the railway station&quot;</span>
+         <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+         <span class="hljs-attr">&quot;pricing&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-punctuation">{</span>
+            <span class="hljs-attr">&quot;pricePerPassenger&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">180</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;totalPrice&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">360</span>
+         <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+         <span class="hljs-attr">&quot;vehicle&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-punctuation">{</span>
+            <span class="hljs-attr">&quot;type&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;Shuttle&quot;</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;maxPassengers&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">10</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;description&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;Shuttle comparable to a Mercedes-Benz Vito, up to 10 passengers with luggage.&quot;</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;image&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;https://daytrip.imgix.net/site/shuttle.png&quot;</span>
+         <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+         <span class="hljs-attr">&quot;luggage&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-punctuation">{</span>
+            <span class="hljs-attr">&quot;maxCarryonsPerPerson&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">1</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;maxSuitcasesPerPerson&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">1</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;maxTotalCarryons&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">2</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;maxTotalSuitcases&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">2</span>
+         <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+         <span class="hljs-attr">&quot;seatsAvailable&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">8</span><span class="hljs-punctuation">,</span>
+         <span class="hljs-attr">&quot;availableChildSeatTypes&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-punctuation">[</span>
+            
+         <span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+         <span class="hljs-attr">&quot;possibleStops&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-punctuation">[</span>
+            
+         <span class="hljs-punctuation">]</span>
+      <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-punctuation">{</span>
+         <span class="hljs-attr">&quot;id&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;4b137906-008a-49cf-b248-e3827b3a3175&quot;</span><span class="hljs-punctuation">,</span>
+         <span class="hljs-attr">&quot;type&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;Shared&quot;</span><span class="hljs-punctuation">,</span>
+         <span class="hljs-attr">&quot;distanceKm&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">350</span><span class="hljs-punctuation">,</span>
+         <span class="hljs-attr">&quot;travelTimeMinutes&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">235</span><span class="hljs-punctuation">,</span>
+         <span class="hljs-attr">&quot;pickUp&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-punctuation">{</span>
+            <span class="hljs-attr">&quot;lat&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">50.12</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;lon&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">14.27</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;time&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;2022-12-05T21:00:00Z&quot;</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;description&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;In front of the hotel Europa&quot;</span>
+         <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+         <span class="hljs-attr">&quot;dropOff&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-punctuation">{</span>
+            <span class="hljs-attr">&quot;lat&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">48.21</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;lon&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">16.36</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;description&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;Next to the railway station&quot;</span>
+         <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+         <span class="hljs-attr">&quot;pricing&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-punctuation">{</span>
+            <span class="hljs-attr">&quot;pricePerPassenger&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">190</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;totalPrice&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">380</span>
+         <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+         <span class="hljs-attr">&quot;vehicle&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-punctuation">{</span>
+            <span class="hljs-attr">&quot;type&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;Shuttle&quot;</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;maxPassengers&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">10</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;description&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;Shuttle comparable to a Mercedes-Benz Vito, up to 10 passengers with luggage.&quot;</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;image&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;https://daytrip.imgix.net/site/shuttle.png&quot;</span>
+         <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+         <span class="hljs-attr">&quot;luggage&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-punctuation">{</span>
+            <span class="hljs-attr">&quot;maxCarryonsPerPerson&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">1</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;maxSuitcasesPerPerson&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">1</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;maxTotalCarryons&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">2</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;maxTotalSuitcases&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">2</span>
+         <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+         <span class="hljs-attr">&quot;seatsAvailable&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">5</span><span class="hljs-punctuation">,</span>
+         <span class="hljs-attr">&quot;availableChildSeatTypes&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-punctuation">[</span>
+            
+         <span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+         <span class="hljs-attr">&quot;possibleStops&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-punctuation">[</span>
+            
+         <span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+         <span class="hljs-attr">&quot;includedStops&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-punctuation">[</span>
+            <span class="hljs-punctuation">{</span>
+               <span class="hljs-attr">&quot;id&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;d280ce2a-6224-4d95-af17-a250f81b97dd&quot;</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;price&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">31</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;Lednice Chateau and Park&quot;</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;image&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;https://daytrip.imgix.net/lednice-chateau-and-park4.jpg&quot;</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;title&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;Vacation like a King&quot;</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;perex&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;This UNESCO-listed chateau and sprawling park was the Lichtenstein&#x27;s holiday home - exactly the kind of extravagance you&#x27;d expect from a dynasty with their own country. &quot;</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;description&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;The Liechtensteins really came into the money with the fortunes seized from Czech noblemen after their victory at the Battle of White Mountain in 1620, and Lednice was one of the presents they bought themselves. In the mid-19th century the baroque manor was given a complete makeover in the &#x27;Windsor Gothic&#x27; style, leaving it as we see it today: a shameless flaunting of fabulous wealth, a slap in the face to anyone foolish enough to think that the French Revolution had ended high-living in Europe. The surrounding English landscape park, the largest in the country, is an incomparable swath of green, sprinkled with Romantic follies. There&#x27;s also a monumental greenhouse open all year round, overflowing with exotic growths gathered by an army of botanists across the Americas. The greenhouse&#x27;s exoticism is echoed by the charming minaret, constructed at the turn of the 18th century, bringing a whiff of Morocco to Moravia.\nFor more info: www.zamek-lednice.com&quot;</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;durationInMinutes&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">60</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;order&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">1</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;timezone&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;Europe/Prague&quot;</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;country&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-punctuation">{</span>
+                  <span class="hljs-attr">&quot;englishName&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;Czech Republic&quot;</span>
+               <span class="hljs-punctuation">}</span>
+            <span class="hljs-punctuation">}</span>
+         <span class="hljs-punctuation">]</span>
+      <span class="hljs-punctuation">}</span>
+   <span class="hljs-punctuation">]</span>
+<span class="hljs-punctuation">}</span></code></pre>
+            <p>This endpoint returns all trip options for given origin, destination, departure time and passenger count (must be between 1 and 10). Origin and destination are passed as latitude and longitude coordinates. The unit used is degree with decimal places, for example <code>39.753657, -117.610215</code>. Departure time is passed as a UNIX epoch timestamp in seconds, like <code>1679463169</code>.</p>
+            <h3 id="url-path">URL path</h3>
+            <p><code>/partners/v3/trip/search</code></p>
+            <h3 id="query-parameters">Query Parameters</h3>
+            <table>
+               <thead>
+                  <tr>
+                     <th>Parameter</th>
+                     <th>Type</th>
+                     <th>Description</th>
+                  </tr>
+               </thead>
+               <tbody>
+                  <tr>
+                     <td>originLatitude</td>
+                     <td>number</td>
+                     <td>Origin latitude in degrees.</td>
+                  </tr>
+                  <tr>
+                     <td>originLongitude</td>
+                     <td>number</td>
+                     <td>Origin longitude in degrees.</td>
+                  </tr>
+                  <tr>
+                     <td>destinationLatitude</td>
+                     <td>number</td>
+                     <td>Destination latitude in degrees.</td>
+                  </tr>
+                  <tr>
+                     <td>originLongitude</td>
+                     <td>number</td>
+                     <td>Destination longitude in degrees.</td>
+                  </tr>
+                  <tr>
+                     <td>departureTime</td>
+                     <td>integer</td>
+                     <td>Departure time as a UNIX epoch timestamp in seconds.</td>
+                  </tr>
+                  <tr>
+                     <td>passengersCount</td>
+                     <td>integer</td>
+                     <td>Count of passengers to transport. Must be between 1 and 10.</td>
+                  </tr>
+               </tbody>
+            </table>
+            <h3 id="response-body">Response body</h3>
+            <table>
+               <thead>
+                  <tr>
+                     <th>Property</th>
+                     <th>Type</th>
+                     <th>Description</th>
+                  </tr>
+               </thead>
+               <tbody>
+                  <tr>
+                     <td>searchId</td>
+                     <td>string</td>
+                     <td>Unique id of your search query.</td>
+                  </tr>
+                  <tr>
+                     <td>expiresAt</td>
+                     <td>string</td>
+                     <td>UTC timestamp of when the offers in this response expire. After this time it is no longer possible to book them, you need to make a new search.</td>
+                  </tr>
+                  <tr>
+                     <td>passengersCount</td>
+                     <td>integer</td>
+                     <td>The count of passengers this search query was for.</td>
+                  </tr>
+                  <tr>
+                     <td>currency</td>
+                     <td>string</td>
+                     <td>Currency used for all prices in this response.</td>
+                  </tr>
+                  <tr>
+                     <td>options</td>
+                     <td>list of <a href="#tripoption">TripOption</a></td>
+                     <td>List of options for this trip.</td>
+                  </tr>
+               </tbody>
+            </table>
+            <h3 id="error-status-codes">Error status codes</h3>
+            <table>
+               <thead>
+                  <tr>
+                     <th>Status code</th>
+                     <th>Description</th>
+                  </tr>
+               </thead>
+               <tbody>
+                  <tr>
+                     <td>400</td>
+                     <td>Invalid request - missing mandatory query parameter, parameter has wrong type or wrong passenger count.</td>
+                  </tr>
+                  <tr>
+                     <td>401</td>
+                     <td>API key missing or invalid.</td>
+                  </tr>
+                  <tr>
+                     <td>404</td>
+                     <td>No trip options found for given request.</td>
+                  </tr>
+               </tbody>
+            </table>
+            <h2 id="customize-endpoint">Customize endpoint</h2>
+            <blockquote>
+               <p>To add the Mikulov stop to the sedan vehicle type private trip option from the Search endpoint example above, use the following call:</p>
+            </blockquote>
+            <pre class="highlight bash"><code>curl -d <span class="hljs-string">&#x27;{ &quot;optionId&quot;: &quot;1d32109f-c2e2-44fe-b2cf-461ef3730541&quot;, &quot;selectedStops&quot;: [&quot;4ee58c0c-4e56-46ef-bd22-406a1bc60e1c&quot;] }&#x27;</span> -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> -H <span class="hljs-string">&quot;x-api-key: your-api-key&quot;</span> -X POST https://api.staging.mydaytrip.net/partners/v3/trip/search/customize</code></pre><pre class="highlight javascript"><code></code></pre><pre class="highlight python"><code></code></pre>
+            <blockquote>
+               <p>The above call returns JSON structured like this:</p>
+            </blockquote>
+            <pre class="highlight json"><code><span class="hljs-punctuation">{</span>
+   <span class="hljs-attr">&quot;searchId&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;f0e34a1b-2b3d-4747-b426-292633b615b4&quot;</span><span class="hljs-punctuation">,</span>
+   <span class="hljs-attr">&quot;expiresAt&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;2022-12-04T18:00:00Z&quot;</span><span class="hljs-punctuation">,</span>
+   <span class="hljs-attr">&quot;passengersCount&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">2</span><span class="hljs-punctuation">,</span>
+   <span class="hljs-attr">&quot;currency&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;EUR&quot;</span><span class="hljs-punctuation">,</span>
+   <span class="hljs-attr">&quot;options&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-punctuation">[</span>
+      <span class="hljs-punctuation">{</span>
+         <span class="hljs-attr">&quot;id&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;519314e3-cd92-41e0-85b6-c652c345e9d0&quot;</span><span class="hljs-punctuation">,</span>
+         <span class="hljs-attr">&quot;type&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;Private&quot;</span><span class="hljs-punctuation">,</span>
+         <span class="hljs-attr">&quot;distanceKm&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">334</span><span class="hljs-punctuation">,</span>
+         <span class="hljs-attr">&quot;travelTimeMinutes&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">268</span><span class="hljs-punctuation">,</span>
+         <span class="hljs-attr">&quot;pickUp&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-punctuation">{</span>
+            <span class="hljs-attr">&quot;lat&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">50.10</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;lon&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">14.25</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;time&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;2022-12-05T18:00:00Z&quot;</span>
+         <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+         <span class="hljs-attr">&quot;dropOff&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-punctuation">{</span>
+            <span class="hljs-attr">&quot;lat&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">48.20</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;lon&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">16.37</span>
+         <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+         <span class="hljs-attr">&quot;pricing&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-punctuation">{</span>
+            <span class="hljs-attr">&quot;totalPrice&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">288</span>
+         <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+         <span class="hljs-attr">&quot;vehicle&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-punctuation">{</span>
+            <span class="hljs-attr">&quot;type&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;Sedan&quot;</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;maxPassengers&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">3</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;description&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;Sedan comparable to a Volkswagen Passat, up to 3 passengers with luggage.&quot;</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;image&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;https://daytrip.imgix.net/site/sedan.png&quot;</span>
+         <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+         <span class="hljs-attr">&quot;luggage&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-punctuation">{</span>
+            <span class="hljs-attr">&quot;maxTotalCarryons&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">3</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;maxTotalSuitcases&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">3</span>
+         <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+         <span class="hljs-attr">&quot;availableChildSeatTypes&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-punctuation">[</span>
+            <span class="hljs-punctuation">{</span>
+               <span class="hljs-attr">&quot;childSeatType&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;RearFacing&quot;</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;description&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;Rear-facing infant seat&quot;</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;ageFrom&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">0</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;ageTo&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">1</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;weightInPoundsFrom&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">0</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;weightInPoundsTo&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">26</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;weightInKilosFrom&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">0</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;weightInKilosTo&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">10</span>
+            <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-punctuation">{</span>
+               <span class="hljs-attr">&quot;childSeatType&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;ForwardFacing&quot;</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;description&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;Forward-facing w/harness&quot;</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;ageFrom&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">1</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;ageTo&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">4</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;weightInPoundsFrom&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">18</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;weightInPoundsTo&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">36</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;weightInKilosFrom&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">8</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;weightInKilosTo&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">16</span>
+            <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-punctuation">{</span>
+               <span class="hljs-attr">&quot;childSeatType&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;BoosterSeat&quot;</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;description&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;Booster seat with high back&quot;</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;ageFrom&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">4</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;ageTo&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">6</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;weightInPoundsFrom&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">30</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;weightInPoundsTo&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">50</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;weightInKilosFrom&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">14</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;weightInKilosTo&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">23</span>
+            <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-punctuation">{</span>
+               <span class="hljs-attr">&quot;childSeatType&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;Booster&quot;</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;description&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;Backless booster&quot;</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;ageFrom&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">6</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;ageTo&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">12</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;weightInPoundsFrom&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">44</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;weightInPoundsTo&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">72</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;weightInKilosFrom&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">20</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;weightInKilosTo&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">33</span>
+            <span class="hljs-punctuation">}</span>
+         <span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+         <span class="hljs-attr">&quot;includedStops&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-punctuation">[</span>
+            <span class="hljs-punctuation">{</span>
+               <span class="hljs-attr">&quot;id&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;4ee58c0c-4e56-46ef-bd22-406a1bc60e1c&quot;</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;price&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">28</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;Mikulov&quot;</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;image&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;https://daytrip.imgix.net/510.jpg&quot;</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;title&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;The Heart of Czech Wine Country&quot;</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;perex&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;A town with a history as deep and flavourful as its wine, Mikulov provides a perfect combination of relaxation and exploration.&quot;</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;description&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;Often favoured by visitors with a more active approach to life, Mikulov has much to offer. Surrounded by idyllic countryside, crisscrossed by bicycle paths and marked hiking trails, and the nearby Nové Mlýny lakes, there is something for everyone to enjoy. After all that fresh air, a glass of wine will be more than welcome, and fortunately, Mikulov is the centre for Czech wine making. Due to a high concentration of limestone in the local soil, wine from this region has a unique character and distinct taste. If you like your wine with a side-serving of history, Mikulov Castle dates from the 1730s, and the Dietrichstein Tomb is the final resting place of a Bohemian noble family. Mikulov is also significant for its strong Jewish history. In the early 1800s Mikulov&#x27;s Jewish Quarter was the largest in Moravia with half the town&#x27;s inhabitants being of Jewish faith.&quot;</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;durationInMinutes&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">60</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;order&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">2</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;timezone&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;Europe/Prague&quot;</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;country&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-punctuation">{</span>
+                  <span class="hljs-attr">&quot;englishName&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;Czech Republic&quot;</span>
+               <span class="hljs-punctuation">}</span>
+            <span class="hljs-punctuation">}</span>
+         <span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+         <span class="hljs-attr">&quot;possibleStops&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-punctuation">[</span>
+            <span class="hljs-punctuation">{</span>
+               <span class="hljs-attr">&quot;id&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;d280ce2a-6224-4d95-af17-a250f81b97dd&quot;</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;price&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">31</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;Lednice Chateau and Park&quot;</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;image&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;https://daytrip.imgix.net/lednice-chateau-and-park4.jpg&quot;</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;title&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;Vacation like a King&quot;</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;perex&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;This UNESCO-listed chateau and sprawling park was the Lichtenstein&#x27;s holiday home - exactly the kind of extravagance you&#x27;d expect from a dynasty with their own country. &quot;</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;description&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;The Liechtensteins really came into the money with the fortunes seized from Czech noblemen after their victory at the Battle of White Mountain in 1620, and Lednice was one of the presents they bought themselves. In the mid-19th century the baroque manor was given a complete makeover in the &#x27;Windsor Gothic&#x27; style, leaving it as we see it today: a shameless flaunting of fabulous wealth, a slap in the face to anyone foolish enough to think that the French Revolution had ended high-living in Europe. The surrounding English landscape park, the largest in the country, is an incomparable swath of green, sprinkled with Romantic follies. There&#x27;s also a monumental greenhouse open all year round, overflowing with exotic growths gathered by an army of botanists across the Americas. The greenhouse&#x27;s exoticism is echoed by the charming minaret, constructed at the turn of the 18th century, bringing a whiff of Morocco to Moravia.\nFor more info: www.zamek-lednice.com&quot;</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;durationInMinutes&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">60</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;order&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">1</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;timezone&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;Europe/Prague&quot;</span><span class="hljs-punctuation">,</span>
+               <span class="hljs-attr">&quot;country&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-punctuation">{</span>
+                  <span class="hljs-attr">&quot;englishName&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;Czech Republic&quot;</span>
+               <span class="hljs-punctuation">}</span>
+            <span class="hljs-punctuation">}</span>
+         <span class="hljs-punctuation">]</span>
+      <span class="hljs-punctuation">}</span>
+   <span class="hljs-punctuation">]</span>
+<span class="hljs-punctuation">}</span></code></pre>
+            <p>This endpoint is used to customize a trip option returned by the Search endpoint. The result is a new trip option with a new id that can be booked or customized again. The format of the response body is the same as for the Search endpoint. Currently the only supported customization operation is selection of stops for private trips. Selected stops will appear in <code>includedStops</code> of the returned option. In case of repeated calls, previously selected stops will be replaced, so if you selected one stop and want to change it to two stops, you need to send both stops in <code>selectedStops</code>. <code>totalPrice</code> and <code>travelTimeMinutes</code> will be automatically updated to reflect the selected stops.</p>
+            <h3 id="url-path-1">URL path</h3>
+            <p><code>/partners/v3/trip/search/customize</code></p>
+            <h3 id="request-body">Request body</h3>
+            <table>
+               <thead>
+                  <tr>
+                     <th>Property</th>
+                     <th>Type</th>
+                     <th>Description</th>
+                  </tr>
+               </thead>
+               <tbody>
+                  <tr>
+                     <td>optionId</td>
+                     <td>string</td>
+                     <td>Id of the option you want to customize. Taken from Search or Customize endpoint response.</td>
+                  </tr>
+                  <tr>
+                     <td>selectedStops</td>
+                     <td>list of string</td>
+                     <td>List of ids of stops to include in the trip. Will replace currently included stops.</td>
+                  </tr>
+               </tbody>
+            </table>
+            <h3 id="response-body-1">Response body</h3>
+            <p>Same format as for the <a href="#search">Search endpoint</a></p>
+            <h3 id="error-status-codes-1">Error status codes</h3>
+            <table>
+               <thead>
+                  <tr>
+                     <th>Status code</th>
+                     <th>Description</th>
+                  </tr>
+               </thead>
+               <tbody>
+                  <tr>
+                     <td>400</td>
+                     <td>Invalid request - missing mandatory property, property has a wrong type or not a valid json.</td>
+                  </tr>
+                  <tr>
+                     <td>401</td>
+                     <td>API key missing or invalid.</td>
+                  </tr>
+                  <tr>
+                     <td>403</td>
+                     <td>Forbidden request - trying to customize a trip option owned by someone else.</td>
+                  </tr>
+                  <tr>
+                     <td>404</td>
+                     <td>Trip option not found or expired. Stop not found.</td>
+                  </tr>
+               </tbody>
+            </table>
+            <h2 id="book-endpoint">Book endpoint</h2>
+            <blockquote>
+               <p>To book the customized trip option with stops from the example above or to book a trip option from the original Search endpoint response for two adults and one child with a booster seat, use the following call:</p>
+            </blockquote>
+            <pre class="highlight bash"><code>curl -d <span class="hljs-string">&#x27;{ &quot;optionId&quot;: &quot;f0e34a1b-2b3d-4747-b426-292633b615b4&quot;, &quot;pickupAddressNote&quot;: &quot;Havel airport&quot;, &quot;dropoffAddressNote&quot;: &quot;Vienna central square&quot;, &quot;customerNote&quot;: &quot;We will stand next to the entrance&quot;, &quot;flightNumber&quot;: &quot;FR008&quot;,	&quot;passengerDetails&quot;: [ { 			&quot;type&quot;: &quot;lead&quot;, &quot;firstName&quot;: &quot;John&quot;, &quot;lastName&quot;: &quot;Doe&quot;, &quot;phone&quot;: &quot;+41555555555&quot;, &quot;email&quot;: &quot;client-email@example.com&quot;, 			&quot;birthday&quot;: 629424000 }, { &quot;type&quot;: &quot;adult&quot; }, { &quot;type&quot;: &quot;child&quot;, &quot;childSeatType&quot;: &quot;Booster&quot; } ] }&#x27;</span> -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> -H <span class="hljs-string">&quot;x-api-key: your-api-key&quot;</span> -X POST https://api.staging.mydaytrip.net/partners/v3/trip/book</code></pre><pre class="highlight javascript"><code></code></pre><pre class="highlight python"><code></code></pre>
+            <blockquote>
+               <p>The above call returns JSON structured like this:</p>
+            </blockquote>
+            <pre class="highlight json"><code><span class="hljs-punctuation">{</span>
+   <span class="hljs-attr">&quot;bookingId&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;cb102778-a3d7-426e-8d18-6bd6b296f283&quot;</span>  
+<span class="hljs-punctuation">}</span></code></pre>
+            <p>This endpoint is used to book a trip option. Any trip option from Search or Customize endpoint response can be booked if the search results have not expired yet (see <code>expiresAt</code> property). You need to send id of the chosen option and passenger details to this endpoint. The result is a booking id that can be used to cancel the booking if not too close to departure.</p>
+            <h3 id="url-path-2">URL path</h3>
+            <p><code>/partners/v3/trip/book</code></p>
+            <h3 id="request-body-1">Request body</h3>
+            <table>
+               <thead>
+                  <tr>
+                     <th>Property</th>
+                     <th>Type</th>
+                     <th>Description</th>
+                  </tr>
+               </thead>
+               <tbody>
+                  <tr>
+                     <td>optionId</td>
+                     <td>string</td>
+                     <td>Id of the option you want to book. Taken from Search or Customize endpoint response.</td>
+                  </tr>
+                  <tr>
+                     <td>pickupAddressNote</td>
+                     <td>string</td>
+                     <td>Optional note for the driver with details about the pick up location.</td>
+                  </tr>
+                  <tr>
+                     <td>dropoffAddressNote</td>
+                     <td>string</td>
+                     <td>Optional note for the driver with details about the drop off location.</td>
+                  </tr>
+                  <tr>
+                     <td>customerNote</td>
+                     <td>string</td>
+                     <td>Optional note for the driver not related to pick up or drop off.</td>
+                  </tr>
+                  <tr>
+                     <td>flightNumber</td>
+                     <td>string</td>
+                     <td>Optional flight number in case this is an airport pick up.</td>
+                  </tr>
+                  <tr>
+                     <td>passengerDetails</td>
+                     <td>list of <a href="#passengerdetail">PassengerDetail</a></td>
+                     <td>List of passengers that will go on this trip. The number of passengers must match the <code>passengersCount</code> query parameter from the Search endpoint. There must be exactly one passenger of type &quot;Lead&quot; with contact details filled. For passenger of type &quot;Child&quot; you can request a child seat of proper type if this is a private trip.</td>
+                  </tr>
+               </tbody>
+            </table>
+            <h3 id="response-body-2">Response body</h3>
+            <table>
+               <thead>
+                  <tr>
+                     <th>Property</th>
+                     <th>Type</th>
+                     <th>Description</th>
+                  </tr>
+               </thead>
+               <tbody>
+                  <tr>
+                     <td>bookingId</td>
+                     <td>string</td>
+                     <td>Id of the created booking. Can be used to retrieve details about the booking or to cancel it.</td>
+                  </tr>
+               </tbody>
+            </table>
+            <h3 id="error-status-codes-2">Error status codes</h3>
+            <table>
+               <thead>
+                  <tr>
+                     <th>Status code</th>
+                     <th>Description</th>
+                  </tr>
+               </thead>
+               <tbody>
+                  <tr>
+                     <td>400</td>
+                     <td>Invalid request - missing mandatory property, property has wrong type, mismatch in passenger count, missing lead passenger, multiple lead passengers or not a valid json.</td>
+                  </tr>
+                  <tr>
+                     <td>401</td>
+                     <td>API key missing or invalid.</td>
+                  </tr>
+                  <tr>
+                     <td>403</td>
+                     <td>Forbidden request - trying to book a trip option owned by someone else.</td>
+                  </tr>
+                  <tr>
+                     <td>404</td>
+                     <td>Trip option not found or expired.</td>
+                  </tr>
+               </tbody>
+            </table>
+            <h2 id="cancel-endpoint">Cancel endpoint</h2>
+            <blockquote>
+               <p>To cancel a booked trip, use the following call:</p>
+            </blockquote>
+            <pre class="highlight bash"><code>curl -d <span class="hljs-string">&#x27;{ &quot;bookingId&quot;: &quot;cb102778-a3d7-426e-8d18-6bd6b296f283&quot; }&#x27;</span> -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> -H <span class="hljs-string">&quot;x-api-key: your-api-key&quot;</span> -X POST https://api.staging.mydaytrip.net/partners/v3/trip/cancel</code></pre><pre class="highlight javascript"><code></code></pre><pre class="highlight python"><code></code></pre>
+            <blockquote>
+               <p>The above call returns 204 No Content success HTTP status code.</p>
+            </blockquote>
+            <p>This endpoint is used to cancel a booked trip. Only trips that have departure more than 24 hours in the future - this threshold is a subject to change.</p>
+            <h3 id="url-path-3">URL path</h3>
+            <p><code>/partners/v3/trip/cancel</code></p>
+            <h3 id="request-body-2">Request body</h3>
+            <table>
+               <thead>
+                  <tr>
+                     <th>Property</th>
+                     <th>Type</th>
+                     <th>Description</th>
+                  </tr>
+               </thead>
+               <tbody>
+                  <tr>
+                     <td>bookingId</td>
+                     <td>string</td>
+                     <td>Id of the booking to cancel. Taken from Book endpoint response.</td>
+                  </tr>
+               </tbody>
+            </table>
+            <h3 id="error-status-codes-3">Error status codes</h3>
+            <table>
+               <thead>
+                  <tr>
+                     <th>Status code</th>
+                     <th>Description</th>
+                  </tr>
+               </thead>
+               <tbody>
+                  <tr>
+                     <td>400</td>
+                     <td>Invalid request - bookingId missing or not a valid json.</td>
+                  </tr>
+                  <tr>
+                     <td>401</td>
+                     <td>API key missing or invalid.</td>
+                  </tr>
+                  <tr>
+                     <td>403</td>
+                     <td>Forbidden request - trying to cancel a booking owned by someone else or the departure is too soon.</td>
+                  </tr>
+                  <tr>
+                     <td>404</td>
+                     <td>Booking not found.</td>
+                  </tr>
+               </tbody>
+            </table>
+            <h2 id="details-endpoint">Details endpoint</h2>
+            <blockquote>
+               <p>To get details of a booked trip, use the following call:</p>
+            </blockquote>
+            <pre class="highlight bash"><code>curl https://api.staging.mydaytrip.net/partners/v3/trip/details/bookingId -H <span class="hljs-string">&quot;x-api-key: your-api-key&quot;</span> </code></pre><pre class="highlight javascript"><code></code></pre><pre class="highlight python"><code></code></pre>
+            <blockquote>
+               <p>Make sure to replace <code>bookingId</code> with the real booking id.</p>
+            </blockquote>
+            <blockquote>
+               <p>The above call returns JSON structured like this:</p>
+            </blockquote>
+            <pre class="highlight json"><code><span class="hljs-punctuation">{</span>
+   <span class="hljs-attr">&quot;status&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Confirmed&quot;</span><span class="hljs-punctuation">,</span>
+   <span class="hljs-attr">&quot;bookingDate&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;2022-12-05T18:00:00Z&quot;</span><span class="hljs-punctuation">,</span>
+   <span class="hljs-attr">&quot;passengersCount&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">2</span><span class="hljs-punctuation">,</span>
+   <span class="hljs-attr">&quot;currency&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;EUR&quot;</span><span class="hljs-punctuation">,</span>
+   <span class="hljs-attr">&quot;trip&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+      <span class="hljs-attr">&quot;type&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Private&quot;</span><span class="hljs-punctuation">,</span>   
+      <span class="hljs-attr">&quot;distanceKm&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">334</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;travelTimeMinutes&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">268</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;pickUp&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-punctuation">{</span>
+         <span class="hljs-attr">&quot;lat&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">50.10</span><span class="hljs-punctuation">,</span>
+         <span class="hljs-attr">&quot;lon&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">14.25</span><span class="hljs-punctuation">,</span>
+         <span class="hljs-attr">&quot;time&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;2022-12-05T18:00:00Z&quot;</span>
+      <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;dropOff&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-punctuation">{</span>
+         <span class="hljs-attr">&quot;lat&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">48.20</span><span class="hljs-punctuation">,</span>
+         <span class="hljs-attr">&quot;lon&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">16.37</span>
+      <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;pricing&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-punctuation">{</span>
+         <span class="hljs-attr">&quot;totalPrice&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">288</span>
+      <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;vehicle&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-punctuation">{</span>
+         <span class="hljs-attr">&quot;type&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;Sedan&quot;</span><span class="hljs-punctuation">,</span>
+         <span class="hljs-attr">&quot;maxPassengers&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">3</span><span class="hljs-punctuation">,</span>
+         <span class="hljs-attr">&quot;description&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;Sedan comparable to a Volkswagen Passat, up to 3 passengers with luggage.&quot;</span><span class="hljs-punctuation">,</span>
+         <span class="hljs-attr">&quot;image&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;https://daytrip.imgix.net/site/sedan.png&quot;</span>
+      <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;luggage&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-punctuation">{</span>
+         <span class="hljs-attr">&quot;maxTotalCarryons&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">3</span><span class="hljs-punctuation">,</span>
+         <span class="hljs-attr">&quot;maxTotalSuitcases&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">3</span>
+      <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;includedStops&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-punctuation">[</span>
+         <span class="hljs-punctuation">{</span>
+            <span class="hljs-attr">&quot;id&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;4ee58c0c-4e56-46ef-bd22-406a1bc60e1c&quot;</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;price&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">28</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;Mikulov&quot;</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;image&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;https://daytrip.imgix.net/510.jpg&quot;</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;title&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;The Heart of Czech Wine Country&quot;</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;perex&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;A town with a history as deep and flavourful as its wine, Mikulov provides a perfect combination of relaxation and exploration.&quot;</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;description&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;Often favoured by visitors with a more active approach to life, Mikulov has much to offer. Surrounded by idyllic countryside, crisscrossed by bicycle paths and marked hiking trails, and the nearby Nové Mlýny lakes, there is something for everyone to enjoy. After all that fresh air, a glass of wine will be more than welcome, and fortunately, Mikulov is the centre for Czech wine making. Due to a high concentration of limestone in the local soil, wine from this region has a unique character and distinct taste. If you like your wine with a side-serving of history, Mikulov Castle dates from the 1730s, and the Dietrichstein Tomb is the final resting place of a Bohemian noble family. Mikulov is also significant for its strong Jewish history. In the early 1800s Mikulov&#x27;s Jewish Quarter was the largest in Moravia with half the town&#x27;s inhabitants being of Jewish faith.&quot;</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;durationInMinutes&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">60</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;order&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">2</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;timezone&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;Europe/Prague&quot;</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;country&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-punctuation">{</span>
+               <span class="hljs-attr">&quot;englishName&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;Czech Republic&quot;</span>
+            <span class="hljs-punctuation">}</span>
+         <span class="hljs-punctuation">}</span>
+      <span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+   <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+   <span class="hljs-attr">&quot;pickupAddressNote&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Havel airport&quot;</span><span class="hljs-punctuation">,</span> 
+   <span class="hljs-attr">&quot;dropoffAddressNote&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Vienna central square&quot;</span><span class="hljs-punctuation">,</span> 
+   <span class="hljs-attr">&quot;customerNote&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;We will stand next to the entrance&quot;</span><span class="hljs-punctuation">,</span> 
+   <span class="hljs-attr">&quot;flightNumber&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;FR008&quot;</span><span class="hljs-punctuation">,</span>	
+   <span class="hljs-attr">&quot;passengerDetails&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span> 
+      <span class="hljs-punctuation">{</span> 			
+         <span class="hljs-attr">&quot;type&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;lead&quot;</span><span class="hljs-punctuation">,</span> 
+         <span class="hljs-attr">&quot;firstName&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;John&quot;</span><span class="hljs-punctuation">,</span> 
+         <span class="hljs-attr">&quot;lastName&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Doe&quot;</span><span class="hljs-punctuation">,</span> 
+         <span class="hljs-attr">&quot;phone&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;+41555555555&quot;</span><span class="hljs-punctuation">,</span> 
+         <span class="hljs-attr">&quot;email&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;client-email@example.com&quot;</span><span class="hljs-punctuation">,</span> 			
+         <span class="hljs-attr">&quot;birthday&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">629424000</span> 
+      <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span> 
+      <span class="hljs-punctuation">{</span> 
+         <span class="hljs-attr">&quot;type&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;adult&quot;</span> 
+      <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span> 
+      <span class="hljs-punctuation">{</span> 
+         <span class="hljs-attr">&quot;type&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;child&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;childSeatType&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Booster&quot;</span> 
+      <span class="hljs-punctuation">}</span> 
+   <span class="hljs-punctuation">]</span>   
+<span class="hljs-punctuation">}</span></code></pre>
+            <p>This endpoint returns details of a booked trip. It provides the status of the booking, information about the trip option and the data that were provided when booking the trip.</p>
+            <h3 id="url-path-4">URL path</h3>
+            <p><code>/partners/v3/trip/details/bookingId</code></p>
+            <p>Replace <code>bookingId</code> with the id of the booking you want to retrieve details for.</p>
+            <h3 id="response-body-3">Response body</h3>
+            <table>
+               <thead>
+                  <tr>
+                     <th>Property</th>
+                     <th>Type</th>
+                     <th>Description</th>
+                  </tr>
+               </thead>
+               <tbody>
+                  <tr>
+                     <td>status</td>
+                     <td>string</td>
+                     <td>Booking status. &quot;Confirmed&quot; or &quot;Cancelled&quot;.</td>
+                  </tr>
+                  <tr>
+                     <td>bookingDate</td>
+                     <td>string</td>
+                     <td>UTC timestamp of when this booking was created.</td>
+                  </tr>
+                  <tr>
+                     <td>passengersCount</td>
+                     <td>integer</td>
+                     <td>The count of passengers this booking is for.</td>
+                  </tr>
+                  <tr>
+                     <td>currency</td>
+                     <td>string</td>
+                     <td>Currency used for all prices in this response.</td>
+                  </tr>
+                  <tr>
+                     <td>trip</td>
+                     <td>object - <a href="#tripoption">TripOption</a></td>
+                     <td>Information about the trip.</td>
+                  </tr>
+                  <tr>
+                     <td>pickupAddressNote</td>
+                     <td>string</td>
+                     <td>Optional note for the driver with details about the pick up location.</td>
+                  </tr>
+                  <tr>
+                     <td>dropoffAddressNote</td>
+                     <td>string</td>
+                     <td>Optional note for the driver with details about the drop off location.</td>
+                  </tr>
+                  <tr>
+                     <td>customerNote</td>
+                     <td>string</td>
+                     <td>Optional note for the driver not related to pick up or drop off.</td>
+                  </tr>
+                  <tr>
+                     <td>flightNumber</td>
+                     <td>string</td>
+                     <td>Optional flight number in case this is an airport pick up.</td>
+                  </tr>
+                  <tr>
+                     <td>passengerDetails</td>
+                     <td>list of <a href="#passengerdetail">PassengerDetail</a></td>
+                     <td>List of passengers that will go on this trip. The number of passengers must match the <code>passengersCount</code> query parameter from the Search endpoint. There must be at least one passenger of type &quot;Lead&quot; with contact details filled. For passenger of type &quot;Child&quot; you can request a child seat of proper type if this is a private trip.</td>
+                  </tr>
+               </tbody>
+            </table>
+            <h3 id="error-status-codes-4">Error status codes</h3>
+            <table>
+               <thead>
+                  <tr>
+                     <th>Status code</th>
+                     <th>Description</th>
+                  </tr>
+               </thead>
+               <tbody>
+                  <tr>
+                     <td>401</td>
+                     <td>API key missing or invalid.</td>
+                  </tr>
+                  <tr>
+                     <td>403</td>
+                     <td>Forbidden request - trying to get details of a booking owned by someone else.</td>
+                  </tr>
+                  <tr>
+                     <td>404</td>
+                     <td>Booking not found.</td>
+                  </tr>
+               </tbody>
+            </table>
+            <h1 id="entities">Entities</h1>
+            <p>Below is a documentation of all object entities returned by the Daytrip API endpoints.</p>
+            <h2 id="tripoption">TripOption</h2>
+            <table>
+               <thead>
+                  <tr>
+                     <th>Property</th>
+                     <th>Type</th>
+                     <th>Description</th>
+                  </tr>
+               </thead>
+               <tbody>
+                  <tr>
+                     <td>id</td>
+                     <td>string</td>
+                     <td>Unique id of the trip option. Used to customize or book this option.</td>
+                  </tr>
+                  <tr>
+                     <td>type</td>
+                     <td>string</td>
+                     <td>Type of this option. &quot;Private&quot; or &quot;Shared&quot; (predefined shuttle trips).</td>
+                  </tr>
+                  <tr>
+                     <td>distanceKm</td>
+                     <td>number</td>
+                     <td>Length of the trip.</td>
+                  </tr>
+                  <tr>
+                     <td>travelTimeMinutes</td>
+                     <td>number</td>
+                     <td>Expected duration of the trip in minutes.</td>
+                  </tr>
+                  <tr>
+                     <td>pickUp</td>
+                     <td>object - <a href="#location">Location</a></td>
+                     <td>Details about the pick up point.</td>
+                  </tr>
+                  <tr>
+                     <td>dropOff</td>
+                     <td>object - <a href="#location">Location</a></td>
+                     <td>Details about the drop off point.</td>
+                  </tr>
+                  <tr>
+                     <td>pricing</td>
+                     <td>object - <a href="#pricing">Pricing</a></td>
+                     <td>Details about the pricing.</td>
+                  </tr>
+                  <tr>
+                     <td>vehicle</td>
+                     <td>object - <a href="#vehicle">Vehicle</a></td>
+                     <td>Details about the vehicle.</td>
+                  </tr>
+                  <tr>
+                     <td>luggage</td>
+                     <td>object - <a href="#luggage">Luggage</a></td>
+                     <td>Details about the luggage.</td>
+                  </tr>
+                  <tr>
+                     <td>seatsAvailable</td>
+                     <td>integer</td>
+                     <td>Number of available seats in the shared shuttle. Optional.</td>
+                  </tr>
+                  <tr>
+                     <td>availableChildSeatTypes</td>
+                     <td>list of <a href="#childseattype">ChildSeatType</a></td>
+                     <td>List of available child seat types for this trip.</td>
+                  </tr>
+                  <tr>
+                     <td>possibleStops</td>
+                     <td>list of <a href="#stop">Stop</a></td>
+                     <td>Stops that can be added to this trip option.</td>
+                  </tr>
+                  <tr>
+                     <td>includedStops</td>
+                     <td>list of <a href="#stop">Stop</a></td>
+                     <td>Stops that are already included in this option.</td>
+                  </tr>
+               </tbody>
+            </table>
+            <h2 id="location">Location</h2>
+            <table>
+               <thead>
+                  <tr>
+                     <th>Property</th>
+                     <th>Type</th>
+                     <th>Description</th>
+                  </tr>
+               </thead>
+               <tbody>
+                  <tr>
+                     <td>lat</td>
+                     <td>number</td>
+                     <td>Latitude in degrees.</td>
+                  </tr>
+                  <tr>
+                     <td>lon</td>
+                     <td>number</td>
+                     <td>Longitude in degrees.</td>
+                  </tr>
+                  <tr>
+                     <td>time</td>
+                     <td>string</td>
+                     <td>UTC timestamp of the departure time. Optional, for pick up only.</td>
+                  </tr>
+                  <tr>
+                     <td>description</td>
+                     <td>string</td>
+                     <td>Description of the pick up or drop off. Optional.</td>
+                  </tr>
+               </tbody>
+            </table>
+            <h2 id="pricing">Pricing</h2>
+            <table>
+               <thead>
+                  <tr>
+                     <th>Property</th>
+                     <th>Type</th>
+                     <th>Description</th>
+                  </tr>
+               </thead>
+               <tbody>
+                  <tr>
+                     <td>totalPrice</td>
+                     <td>number</td>
+                     <td>Total price of this option based on requested passenger count.</td>
+                  </tr>
+                  <tr>
+                     <td>pricePerPassenger</td>
+                     <td>number</td>
+                     <td>Price per passenger. Optional, for shared options only.</td>
+                  </tr>
+               </tbody>
+            </table>
+            <h2 id="vehicle">Vehicle</h2>
+            <table>
+               <thead>
+                  <tr>
+                     <th>Property</th>
+                     <th>Type</th>
+                     <th>Description</th>
+                  </tr>
+               </thead>
+               <tbody>
+                  <tr>
+                     <td>type</td>
+                     <td>string</td>
+                     <td>Type of vehicle. &quot;Sedan&quot;, &quot;MPV&quot;, &quot;Van&quot;, &quot;Luxury&quot; or &quot;Shuttle&quot;</td>
+                  </tr>
+                  <tr>
+                     <td>maxPassengers</td>
+                     <td>integer</td>
+                     <td>Maximum number of passengers that can take a trip in this vehicle.</td>
+                  </tr>
+                  <tr>
+                     <td>description</td>
+                     <td>string</td>
+                     <td>Description of the vehicle type, e.g. models that it is similar to.</td>
+                  </tr>
+                  <tr>
+                     <td>image</td>
+                     <td>string</td>
+                     <td>Link to an illustrative image of the vehicle type. Not an image of the exact vehicle that will be used for this trip.</td>
+                  </tr>
+               </tbody>
+            </table>
+            <h2 id="luggage">Luggage</h2>
+            <table>
+               <thead>
+                  <tr>
+                     <th>Property</th>
+                     <th>Type</th>
+                     <th>Description</th>
+                  </tr>
+               </thead>
+               <tbody>
+                  <tr>
+                     <td>maxTotalCarryons</td>
+                     <td>integer</td>
+                     <td>Maximum amount of carry-on luggage that passengers can bring on this trip.</td>
+                  </tr>
+                  <tr>
+                     <td>maxTotalSuitcases</td>
+                     <td>integer</td>
+                     <td>Maximum amount of suitcases that passengers can bring on this trip.</td>
+                  </tr>
+                  <tr>
+                     <td>maxCarryonsPerPerson</td>
+                     <td>integer</td>
+                     <td>Maximum amount of carry-on luggage that one passenger can bring on this trip. Optional, for shared trips only.</td>
+                  </tr>
+                  <tr>
+                     <td>maxSuitcasesPerPerson</td>
+                     <td>integer</td>
+                     <td>Maximum amount of suitcases that one passenger can bring on this trip. Optional, for shared trips only.</td>
+                  </tr>
+               </tbody>
+            </table>
+            <h2 id="childseattype">ChildSeatType</h2>
+            <table>
+               <thead>
+                  <tr>
+                     <th>Property</th>
+                     <th>Type</th>
+                     <th>Description</th>
+                  </tr>
+               </thead>
+               <tbody>
+                  <tr>
+                     <td>childSeatType</td>
+                     <td>string</td>
+                     <td>Type of the child seat. &quot;RearFacing&quot;, &quot;ForwardFacing&quot;, &quot;BoosterSeat&quot; or &quot;Booster&quot;</td>
+                  </tr>
+                  <tr>
+                     <td>description</td>
+                     <td>string</td>
+                     <td>Description of the child seat type.</td>
+                  </tr>
+                  <tr>
+                     <td>ageFrom</td>
+                     <td>integer</td>
+                     <td>Minimum age in years of a child that this seat type is suitable for.</td>
+                  </tr>
+                  <tr>
+                     <td>ageTo</td>
+                     <td>integer</td>
+                     <td>Maximum age in years of a child that this seat type is suitable for.</td>
+                  </tr>
+                  <tr>
+                     <td>weightInPoundsFrom</td>
+                     <td>integer</td>
+                     <td>Minimum weight in pounds of a child that this seat type is suitable for.</td>
+                  </tr>
+                  <tr>
+                     <td>weightInPoundsTo</td>
+                     <td>integer</td>
+                     <td>Maximum weight in pounds of a child that this seat type is suitable for.</td>
+                  </tr>
+                  <tr>
+                     <td>weightInKilosFrom</td>
+                     <td>integer</td>
+                     <td>Minimum weight in kilograms of a child that this seat type is suitable for.</td>
+                  </tr>
+                  <tr>
+                     <td>weightInKilosTo</td>
+                     <td>integer</td>
+                     <td>Maximum weight in kilograms of a child that this seat type is suitable for.</td>
+                  </tr>
+               </tbody>
+            </table>
+            <h2 id="stop">Stop</h2>
+            <table>
+               <thead>
+                  <tr>
+                     <th>Property</th>
+                     <th>Type</th>
+                     <th>Description</th>
+                  </tr>
+               </thead>
+               <tbody>
+                  <tr>
+                     <td>id</td>
+                     <td>string</td>
+                     <td>Id of the stop. Used for adding stops to a trip option.</td>
+                  </tr>
+                  <tr>
+                     <td>price</td>
+                     <td>number</td>
+                     <td>Price of the stop. If the stop is in <code>includedStops</code> then this price is already part of <code>totalPrice</code> under <code>pricing</code> of the <a href="#tripoption">TripOption</a>.</td>
+                  </tr>
+                  <tr>
+                     <td>name</td>
+                     <td>string</td>
+                     <td>Name of the stop.</td>
+                  </tr>
+                  <tr>
+                     <td>image</td>
+                     <td>string</td>
+                     <td>Link to the image of the stop.</td>
+                  </tr>
+                  <tr>
+                     <td>title</td>
+                     <td>string</td>
+                     <td>Title of the stop description.</td>
+                  </tr>
+                  <tr>
+                     <td>perex</td>
+                     <td>string</td>
+                     <td>Perex of the stop description.</td>
+                  </tr>
+                  <tr>
+                     <td>description</td>
+                     <td>string</td>
+                     <td>The stop description.</td>
+                  </tr>
+                  <tr>
+                     <td>durationInMinutes</td>
+                     <td>integer</td>
+                     <td>Expected duration of the stop.</td>
+                  </tr>
+                  <tr>
+                     <td>order</td>
+                     <td>integer</td>
+                     <td>Order of this stop on this trip.</td>
+                  </tr>
+                  <tr>
+                     <td>timezone</td>
+                     <td>string</td>
+                     <td>Name of the timezone matching the location of the stop.</td>
+                  </tr>
+                  <tr>
+                     <td>country</td>
+                     <td>object - <a href="#country">Country</a></td>
+                     <td>Details about the country where the stop is located.</td>
+                  </tr>
+               </tbody>
+            </table>
+            <h2 id="country">Country</h2>
+            <table>
+               <thead>
+                  <tr>
+                     <th>Property</th>
+                     <th>Type</th>
+                     <th>Description</th>
+                  </tr>
+               </thead>
+               <tbody>
+                  <tr>
+                     <td>englishName</td>
+                     <td>string</td>
+                     <td>Name of the country in English.</td>
+                  </tr>
+               </tbody>
+            </table>
+            <h2 id="passengerdetail">PassengerDetail</h2>
+            <table>
+               <thead>
+                  <tr>
+                     <th>Property</th>
+                     <th>Type</th>
+                     <th>Description</th>
+                  </tr>
+               </thead>
+               <tbody>
+                  <tr>
+                     <td>type</td>
+                     <td>string</td>
+                     <td>Type of the passenger. &quot;Lead&quot;, &quot;Adult&quot; or &quot;Child&quot;</td>
+                  </tr>
+                  <tr>
+                     <td>firstName</td>
+                     <td>string</td>
+                     <td>First name of the passenger - required the for lead passenger.</td>
+                  </tr>
+                  <tr>
+                     <td>lastName</td>
+                     <td>string</td>
+                     <td>Last name of the passenger - required for the lead passenger.</td>
+                  </tr>
+                  <tr>
+                     <td>phone</td>
+                     <td>string</td>
+                     <td>Phone number of the passenger - required for the lead passenger. Include country prefix.</td>
+                  </tr>
+                  <tr>
+                     <td>email</td>
+                     <td>string</td>
+                     <td>Email of the passenger - required for the lead passenger.</td>
+                  </tr>
+                  <tr>
+                     <td>birthday</td>
+                     <td>integer</td>
+                     <td>Birthday of the passenger - required for the lead passenger. Unix epoch timestamp in seconds.</td>
+                  </tr>
+                  <tr>
+                     <td>childSeatType</td>
+                     <td>string</td>
+                     <td>Requested child seat type for a passenger of type &quot;Child&quot;. Must match one of offered child seat types from <code>availableChildSeatTypes</code> of the trip option you are booking.</td>
+                  </tr>
+               </tbody>
+            </table>
+            <h1 id="frequently-asked-questions">Frequently asked questions</h1>
+            <h2 id="once-a-booking-is-created-can-it-be-cancelled-or-changed-by-daytrip">Once a booking is created, can it be cancelled or changed by Daytrip?</h2>
+            <p>No, once a booking is created by calling our API, it is confirmed and guaranteed by Daytrip to be fullfilled. You do not need to subscribe to any booking status changes.</p>
+            <h2 id="can-i-cancel-a-booking-created-via-the-api">Can I cancel a booking created via the API?</h2>
+            <p>Yes, you can cancel a booking if it&#39;s departure is more than 24 hours in the future - this threshold is a subject to change.</p>
+            <h2 id="does-the-daytrip-api-handle-payments">Does the Daytrip API handle payments?</h2>
+            <p>No, the Daytrip API does not handle payments. You are responsible for collecting online payments from the customers. Your company will be invoiced by Daytrip for the trips you book with us.</p>
+            <h2 id="how-many-passengers-can-be-a-trip-booked-for">How many passengers can be a trip booked for?</h2>
+            <p>On most routes we offer trips for 1-7 passengers. On some routes we offer trips for up to 10 passengers. If you need to book a trip for more passengers please create multiple bookings.</p>
+         </div>
+         <div class=dark-box>
+            <div class=lang-selector>
+               <a href=# data-language-name="bash">bash</a>
+               <a href=# data-language-name="python">python</a>
+               <a href=# data-language-name="javascript">javascript</a>
+            </div>
+         </div>
+      </div>
+   </body>
+</html>

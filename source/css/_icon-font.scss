@@ -1,0 +1,41 @@
+@font-face {
+   font-family: 'slate';
+   src:
+      url('../fonts/slate.woff2') format('woff2'),
+      url('../fonts/slate.woff')  format('woff'),
+      url('../fonts/slate.ttf')   format('truetype');
+   font-weight: normal;
+   font-style: normal;
+   }
+
+@mixin Icon($glyphCode) {
+   &::before {
+      font-family: 'slate';
+      speak: none;
+      font-style: normal;
+      font-weight: normal;
+      font-variant: normal;
+      text-transform: none;
+      line-height: 1;
+      vertical-align: middle;
+      padding-right: 0.5em;
+      font-size: 14px;
+      content: $glyphCode;
+      }
+   }
+
+%icon-exclamation-sign {
+   @include Icon("\e600");
+   }
+
+%icon-info-sign {
+   @include Icon("\e602");
+   }
+
+%icon-ok-sign {
+   @include Icon("\e606");
+   }
+
+%icon-search {
+   @include Icon("\e607");
+   }

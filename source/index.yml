@@ -1,0 +1,19 @@
+title: Daytrip API Reference
+
+language_tabs:
+   - bash
+   - python
+   - javascript
+
+includes:
+   - introduction
+   - environments
+   - authentication
+   - errors
+   - debugging
+   - trip-api
+   - faq
+
+search: true
+
+highlight_theme: monokai

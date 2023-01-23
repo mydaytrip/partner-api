@@ -1,0 +1,78 @@
+{
+   "name": "node-slate",
+   "version": "3.1.0",
+   "description": "Node port of lord/slate",
+   "license": "Apache-2.0",
+   "type": "module",
+   "main": "build/1-dev/index.html",
+   "repository": "github:center-key/node-slate",
+   "homepage": "https://node-slate.js.org",
+   "bugs": "https://github.com/center-key/node-slate/issues",
+   "docs": "https://github.com/center-key/node-slate#readme",
+   "author": "Various",
+   "keywords": [
+      "api-documentation",
+      "api",
+      "nodejs",
+      "slate",
+      "static-site-generator"
+   ],
+   "jshintConfig": {
+      "esversion": 11,
+      "strict": "implied",
+      "eqeqeq": true,
+      "node": true,
+      "undef": true,
+      "unused": true
+   },
+   "runScriptsConfig": {
+      "build": [
+         "rimraf build **/.DS_Store",
+         "gulp build",
+         "gulp lint",
+         "html-validator build/1-dev",
+         "rev-web-assets build/2-min build/3-rev"
+      ]
+   },
+   "scripts": {
+      "build": "run-scripts build && gulp show-paths",
+      "build-quiet": "run-scripts build",
+      "start": "run-scripts build && gulp show-paths && gulp serve",
+      "deploy": "deploy.sh",
+      "test": "jshint gulpfile.js"
+   },
+   "dependencies": {
+      "browser-sync": "~2.27",
+      "chalk": "~5.1",
+      "fuse.js": "~6.6",
+      "gulp": "~4.0",
+      "gulp-clean-css": "~4.3",
+      "gulp-cli": "~2.3",
+      "gulp-concat": "~2.6",
+      "gulp-ejs": "~5.1",
+      "gulp-htmlhint": "~4.0",
+      "gulp-jshint": "~2.1",
+      "gulp-prettify": "~0.5",
+      "gulp-rename": "~2.0",
+      "gulp-sass": "~5.1",
+      "gulp-size": "~4.0",
+      "gulp-uglify": "~3.0",
+      "highlight.js": "~11.6",
+      "imagesloaded": "~5.0",
+      "jquery": "~3.6",
+      "jquery-highlight": "~3.5",
+      "jquery-ui": "~1.13",
+      "jquery-ui-dist": "~1.13",
+      "jquery.tocify": "~1.9",
+      "js-yaml": "~4.1",
+      "jshint": "~2.13",
+      "marked": "~4.1",
+      "merge-stream": "~2.0",
+      "rev-web-assets": "~0.1",
+      "rimraf": "~3.0",
+      "run-scripts-util": "~0.1",
+      "sass": "~1.55",
+      "tocbot": "~4.18",
+      "w3c-html-validator": "~1.2"
+   }
+}
