@@ -597,8 +597,8 @@ This endpoint is used to book a trip option. Any trip option from Search or Cust
 Property           | Type                                        | Description
 ------------------ | ------------------------------------------- | -----------
 optionId           | string                                      | Id of the option you want to book. Taken from Search or Customize endpoint response.
-pickupAddressNote  | string                                      | Optional note for the driver with details about the pick up location.
-dropoffAddressNote | string                                      | Optional note for the driver with details about the drop off location.
+pickUpAddressNote  | string                                      | Optional note for the driver with details about the pick up location.
+dropOffAddressNote | string                                      | Optional note for the driver with details about the drop off location.
 customerNote       | string                                      | Optional note for the driver not related to pick up or drop off.
 flightNumber       | string                                      | Optional flight number in case this is an airport pick up.
 passengerDetails   | list of [PassengerDetail](#passengerdetail) | List of passengers that will go on this trip. The number of passengers must match the `passengersCount` query parameter from the Search endpoint. There must be exactly one passenger of type "Lead" with contact details filled. For passenger of type "Child" you can request a child seat of proper type if this is a private trip.
@@ -727,8 +727,8 @@ curl https://api.staging.mydaytrip.net/partners/v3/trip/details/bookingId -H "x-
          }
       ],
    },
-   "pickupAddressNote": "Havel airport", 
-   "dropoffAddressNote": "Vienna central square", 
+   "pickUpAddressNote": "Havel airport", 
+   "dropOffAddressNote": "Vienna central square", 
    "customerNote": "We will stand next to the entrance", 
    "flightNumber": "FR008",	
    "passengerDetails": [ 
@@ -767,8 +767,8 @@ bookingDate        | string                                      | UTC timestamp
 passengersCount    | integer                                     | The count of passengers this booking is for.
 currency           | string                                      | Currency used for all prices in this response.
 trip               | object - [TripOption](#tripoption)          | Information about the trip.
-pickupAddressNote  | string                                      | Optional note for the driver with details about the pick up location.
-dropoffAddressNote | string                                      | Optional note for the driver with details about the drop off location.
+pickUpAddressNote  | string                                      | Optional note for the driver with details about the pick up location.
+dropOffAddressNote | string                                      | Optional note for the driver with details about the drop off location.
 customerNote       | string                                      | Optional note for the driver not related to pick up or drop off.
 flightNumber       | string                                      | Optional flight number in case this is an airport pick up.
 passengerDetails   | list of [PassengerDetail](#passengerdetail) | List of passengers that will go on this trip. The number of passengers must match the `passengersCount` query parameter from the Search endpoint. There must be at least one passenger of type "Lead" with contact details filled. For passenger of type "Child" you can request a child seat of proper type if this is a private trip.
