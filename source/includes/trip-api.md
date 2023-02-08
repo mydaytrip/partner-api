@@ -42,7 +42,7 @@ If you want to make pick up, drop off, passenger count or departure time changes
 > To search for a trip from Prague to Vienna for two passengers, use this call:
 
 ```bash
-curl "https://api.staging.mydaytrip.net/partners/v3/trip/search?originLongitude=14.2559&originLatitude=50.10&destinationLongitude=16.3738&destinationLatitude=48.2082&departureTime=1766227088&passengersCount=2"
+curl "https://api.staging.mydaytrip.net/partners/v3/trip/search?originLongitude=14.2559&originLatitude=50.10&destinationLongitude=16.3738&destinationLatitude=48.2082&departureTime=1766227088&passengersCount=3"
   -H "x-api-key: your-api-key"
 ```
 
@@ -60,7 +60,7 @@ curl "https://api.staging.mydaytrip.net/partners/v3/trip/search?originLongitude=
 {
    "searchId":"f0e34a1b-2b3d-4747-b426-292633b615b4",
    "expiresAt": "2022-12-04T18:00:00Z",
-   "passengersCount":2,
+   "passengersCount":3,
    "currency":"EUR",
    "options":[
       {
@@ -532,7 +532,7 @@ curl -d '{ "optionId": "1d32109f-c2e2-44fe-b2cf-461ef3730541", "selectedStops": 
 {
    "searchId":"f0e34a1b-2b3d-4747-b426-292633b615b4",
    "expiresAt": "2022-12-04T18:00:00Z",
-   "passengersCount":2,
+   "passengersCount":3,
    "currency":"EUR",
    "options":[
       {
@@ -675,7 +675,7 @@ Status code | Description
 > To book the customized trip option with stops from the example above or to book a trip option from the original Search endpoint response for two adults and one child with a booster seat, use the following call:
 
 ```bash
-curl -d '{ "optionId": "f0e34a1b-2b3d-4747-b426-292633b615b4", "pickupAddressNote": "Havel airport", "dropoffAddressNote": "Vienna central square", "customerNote": "We will stand next to the entrance", "flightNumber": "FR008",	"passengerDetails": [ { 			"type": "lead", "firstName": "John", "lastName": "Doe", "phone": "+41555555555", "email": "client-email@example.com", 			"birthday": 629424000 }, { "type": "adult" }, { "type": "child", "childSeatType": "Booster" } ] }' -H "Content-Type: application/json" -H "x-api-key: your-api-key" -X POST https://api.staging.mydaytrip.net/partners/v3/trip/book
+curl -d '{ "optionId": "f0e34a1b-2b3d-4747-b426-292633b615b4", "pickupAddressNote": "Havel airport", "dropoffAddressNote": "Vienna central square", "customerNote": "We will stand next to the entrance", "flightNumber": "FR008",	"passengerDetails": [ { 			"type": "Lead", "firstName": "John", "lastName": "Doe", "phone": "+41555555555", "email": "client-email@example.com", 			"birthday": 629424000 }, { "type": "Adult" }, { "type": "Child", "childSeatType": "Booster" } ] }' -H "Content-Type: application/json" -H "x-api-key: your-api-key" -X POST https://api.staging.mydaytrip.net/partners/v3/trip/book
 ```
 
 ```javascript
@@ -789,7 +789,7 @@ curl https://api.staging.mydaytrip.net/partners/v3/trip/details/bookingId -H "x-
 {
    "status": "Confirmed",
    "bookingDate": "2022-12-05T18:00:00Z",
-   "passengersCount": 2,
+   "passengersCount": 3,
    "currency": "EUR",
    "trip": {
       "type": "Private",
@@ -842,7 +842,7 @@ curl https://api.staging.mydaytrip.net/partners/v3/trip/details/bookingId -H "x-
    "flightNumber": "FR008",	
    "passengerDetails": [ 
       { 			
-         "type": "lead", 
+         "type": "Lead", 
          "firstName": "John", 
          "lastName": "Doe", 
          "phone": "+41555555555", 
@@ -850,10 +850,10 @@ curl https://api.staging.mydaytrip.net/partners/v3/trip/details/bookingId -H "x-
          "birthday": 629424000 
       }, 
       { 
-         "type": "adult" 
+         "type": "Adult" 
       }, 
       { 
-         "type": "child", "childSeatType": "Booster" 
+         "type": "Child", "childSeatType": "Booster" 
       } 
    ]   
 }
