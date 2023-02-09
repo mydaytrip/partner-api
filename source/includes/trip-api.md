@@ -675,7 +675,7 @@ Status code | Description
 > To book the customized trip option with stops from the example above or to book a trip option from the original Search endpoint response for two adults and one child with a booster seat, use the following call:
 
 ```bash
-curl -d '{ "optionId": "f0e34a1b-2b3d-4747-b426-292633b615b4", "pickupAddressNote": "Havel airport", "dropoffAddressNote": "Vienna central square", "customerNote": "We will stand next to the entrance", "flightNumber": "FR008",	"passengerDetails": [ { 			"type": "Lead", "firstName": "John", "lastName": "Doe", "phone": "+41555555555", "email": "client-email@example.com", 			"birthday": 629424000 }, { "type": "Adult" }, { "type": "Child", "childSeatType": "Booster" } ] }' -H "Content-Type: application/json" -H "x-api-key: your-api-key" -X POST https://api.staging.mydaytrip.net/partners/v3/trip/book
+curl -d '{ "optionId": "f0e34a1b-2b3d-4747-b426-292633b615b4", "pickUpAddressNote": "Havel airport", "dropOffAddressNote": "Vienna central square", "customerNote": "We will stand next to the entrance", "flightNumber": "FR008",	"passengerDetails": [ { 			"type": "Lead", "firstName": "John", "lastName": "Doe", "phone": "+41555555555", "email": "client-email@example.com", 			"birthday": 629424000 }, { "type": "Adult" }, { "type": "Child", "childSeatType": "Booster" } ] }' -H "Content-Type: application/json" -H "x-api-key: your-api-key" -X POST https://api.staging.mydaytrip.net/partners/v3/trip/book
 ```
 
 ```javascript
@@ -743,9 +743,15 @@ curl -d '{ "bookingId": "cb102778-a3d7-426e-8d18-6bd6b296f283" }' -H "Content-Ty
 
 ```
 
-> The above call returns 204 No Content success HTTP status code.
+> The above call returns empty object:
 
-This endpoint is used to cancel a booked trip. Only trips that have departure more than 24 hours in the future - this threshold is a subject to change.
+```json
+{
+
+}
+```
+
+This endpoint is used to cancel a booked trip. Only trips that have departure more than 24 hours in the future can be cancelled - this threshold is a subject to change.
 
 ### URL path
 
