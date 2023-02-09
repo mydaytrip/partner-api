@@ -8,5 +8,6 @@ HTTP Code | Meaning
 401        | Unauthorized - API key is missing or invalid.
 403        | Forbidden - The requested operation is forbidden.
 404        | Not Found - No trips found, trip option not found, booking not found, endpoint does not exist.
+409        | Conflict - Trip option already booked, trip option already cancelled.
 500        | Internal Server Error - We had a problem with our service. Please retry your request.
 503        | Service Unavailable - We had a problem with our service. Please retry your request.

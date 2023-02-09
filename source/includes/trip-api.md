@@ -725,6 +725,7 @@ Status code | Description
 401         | API key missing or invalid.
 403         | Forbidden request - trying to book a trip option owned by someone else.
 404         | Trip option not found or expired.
+409         | Trip option has already been booked.
 
 ## Cancel endpoint
 
@@ -764,6 +765,7 @@ Status code | Description
 401         | API key missing or invalid.
 403         | Forbidden request - trying to cancel a booking owned by someone else or the departure is too soon.
 404         | Booking not found.
+409         | Booking has already been cancelled.
 
 ## Details endpoint
 
