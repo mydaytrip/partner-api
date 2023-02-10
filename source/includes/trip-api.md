@@ -796,7 +796,7 @@ curl https://api.staging.mydaytrip.net/partners/v3/trip/details/bookingId -H "x-
 ```json
 {
    "status": "Confirmed",
-   "bookingDate": "2022-12-05T18:00:00Z",
+   "createdAt": "2022-12-05T18:00:00Z",
    "passengersCount": 3,
    "currency": "EUR",
    "trip": {
@@ -880,7 +880,7 @@ Replace `bookingId` with the id of the booking you want to retrieve details for.
 Property           | Type                                        | Description
 ------------------ | ------------------------------------------- | -----------
 status             | string                                      | Booking status. "Confirmed" or "Cancelled".
-bookingDate        | string                                      | UTC timestamp of when this booking was created.
+createdAt          | string                                      | UTC timestamp of when this booking was created.
 passengersCount    | integer                                     | The count of passengers this booking is for.
 currency           | string                                      | Currency used for all prices in this response.
 trip               | object - [TripOption](#tripoption)          | Information about the trip.
