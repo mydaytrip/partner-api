@@ -39,9 +39,9 @@
             <p>The API can be used to search for trip options, customize a trip with stops, book a trip, get details about a booking or cancel a booking.</p>
             <h2 id="contacts">Contacts</h2>
             <h3 id="onboarding">Onboarding</h3>
-            <p>If you want to integrate with our API, contact us at <a href="mailto:&#x70;&#97;&#114;&#x74;&#110;&#101;&#114;&#115;&#x40;&#109;&#121;&#100;&#x61;&#x79;&#x74;&#x72;&#105;&#x70;&#x2e;&#99;&#x6f;&#109;">&#x70;&#97;&#114;&#x74;&#110;&#101;&#114;&#115;&#x40;&#109;&#121;&#100;&#x61;&#x79;&#x74;&#x72;&#105;&#x70;&#x2e;&#99;&#x6f;&#109;</a> to get a partner account and an API key. </p>
+            <p>If you want to integrate with our API, contact us at <a href="mailto:&#112;&#97;&#x72;&#x74;&#x6e;&#101;&#x72;&#x73;&#64;&#x6d;&#x79;&#x64;&#x61;&#121;&#x74;&#x72;&#105;&#x70;&#46;&#x63;&#x6f;&#109;">&#112;&#97;&#x72;&#x74;&#x6e;&#101;&#x72;&#x73;&#64;&#x6d;&#x79;&#x64;&#x61;&#121;&#x74;&#x72;&#105;&#x70;&#46;&#x63;&#x6f;&#109;</a> to get a partner account and an API key. </p>
             <h3 id="customer-support-emergency">Customer support emergency</h3>
-            <p>To solve problems with bookings created via the API you can contact <a href="mailto:&#x64;&#x61;&#x79;&#x74;&#x72;&#105;&#x70;&#x40;&#109;&#121;&#100;&#x61;&#121;&#116;&#114;&#x69;&#112;&#x2e;&#99;&#x6f;&#x6d;">&#x64;&#x61;&#x79;&#x74;&#x72;&#105;&#x70;&#x40;&#109;&#121;&#100;&#x61;&#121;&#116;&#114;&#x69;&#112;&#x2e;&#99;&#x6f;&#x6d;</a> or call <a href="tel:+442033181119">+44 20 3318 1119</a>.</p>
+            <p>To solve problems with bookings created via the API you can contact <a href="mailto:&#100;&#x61;&#x79;&#x74;&#x72;&#x69;&#112;&#x40;&#109;&#x79;&#100;&#97;&#x79;&#116;&#114;&#105;&#x70;&#46;&#x63;&#111;&#109;">&#100;&#x61;&#x79;&#x74;&#x72;&#x69;&#112;&#x40;&#109;&#x79;&#100;&#97;&#x79;&#116;&#114;&#105;&#x70;&#46;&#x63;&#111;&#109;</a> or call <a href="tel:+442033181119">+44 20 3318 1119</a>.</p>
             <h1 id="environments">Environments</h1>
             <p>Daytrip offers a sandbox environment where you can test your integration with the API without creating real bookings. All the code examples provided in this documentation are using this sandbox environment. Each environment requires a different API key. When your integration is ready and tested against the sandbox environment, you can request an API key for the production environment.</p>
             <h2 id="urls">URLs</h2>
@@ -1035,6 +1035,26 @@
    <span class="hljs-attr">&quot;createdAt&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;2022-12-05T18:00:00Z&quot;</span><span class="hljs-punctuation">,</span>
    <span class="hljs-attr">&quot;passengersCount&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">3</span><span class="hljs-punctuation">,</span>
    <span class="hljs-attr">&quot;currency&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;EUR&quot;</span><span class="hljs-punctuation">,</span>
+   <span class="hljs-attr">&quot;pickUpAddressNote&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Havel airport&quot;</span><span class="hljs-punctuation">,</span> 
+   <span class="hljs-attr">&quot;dropOffAddressNote&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Vienna central square&quot;</span><span class="hljs-punctuation">,</span> 
+   <span class="hljs-attr">&quot;customerNote&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;We will stand next to the entrance&quot;</span><span class="hljs-punctuation">,</span> 
+   <span class="hljs-attr">&quot;flightNumber&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;FR008&quot;</span><span class="hljs-punctuation">,</span>	
+   <span class="hljs-attr">&quot;passengerDetails&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span> 
+      <span class="hljs-punctuation">{</span> 			
+         <span class="hljs-attr">&quot;type&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Lead&quot;</span><span class="hljs-punctuation">,</span> 
+         <span class="hljs-attr">&quot;firstName&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;John&quot;</span><span class="hljs-punctuation">,</span> 
+         <span class="hljs-attr">&quot;lastName&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Doe&quot;</span><span class="hljs-punctuation">,</span> 
+         <span class="hljs-attr">&quot;phone&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;+41555555555&quot;</span><span class="hljs-punctuation">,</span> 
+         <span class="hljs-attr">&quot;email&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;client-email@example.com&quot;</span><span class="hljs-punctuation">,</span> 			
+         <span class="hljs-attr">&quot;birthday&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">629424000</span> 
+      <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span> 
+      <span class="hljs-punctuation">{</span> 
+         <span class="hljs-attr">&quot;type&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Adult&quot;</span> 
+      <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span> 
+      <span class="hljs-punctuation">{</span> 
+         <span class="hljs-attr">&quot;type&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Child&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;childSeatType&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Booster&quot;</span> 
+      <span class="hljs-punctuation">}</span>
+   <span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
    <span class="hljs-attr">&quot;trip&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
       <span class="hljs-attr">&quot;type&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Private&quot;</span><span class="hljs-punctuation">,</span>
       <span class="hljs-attr">&quot;englishSpeakingDriver&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span><span class="hljs-punctuation">,</span>
@@ -1079,27 +1099,7 @@
             <span class="hljs-punctuation">}</span>
          <span class="hljs-punctuation">}</span>
       <span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
-   <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
-   <span class="hljs-attr">&quot;pickUpAddressNote&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Havel airport&quot;</span><span class="hljs-punctuation">,</span> 
-   <span class="hljs-attr">&quot;dropOffAddressNote&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Vienna central square&quot;</span><span class="hljs-punctuation">,</span> 
-   <span class="hljs-attr">&quot;customerNote&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;We will stand next to the entrance&quot;</span><span class="hljs-punctuation">,</span> 
-   <span class="hljs-attr">&quot;flightNumber&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;FR008&quot;</span><span class="hljs-punctuation">,</span>	
-   <span class="hljs-attr">&quot;passengerDetails&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span> 
-      <span class="hljs-punctuation">{</span> 			
-         <span class="hljs-attr">&quot;type&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Lead&quot;</span><span class="hljs-punctuation">,</span> 
-         <span class="hljs-attr">&quot;firstName&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;John&quot;</span><span class="hljs-punctuation">,</span> 
-         <span class="hljs-attr">&quot;lastName&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Doe&quot;</span><span class="hljs-punctuation">,</span> 
-         <span class="hljs-attr">&quot;phone&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;+41555555555&quot;</span><span class="hljs-punctuation">,</span> 
-         <span class="hljs-attr">&quot;email&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;client-email@example.com&quot;</span><span class="hljs-punctuation">,</span> 			
-         <span class="hljs-attr">&quot;birthday&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">629424000</span> 
-      <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span> 
-      <span class="hljs-punctuation">{</span> 
-         <span class="hljs-attr">&quot;type&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Adult&quot;</span> 
-      <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span> 
-      <span class="hljs-punctuation">{</span> 
-         <span class="hljs-attr">&quot;type&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Child&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;childSeatType&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Booster&quot;</span> 
-      <span class="hljs-punctuation">}</span> 
-   <span class="hljs-punctuation">]</span>   
+   <span class="hljs-punctuation">}</span>   
 <span class="hljs-punctuation">}</span></code></pre>
             <p>This endpoint returns details of a booked trip. It provides the status of the booking, information about the trip option and the data that were provided when booking the trip.</p>
             <h3 id="url-path-4">URL path</h3>
@@ -1136,11 +1136,6 @@
                      <td>Currency used for all prices in this response.</td>
                   </tr>
                   <tr>
-                     <td>trip</td>
-                     <td>object - <a href="#tripoption">TripOption</a></td>
-                     <td>Information about the trip.</td>
-                  </tr>
-                  <tr>
                      <td>pickUpAddressNote</td>
                      <td>string</td>
                      <td>Optional note for the driver with details about the pick up location.</td>
@@ -1163,7 +1158,12 @@
                   <tr>
                      <td>passengerDetails</td>
                      <td>list of <a href="#passengerdetail">PassengerDetail</a></td>
-                     <td>List of passengers that will go on this trip. The number of passengers must match the <code>passengersCount</code> query parameter from the Search endpoint. There must be at least one passenger of type &quot;Lead&quot; with contact details filled. For passenger of type &quot;Child&quot; you can request a child seat of proper type if this is a private trip.</td>
+                     <td>List of passengers that will go on this trip.</td>
+                  </tr>
+                  <tr>
+                     <td>trip</td>
+                     <td>object - <a href="#tripoption">TripOption</a></td>
+                     <td>Information about the trip.</td>
                   </tr>
                </tbody>
             </table>

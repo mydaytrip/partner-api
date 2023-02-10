@@ -799,6 +799,26 @@ curl https://api.staging.mydaytrip.net/partners/v3/trip/details/bookingId -H "x-
    "createdAt": "2022-12-05T18:00:00Z",
    "passengersCount": 3,
    "currency": "EUR",
+   "pickUpAddressNote": "Havel airport", 
+   "dropOffAddressNote": "Vienna central square", 
+   "customerNote": "We will stand next to the entrance", 
+   "flightNumber": "FR008",	
+   "passengerDetails": [ 
+      { 			
+         "type": "Lead", 
+         "firstName": "John", 
+         "lastName": "Doe", 
+         "phone": "+41555555555", 
+         "email": "client-email@example.com", 			
+         "birthday": 629424000 
+      }, 
+      { 
+         "type": "Adult" 
+      }, 
+      { 
+         "type": "Child", "childSeatType": "Booster" 
+      }
+   ],
    "trip": {
       "type": "Private",
       "englishSpeakingDriver": true,
@@ -843,27 +863,7 @@ curl https://api.staging.mydaytrip.net/partners/v3/trip/details/bookingId -H "x-
             }
          }
       ],
-   },
-   "pickUpAddressNote": "Havel airport", 
-   "dropOffAddressNote": "Vienna central square", 
-   "customerNote": "We will stand next to the entrance", 
-   "flightNumber": "FR008",	
-   "passengerDetails": [ 
-      { 			
-         "type": "Lead", 
-         "firstName": "John", 
-         "lastName": "Doe", 
-         "phone": "+41555555555", 
-         "email": "client-email@example.com", 			
-         "birthday": 629424000 
-      }, 
-      { 
-         "type": "Adult" 
-      }, 
-      { 
-         "type": "Child", "childSeatType": "Booster" 
-      } 
-   ]   
+   }   
 }
 ```
 
@@ -883,12 +883,12 @@ status             | string                                      | Booking statu
 createdAt          | string                                      | UTC timestamp of when this booking was created.
 passengersCount    | integer                                     | The count of passengers this booking is for.
 currency           | string                                      | Currency used for all prices in this response.
-trip               | object - [TripOption](#tripoption)          | Information about the trip.
 pickUpAddressNote  | string                                      | Optional note for the driver with details about the pick up location.
 dropOffAddressNote | string                                      | Optional note for the driver with details about the drop off location.
 customerNote       | string                                      | Optional note for the driver not related to pick up or drop off.
 flightNumber       | string                                      | Optional flight number in case this is an airport pick up.
-passengerDetails   | list of [PassengerDetail](#passengerdetail) | List of passengers that will go on this trip. The number of passengers must match the `passengersCount` query parameter from the Search endpoint. There must be at least one passenger of type "Lead" with contact details filled. For passenger of type "Child" you can request a child seat of proper type if this is a private trip.
+passengerDetails   | list of [PassengerDetail](#passengerdetail) | List of passengers that will go on this trip.
+trip               | object - [TripOption](#tripoption)          | Information about the trip.
 
 ### Error status codes
 
