@@ -881,6 +881,7 @@ Property           | Type                                        | Description
 ------------------ | ------------------------------------------- | -----------
 status             | string                                      | Booking status. "Confirmed" or "Cancelled".
 createdAt          | string                                      | UTC timestamp of when this booking was created.
+cancelledAt        | string                                      | UTC timestamp of when this booking was cancelled. Optional.
 passengersCount    | integer                                     | The count of passengers this booking is for.
 currency           | string                                      | Currency used for all prices in this response.
 pickUpAddressNote  | string                                      | Optional note for the driver with details about the pick up location.
