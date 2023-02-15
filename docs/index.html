@@ -39,9 +39,9 @@
             <p>The API can be used to search for trip options, customize a trip with stops, book a trip, get details about a booking or cancel a booking.</p>
             <h2 id="contacts">Contacts</h2>
             <h3 id="onboarding">Onboarding</h3>
-            <p>If you want to integrate with our API, contact us at <a href="mailto:&#112;&#97;&#114;&#116;&#110;&#101;&#x72;&#x73;&#64;&#x6d;&#x79;&#x64;&#x61;&#121;&#116;&#x72;&#105;&#112;&#x2e;&#99;&#x6f;&#x6d;">&#112;&#97;&#114;&#116;&#110;&#101;&#x72;&#x73;&#64;&#x6d;&#x79;&#x64;&#x61;&#121;&#116;&#x72;&#105;&#112;&#x2e;&#99;&#x6f;&#x6d;</a> to get a partner account and an API key. </p>
+            <p>If you want to integrate with our API, contact us at <a href="mailto:&#x70;&#x61;&#x72;&#116;&#110;&#x65;&#x72;&#x73;&#x40;&#x6d;&#x79;&#100;&#97;&#x79;&#x74;&#114;&#105;&#112;&#x2e;&#x63;&#111;&#x6d;">&#x70;&#x61;&#x72;&#116;&#110;&#x65;&#x72;&#x73;&#x40;&#x6d;&#x79;&#100;&#97;&#x79;&#x74;&#114;&#105;&#112;&#x2e;&#x63;&#111;&#x6d;</a> to get a partner account and an API key. </p>
             <h3 id="customer-support-emergency">Customer support emergency</h3>
-            <p>To solve problems with bookings created via the API you can contact <a href="mailto:&#100;&#97;&#x79;&#x74;&#x72;&#105;&#x70;&#x40;&#x6d;&#x79;&#x64;&#x61;&#121;&#116;&#114;&#105;&#112;&#46;&#x63;&#111;&#109;">&#100;&#97;&#x79;&#x74;&#x72;&#105;&#x70;&#x40;&#x6d;&#x79;&#x64;&#x61;&#121;&#116;&#114;&#105;&#112;&#46;&#x63;&#111;&#109;</a> or call <a href="tel:+442033181119">+44 20 3318 1119</a>.</p>
+            <p>To solve problems with bookings created via the API you can contact <a href="mailto:&#x64;&#97;&#121;&#x74;&#x72;&#105;&#x70;&#64;&#x6d;&#x79;&#100;&#97;&#121;&#x74;&#114;&#x69;&#x70;&#x2e;&#x63;&#111;&#x6d;">&#x64;&#97;&#121;&#x74;&#x72;&#105;&#x70;&#64;&#x6d;&#x79;&#100;&#97;&#121;&#x74;&#114;&#x69;&#x70;&#x2e;&#x63;&#111;&#x6d;</a> or call <a href="tel:+442033181119">+44 20 3318 1119</a>.</p>
             <h1 id="environments">Environments</h1>
             <p>Daytrip offers a sandbox environment where you can test your integration with the API without creating real bookings. All the code examples provided in this documentation are using this sandbox environment. Each environment requires a different API key. When your integration is ready and tested against the sandbox environment, you can request an API key for the production environment.</p>
             <h2 id="urls">URLs</h2>
@@ -155,6 +155,7 @@
                <li>call <a href="#update-endpoint">/update</a> endpoint to update the booking details</li>
             </ol>
             <h2 id="search-endpoint">Search endpoint</h2>
+            <p>This endpoint returns all trip options for given origin, destination, departure time and passenger count (must be between 1 and 10). Origin and destination are passed as latitude and longitude coordinates. The unit used is degree with decimal places, for example <code>39.753657, -117.610215</code>. Departure time is passed as a UNIX epoch timestamp in seconds, like <code>1679463169</code>.</p>
             <blockquote>
                <p>To search for a trip from Prague to Vienna for two passengers, use this call:</p>
             </blockquote>
@@ -579,7 +580,6 @@
       <span class="hljs-punctuation">}</span>
    <span class="hljs-punctuation">]</span>
 <span class="hljs-punctuation">}</span></code></pre>
-            <p>This endpoint returns all trip options for given origin, destination, departure time and passenger count (must be between 1 and 10). Origin and destination are passed as latitude and longitude coordinates. The unit used is degree with decimal places, for example <code>39.753657, -117.610215</code>. Departure time is passed as a UNIX epoch timestamp in seconds, like <code>1679463169</code>.</p>
             <h3 id="url-path">URL path</h3>
             <p><code>/partners/v3/trip/search</code></p>
             <h3 id="query-parameters">Query Parameters</h3>
@@ -685,6 +685,7 @@
                </tbody>
             </table>
             <h2 id="customize-endpoint">Customize endpoint</h2>
+            <p>This endpoint is used to customize a trip option returned by the Search endpoint. The result is a new trip option with a new id that can be booked or customized again. The format of the response body is the same as for the Search endpoint. Currently the only supported customization operation is selection of stops for private trips. Selected stops will appear in <code>includedStops</code> of the returned option. In case of repeated calls, previously selected stops will be replaced, so if you selected one stop and want to change it to two stops, you need to send both stops in <code>selectedStops</code>. <code>totalPrice</code> and <code>travelTimeMinutes</code> will be automatically updated to reflect the selected stops.</p>
             <blockquote>
                <p>To add the Mikulov stop to the sedan vehicle type private trip option from the Search endpoint example above, use the following call:</p>
             </blockquote>
@@ -805,7 +806,6 @@
       <span class="hljs-punctuation">}</span>
    <span class="hljs-punctuation">]</span>
 <span class="hljs-punctuation">}</span></code></pre>
-            <p>This endpoint is used to customize a trip option returned by the Search endpoint. The result is a new trip option with a new id that can be booked or customized again. The format of the response body is the same as for the Search endpoint. Currently the only supported customization operation is selection of stops for private trips. Selected stops will appear in <code>includedStops</code> of the returned option. In case of repeated calls, previously selected stops will be replaced, so if you selected one stop and want to change it to two stops, you need to send both stops in <code>selectedStops</code>. <code>totalPrice</code> and <code>travelTimeMinutes</code> will be automatically updated to reflect the selected stops.</p>
             <h3 id="url-path-1">URL path</h3>
             <p><code>/partners/v3/trip/search/customize</code></p>
             <h3 id="request-body">Request body</h3>
@@ -860,6 +860,7 @@
                </tbody>
             </table>
             <h2 id="book-endpoint">Book endpoint</h2>
+            <p>This endpoint is used to book a trip option. Any trip option from Search or Customize endpoint response can be booked if the search results have not expired yet (see <code>expiresAt</code> property). You need to send id of the chosen option and passenger details to this endpoint. The result is a booking id that can be used to cancel the booking if not too close to departure.</p>
             <blockquote>
                <p>To book the customized trip option with stops from the example above or to book a trip option from the original Search endpoint response for two adults and one child with a booster seat, use the following call:</p>
             </blockquote>
@@ -870,7 +871,6 @@
             <pre class="highlight json"><code><span class="hljs-punctuation">{</span>
    <span class="hljs-attr">&quot;bookingId&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;cb102778-a3d7-426e-8d18-6bd6b296f283&quot;</span>  
 <span class="hljs-punctuation">}</span></code></pre>
-            <p>This endpoint is used to book a trip option. Any trip option from Search or Customize endpoint response can be booked if the search results have not expired yet (see <code>expiresAt</code> property). You need to send id of the chosen option and passenger details to this endpoint. The result is a booking id that can be used to cancel the booking if not too close to departure.</p>
             <h3 id="url-path-2">URL path</h3>
             <p><code>/partners/v3/trip/book</code></p>
             <h3 id="request-body-1">Request body</h3>
@@ -964,6 +964,7 @@
                </tbody>
             </table>
             <h2 id="cancel-endpoint">Cancel endpoint</h2>
+            <p>This endpoint is used to cancel a booked trip. Only trips that have departure more than 24 hours in the future can be cancelled - this threshold is a subject to change.</p>
             <blockquote>
                <p>To cancel a booked trip, use the following call:</p>
             </blockquote>
@@ -974,7 +975,6 @@
             <pre class="highlight json"><code><span class="hljs-punctuation">{</span>
 
 <span class="hljs-punctuation">}</span></code></pre>
-            <p>This endpoint is used to cancel a booked trip. Only trips that have departure more than 24 hours in the future can be cancelled - this threshold is a subject to change.</p>
             <h3 id="url-path-3">URL path</h3>
             <p><code>/partners/v3/trip/cancel</code></p>
             <h3 id="request-body-2">Request body</h3>
@@ -1026,6 +1026,7 @@
                </tbody>
             </table>
             <h2 id="details-endpoint">Details endpoint</h2>
+            <p>This endpoint returns details of a booked trip. It provides the status of the booking, information about the trip option and the data that were provided when booking the trip.</p>
             <blockquote>
                <p>To get details of a booked trip, use the following call:</p>
             </blockquote>
@@ -1108,7 +1109,6 @@
       <span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
    <span class="hljs-punctuation">}</span>
 <span class="hljs-punctuation">}</span></code></pre>
-            <p>This endpoint returns details of a booked trip. It provides the status of the booking, information about the trip option and the data that were provided when booking the trip.</p>
             <h3 id="url-path-4">URL path</h3>
             <p><code>/partners/v3/trip/details/bookingId</code></p>
             <p>Replace <code>bookingId</code> with the id of the booking you want to retrieve details for.</p>
@@ -1203,7 +1203,7 @@
                </tbody>
             </table>
             <h2 id="update-endpoint">Update endpoint</h2>
-            <p>This endpoint is used to update minor details of an existing booking. If you want to change departure time or add/remove stops you need to cancel the booking and create it again as it can affect the price.</p>
+            <p>This endpoint is used to update minor details of an existing booking. If you want to change departure time or add/remove stops you need to cancel the booking and create it again as it can affect the price. The response of the endpoint are the details of the updated booking, in same format as the <a href="#details-endpoint">/details</a> endpoint.</p>
             <blockquote>
                <p>To update passenger details and customer note of a booked trip, use the following call:</p>
             </blockquote>

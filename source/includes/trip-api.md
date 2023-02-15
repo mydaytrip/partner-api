@@ -44,6 +44,8 @@ If you want to change departure time or add/remove stops you need to cancel the 
 
 ## Search endpoint
 
+This endpoint returns all trip options for given origin, destination, departure time and passenger count (must be between 1 and 10). Origin and destination are passed as latitude and longitude coordinates. The unit used is degree with decimal places, for example `39.753657, -117.610215`. Departure time is passed as a UNIX epoch timestamp in seconds, like `1679463169`.
+
 > To search for a trip from Prague to Vienna for two passengers, use this call:
 
 ```bash
@@ -480,8 +482,6 @@ curl "https://api.staging.mydaytrip.net/partners/v3/trip/search?originLongitude=
 }
 ```
 
-This endpoint returns all trip options for given origin, destination, departure time and passenger count (must be between 1 and 10). Origin and destination are passed as latitude and longitude coordinates. The unit used is degree with decimal places, for example `39.753657, -117.610215`. Departure time is passed as a UNIX epoch timestamp in seconds, like `1679463169`.
-
 ### URL path
 
 `/partners/v3/trip/search`
@@ -516,6 +516,8 @@ Status code | Description
 404         | No trip options found for given request.
 
 ## Customize endpoint
+
+This endpoint is used to customize a trip option returned by the Search endpoint. The result is a new trip option with a new id that can be booked or customized again. The format of the response body is the same as for the Search endpoint. Currently the only supported customization operation is selection of stops for private trips. Selected stops will appear in `includedStops` of the returned option. In case of repeated calls, previously selected stops will be replaced, so if you selected one stop and want to change it to two stops, you need to send both stops in `selectedStops`. `totalPrice` and `travelTimeMinutes` will be automatically updated to reflect the selected stops.
 
 > To add the Mikulov stop to the sedan vehicle type private trip option from the Search endpoint example above, use the following call:
 
@@ -649,8 +651,6 @@ curl -d '{ "optionId": "1d32109f-c2e2-44fe-b2cf-461ef3730541", "selectedStops": 
 }
 ```
 
-This endpoint is used to customize a trip option returned by the Search endpoint. The result is a new trip option with a new id that can be booked or customized again. The format of the response body is the same as for the Search endpoint. Currently the only supported customization operation is selection of stops for private trips. Selected stops will appear in `includedStops` of the returned option. In case of repeated calls, previously selected stops will be replaced, so if you selected one stop and want to change it to two stops, you need to send both stops in `selectedStops`. `totalPrice` and `travelTimeMinutes` will be automatically updated to reflect the selected stops.
-
 ### URL path
 
 `/partners/v3/trip/search/customize`
@@ -677,6 +677,8 @@ Status code | Description
 
 ## Book endpoint
 
+This endpoint is used to book a trip option. Any trip option from Search or Customize endpoint response can be booked if the search results have not expired yet (see `expiresAt` property). You need to send id of the chosen option and passenger details to this endpoint. The result is a booking id that can be used to cancel the booking if not too close to departure.
+
 > To book the customized trip option with stops from the example above or to book a trip option from the original Search endpoint response for two adults and one child with a booster seat, use the following call:
 
 ```bash
@@ -698,8 +700,6 @@ curl -d '{ "optionId": "f0e34a1b-2b3d-4747-b426-292633b615b4", "pickUpAddressNot
    "bookingId": "cb102778-a3d7-426e-8d18-6bd6b296f283"  
 }
 ```
-
-This endpoint is used to book a trip option. Any trip option from Search or Customize endpoint response can be booked if the search results have not expired yet (see `expiresAt` property). You need to send id of the chosen option and passenger details to this endpoint. The result is a booking id that can be used to cancel the booking if not too close to departure.
 
 ### URL path
 
@@ -734,6 +734,8 @@ Status code | Description
 
 ## Cancel endpoint
 
+This endpoint is used to cancel a booked trip. Only trips that have departure more than 24 hours in the future can be cancelled - this threshold is a subject to change.
+
 > To cancel a booked trip, use the following call:
 
 ```bash
@@ -756,8 +758,6 @@ curl -d '{ "bookingId": "cb102778-a3d7-426e-8d18-6bd6b296f283" }' -H "Content-Ty
 }
 ```
 
-This endpoint is used to cancel a booked trip. Only trips that have departure more than 24 hours in the future can be cancelled - this threshold is a subject to change.
-
 ### URL path
 
 `/partners/v3/trip/cancel`
@@ -779,6 +779,8 @@ Status code | Description
 409         | Booking has already been cancelled.
 
 ## Details endpoint
+
+This endpoint returns details of a booked trip. It provides the status of the booking, information about the trip option and the data that were provided when booking the trip.
 
 > To get details of a booked trip, use the following call:
 
@@ -873,8 +875,6 @@ curl https://api.staging.mydaytrip.net/partners/v3/trip/details/bookingId -H "x-
 }
 ```
 
-This endpoint returns details of a booked trip. It provides the status of the booking, information about the trip option and the data that were provided when booking the trip.
-
 ### URL path
 
 `/partners/v3/trip/details/bookingId`
@@ -907,7 +907,7 @@ Status code | Description
 
 ## Update endpoint
 
-This endpoint is used to update minor details of an existing booking. If you want to change departure time or add/remove stops you need to cancel the booking and create it again as it can affect the price.
+This endpoint is used to update minor details of an existing booking. If you want to change departure time or add/remove stops you need to cancel the booking and create it again as it can affect the price. The response of the endpoint are the details of the updated booking, in same format as the [/details](#details-endpoint) endpoint.
 
 > To update passenger details and customer note of a booked trip, use the following call:
 
