@@ -33,9 +33,14 @@ A flow to book a trip, get details about it and then cancel it would look like t
 4. call [/cancel](#cancel-endpoint) endpoint to cancel the booking
 5. `optional` - call [/details](#details-endpoint) endpoint to get trip and booking details (status should be "Cancelled")
 
-### Updates
+### Updating a trip
 
-If you want to make pick up, drop off, passenger count or departure time changes to the booking you need to cancel it and create it again. For small adjustments like changing passenger phone number or email please contact our [support](#contacts).
+If you want to change departure time or add/remove stops you need to cancel the booking and create it again as it can affect the price. For small adjustments like changing passenger phone number, email, child seat type, pick up and drop off address notes (within the scope of original search coordinates), customer note or flight number you can use the [/update](#update-endpoint) endpoint:
+
+1. call [/search](#search-endpoint) endpoint to get possible options
+2. call [/book](#book-endpoint) endpoint to book the chosen option
+3. `optional` - call [/details](#details-endpoint) endpoint to get trip and booking details
+4. call [/update](#update-endpoint) endpoint to update the booking details
 
 ## Search endpoint
 
@@ -654,7 +659,7 @@ This endpoint is used to customize a trip option returned by the Search endpoint
 
 Property        | Type                         | Description
 --------------- | ---------------------------- | -----------
-optionId        | string                       | Id of the option you want to customize. Taken from Search or Customize endpoint response.
+optionId        | string                       | Id of the option you want to customize. Taken from [/search](#search-endpoint) or [/customize](#customize-endpoint) endpoint response.
 selectedStops   | list of string               | List of ids of stops to include in the trip. Will replace currently included stops.
 
 ### Response body
@@ -675,7 +680,7 @@ Status code | Description
 > To book the customized trip option with stops from the example above or to book a trip option from the original Search endpoint response for two adults and one child with a booster seat, use the following call:
 
 ```bash
-curl -d '{ "optionId": "f0e34a1b-2b3d-4747-b426-292633b615b4", "pickUpAddressNote": "Havel airport", "dropOffAddressNote": "Vienna central square", "customerNote": "We will stand next to the entrance", "flightNumber": "FR008",	"passengerDetails": [ { 			"type": "Lead", "firstName": "John", "lastName": "Doe", "phone": "+41555555555", "email": "client-email@example.com", 			"birthday": 629424000 }, { "type": "Adult" }, { "type": "Child", "childSeatType": "Booster" } ] }' -H "Content-Type: application/json" -H "x-api-key: your-api-key" -X POST https://api.staging.mydaytrip.net/partners/v3/trip/book
+curl -d '{ "optionId": "f0e34a1b-2b3d-4747-b426-292633b615b4", "pickUpAddressNote": "Havel airport", "dropOffAddressNote": "Vienna central square", "customerNote": "We will stand next to the entrance", "flightNumber": "FR008",	"passengerDetails": [ { "type": "Lead", "firstName": "John", "lastName": "Doe", "phone": "+41555555555", "email": "client-email@example.com", "birthday": 629424000 }, { "type": "Adult" }, { "type": "Child", "childSeatType": "Booster" } ] }' -H "Content-Type: application/json" -H "x-api-key: your-api-key" -X POST https://api.staging.mydaytrip.net/partners/v3/trip/book
 ```
 
 ```javascript
@@ -704,7 +709,7 @@ This endpoint is used to book a trip option. Any trip option from Search or Cust
 
 Property           | Type                                        | Description
 ------------------ | ------------------------------------------- | -----------
-optionId           | string                                      | Id of the option you want to book. Taken from Search or Customize endpoint response.
+optionId           | string                                      | Id of the option you want to book. Taken from [/search](#search-endpoint) or [/customize](#customize-endpoint) endpoint response.
 pickUpAddressNote  | string                                      | Optional note for the driver with details about the pick up location.
 dropOffAddressNote | string                                      | Optional note for the driver with details about the drop off location.
 customerNote       | string                                      | Optional note for the driver not related to pick up or drop off.
@@ -761,7 +766,7 @@ This endpoint is used to cancel a booked trip. Only trips that have departure mo
 
 Property         | Type                         | Description
 ---------------- | ---------------------------- | -----------
-bookingId        | string                       | Id of the booking to cancel. Taken from Book endpoint response.
+bookingId        | string                       | Id of the booking to cancel. Taken from [/book](#book-endpoint) endpoint response.
 
 ### Error status codes
 
@@ -816,7 +821,8 @@ curl https://api.staging.mydaytrip.net/partners/v3/trip/details/bookingId -H "x-
          "type": "Adult" 
       }, 
       { 
-         "type": "Child", "childSeatType": "Booster" 
+         "type": "Child", 
+         "childSeatType": "Booster" 
       }
    ],
    "trip": {
@@ -863,7 +869,7 @@ curl https://api.staging.mydaytrip.net/partners/v3/trip/details/bookingId -H "x-
             }
          }
       ],
-   }   
+   }
 }
 ```
 
@@ -897,6 +903,143 @@ Status code | Description
 ----------- | -----------
 401         | API key missing or invalid.
 403         | Forbidden request - trying to get details of a booking owned by someone else.
+404         | Booking not found.
+
+## Update endpoint
+
+This endpoint is used to update minor details of an existing booking. If you want to change departure time or add/remove stops you need to cancel the booking and create it again as it can affect the price.
+
+> To update passenger details and customer note of a booked trip, use the following call:
+
+```bash
+curl -d '{ "bookingId": "cb102778-a3d7-426e-8d18-6bd6b296f283", "customerNote": "We will wait inside the Airport building", "passengerDetails": [ { "type": "Lead", "firstName": "John", "lastName": "Doe", "phone": "+4166666666", "email": "client-email@example.com", "birthday": 629424000 }, { "type": "Adult" }, { "type": "Child", "childSeatType": "BoosterSeat" } ] }' -H "Content-Type: application/json" -H "x-api-key: your-api-key" -X POST https://api.staging.mydaytrip.net/partners/v3/trip/update
+```
+
+```javascript
+
+```
+
+```python
+
+```
+
+> The above call returns JSON structured like this:
+
+```json
+{
+   "status": "Confirmed",
+   "createdAt": "2022-12-05T18:00:00Z",
+   "passengersCount": 3,
+   "currency": "EUR",
+   "pickUpAddressNote": "Havel airport",
+   "dropOffAddressNote": "Vienna central square",
+   "customerNote": "We will wait inside the Airport building",
+   "flightNumber": "FR008",
+   "passengerDetails": [
+      {
+         "type": "Lead",
+         "firstName": "John",
+         "lastName": "Doe",
+         "phone": "+4166666666",
+         "email": "client-email@example.com",
+         "birthday": 629424000
+      },
+      {
+         "type": "Adult"
+      },
+      {
+         "type": "Child",
+         "childSeatType": "BoosterSeat"
+      }
+   ],
+   "trip": {
+      "type": "Private",
+      "englishSpeakingDriver": true,
+      "distanceKm":334,
+      "travelTimeMinutes":268,
+      "pickUp":{
+         "lat":50.10,
+         "lon":14.25,
+         "time":"2022-12-05T18:00:00Z"
+      },
+      "dropOff":{
+         "lat":48.20,
+         "lon":16.37
+      },
+      "pricing":{
+         "totalPrice":288
+      },
+      "vehicle":{
+         "type":"Sedan",
+         "maxPassengers":3,
+         "description":"Sedan comparable to a Volkswagen Passat, up to 3 passengers with luggage.",
+         "image":"https://daytrip.imgix.net/site/sedan.png"
+      },
+      "luggage":{
+         "maxTotalCarryons":3,
+         "maxTotalSuitcases":3
+      },
+      "includedStops":[
+         {
+            "id":"4ee58c0c-4e56-46ef-bd22-406a1bc60e1c",
+            "price":28,
+            "name":"Mikulov",
+            "image":"https://daytrip.imgix.net/510.jpg",
+            "title":"The Heart of Czech Wine Country",
+            "perex":"A town with a history as deep and flavourful as its wine, Mikulov provides a perfect combination of relaxation and exploration.",
+            "description":"Often favoured by visitors with a more active approach to life, Mikulov has much to offer. Surrounded by idyllic countryside, crisscrossed by bicycle paths and marked hiking trails, and the nearby Nové Mlýny lakes, there is something for everyone to enjoy. After all that fresh air, a glass of wine will be more than welcome, and fortunately, Mikulov is the centre for Czech wine making. Due to a high concentration of limestone in the local soil, wine from this region has a unique character and distinct taste. If you like your wine with a side-serving of history, Mikulov Castle dates from the 1730s, and the Dietrichstein Tomb is the final resting place of a Bohemian noble family. Mikulov is also significant for its strong Jewish history. In the early 1800s Mikulov's Jewish Quarter was the largest in Moravia with half the town's inhabitants being of Jewish faith.",
+            "durationInMinutes":60,
+            "order":2,
+            "timezone":"Europe/Prague",
+            "country":{
+               "englishName":"Czech Republic"
+            }
+         }
+      ],
+   }
+}
+```
+
+### URL path
+
+`/partners/v3/trip/update`
+
+### Request body
+
+All properties except `bookingId` are optional. When a property is not included in the request it won't be updated and it will keep it's previous value. If you want to remove a property value like `customerNote` then send an empty string `""` as the value. If you want to make changes to any passenger you need to provide full `passengerDetails` array - it's not possible to send only details of the passenger you want to update.
+
+Property         | Type                                          | Description
+---------------- | --------------------------------------------- | -----------
+bookingId        | string                                        | Id of the booking to cancel. Taken from [/book](#book-endpoint) endpoint response.
+pickUpAddressNote  | string                                      | Optional note for the driver with details about the pick up location.
+dropOffAddressNote | string                                      | Optional note for the driver with details about the drop off location.
+customerNote       | string                                      | Optional note for the driver not related to pick up or drop off.
+flightNumber       | string                                      | Optional flight number in case this is an airport pick up.
+passengerDetails   | list of [PassengerDetail](#passengerdetail) | Optional. List of passengers that will go on this trip. For trips with "Private" type the number of passengers must be below or equal to `maxPassengers` of the `vehicle` in the trip option. For trips with "Shared" type the number of passengers must match the `passengersCount` query parameter from the Search endpoint. There must always be exactly one passenger of type "Lead" with contact details filled. For passenger of type "Child" you must specify a child seat of proper type offered in the trip option's `availableChildSeatTypes`. For older children that do not need any child seat use `Adult` passenger type.
+
+### Response body
+
+Property           | Type                                        | Description
+------------------ | ------------------------------------------- | -----------
+status             | string                                      | Booking status. "Confirmed" or "Cancelled".
+createdAt          | string                                      | UTC timestamp of when this booking was created.
+cancelledAt        | string                                      | UTC timestamp of when this booking was cancelled. Optional.
+passengersCount    | integer                                     | The count of passengers this booking is for.
+currency           | string                                      | Currency used for all prices in this response.
+pickUpAddressNote  | string                                      | Optional note for the driver with details about the pick up location.
+dropOffAddressNote | string                                      | Optional note for the driver with details about the drop off location.
+customerNote       | string                                      | Optional note for the driver not related to pick up or drop off.
+flightNumber       | string                                      | Optional flight number in case this is an airport pick up.
+passengerDetails   | list of [PassengerDetail](#passengerdetail) | List of passengers that will go on this trip.
+trip               | object - [TripOption](#tripoption)          | Information about the trip.
+
+### Error status codes
+
+Status code | Description
+----------- | -----------
+400         | Invalid request - missing mandatory property, property has wrong type, mismatch in passenger count, missing lead passenger, multiple lead passengers or not a valid json.
+401         | API key missing or invalid.
+403         | Forbidden request - trying to update details of a booking owned by someone else.
 404         | Booking not found.
 
 # Entities

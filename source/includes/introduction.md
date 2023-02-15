@@ -6,7 +6,7 @@ With Daytrip you can offer your clients private car transfers in over 80 countri
 
 ## Daytrip Partner API
 
-**DISCLAIMER: SEARCH AND BOOK ENDPOINTS ARE READY FOR INTEGRATION. OTHER ENDPOINTS WILL BE READY IN THE FOLLOWING WEEKS.**
+**DISCLAIMER: SEARCH, BOOK AND CANCEL ENDPOINTS ARE READY FOR INTEGRATION. OTHER ENDPOINTS WILL BE READY IN THE FOLLOWING WEEKS.**
 
 The Daytrip API is organized around REST. Our API accepts JSON-encoded request bodies, returns JSON-encoded responses, and uses standard HTTP response codes and verbs.
 
