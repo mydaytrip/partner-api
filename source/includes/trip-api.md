@@ -919,7 +919,7 @@ Status code | Description
 
 ## Update endpoint
 
-This endpoint is used to update minor details of an existing booking. If you want to change departure time or add/remove stops you need to cancel the booking and create it again as it can affect the price. The response of the endpoint are the details of the updated booking, in same format as the [/details](#details-endpoint) endpoint.
+This endpoint is used to update minor details of an existing booking. If you want to change departure time or add/remove stops you need to cancel the booking and create it again as it can affect the price. The response of the endpoint are the details of the updated booking, in the same format as the [/details](#details-endpoint) endpoint.
 
 > To update passenger details and customer note of a booked trip, use the following call:
 
