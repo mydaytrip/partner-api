@@ -490,14 +490,14 @@ curl "https://api.staging.mydaytrip.net/partners/v3/trip/search?originLongitude=
 
 ### Query Parameters
 
-Parameter           | Type    | Description
-------------------- | ------- | -----------
-originLatitude      | number  | Origin latitude in degrees.
-originLongitude     | number  | Origin longitude in degrees.
-destinationLatitude | number  | Destination latitude in degrees.
-originLongitude     | number  | Destination longitude in degrees.
-departureTime       | integer | Departure time as a UNIX epoch timestamp in seconds.
-passengersCount     | integer | Count of passengers to transport. Must be between 1 and 10.
+Parameter            | Type    | Description
+-------------------- | ------- | -----------
+originLatitude       | number  | Origin latitude in degrees.
+originLongitude      | number  | Origin longitude in degrees.
+destinationLatitude  | number  | Destination latitude in degrees.
+destinationLongitude | number  | Destination longitude in degrees.
+departureTime        | integer | Departure time as a UNIX epoch timestamp in seconds.
+passengersCount      | integer | Count of passengers to transport. Must be between 1 and 10.
 
 ### Response body
 
