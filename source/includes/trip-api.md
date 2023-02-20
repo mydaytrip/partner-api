@@ -1056,8 +1056,9 @@ Status code | Description
 ----------- | -----------
 400         | Invalid request - missing mandatory property, property has wrong type, mismatch in passenger count, missing lead passenger, multiple lead passengers or not a valid json.
 401         | API key missing or invalid.
-403         | Forbidden request - trying to update details of a booking owned by someone else or trying to update a trip in last 12 hours before departure.
+403         | Forbidden request - trying to update details of a booking owned by someone else or trying to update a trip in the last 24 hours before departure.
 404         | Booking not found.
+409         | Trying to update a cancelled booking.
 
 # Entities
 
