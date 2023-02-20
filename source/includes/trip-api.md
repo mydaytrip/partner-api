@@ -42,7 +42,7 @@ If you want to change departure time or add/remove stops you need to cancel the 
 3. `optional` - call [/details](#details-endpoint) endpoint to get trip and booking details
 4. call [/update](#update-endpoint) endpoint to update the booking details
 
-Disclaimer: in the last 12 hours before the departure the [/update](#update-endpoint) endpoint will no longer accept updates. For updates in the last 12 hours please contact our customer support at <daytrip@mydaytrip.com> or call [+44 20 3318 1119](tel:+442033181119).
+Disclaimer: in the last 24 hours before the departure the [/update](#update-endpoint) endpoint will no longer accept updates. For updates in the last 24 hours please contact our customer support at <daytrip@mydaytrip.com> or call [+44 20 3318 1119](tel:+442033181119).
 
 ## Search endpoint
 
@@ -1023,16 +1023,16 @@ curl -d '{ "bookingId": "cb102778-a3d7-426e-8d18-6bd6b296f283", "customerNote": 
 
 All properties except `bookingId` are optional. When a property is not included in the request it won't be updated and it will keep it's previous value. If you want to remove a property value like `customerNote` then send an empty string `""` as the value. If you want to make changes to any passenger you need to provide full `passengerDetails` array - it's not possible to send only details of the passenger you want to update.
 
-Disclaimer: in the last 12 hours before the departure the [/update](#update-endpoint) endpoint will no longer accept updates. For updates in the last 12 hours please contact our customer support at <daytrip@mydaytrip.com> or call [+44 20 3318 1119](tel:+442033181119).
+Disclaimer: in the last 24 hours before the departure the [/update](#update-endpoint) endpoint will no longer accept updates. For updates in the last 24 hours please contact our customer support at <daytrip@mydaytrip.com> or call [+44 20 3318 1119](tel:+442033181119).
 
-Property         | Type                                          | Description
----------------- | --------------------------------------------- | -----------
-bookingId        | string                                        | Id of the booking to cancel. Taken from [/book](#book-endpoint) endpoint response.
-pickUpAddressNote  | string                                      | Optional note for the driver with details about the pick up location.
-dropOffAddressNote | string                                      | Optional note for the driver with details about the drop off location.
-customerNote       | string                                      | Optional note for the driver not related to pick up or drop off.
-flightNumber       | string                                      | Optional flight number in case this is an airport pick up.
-passengerDetails   | list of [PassengerDetail](#passengerdetail) | Optional. List of passengers that will go on this trip. For trips with "Private" type the number of passengers must be below or equal to `maxPassengers` of the `vehicle` in the trip option. For trips with "Shared" type the number of passengers must match the `passengersCount` query parameter from the Search endpoint. There must always be exactly one passenger of type "Lead" with contact details filled. For passenger of type "Child" you must specify a child seat of proper type offered in the trip option's `availableChildSeatTypes`. For older children that do not need any child seat use `Adult` passenger type.
+Property           | Type                                          | Description
+------------------ | --------------------------------------------- | -----------
+bookingId          | string                                        | Id of the booking to cancel. Taken from [/book](#book-endpoint) endpoint response.
+pickUpAddressNote  | string                                        | Optional note for the driver with details about the pick up location.
+dropOffAddressNote | string                                        | Optional note for the driver with details about the drop off location.
+customerNote       | string                                        | Optional note for the driver not related to pick up or drop off.
+flightNumber       | string                                        | Optional flight number in case this is an airport pick up.
+passengerDetails   | list of [PassengerDetail](#passengerdetail)   | Optional. List of passengers that will go on this trip. For trips with "Private" type the number of passengers must be below or equal to `maxPassengers` of the `vehicle` in the trip option. For trips with "Shared" type the number of passengers must match the `passengersCount` query parameter from the Search endpoint. There must always be exactly one passenger of type "Lead" with contact details filled. For passenger of type "Child" you must specify a child seat of proper type offered in the trip option's `availableChildSeatTypes`. For older children that do not need any child seat use `Adult` passenger type.
 
 ### Response body
 
