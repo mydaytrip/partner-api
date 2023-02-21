@@ -63,7 +63,7 @@ curl "https://api.staging.mydaytrip.net/partners/v3/trip/search?originLongitude=
 
 ```
 
-> The above call returns JSON structured like this:
+> The above call returns a JSON structured like this:
 
 ```json
 {
@@ -538,7 +538,7 @@ curl -d '{ "optionId": "1d32109f-c2e2-44fe-b2cf-461ef3730541", "selectedStops": 
 
 ```
 
-> The above call returns JSON structured like this:
+> The above call returns a JSON structured like this:
 
 ```json
 {
@@ -701,7 +701,7 @@ curl -d '{ "optionId": "f0e34a1b-2b3d-4747-b426-292633b615b4", "pickUpAddressNot
 
 ```
 
-> The above call returns JSON structured like this:
+> The above call returns a JSON structured like this:
 
 ```json
 {
@@ -761,7 +761,7 @@ curl -d '{ "bookingId": "cb102778-a3d7-426e-8d18-6bd6b296f283" }'
 
 ```
 
-> The above call returns empty object:
+> The above call returns an empty object:
 
 ```json
 {
@@ -810,7 +810,7 @@ curl https://api.staging.mydaytrip.net/partners/v3/trip/details/bookingId
 
 > Make sure to replace `bookingId` with the real booking id.
 
-> The above call returns JSON structured like this:
+> The above call returns a JSON structured like this:
 
 ```json
 {
@@ -938,7 +938,7 @@ curl -d '{ "bookingId": "cb102778-a3d7-426e-8d18-6bd6b296f283", "customerNote": 
 
 ```
 
-> The above call returns JSON structured like this:
+> The above call returns a JSON structured like this:
 
 ```json
 {
