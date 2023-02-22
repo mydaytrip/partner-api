@@ -519,6 +519,8 @@ Status code | Description
 
 ## Customize endpoint
 
+**DISCLAIMER: THIS ENDPOINT IS NOT READY YET. SUPPORT FOR STOPS IS IN PROGRESS SO YOU DON'T NEED THIS ENDPOINT YET, SEARCH ENDPOINT WILL ALWAYS RETURN EMPTY ARRAY FOR POSSIBLE STOPS.**
+
 This endpoint is used to customize a trip option returned by the Search endpoint. The result is a new trip option with a new id that can be booked or customized again. The format of the response body is the same as for the Search endpoint. Currently the only supported customization operation is selection of stops for private trips. Selected stops will appear in `includedStops` of the returned option. In case of repeated calls, previously selected stops will be replaced, so if you selected one stop and want to change it to two stops, you need to send both stops in `selectedStops`. `totalPrice` and `travelTimeMinutes` will be automatically updated to reflect the selected stops.
 
 > To add the Mikulov stop to the sedan vehicle type private trip option from the Search endpoint example above, use the following call:
