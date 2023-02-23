@@ -1,6 +1,8 @@
 # Errors
 
-Daytrip uses conventional HTTP response codes to indicate the success or failure of an API request. In general: codes in the 2xx range indicate success. Codes in the 4xx range indicate an error that failed given the information provided (e.g., a required parameter was omitted, no trip was found for given parameters, etc.). Codes in the 5xx range indicate an error with Daytrip's servers (these are rare).
+Daytrip uses conventional HTTP response status codes to indicate the success or failure of an API request. In general: codes in the 2xx range indicate success. Codes in the 4xx range indicate an error that failed given the information provided (e.g., a required parameter was omitted, no trip was found for given parameters, etc.). Codes in the 5xx range indicate an error with Daytrip's service (these are rare).
+
+## HTTP status code meanings
 
 HTTP Code  | Meaning
 ---------- | -------
@@ -14,7 +16,7 @@ HTTP Code  | Meaning
 
 ## Error response body
 
-Each error response has an unified JSON body:
+> Error response body example:
 
 ```json
 {
@@ -22,6 +24,8 @@ Each error response has an unified JSON body:
     "message": "Booking not found",
 }
 ```
+
+Each error response has an unified JSON body:
 
 Property   | Type    | Description
 -----------|---------|------------
