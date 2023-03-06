@@ -8,7 +8,7 @@ With Daytrip, you can offer your clients private car transfers in 90+ countries 
 
 The Daytrip API is organized around REST. Our API accepts JSON-encoded request bodies, returns JSON-encoded responses, and uses standard HTTP response codes and verbs.
 
-The API can be used to search for trip options, customize a trip with stops, book a trip, get details about a booking or cancel a booking.
+The API can be used to search for trip options, customize a trip with stops, book a trip, get details about a booking, update it or cancel it.
 
 ## Contacts
 
