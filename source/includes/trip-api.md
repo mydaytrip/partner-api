@@ -679,6 +679,7 @@ Status code | Description
 401         | API key missing or invalid.
 403         | Forbidden request - trying to customize a trip option owned by someone else.
 404         | Trip option not found or expired. Stop not found.
+409         | Trip option has already been booked.
 
 ## Book endpoint
 

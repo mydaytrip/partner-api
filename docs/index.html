@@ -38,9 +38,9 @@
             <p>The API can be used to search for trip options, customize a trip with stops, book a trip, get details about a booking, update it or cancel it.</p>
             <h2 id="contacts">Contacts</h2>
             <h3 id="onboarding">Onboarding</h3>
-            <p>If you want to integrate with our API, contact us at <a href="mailto:&#x70;&#x61;&#x72;&#x74;&#110;&#101;&#114;&#x73;&#64;&#109;&#121;&#x64;&#97;&#121;&#116;&#114;&#105;&#x70;&#x2e;&#99;&#111;&#x6d;">&#x70;&#x61;&#x72;&#x74;&#110;&#101;&#114;&#x73;&#64;&#109;&#121;&#x64;&#97;&#121;&#116;&#114;&#105;&#x70;&#x2e;&#99;&#111;&#x6d;</a> to get a partner account and an API key. </p>
+            <p>If you want to integrate with our API, contact us at <a href="mailto:&#112;&#x61;&#x72;&#116;&#110;&#101;&#x72;&#x73;&#64;&#109;&#x79;&#x64;&#97;&#121;&#x74;&#114;&#105;&#x70;&#46;&#99;&#111;&#x6d;">&#112;&#x61;&#x72;&#116;&#110;&#101;&#x72;&#x73;&#64;&#109;&#x79;&#x64;&#97;&#121;&#x74;&#114;&#105;&#x70;&#46;&#99;&#111;&#x6d;</a> to get a partner account and an API key. </p>
             <h3 id="customer-support-emergency">Customer support emergency</h3>
-            <p>To solve problems with bookings created via the API you can contact <a href="mailto:&#100;&#97;&#x79;&#x74;&#114;&#x69;&#x70;&#x40;&#x6d;&#121;&#100;&#97;&#121;&#x74;&#x72;&#105;&#112;&#x2e;&#x63;&#x6f;&#109;">&#100;&#97;&#x79;&#x74;&#114;&#x69;&#x70;&#x40;&#x6d;&#121;&#100;&#97;&#121;&#x74;&#x72;&#105;&#112;&#x2e;&#x63;&#x6f;&#109;</a> or call <a href="tel:+442033181119">+44 20 3318 1119</a>.</p>
+            <p>To solve problems with bookings created via the API you can contact <a href="mailto:&#100;&#x61;&#121;&#116;&#114;&#105;&#112;&#x40;&#x6d;&#121;&#100;&#x61;&#121;&#x74;&#x72;&#x69;&#112;&#46;&#x63;&#111;&#109;">&#100;&#x61;&#121;&#116;&#114;&#105;&#112;&#x40;&#x6d;&#121;&#100;&#x61;&#121;&#x74;&#x72;&#x69;&#112;&#46;&#x63;&#111;&#109;</a> or call <a href="tel:+442033181119">+44 20 3318 1119</a>.</p>
             <h1 id="environments">Environments</h1>
             <p>Daytrip offers a sandbox environment where you can test your integration with the API without creating real bookings. All the code examples provided in this documentation are using this sandbox environment. Each environment requires a different API key. When your integration is ready and tested against the sandbox environment, you can request an API key for the production environment.</p>
             <h2 id="urls">URLs</h2>
@@ -184,7 +184,7 @@
                <li><code>optional</code> - call <a href="#details-endpoint">/details</a> endpoint to get trip and booking details</li>
                <li>call <a href="#update-endpoint">/update</a> endpoint to update the booking details</li>
             </ol>
-            <p>Disclaimer: in the last 24 hours before the departure the <a href="#update-endpoint">/update</a> endpoint will no longer accept updates. For updates in the last 24 hours please contact our customer support at <a href="mailto:&#x64;&#x61;&#121;&#x74;&#x72;&#x69;&#112;&#64;&#x6d;&#121;&#100;&#x61;&#121;&#116;&#x72;&#x69;&#112;&#x2e;&#99;&#x6f;&#x6d;">&#x64;&#x61;&#121;&#x74;&#x72;&#x69;&#112;&#64;&#x6d;&#121;&#100;&#x61;&#121;&#116;&#x72;&#x69;&#112;&#x2e;&#99;&#x6f;&#x6d;</a> or call <a href="tel:+442033181119">+44 20 3318 1119</a>.</p>
+            <p>Disclaimer: in the last 24 hours before the departure the <a href="#update-endpoint">/update</a> endpoint will no longer accept updates. For updates in the last 24 hours please contact our customer support at <a href="mailto:&#x64;&#97;&#121;&#116;&#114;&#105;&#x70;&#64;&#109;&#x79;&#x64;&#x61;&#x79;&#116;&#114;&#105;&#112;&#x2e;&#x63;&#x6f;&#109;">&#x64;&#97;&#121;&#116;&#114;&#105;&#x70;&#64;&#109;&#x79;&#x64;&#x61;&#x79;&#116;&#114;&#105;&#112;&#x2e;&#x63;&#x6f;&#109;</a> or call <a href="tel:+442033181119">+44 20 3318 1119</a>.</p>
             <h2 id="search-endpoint">Search endpoint</h2>
             <p>This endpoint returns all trip options for given origin, destination, departure time and passenger count (must be between 1 and 10). Origin and destination are passed as latitude and longitude coordinates. The unit used is degree with decimal places, for example <code>39.753657, -117.610215</code>. Departure time is passed as a UNIX epoch timestamp in seconds, like <code>1679463169</code>.</p>
             <blockquote>
@@ -891,6 +891,10 @@
                      <td>404</td>
                      <td>Trip option not found or expired. Stop not found.</td>
                   </tr>
+                  <tr>
+                     <td>409</td>
+                     <td>Trip option has already been booked.</td>
+                  </tr>
                </tbody>
             </table>
             <h2 id="book-endpoint">Book endpoint</h2>
@@ -1331,7 +1335,7 @@
             <p><code>/partners/v3/trip/update</code></p>
             <h3 id="request-body-3">Request body</h3>
             <p>All properties except <code>bookingId</code> are optional. When a property is not included in the request it won&#39;t be updated and it will keep it&#39;s previous value. If you want to remove a property value like <code>customerNote</code> then send an empty string <code>&quot;&quot;</code> as the value. If you want to make changes to any passenger you need to provide full <code>passengerDetails</code> array - it&#39;s not possible to send only details of the passenger you want to update.</p>
-            <p>Disclaimer: in the last 24 hours before the departure the <a href="#update-endpoint">/update</a> endpoint will no longer accept updates. For updates in the last 24 hours please contact our customer support at <a href="mailto:&#100;&#97;&#121;&#116;&#114;&#105;&#112;&#x40;&#109;&#x79;&#x64;&#97;&#121;&#116;&#114;&#105;&#112;&#x2e;&#99;&#111;&#x6d;">&#100;&#97;&#121;&#116;&#114;&#105;&#112;&#x40;&#109;&#x79;&#x64;&#97;&#121;&#116;&#114;&#105;&#112;&#x2e;&#99;&#111;&#x6d;</a> or call <a href="tel:+442033181119">+44 20 3318 1119</a>.</p>
+            <p>Disclaimer: in the last 24 hours before the departure the <a href="#update-endpoint">/update</a> endpoint will no longer accept updates. For updates in the last 24 hours please contact our customer support at <a href="mailto:&#x64;&#97;&#x79;&#x74;&#x72;&#x69;&#112;&#64;&#x6d;&#121;&#100;&#97;&#121;&#x74;&#114;&#x69;&#x70;&#46;&#99;&#x6f;&#x6d;">&#x64;&#97;&#x79;&#x74;&#x72;&#x69;&#112;&#64;&#x6d;&#121;&#100;&#97;&#121;&#x74;&#114;&#x69;&#x70;&#46;&#99;&#x6f;&#x6d;</a> or call <a href="tel:+442033181119">+44 20 3318 1119</a>.</p>
             <table>
                <thead>
                   <tr>
