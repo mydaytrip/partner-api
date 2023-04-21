@@ -46,7 +46,7 @@ Disclaimer: in the last 24 hours before the departure the [/update](#update-endp
 
 ## Search endpoint
 
-This endpoint returns all trip options for given origin, destination, departure time and passenger count (must be between 1 and 10). Origin and destination are passed as latitude and longitude coordinates. The unit used is degree with decimal places, for example `39.753657, -117.610215`. Departure time is passed as a UNIX epoch timestamp in seconds, like `1679463169`.
+This endpoint returns all trip options for given origin, destination, departure time and passenger count (must be between 1 and 10). Origin and destination are passed as latitude and longitude coordinates. The unit used is degree with decimal places, for example `39.753657, -117.610215`. Departure time is passed as a UNIX epoch timestamp in seconds, like `1679463169`. Note that UNIX timestamps are UTC so you need to convert from local time to UTC when calculating it.
 
 > To search for a trip from Prague to Vienna for two passengers, use this call:
 
@@ -496,7 +496,7 @@ originLatitude            | number  | Origin latitude in degrees.
 originLongitude           | number  | Origin longitude in degrees.
 destinationLatitude       | number  | Destination latitude in degrees.
 destinationLongitude      | number  | Destination longitude in degrees.
-departureTime             | integer | Departure time as a UNIX epoch timestamp in seconds.
+departureTime             | integer | Departure time as a UNIX epoch timestamp in seconds. Note that UNIX timestamps are UTC so you need to convert from local time to UTC when calculating it.
 passengersCount           | integer | Count of passengers to transport. Must be between 1 and 10.
 includeStops              | boolean | Optional. Default value true. When set to false no stops will be returned in trip options.
 includeShared             | boolean | Optional. Default value true. When set to false no shared trip options will be returned.
@@ -1171,5 +1171,5 @@ firstName        | string                       | First name of the passenger - 
 lastName         | string                       | Last name of the passenger - required for the lead passenger.
 phone            | string                       | Phone number of the passenger - required for the lead passenger. Include country prefix.
 email            | string                       | Email of the passenger - required for the lead passenger.
-birthday         | integer                      | Birthday of the passenger - required for the lead passenger. Unix epoch timestamp in seconds.
+birthday         | integer                      | Birthday of the passenger - required for the lead passenger. UNIX epoch timestamp in seconds.
 childSeatType    | string                       | Requested child seat type for a passenger of type "Child". Must match one of offered child seat types from `availableChildSeatTypes` of the trip option you are booking.
