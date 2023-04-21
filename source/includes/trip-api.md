@@ -709,7 +709,8 @@ curl -d '{ "optionId": "f0e34a1b-2b3d-4747-b426-292633b615b4", "pickUpAddressNot
 
 ```json
 {
-   "bookingId": "cb102778-a3d7-426e-8d18-6bd6b296f283"  
+   "bookingId": "cb102778-a3d7-426e-8d18-6bd6b296f283",
+   "bookingReference": "CB1027"
 }
 ```
 
@@ -733,6 +734,7 @@ passengerDetails   | list of [PassengerDetail](#passengerdetail) | List of passe
 Property           | Type                                        | Description
 ------------------ | ------------------------------------------- | -----------
 bookingId          | string                                      | Id of the created booking. Can be used to retrieve details about the booking or to cancel it.
+bookingReference   | string                                      | Short booking reference that can be shared with the customer in order for him to be able to contact Daytrip customer support easily.
 
 ### Error status codes
 
@@ -818,6 +820,7 @@ curl https://api.staging.mydaytrip.net/partners/v3/trip/details/bookingId
 
 ```json
 {
+   "bookingReference": "CB1027",
    "status": "Confirmed",
    "createdAt": "2022-12-05T18:00:00Z",
    "passengersCount": 3,
@@ -901,6 +904,7 @@ Replace `bookingId` with the id of the booking you want to retrieve details for.
 
 Property           | Type                                        | Description
 ------------------ | ------------------------------------------- | -----------
+bookingReference   | string                                      | Short booking reference that can be shared with the customer in order for him to be able to contact Daytrip customer support easily.
 status             | string                                      | Booking status. "Confirmed" or "Cancelled".
 createdAt          | string                                      | UTC timestamp of when this booking was created.
 cancelledAt        | string                                      | UTC timestamp of when this booking was cancelled. Optional.
@@ -946,6 +950,7 @@ curl -d '{ "bookingId": "cb102778-a3d7-426e-8d18-6bd6b296f283", "customerNote": 
 
 ```json
 {
+   "bookingReference": "CB1027",
    "status": "Confirmed",
    "createdAt": "2022-12-05T18:00:00Z",
    "passengersCount": 3,
@@ -1042,6 +1047,7 @@ passengerDetails   | list of [PassengerDetail](#passengerdetail)   | Optional. L
 
 Property           | Type                                        | Description
 ------------------ | ------------------------------------------- | -----------
+bookingReference   | string                                      | Short booking reference that can be shared with the customer in order for him to be able to contact Daytrip customer support easily.
 status             | string                                      | Booking status. "Confirmed" or "Cancelled".
 createdAt          | string                                      | UTC timestamp of when this booking was created.
 cancelledAt        | string                                      | UTC timestamp of when this booking was cancelled. Optional.
