@@ -723,6 +723,7 @@ curl -d '{ "optionId": "f0e34a1b-2b3d-4747-b426-292633b615b4", "pickUpAddressNot
 Property           | Type                                        | Description
 ------------------ | ------------------------------------------- | -----------
 optionId           | string                                      | Id of the option you want to book. Taken from [/search](#search-endpoint) or [/customize](#customize-endpoint) endpoint response.
+departureTime      | integer                                     | Optional. Departure time as a UNIX epoch timestamp in seconds to use instead of the `departureTime` provided to the [/search](#search-endpoint). You can only move departure time less than 24 hours into the past or into the future compared to the original `departureTime`, otherwise the booking will be rejected (403 HTTP status code). Also if the new price after changing the departure time would be different, booking will also get rejected. Such price change should be extremely rare but your integration should be ready for it if you are sending different `departureTime`. Note that UNIX timestamps are UTC so you need to convert from local time to UTC when calculating it. 
 pickUpAddressNote  | string                                      | Optional note for the driver with details about the pick up location.
 dropOffAddressNote | string                                      | Optional note for the driver with details about the drop off location.
 customerNote       | string                                      | Optional note for the driver not related to pick up or drop off.
@@ -743,7 +744,7 @@ Status code | Description
 400         | Invalid request - missing mandatory property, property has wrong type, mismatch in passenger count, missing lead passenger, multiple lead passengers or not a valid json.
 401         | API key missing or invalid.
 403         | Forbidden request - trying to book a trip option owned by someone else.
-404         | Trip option not found or expired.
+404         | Trip option not found or expired. Departure time change not allowed.
 409         | Trip option has already been booked.
 
 ## Cancel endpoint
