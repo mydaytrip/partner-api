@@ -743,9 +743,9 @@ Status code | Description
 ----------- | -----------
 400         | Invalid request - missing mandatory property, property has wrong type, mismatch in passenger count, missing lead passenger, multiple lead passengers or not a valid json.
 401         | API key missing or invalid.
-403         | Forbidden request - trying to book a trip option owned by someone else.
-404         | Trip option not found or expired. Departure time change not allowed.
-409         | Trip option has already been booked.
+403         | Forbidden request - trying to book a trip option owned by someone else. Departure too soon. Departure time change not allowed.
+404         | Trip option not found or expired.
+409         | Trip option has already been booked. Price changed, please make a new search.
 
 ## Cancel endpoint
 
