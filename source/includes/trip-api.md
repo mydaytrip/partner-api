@@ -555,7 +555,7 @@ curl -d '{ "originLongitude": 14.2559, "originLatitude": 50.10, "destinationLong
          "type":"Private",
          "englishSpeakingDriver": true,
          "distanceKm":427,
-         "travelTimeMinutes":312,
+         "travelTimeMinutes":432,
          "pickUp":{
             "lat":50.10,
             "lon":14.25,
@@ -634,7 +634,7 @@ curl -d '{ "originLongitude": 14.2559, "originLatitude": 50.10, "destinationLong
          "type":"Private",
          "englishSpeakingDriver": true,
          "distanceKm":427,
-         "travelTimeMinutes":312,
+         "travelTimeMinutes":432,
          "pickUp":{
             "lat":50.10,
             "lon":14.25,
