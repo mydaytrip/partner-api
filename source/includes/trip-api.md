@@ -46,7 +46,7 @@ Disclaimer: in the last 24 hours before the departure the [/update](#update-endp
 
 ## Search endpoint
 
-This endpoint returns all trip options for given origin, destination, departure time and passenger count (must be between 1 and 10). Origin and destination are passed as latitude and longitude coordinates. The unit used is degree with decimal places, for example `39.753657, -117.610215`. Departure time is passed as a UNIX epoch timestamp in seconds, like `1679463169`. Note that UNIX timestamps are UTC so you need to convert from local time to UTC when calculating it.
+This endpoint returns all trip options for given origin, destination, departure time, passenger count (must be between 1 and 10) and optionally custom stops along the way. Origin, destination and custom stops are passed as latitude and longitude coordinates. The unit used is degree with decimal places, for example `39.753657, -117.610215`. Departure time is passed as a UNIX epoch timestamp in seconds, like `1679463169`. Note that UNIX timestamps are UTC so you need to convert from local time to UTC when calculating it.
 
 > To search for a trip from Prague to Vienna for two passengers, use this call:
 
@@ -501,7 +501,7 @@ passengersCount           | integer | Count of passengers to transport. Must be 
 includeStops              | boolean | Optional. Default value true. When set to false no stops will be returned in trip options.
 includeShared             | boolean | Optional. Default value true. When set to false no shared trip options will be returned.
 includeNonEnglishSpeaking | boolean | Optional. Default value true. When set to false no trip options without an English speaking driver will be returned.
-customStops               | list of [CustomStop](#customstop) | Optional. Customs stops for this trip in the desired order. When a custom stop is requested then origin can be equal to destination, making the trip a same day roundtrip.
+customStops               | list of [CustomStop](#customstop) | Optional. Customs stops for this trip in the desired order. When a custom stop is requested then origin can be equal to the destination, making the trip a same day roundtrip.
 
 ### Response body
 
