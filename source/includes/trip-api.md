@@ -501,6 +501,7 @@ passengersCount           | integer | Count of passengers to transport. Must be 
 includeStops              | boolean | Optional. Default value true. When set to false no stops will be returned in trip options.
 includeShared             | boolean | Optional. Default value true. When set to false no shared trip options will be returned.
 includeNonEnglishSpeaking | boolean | Optional. Default value true. When set to false no trip options without an English speaking driver will be returned.
+customStops               | list of [CustomStop](#customstop) | Optional. Customs stops for this trip in the desired order. When a custom stop is requested then origin can be equal to destination, making the trip a same day roundtrip.
 
 ### Response body
 
@@ -1075,6 +1076,15 @@ Status code | Description
 
 Below is a documentation of all object entities returned by the Daytrip API endpoints.
 
+## CustomStop
+
+Property          | Type   | Description
+----------------- | ------ | -----------
+name              | string | Name of the stop. Preferably a valid Google Maps address.
+latitude          | number | Stop location latitude in degrees.
+longitude         | number | Stop location longitude in degrees.
+durationInMinutes | number | Stop duration in minutes. 30 minutes minimum, 300 minutes maximum.
+
 ## TripOption
 
 Property                | Type                                    | Description
@@ -1093,6 +1103,7 @@ seatsAvailable          | integer                                 | Number of av
 availableChildSeatTypes | list of [ChildSeatType](#childseattype) | List of available child seat types for this trip.
 possibleStops           | list of [Stop](#stop)                   | Stops that can be added to this trip option.
 includedStops           | list of [Stop](#stop)                   | Stops that are already included in this option.
+includedCustomStops     | list of [CustomStop](#customstop)       | Custom stops included in this option. When custom stops are included then both `possibleStops` and `includedStops` will always be empty.
 
 ## Location
 
