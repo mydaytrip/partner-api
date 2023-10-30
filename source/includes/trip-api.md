@@ -81,7 +81,8 @@ curl "https://api.staging.mydaytrip.net/partners/v3/trip/search?originLongitude=
          "pickUp":{
             "lat":50.10,
             "lon":14.25,
-            "time":"2022-12-05T18:00:00Z"
+            "time":"2022-12-05T18:00:00Z",
+            "meetAndGreet": true
          },
          "dropOff":{
             "lat":48.20,
@@ -184,7 +185,8 @@ curl "https://api.staging.mydaytrip.net/partners/v3/trip/search?originLongitude=
          "pickUp":{
             "lat":50.10,
             "lon":14.25,
-            "time":"2022-12-05T18:00:00Z"
+            "time":"2022-12-05T18:00:00Z",
+            "meetAndGreet": true
          },
          "dropOff":{
             "lat":48.20,
@@ -287,7 +289,8 @@ curl "https://api.staging.mydaytrip.net/partners/v3/trip/search?originLongitude=
          "pickUp":{
             "lat":50.10,
             "lon":14.25,
-            "time":"2022-12-05T18:00:00Z"
+            "time":"2022-12-05T18:00:00Z",
+            "meetAndGreet": true
          },
          "dropOff":{
             "lat":48.20,
@@ -391,7 +394,8 @@ curl "https://api.staging.mydaytrip.net/partners/v3/trip/search?originLongitude=
             "lat":50.12,
             "lon":14.27,
             "time":"2022-12-05T19:00:00Z",
-            "description":"In front of the hotel Europa"
+            "description":"In front of the hotel Europa",
+            "meetAndGreet": false
          },
          "dropOff":{
             "lat":48.21,
@@ -432,7 +436,8 @@ curl "https://api.staging.mydaytrip.net/partners/v3/trip/search?originLongitude=
             "lat":50.12,
             "lon":14.27,
             "time":"2022-12-05T21:00:00Z",
-            "description":"In front of the hotel Europa"
+            "description":"In front of the hotel Europa",
+            "meetAndGreet": false
          },
          "dropOff":{
             "lat":48.21,
@@ -559,7 +564,8 @@ curl -d '{ "optionId": "1d32109f-c2e2-44fe-b2cf-461ef3730541", "selectedStops": 
          "pickUp":{
             "lat":50.10,
             "lon":14.25,
-            "time":"2022-12-05T18:00:00Z"
+            "time":"2022-12-05T18:00:00Z",
+            "meetAndGreet": true
          },
          "dropOff":{
             "lat":48.20,
@@ -855,7 +861,8 @@ curl https://api.staging.mydaytrip.net/partners/v3/trip/details/bookingId
       "pickUp":{
          "lat":50.10,
          "lon":14.25,
-         "time":"2022-12-05T18:00:00Z"
+         "time":"2022-12-05T18:00:00Z",
+         "meetAndGreet": true
       },
       "dropOff":{
          "lat":48.20,
@@ -985,7 +992,8 @@ curl -d '{ "bookingId": "cb102778-a3d7-426e-8d18-6bd6b296f283", "customerNote": 
       "pickUp":{
          "lat":50.10,
          "lon":14.25,
-         "time":"2022-12-05T18:00:00Z"
+         "time":"2022-12-05T18:00:00Z",
+         "meetAndGreet": true
       },
       "dropOff":{
          "lat":48.20,
@@ -1102,6 +1110,7 @@ lat                     | number                       | Latitude in degrees.
 lon                     | number                       | Longitude in degrees.
 time                    | string                       | UTC timestamp of the departure time. Optional, for pick up only.
 description             | string                       | Description of the pick up or drop off. Optional.
+meetAndGreet            | boolean                      | Specifies if meet and greet is provided for this pick up. Optional, for pick up only.
 
 ## Pricing
 
