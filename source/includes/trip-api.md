@@ -711,12 +711,35 @@ curl -d '{ "optionId": "f0e34a1b-2b3d-4747-b426-292633b615b4", "pickUpAddressNot
 
 ```
 
-> The above call returns a JSON structured like this:
+> Example response without meeting and drop off positions:
 
 ```json
 {
    "bookingId": "cb102778-a3d7-426e-8d18-6bd6b296f283",
    "bookingReference": "CB1027"
+}
+```
+
+> Example response with meeting and drop off positions:
+
+```json
+{
+   "bookingId": "72r537a9-b846-4b46-b638-de8121337229",
+   "bookingReference": "72R537",
+   "meetingPosition": {
+      "lat": 46.067648,
+      "lon": 7.775185,
+      "description": "the train station in Tasch",
+      "time": "2022-12-05T18:00:00Z",
+      "instructions": "As vehicle entry into Zermatt is heavily restricted, your driver will meet you nearby at the train station in Tasch, which can be reached by transit from Zermatt within about 10 minutes. Your driver will be waiting at the taxi stand just outside the entrance to the train station.",
+      "meetAndGreet": false
+   },
+   "dropOffPosition": {
+      "lat": 45.4374041,
+      "lon": 12.3190675,
+      "description": "Piazzale Roma",
+      "image": "https://daytrip.imgix.net/management/venice.png?w=480&q=50"
+   },
 }
 ```
 
@@ -742,6 +765,8 @@ Property           | Type                                        | Description
 ------------------ | ------------------------------------------- | -----------
 bookingId          | string                                      | Id of the created booking. Can be used to retrieve details about the booking or to cancel it.
 bookingReference   | string                                      | Short booking reference that can be shared with the customer in order for him to be able to contact Daytrip customer support easily.
+meetingPosition    | object - [Position](#position)              | Information about the meeting position, important for unreachable places or when meet and greet is not provided. Optional.
+dropOffPosition    | object - [Position](#position)              | Information about the drop off position, important for unreachable places. Optional.
 
 ### Error status codes
 
@@ -823,7 +848,7 @@ curl https://api.staging.mydaytrip.net/partners/v3/trip/details/bookingId
 
 > Make sure to replace `bookingId` with the real booking id.
 
-> The above call returns a JSON structured like this:
+> Example response without meeting and drop off positions:
 
 ```json
 {
@@ -902,6 +927,81 @@ curl https://api.staging.mydaytrip.net/partners/v3/trip/details/bookingId
 }
 ```
 
+> Example response without meeting and drop off positions:
+
+```json
+{
+   "bookingReference": "72R537",
+   "status": "Confirmed",
+   "createdAt": "2022-12-05T18:00:00Z",
+   "passengersCount": 3,
+   "currency": "EUR",
+   "meetingPosition": {
+      "lat": 46.067648,
+      "lon": 7.775185,
+      "description": "the train station in Tasch",
+      "time": "2022-12-05T18:00:00Z",
+      "instructions": "As vehicle entry into Zermatt is heavily restricted, your driver will meet you nearby at the train station in Tasch, which can be reached by transit from Zermatt within about 10 minutes. Your driver will be waiting at the taxi stand just outside the entrance to the train station.",
+      "meetAndGreet": false
+   },
+   "dropOffPosition": {
+      "lat": 45.4374041,
+      "lon": 12.3190675,
+      "description": "Piazzale Roma",
+      "image": "https://daytrip.imgix.net/management/venice.png?w=480&q=50"
+   },
+   "pickUpAddressNote": "Zermatt", 
+   "dropOffAddressNote": "Venice", 
+   "passengerDetails": [ 
+      {
+         "type": "Lead", 
+         "firstName": "John", 
+         "lastName": "Doe", 
+         "phone": "+41555555555", 
+         "email": "client-email@example.com",
+         "birthday": 629424000 
+      }, 
+      { 
+         "type": "Adult" 
+      }, 
+      { 
+         "type": "Child", 
+         "childSeatType": "Booster" 
+      }
+   ],
+   "trip": {
+      "type": "Private",
+      "englishSpeakingDriver": true,
+      "distanceKm":334,
+      "travelTimeMinutes":268,
+      "pickUp":{
+         "lat":46.02079170845689,
+         "lon":7.748169219390801,
+         "time":"2022-12-05T18:00:00Z",
+         "meetAndGreet": true
+      },
+      "dropOff":{
+         "lat":45.438168912490426,
+         "lon":12.327932808251374
+      },
+      "pricing":{
+         "totalPrice":1311
+      },
+      "vehicle":{
+         "type":"Sedan",
+         "maxPassengers":3,
+         "description":"Sedan comparable to a Volkswagen Passat, up to 3 passengers with luggage.",
+         "image":"https://daytrip.imgix.net/site/sedan.png"
+      },
+      "luggage":{
+         "maxTotalCarryons":3,
+         "maxTotalSuitcases":3
+      },
+      "includedStops":[],
+   }
+}
+```
+
 ### URL path
 
 `/partners/v3/trip/details/bookingId`
@@ -918,6 +1018,8 @@ createdAt          | string                                      | UTC timestamp
 cancelledAt        | string                                      | UTC timestamp of when this booking was cancelled. Optional.
 passengersCount    | integer                                     | The count of passengers this booking is for.
 currency           | string                                      | Currency used for all prices in this response.
+meetingPosition    | object - [Position](#position)              | Information about the meeting position, important for unreachable places or when meet and greet is not provided. Optional.
+dropOffPosition    | object - [Position](#position)              | Information about the drop off position, important for unreachable places. Optional.
 pickUpAddressNote  | string                                      | Optional note for the driver with details about the pick up location.
 dropOffAddressNote | string                                      | Optional note for the driver with details about the drop off location.
 customerNote       | string                                      | Optional note for the driver not related to pick up or drop off.
@@ -1062,6 +1164,8 @@ createdAt          | string                                      | UTC timestamp
 cancelledAt        | string                                      | UTC timestamp of when this booking was cancelled. Optional.
 passengersCount    | integer                                     | The count of passengers this booking is for.
 currency           | string                                      | Currency used for all prices in this response.
+meetingPosition    | object - [Position](#position)              | Information about the meeting position, important for unreachable places or when meet and greet is not provided. Optional.
+dropOffPosition    | object - [Position](#position)              | Information about the drop off position, important for unreachable places. Optional.
 pickUpAddressNote  | string                                      | Optional note for the driver with details about the pick up location.
 dropOffAddressNote | string                                      | Optional note for the driver with details about the drop off location.
 customerNote       | string                                      | Optional note for the driver not related to pick up or drop off.
@@ -1183,3 +1287,15 @@ phone            | string                       | Phone number of the passenger 
 email            | string                       | Email of the passenger - required for the lead passenger.
 birthday         | integer                      | Birthday of the passenger - required for the lead passenger. UNIX epoch timestamp in seconds.
 childSeatType    | string                       | Requested child seat type for a passenger of type "Child". Must match one of offered child seat types from `availableChildSeatTypes` of the trip option you are booking.
+
+## Position
+
+Property                | Type                         | Description
+----------------------- | ---------------------------- | -----------
+lat                     | number                       | Latitude in degrees.
+lon                     | number                       | Longitude in degrees.
+description             | string                       | Description of the position.
+image                   | string                       | Link to an image of the position. Optional.
+time                    | string                       | UTC timestamp of the meeting time. Optional, for meeting position only.
+instructions            | string                       | Meeting or drop off instructions for the customer. Optional.
+meetAndGreet            | boolean                      | Specifies if meet and greet is provided. Optional, for meeting position only.
