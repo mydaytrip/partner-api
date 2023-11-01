@@ -716,7 +716,8 @@ curl -d '{ "optionId": "f0e34a1b-2b3d-4747-b426-292633b615b4", "pickUpAddressNot
 ```json
 {
    "bookingId": "cb102778-a3d7-426e-8d18-6bd6b296f283",
-   "bookingReference": "CB1027"
+   "bookingReference": "CB1027",
+   "meetAndGreet": true
 }
 ```
 
@@ -726,13 +727,13 @@ curl -d '{ "optionId": "f0e34a1b-2b3d-4747-b426-292633b615b4", "pickUpAddressNot
 {
    "bookingId": "72r537a9-b846-4b46-b638-de8121337229",
    "bookingReference": "72R537",
+   "meetAndGreet": false,
    "meetingPosition": {
       "lat": 46.067648,
       "lon": 7.775185,
       "description": "the train station in Tasch",
       "time": "2022-12-05T18:00:00Z",
-      "instructions": "As vehicle entry into Zermatt is heavily restricted, your driver will meet you nearby at the train station in Tasch, which can be reached by transit from Zermatt within about 10 minutes. Your driver will be waiting at the taxi stand just outside the entrance to the train station.",
-      "meetAndGreet": false
+      "instructions": "As vehicle entry into Zermatt is heavily restricted, your driver will meet you nearby at the train station in Tasch, which can be reached by transit from Zermatt within about 10 minutes. Your driver will be waiting at the taxi stand just outside the entrance to the train station."
    },
    "dropOffPosition": {
       "lat": 45.4374041,
@@ -765,6 +766,7 @@ Property           | Type                                        | Description
 ------------------ | ------------------------------------------- | -----------
 bookingId          | string                                      | Id of the created booking. Can be used to retrieve details about the booking or to cancel it.
 bookingReference   | string                                      | Short booking reference that can be shared with the customer in order for him to be able to contact Daytrip customer support easily.
+meetAndGreet       | boolean                                     | Specifies if meet and greet is provided for the pick up of this booking.
 meetingPosition    | object - [Position](#position)              | Information about the meeting position, important for unreachable places or when meet and greet is not provided. Optional.
 dropOffPosition    | object - [Position](#position)              | Information about the drop off position, important for unreachable places. Optional.
 
@@ -936,13 +938,13 @@ curl https://api.staging.mydaytrip.net/partners/v3/trip/details/bookingId
    "createdAt": "2022-12-05T18:00:00Z",
    "passengersCount": 3,
    "currency": "EUR",
+   "meetAndGreet": false,
    "meetingPosition": {
       "lat": 46.067648,
       "lon": 7.775185,
       "description": "the train station in Tasch",
       "time": "2022-12-05T18:00:00Z",
-      "instructions": "As vehicle entry into Zermatt is heavily restricted, your driver will meet you nearby at the train station in Tasch, which can be reached by transit from Zermatt within about 10 minutes. Your driver will be waiting at the taxi stand just outside the entrance to the train station.",
-      "meetAndGreet": false
+      "instructions": "As vehicle entry into Zermatt is heavily restricted, your driver will meet you nearby at the train station in Tasch, which can be reached by transit from Zermatt within about 10 minutes. Your driver will be waiting at the taxi stand just outside the entrance to the train station."
    },
    "dropOffPosition": {
       "lat": 45.4374041,
@@ -1018,6 +1020,7 @@ createdAt          | string                                      | UTC timestamp
 cancelledAt        | string                                      | UTC timestamp of when this booking was cancelled. Optional.
 passengersCount    | integer                                     | The count of passengers this booking is for.
 currency           | string                                      | Currency used for all prices in this response.
+meetAndGreet       | boolean                                     | Specifies if meet and greet is provided for the pick up of this booking.
 meetingPosition    | object - [Position](#position)              | Information about the meeting position, important for unreachable places or when meet and greet is not provided. Optional.
 dropOffPosition    | object - [Position](#position)              | Information about the drop off position, important for unreachable places. Optional.
 pickUpAddressNote  | string                                      | Optional note for the driver with details about the pick up location.
@@ -1164,6 +1167,7 @@ createdAt          | string                                      | UTC timestamp
 cancelledAt        | string                                      | UTC timestamp of when this booking was cancelled. Optional.
 passengersCount    | integer                                     | The count of passengers this booking is for.
 currency           | string                                      | Currency used for all prices in this response.
+meetAndGreet       | boolean                                     | Specifies if meet and greet is provided for the pick up of this booking.
 meetingPosition    | object - [Position](#position)              | Information about the meeting position, important for unreachable places or when meet and greet is not provided. Optional.
 dropOffPosition    | object - [Position](#position)              | Information about the drop off position, important for unreachable places. Optional.
 pickUpAddressNote  | string                                      | Optional note for the driver with details about the pick up location.
