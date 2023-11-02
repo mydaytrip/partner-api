@@ -859,6 +859,7 @@ curl https://api.staging.mydaytrip.net/partners/v3/trip/details/bookingId
    "createdAt": "2022-12-05T18:00:00Z",
    "passengersCount": 3,
    "currency": "EUR",
+   "meetAndGreet": true,
    "pickUpAddressNote": "Havel airport", 
    "dropOffAddressNote": "Vienna central square", 
    "customerNote": "We will stand next to the entrance", 
