@@ -1302,4 +1302,3 @@ description             | string                       | Description of the posi
 image                   | string                       | Link to an image of the position. Optional.
 time                    | string                       | UTC timestamp of the meeting time. Optional, for meeting position only.
 instructions            | string                       | Meeting or drop off instructions for the customer. Optional.
-meetAndGreet            | boolean                      | Specifies if meet and greet is provided. Optional, for meeting position only.
