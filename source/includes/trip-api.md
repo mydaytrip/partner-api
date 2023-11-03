@@ -717,6 +717,8 @@ curl -d '{ "optionId": "f0e34a1b-2b3d-4747-b426-292633b615b4", "pickUpAddressNot
 {
    "bookingId": "cb102778-a3d7-426e-8d18-6bd6b296f283",
    "bookingReference": "CB1027",
+   "departureTimeUtc": "2022-12-05T18:00:00Z",
+   "originTimezone": "Europe/Prague",
    "meetAndGreet": true
 }
 ```
@@ -727,12 +729,13 @@ curl -d '{ "optionId": "f0e34a1b-2b3d-4747-b426-292633b615b4", "pickUpAddressNot
 {
    "bookingId": "72r537a9-b846-4b46-b638-de8121337229",
    "bookingReference": "72R537",
+   "departureTimeUtc": "2022-12-05T18:00:00Z",
+   "originTimezone": "Europe/Zurich",
    "meetAndGreet": false,
    "meetingPosition": {
       "lat": 46.067648,
       "lon": 7.775185,
       "description": "the train station in Tasch",
-      "time": "2022-12-05T18:00:00Z",
       "instructions": "As vehicle entry into Zermatt is heavily restricted, your driver will meet you nearby at the train station in Tasch, which can be reached by transit from Zermatt within about 10 minutes. Your driver will be waiting at the taxi stand just outside the entrance to the train station."
    },
    "dropOffPosition": {
@@ -766,6 +769,8 @@ Property           | Type                                        | Description
 ------------------ | ------------------------------------------- | -----------
 bookingId          | string                                      | Id of the created booking. Can be used to retrieve details about the booking or to cancel it.
 bookingReference   | string                                      | Short booking reference that can be shared with the customer in order for him to be able to contact Daytrip customer support easily.
+departureTimeUtc   | string                                      | Date and time of departure in UTC.
+originTimezone     | string                                      | IANA timezone for the origin location. Can be used to convert `departureTimeUtc` to local time.
 meetAndGreet       | boolean                                     | Specifies if meet and greet is provided for the pick up of this booking.
 meetingPosition    | object - [Position](#position)              | Information about the meeting position, important for unreachable places or when meet and greet is not provided. Optional.
 dropOffPosition    | object - [Position](#position)              | Information about the drop off position, important for unreachable places. Optional.
@@ -859,6 +864,8 @@ curl https://api.staging.mydaytrip.net/partners/v3/trip/details/bookingId
    "createdAt": "2022-12-05T18:00:00Z",
    "passengersCount": 3,
    "currency": "EUR",
+   "departureTimeUtc": "2022-12-05T18:00:00Z",
+   "originTimezone": "Europe/Prague",
    "meetAndGreet": true,
    "pickUpAddressNote": "Havel airport", 
    "dropOffAddressNote": "Vienna central square", 
@@ -939,12 +946,13 @@ curl https://api.staging.mydaytrip.net/partners/v3/trip/details/bookingId
    "createdAt": "2022-12-05T18:00:00Z",
    "passengersCount": 3,
    "currency": "EUR",
+   "departureTimeUtc": "2022-12-05T18:00:00Z",
+   "originTimezone": "Europe/Zurich",
    "meetAndGreet": false,
    "meetingPosition": {
       "lat": 46.067648,
       "lon": 7.775185,
       "description": "the train station in Tasch",
-      "time": "2022-12-05T18:00:00Z",
       "instructions": "As vehicle entry into Zermatt is heavily restricted, your driver will meet you nearby at the train station in Tasch, which can be reached by transit from Zermatt within about 10 minutes. Your driver will be waiting at the taxi stand just outside the entrance to the train station."
    },
    "dropOffPosition": {
@@ -1021,6 +1029,8 @@ createdAt          | string                                      | UTC timestamp
 cancelledAt        | string                                      | UTC timestamp of when this booking was cancelled. Optional.
 passengersCount    | integer                                     | The count of passengers this booking is for.
 currency           | string                                      | Currency used for all prices in this response.
+departureTimeUtc   | string                                      | Date and time of departure in UTC. This reflects possible changes made by customer support.
+originTimezone     | string                                      | IANA timezone for the origin location. Can be used to convert `departureTimeUtc` to local time.
 meetAndGreet       | boolean                                     | Specifies if meet and greet is provided for the pick up of this booking.
 meetingPosition    | object - [Position](#position)              | Information about the meeting position, important for unreachable places or when meet and greet is not provided. Optional.
 dropOffPosition    | object - [Position](#position)              | Information about the drop off position, important for unreachable places. Optional.
@@ -1069,6 +1079,9 @@ curl -d '{ "bookingId": "cb102778-a3d7-426e-8d18-6bd6b296f283", "customerNote": 
    "createdAt": "2022-12-05T18:00:00Z",
    "passengersCount": 3,
    "currency": "EUR",
+   "departureTimeUtc": "2022-12-05T18:00:00Z",
+   "originTimezone": "Europe/Prague",
+   "meetAndGreet": true,
    "pickUpAddressNote": "Havel airport",
    "dropOffAddressNote": "Vienna central square",
    "customerNote": "We will wait inside the Airport building",
@@ -1168,6 +1181,8 @@ createdAt          | string                                      | UTC timestamp
 cancelledAt        | string                                      | UTC timestamp of when this booking was cancelled. Optional.
 passengersCount    | integer                                     | The count of passengers this booking is for.
 currency           | string                                      | Currency used for all prices in this response.
+departureTimeUtc   | string                                      | Date and time of departure in UTC. This reflects possible changes made by customer support.
+originTimezone     | string                                      | IANA timezone for the origin location. Can be used to convert `departureTimeUtc` to local time.
 meetAndGreet       | boolean                                     | Specifies if meet and greet is provided for the pick up of this booking.
 meetingPosition    | object - [Position](#position)              | Information about the meeting position, important for unreachable places or when meet and greet is not provided. Optional.
 dropOffPosition    | object - [Position](#position)              | Information about the drop off position, important for unreachable places. Optional.
@@ -1301,5 +1316,4 @@ lat                     | number                       | Latitude in degrees.
 lon                     | number                       | Longitude in degrees.
 description             | string                       | Description of the position.
 image                   | string                       | Link to an image of the position. Optional.
-time                    | string                       | UTC timestamp of the meeting time. Optional, for meeting position only.
 instructions            | string                       | Meeting or drop off instructions for the customer. Optional.
