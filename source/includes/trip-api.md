@@ -1039,7 +1039,7 @@ dropOffAddressNote | string                                      | Optional note
 customerNote       | string                                      | Optional note for the driver not related to pick up or drop off.
 flightNumber       | string                                      | Optional flight number in case this is an airport pick up.
 passengerDetails   | list of [PassengerDetail](#passengerdetail) | List of passengers that will go on this trip.
-trip               | object - [TripOption](#tripoption)          | Information about the trip.
+trip               | object - [TripOption](#tripoption)          | Information about the trip. This does not reflect changes made after the booking was created.
 
 ### Error status codes
 
@@ -1191,7 +1191,7 @@ dropOffAddressNote | string                                      | Optional note
 customerNote       | string                                      | Optional note for the driver not related to pick up or drop off.
 flightNumber       | string                                      | Optional flight number in case this is an airport pick up.
 passengerDetails   | list of [PassengerDetail](#passengerdetail) | List of passengers that will go on this trip.
-trip               | object - [TripOption](#tripoption)          | Information about the trip.
+trip               | object - [TripOption](#tripoption)          | Information about the trip. This does not reflect changes made after the booking was created.
 
 ### Error status codes
 
