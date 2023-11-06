@@ -81,7 +81,8 @@ curl "https://api.staging.mydaytrip.net/partners/v3/trip/search?originLongitude=
          "pickUp":{
             "lat":50.10,
             "lon":14.25,
-            "time":"2022-12-05T18:00:00Z"
+            "time":"2022-12-05T18:00:00Z",
+            "meetAndGreet": true
          },
          "dropOff":{
             "lat":48.20,
@@ -184,7 +185,8 @@ curl "https://api.staging.mydaytrip.net/partners/v3/trip/search?originLongitude=
          "pickUp":{
             "lat":50.10,
             "lon":14.25,
-            "time":"2022-12-05T18:00:00Z"
+            "time":"2022-12-05T18:00:00Z",
+            "meetAndGreet": true
          },
          "dropOff":{
             "lat":48.20,
@@ -287,7 +289,8 @@ curl "https://api.staging.mydaytrip.net/partners/v3/trip/search?originLongitude=
          "pickUp":{
             "lat":50.10,
             "lon":14.25,
-            "time":"2022-12-05T18:00:00Z"
+            "time":"2022-12-05T18:00:00Z",
+            "meetAndGreet": true
          },
          "dropOff":{
             "lat":48.20,
@@ -391,7 +394,8 @@ curl "https://api.staging.mydaytrip.net/partners/v3/trip/search?originLongitude=
             "lat":50.12,
             "lon":14.27,
             "time":"2022-12-05T19:00:00Z",
-            "description":"In front of the hotel Europa"
+            "description":"In front of the hotel Europa",
+            "meetAndGreet": false
          },
          "dropOff":{
             "lat":48.21,
@@ -432,7 +436,8 @@ curl "https://api.staging.mydaytrip.net/partners/v3/trip/search?originLongitude=
             "lat":50.12,
             "lon":14.27,
             "time":"2022-12-05T21:00:00Z",
-            "description":"In front of the hotel Europa"
+            "description":"In front of the hotel Europa",
+            "meetAndGreet": false
          },
          "dropOff":{
             "lat":48.21,
@@ -559,7 +564,8 @@ curl -d '{ "optionId": "1d32109f-c2e2-44fe-b2cf-461ef3730541", "selectedStops": 
          "pickUp":{
             "lat":50.10,
             "lon":14.25,
-            "time":"2022-12-05T18:00:00Z"
+            "time":"2022-12-05T18:00:00Z",
+            "meetAndGreet": true
          },
          "dropOff":{
             "lat":48.20,
@@ -705,12 +711,39 @@ curl -d '{ "optionId": "f0e34a1b-2b3d-4747-b426-292633b615b4", "pickUpAddressNot
 
 ```
 
-> The above call returns a JSON structured like this:
+> Example response without meeting and drop off positions:
 
 ```json
 {
    "bookingId": "cb102778-a3d7-426e-8d18-6bd6b296f283",
-   "bookingReference": "CB1027"
+   "bookingReference": "CB1027",
+   "departureTimeUtc": "2022-12-05T18:00:00Z",
+   "originTimezone": "Europe/Prague",
+   "meetAndGreet": true
+}
+```
+
+> Example response with meeting and drop off positions:
+
+```json
+{
+   "bookingId": "72r537a9-b846-4b46-b638-de8121337229",
+   "bookingReference": "72R537",
+   "departureTimeUtc": "2022-12-05T18:00:00Z",
+   "originTimezone": "Europe/Zurich",
+   "meetAndGreet": false,
+   "meetingPosition": {
+      "lat": 46.067648,
+      "lon": 7.775185,
+      "description": "the train station in Tasch",
+      "instructions": "As vehicle entry into Zermatt is heavily restricted, your driver will meet you nearby at the train station in Tasch, which can be reached by transit from Zermatt within about 10 minutes. Your driver will be waiting at the taxi stand just outside the entrance to the train station."
+   },
+   "dropOffPosition": {
+      "lat": 45.4374041,
+      "lon": 12.3190675,
+      "description": "Piazzale Roma",
+      "image": "https://daytrip.imgix.net/management/venice.png?w=480&q=50"
+   },
 }
 ```
 
@@ -736,6 +769,11 @@ Property           | Type                                        | Description
 ------------------ | ------------------------------------------- | -----------
 bookingId          | string                                      | Id of the created booking. Can be used to retrieve details about the booking or to cancel it.
 bookingReference   | string                                      | Short booking reference that can be shared with the customer in order for him to be able to contact Daytrip customer support easily.
+departureTimeUtc   | string                                      | Date and time of departure in UTC.
+originTimezone     | string                                      | IANA timezone for the origin location. Can be used to convert `departureTimeUtc` to local time.
+meetAndGreet       | boolean                                     | Specifies if meet and greet is provided for the pick up of this booking.
+meetingPosition    | object - [Position](#position)              | Information about the meeting position, important for unreachable places or when meet and greet is not provided. Optional.
+dropOffPosition    | object - [Position](#position)              | Information about the drop off position, important for unreachable places. Optional.
 
 ### Error status codes
 
@@ -817,7 +855,7 @@ curl https://api.staging.mydaytrip.net/partners/v3/trip/details/bookingId
 
 > Make sure to replace `bookingId` with the real booking id.
 
-> The above call returns a JSON structured like this:
+> Example response without meeting and drop off positions:
 
 ```json
 {
@@ -826,6 +864,9 @@ curl https://api.staging.mydaytrip.net/partners/v3/trip/details/bookingId
    "createdAt": "2022-12-05T18:00:00Z",
    "passengersCount": 3,
    "currency": "EUR",
+   "departureTimeUtc": "2022-12-05T18:00:00Z",
+   "originTimezone": "Europe/Prague",
+   "meetAndGreet": true,
    "pickUpAddressNote": "Havel airport", 
    "dropOffAddressNote": "Vienna central square", 
    "customerNote": "We will stand next to the entrance", 
@@ -855,7 +896,8 @@ curl https://api.staging.mydaytrip.net/partners/v3/trip/details/bookingId
       "pickUp":{
          "lat":50.10,
          "lon":14.25,
-         "time":"2022-12-05T18:00:00Z"
+         "time":"2022-12-05T18:00:00Z",
+         "meetAndGreet": true
       },
       "dropOff":{
          "lat":48.20,
@@ -895,6 +937,82 @@ curl https://api.staging.mydaytrip.net/partners/v3/trip/details/bookingId
 }
 ```
 
+> Example response without meeting and drop off positions:
+
+```json
+{
+   "bookingReference": "72R537",
+   "status": "Confirmed",
+   "createdAt": "2022-12-05T18:00:00Z",
+   "passengersCount": 3,
+   "currency": "EUR",
+   "departureTimeUtc": "2022-12-05T18:00:00Z",
+   "originTimezone": "Europe/Zurich",
+   "meetAndGreet": false,
+   "meetingPosition": {
+      "lat": 46.067648,
+      "lon": 7.775185,
+      "description": "the train station in Tasch",
+      "instructions": "As vehicle entry into Zermatt is heavily restricted, your driver will meet you nearby at the train station in Tasch, which can be reached by transit from Zermatt within about 10 minutes. Your driver will be waiting at the taxi stand just outside the entrance to the train station."
+   },
+   "dropOffPosition": {
+      "lat": 45.4374041,
+      "lon": 12.3190675,
+      "description": "Piazzale Roma",
+      "image": "https://daytrip.imgix.net/management/venice.png?w=480&q=50"
+   },
+   "pickUpAddressNote": "Zermatt", 
+   "dropOffAddressNote": "Venice", 
+   "passengerDetails": [ 
+      {
+         "type": "Lead", 
+         "firstName": "John", 
+         "lastName": "Doe", 
+         "phone": "+41555555555", 
+         "email": "client-email@example.com",
+         "birthday": 629424000 
+      }, 
+      { 
+         "type": "Adult" 
+      }, 
+      { 
+         "type": "Child", 
+         "childSeatType": "Booster" 
+      }
+   ],
+   "trip": {
+      "type": "Private",
+      "englishSpeakingDriver": true,
+      "distanceKm":334,
+      "travelTimeMinutes":268,
+      "pickUp":{
+         "lat":46.02079170845689,
+         "lon":7.748169219390801,
+         "time":"2022-12-05T18:00:00Z",
+         "meetAndGreet": true
+      },
+      "dropOff":{
+         "lat":45.438168912490426,
+         "lon":12.327932808251374
+      },
+      "pricing":{
+         "totalPrice":1311
+      },
+      "vehicle":{
+         "type":"Sedan",
+         "maxPassengers":3,
+         "description":"Sedan comparable to a Volkswagen Passat, up to 3 passengers with luggage.",
+         "image":"https://daytrip.imgix.net/site/sedan.png"
+      },
+      "luggage":{
+         "maxTotalCarryons":3,
+         "maxTotalSuitcases":3
+      },
+      "includedStops":[],
+   }
+}
+```
+
 ### URL path
 
 `/partners/v3/trip/details/bookingId`
@@ -911,12 +1029,17 @@ createdAt          | string                                      | UTC timestamp
 cancelledAt        | string                                      | UTC timestamp of when this booking was cancelled. Optional.
 passengersCount    | integer                                     | The count of passengers this booking is for.
 currency           | string                                      | Currency used for all prices in this response.
+departureTimeUtc   | string                                      | Date and time of departure in UTC. This reflects possible changes made by customer support.
+originTimezone     | string                                      | IANA timezone for the origin location. Can be used to convert `departureTimeUtc` to local time.
+meetAndGreet       | boolean                                     | Specifies if meet and greet is provided for the pick up of this booking.
+meetingPosition    | object - [Position](#position)              | Information about the meeting position, important for unreachable places or when meet and greet is not provided. Optional.
+dropOffPosition    | object - [Position](#position)              | Information about the drop off position, important for unreachable places. Optional.
 pickUpAddressNote  | string                                      | Optional note for the driver with details about the pick up location.
 dropOffAddressNote | string                                      | Optional note for the driver with details about the drop off location.
 customerNote       | string                                      | Optional note for the driver not related to pick up or drop off.
 flightNumber       | string                                      | Optional flight number in case this is an airport pick up.
 passengerDetails   | list of [PassengerDetail](#passengerdetail) | List of passengers that will go on this trip.
-trip               | object - [TripOption](#tripoption)          | Information about the trip.
+trip               | object - [TripOption](#tripoption)          | Information about the trip. This does not reflect changes made after the booking was created.
 
 ### Error status codes
 
@@ -956,6 +1079,9 @@ curl -d '{ "bookingId": "cb102778-a3d7-426e-8d18-6bd6b296f283", "customerNote": 
    "createdAt": "2022-12-05T18:00:00Z",
    "passengersCount": 3,
    "currency": "EUR",
+   "departureTimeUtc": "2022-12-05T18:00:00Z",
+   "originTimezone": "Europe/Prague",
+   "meetAndGreet": true,
    "pickUpAddressNote": "Havel airport",
    "dropOffAddressNote": "Vienna central square",
    "customerNote": "We will wait inside the Airport building",
@@ -985,7 +1111,8 @@ curl -d '{ "bookingId": "cb102778-a3d7-426e-8d18-6bd6b296f283", "customerNote": 
       "pickUp":{
          "lat":50.10,
          "lon":14.25,
-         "time":"2022-12-05T18:00:00Z"
+         "time":"2022-12-05T18:00:00Z",
+         "meetAndGreet": true
       },
       "dropOff":{
          "lat":48.20,
@@ -1054,12 +1181,17 @@ createdAt          | string                                      | UTC timestamp
 cancelledAt        | string                                      | UTC timestamp of when this booking was cancelled. Optional.
 passengersCount    | integer                                     | The count of passengers this booking is for.
 currency           | string                                      | Currency used for all prices in this response.
+departureTimeUtc   | string                                      | Date and time of departure in UTC. This reflects possible changes made by customer support.
+originTimezone     | string                                      | IANA timezone for the origin location. Can be used to convert `departureTimeUtc` to local time.
+meetAndGreet       | boolean                                     | Specifies if meet and greet is provided for the pick up of this booking.
+meetingPosition    | object - [Position](#position)              | Information about the meeting position, important for unreachable places or when meet and greet is not provided. Optional.
+dropOffPosition    | object - [Position](#position)              | Information about the drop off position, important for unreachable places. Optional.
 pickUpAddressNote  | string                                      | Optional note for the driver with details about the pick up location.
 dropOffAddressNote | string                                      | Optional note for the driver with details about the drop off location.
 customerNote       | string                                      | Optional note for the driver not related to pick up or drop off.
 flightNumber       | string                                      | Optional flight number in case this is an airport pick up.
 passengerDetails   | list of [PassengerDetail](#passengerdetail) | List of passengers that will go on this trip.
-trip               | object - [TripOption](#tripoption)          | Information about the trip.
+trip               | object - [TripOption](#tripoption)          | Information about the trip. This does not reflect changes made after the booking was created.
 
 ### Error status codes
 
@@ -1102,6 +1234,7 @@ lat                     | number                       | Latitude in degrees.
 lon                     | number                       | Longitude in degrees.
 time                    | string                       | UTC timestamp of the departure time. Optional, for pick up only.
 description             | string                       | Description of the pick up or drop off. Optional.
+meetAndGreet            | boolean                      | Specifies if meet and greet is provided for this pick up. Optional, for pick up only.
 
 ## Pricing
 
@@ -1174,3 +1307,13 @@ phone            | string                       | Phone number of the passenger 
 email            | string                       | Email of the passenger - required for the lead passenger.
 birthday         | integer                      | Birthday of the passenger - required for the lead passenger. UNIX epoch timestamp in seconds.
 childSeatType    | string                       | Requested child seat type for a passenger of type "Child". Must match one of offered child seat types from `availableChildSeatTypes` of the trip option you are booking.
+
+## Position
+
+Property                | Type                         | Description
+----------------------- | ---------------------------- | -----------
+lat                     | number                       | Latitude in degrees.
+lon                     | number                       | Longitude in degrees.
+description             | string                       | Description of the position.
+image                   | string                       | Link to an image of the position. Optional.
+instructions            | string                       | Meeting or drop off instructions for the customer. Optional.
