@@ -772,8 +772,8 @@ bookingReference   | string                                      | Short booking
 departureTimeUtc   | string                                      | Date and time of departure in UTC.
 originTimezone     | string                                      | IANA timezone for the origin location. Can be used to convert `departureTimeUtc` to local time.
 meetAndGreet       | boolean                                     | Specifies if meet and greet is provided for the pick up of this booking.
-meetingPosition    | object - [Position](#position)              | Information about the meeting position, important for unreachable places or when meet and greet is not provided. Optional.
-dropOffPosition    | object - [Position](#position)              | Information about the drop off position, important for unreachable places. Optional.
+meetingPosition    | object - [MeetingPosition](#meetingposition)| Information about the meeting position, important for unreachable places or when meet and greet is not provided. Optional.
+dropOffPosition    | object - [DropOffPosition](#dropoffposition)| Information about the drop off position, important for unreachable places. Optional.
 
 ### Error status codes
 
@@ -1032,8 +1032,8 @@ currency           | string                                      | Currency used
 departureTimeUtc   | string                                      | Date and time of departure in UTC. This reflects possible changes made by customer support.
 originTimezone     | string                                      | IANA timezone for the origin location. Can be used to convert `departureTimeUtc` to local time.
 meetAndGreet       | boolean                                     | Specifies if meet and greet is provided for the pick up of this booking.
-meetingPosition    | object - [Position](#position)              | Information about the meeting position, important for unreachable places or when meet and greet is not provided. Optional.
-dropOffPosition    | object - [Position](#position)              | Information about the drop off position, important for unreachable places. Optional.
+meetingPosition    | object - [MeetingPosition](#meetingposition)| Information about the meeting position, important for unreachable places or when meet and greet is not provided. Optional.
+dropOffPosition    | object - [DropOffPosition](#dropoffposition)| Information about the drop off position, important for unreachable places. Optional.
 pickUpAddressNote  | string                                      | Optional note for the driver with details about the pick up location.
 dropOffAddressNote | string                                      | Optional note for the driver with details about the drop off location.
 customerNote       | string                                      | Optional note for the driver not related to pick up or drop off.
@@ -1184,8 +1184,8 @@ currency           | string                                      | Currency used
 departureTimeUtc   | string                                      | Date and time of departure in UTC. This reflects possible changes made by customer support.
 originTimezone     | string                                      | IANA timezone for the origin location. Can be used to convert `departureTimeUtc` to local time.
 meetAndGreet       | boolean                                     | Specifies if meet and greet is provided for the pick up of this booking.
-meetingPosition    | object - [Position](#position)              | Information about the meeting position, important for unreachable places or when meet and greet is not provided. Optional.
-dropOffPosition    | object - [Position](#position)              | Information about the drop off position, important for unreachable places. Optional.
+meetingPosition    | object - [MeetingPosition](#meetingposition)| Information about the meeting position, important for unreachable places or when meet and greet is not provided. Optional.
+dropOffPosition    | object - [DropOffPosition](#dropoffposition)| Information about the drop off position, important for unreachable places. Optional.
 pickUpAddressNote  | string                                      | Optional note for the driver with details about the pick up location.
 dropOffAddressNote | string                                      | Optional note for the driver with details about the drop off location.
 customerNote       | string                                      | Optional note for the driver not related to pick up or drop off.
@@ -1308,7 +1308,17 @@ email            | string                       | Email of the passenger - requi
 birthday         | integer                      | Birthday of the passenger - required for the lead passenger. UNIX epoch timestamp in seconds.
 childSeatType    | string                       | Requested child seat type for a passenger of type "Child". Must match one of offered child seat types from `availableChildSeatTypes` of the trip option you are booking.
 
-## Position
+## MeetingPosition
+
+Property                | Type                         | Description
+----------------------- | ---------------------------- | -----------
+lat                     | number                       | Latitude in degrees.
+lon                     | number                       | Longitude in degrees.
+description             | string                       | Description of the position.
+instructions            | string                       | Meeting instructions for the customer.
+image                   | string                       | Link to an image of the position. Optional.
+
+## DropOffPosition
 
 Property                | Type                         | Description
 ----------------------- | ---------------------------- | -----------
@@ -1316,4 +1326,3 @@ lat                     | number                       | Latitude in degrees.
 lon                     | number                       | Longitude in degrees.
 description             | string                       | Description of the position.
 image                   | string                       | Link to an image of the position. Optional.
-instructions            | string                       | Meeting or drop off instructions for the customer. Optional.
