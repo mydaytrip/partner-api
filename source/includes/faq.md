@@ -6,7 +6,7 @@ On most routes we offer trips for 1-7 passengers. On some routes we offer trips 
 
 ## After receiving trip options, how much time do I have to book one of them?
 
-Returned trip options will expire in 1 hour. Customizing an option with stops won't change it's expiration time.
+Options are valid for up to 7 days or until the price changes due to increased demand. In such case you will need to repeat the search.
 
 ## Can I cancel a booking created via the API?
 
