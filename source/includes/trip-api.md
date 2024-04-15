@@ -13,6 +13,7 @@ A typical simple flow without stop customization would look like this:
 1. call [/search](#search-endpoint) endpoint to get possible options
 2. call [/book](#book-endpoint) endpoint to book the chosen option
 3. `optional` - call [/details](#details-endpoint) endpoint to get trip and booking details
+4. `optional` - call [/tracking](#tracking-endpoint) endpoint to track the position of the driver(s) assigned to the trip
 
 ### Trip with a stop
 
@@ -1203,6 +1204,97 @@ Status code | Description
 404         | Booking not found.
 409         | Trying to update a cancelled booking.
 
+## Tracking endpoint
+
+This endpoint allows you to retrieve the latest position of driver(s) assigned to the trip. Not every trip is guaranteed to have driver tracking.
+
+> To get driver position(s) of a trip currently in progress, use the following call:
+
+```bash
+curl https://api.staging.mydaytrip.net/partners/v3/trip/tracking/bookingId 
+  -H "x-api-key: your-api-key" 
+```
+
+```javascript
+
+```
+
+```python
+
+```
+
+> Make sure to replace `bookingId` with the real booking id.
+
+> Example response for a trip served by one driver:
+
+```json
+{
+   "driverPositions": [
+      {
+         "timestamp": "2023-12-04T18:00:00Z",
+         "driverId": "4381b73d-be1d-4d7d-bf7c-cdde5292c1b9",
+         "position": {
+            "lat": 50.09298565485293,
+            "lon": 14.453347220812443
+         }
+      }
+   ]
+}
+```
+
+> Example response for a trip where tracking did not start yet:
+
+```json
+{
+   "driverPositions": []
+}
+```
+
+> Example response for a trip served by two drivers:
+
+```json
+{
+   "driverPositions": [
+      {
+         "timestamp": "2023-12-04T18:00:00Z",
+         "driverId": "4381b73d-be1d-4d7d-bf7c-cdde5292c1b9",
+         "position": {
+            "lat": 50.09298565485293,
+            "lon": 14.453347220812443
+         }
+      },
+      {
+         "timestamp": "2023-12-04T18:01:00Z",
+         "driverId": "52443e97-dd86-477a-927a-8fc9fa786797",
+         "position": {
+            "lat": 50.08213692331847,
+            "lon": 14.433944045117011
+         }
+      }
+   ]
+}
+```
+
+### URL path
+
+`/partners/v3/trip/tracking/bookingId`
+
+Replace `bookingId` with the id of the booking you want to track.
+
+### Response body
+
+Property           | Type                                        | Description
+------------------ | ------------------------------------------- | -----------
+driverPositions    | list of [DriverPosition](#driverposition)   | List of latest driver positions for this trip.
+
+### Error status codes
+
+Status code | Description
+----------- | -----------
+401         | API key missing or invalid.
+403         | Forbidden request - trying to track booking owned by someone else.
+404         | Booking not found.
+
 # Entities
 
 Below is a documentation of all object entities returned by the Daytrip API endpoints.
@@ -1326,3 +1418,18 @@ lat                     | number                       | Latitude in degrees.
 lon                     | number                       | Longitude in degrees.
 description             | string                       | Description of the position.
 image                   | string                       | Link to an image of the position. Optional.
+
+## DriverPosition
+
+Property                | Type                           | Description
+----------------------- | ------------------------------ | -----------
+timestamp               | string                         | UTC timestamp of when this position was reported by the driver.
+driverId                | string                         | Unique id of the driver. To distinguish the drivers for trips with multiple drivers.
+position                | object - [Position](#position) | Last reported position of the driver.
+
+## Position
+
+Property                | Type                         | Description
+----------------------- | ---------------------------- | -----------
+lat                     | number                       | Latitude in degrees.
+lon                     | number                       | Longitude in degrees.

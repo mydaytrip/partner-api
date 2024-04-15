@@ -19,3 +19,7 @@ No, once a booking is created by calling our API, it is confirmed and guaranteed
 ## Does the Daytrip API handle payments?
 
 No, the Daytrip API does not handle payments. You are responsible for collecting online payments from the customers. You are also responsible for any currency conversion for display purposes (currently the API will return prices in EUR or USD based on the country of the trip). Your company will be invoiced by Daytrip for the trips you book with us.
+
+## Is the amount of requests for the Daytrip API limited?
+
+You can send up to 2000 requests per minute.
