@@ -763,6 +763,7 @@ dropOffAddressNote | string                                      | Optional note
 customerNote       | string                                      | Optional note for the driver not related to pick up or drop off.
 flightNumber       | string                                      | Optional flight number in case this is an airport pick up.
 passengerDetails   | list of [PassengerDetail](#passengerdetail) | List of passengers that will go on this trip. For trips with "Private" type the number of passengers must be below or equal to `maxPassengers` of the `vehicle` in the trip option. For trips with "Shared" type the number of passengers must match the `passengersCount` query parameter from the Search endpoint. There must always be exactly one passenger of type "Lead" with contact details filled. For passenger of type "Child" you must specify a child seat of proper type offered in the trip option's `availableChildSeatTypes`. For older children that do not need any child seat use `Adult` passenger type.
+externalId         | string                                      | Optional. You can send us the id of the booking in your system to help with communication when our support team needs to identify a booking and you are not able to provide our own `bookingReference`.
 
 ### Response body
 
@@ -1025,6 +1026,7 @@ Replace `bookingId` with the id of the booking you want to retrieve details for.
 Property           | Type                                        | Description
 ------------------ | ------------------------------------------- | -----------
 bookingReference   | string                                      | Short booking reference that can be shared with the customer in order for him to be able to contact Daytrip customer support easily.
+externalId         | string                                      | Optional. If you sent the `externalId` parameter to the [/book](#book-endpoint) it will be returned here.
 status             | string                                      | Booking status. "Confirmed" or "Cancelled".
 createdAt          | string                                      | UTC timestamp of when this booking was created.
 cancelledAt        | string                                      | UTC timestamp of when this booking was cancelled. Optional.
@@ -1166,6 +1168,7 @@ Disclaimer: in the last 24 hours before the departure the [/update](#update-endp
 Property           | Type                                          | Description
 ------------------ | --------------------------------------------- | -----------
 bookingId          | string                                        | Id of the booking to cancel. Taken from [/book](#book-endpoint) endpoint response.
+externalId         | string                                        | Optional. If you sent the `externalId` parameter to the [/book](#book-endpoint) it will be returned here.
 pickUpAddressNote  | string                                        | Optional note for the driver with details about the pick up location.
 dropOffAddressNote | string                                        | Optional note for the driver with details about the drop off location.
 customerNote       | string                                        | Optional note for the driver not related to pick up or drop off.
