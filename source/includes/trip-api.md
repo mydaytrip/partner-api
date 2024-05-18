@@ -13,7 +13,8 @@ A typical simple flow without stop customization would look like this:
 1. call [/search](#search-endpoint) endpoint to get possible options
 2. call [/book](#book-endpoint) endpoint to book the chosen option
 3. `optional` - call [/details](#details-endpoint) endpoint to get trip and booking details
-4. `optional` - call [/tracking](#tracking-endpoint) endpoint to track the position of the driver(s) assigned to the trip
+4. `optional` - call [/drivers](#drivers-endpoint) endpoint to get information about driver(s) and vehicle(s) assigned to the trip
+5. `optional` - call [/tracking](#tracking-endpoint) endpoint to track the position of the driver(s) assigned to the trip
 
 ### Trip with a stop
 
@@ -1209,7 +1210,7 @@ Status code | Description
 
 ## Tracking endpoint
 
-This endpoint allows you to retrieve the latest position of driver(s) assigned to the trip. Not every trip is guaranteed to have driver tracking.
+This endpoint allows you to retrieve the latest position of driver(s) assigned to the trip. Not every trip is guaranteed to have driver tracking. Use the [/drivers](#drivers-endpoint) endpoint to retrieve the details about the drivers and the vehicles. That information can be cached and does not need to be retrieved with every tracking request.
 
 > To get driver position(s) of a trip currently in progress, use the following call:
 
@@ -1295,7 +1296,104 @@ driverPositions    | list of [DriverPosition](#driverposition)   | List of lates
 Status code | Description
 ----------- | -----------
 401         | API key missing or invalid.
-403         | Forbidden request - trying to track booking owned by someone else.
+403         | Forbidden request - trying to track a booking owned by someone else.
+404         | Booking not found.
+
+## Drivers endpoint
+
+This endpoint allows you to retrieve the information about driver(s) and vehicle(s) currently assigned to the trip. The assigned driver might change so it is recommended to pass this information to the customer only few days before the trip and give him an update if the response of this endpoint changes. The `driverId` returned by this endpoint is the same as the `driverId` returned by the [/tracking](#tracking-endpoint) endpoint and can be used to identify which driver is at which position in case of trips with multiple drivers.
+
+> To get drivers currently assigned to a trip
+
+```bash
+curl https://api.staging.mydaytrip.net/partners/v3/trip/drivers/bookingId 
+  -H "x-api-key: your-api-key" 
+```
+
+```javascript
+
+```
+
+```python
+
+```
+
+> Make sure to replace `bookingId` with the real booking id.
+
+> Example response for a trip served by one driver:
+
+```json
+{
+   "assignedDrivers": [
+      {
+         "driverId": "4381b73d-be1d-4d7d-bf7c-cdde5292c1b9",
+         "name": "John Doe",
+         "phoneNumber": "+1 628 201 9501",
+         "profilePhoto": "link to image of driver's profile photo",
+         "vehicle": {
+            "title": "Mercedes-Benz E-class",
+            "color": "Black",
+            "licensePlate": "XXXXXX"
+         }
+      }
+   ]
+}
+```
+
+> Example response for a trip that doesn't have any assigned driver yet:
+
+```json
+{
+   "assignedDrivers": []
+}
+```
+
+> Example response for a trip served by two drivers:
+
+```json
+{
+   "assignedDrivers": [
+      {
+         "driverId": "4381b73d-be1d-4d7d-bf7c-cdde5292c1b9",
+         "name": "John Doe",
+         "phoneNumber": "+1 628 201 9501",
+         "profilePhoto": "link to image of driver's profile photo",
+         "vehicle": {
+            "title": "Mercedes-Benz E-class",
+            "color": "Black",
+            "licensePlate": "XXXXXX"
+         }
+      },
+      {
+         "driverId": "52443e97-dd86-477a-927a-8fc9fa786797",
+         "name": "Jack Smith",
+         "phoneNumber": "+1 628 201 9501",
+         "vehicle": {
+            "title": "BMW 5 Series"
+         }
+      }
+   ]
+}
+```
+
+### URL path
+
+`/partners/v3/trip/drivers/bookingId`
+
+Replace `bookingId` with the id of the booking you want to retrieve drivers and vehicles for.
+
+### Response body
+
+Property           | Type                                        | Description
+------------------ | ------------------------------------------- | -----------
+assignedDrivers    | list of [Driver](#driver)                   | List of drivers currently assigned to this trip.
+
+### Error status codes
+
+Status code | Description
+----------- | -----------
+401         | API key missing or invalid.
+403         | Forbidden request - trying to retrieve drivers for a booking owned by someone else.
 404         | Booking not found.
 
 # Entities
@@ -1427,7 +1525,7 @@ image                   | string                       | Link to an image of the
 Property                | Type                           | Description
 ----------------------- | ------------------------------ | -----------
 timestamp               | string                         | UTC timestamp of when this position was reported by the driver.
-driverId                | string                         | Unique id of the driver. To distinguish the drivers for trips with multiple drivers.
+driverId                | string                         | Unique id of the driver. To distinguish the drivers for trips with multiple drivers. Use the [/drivers](#drivers-endpoint) endpoint to retrieve the details about the drivers and vehicles and match them by this id.
 position                | object - [Position](#position) | Last reported position of the driver.
 
 ## Position
@@ -1436,3 +1534,21 @@ Property                | Type                         | Description
 ----------------------- | ---------------------------- | -----------
 lat                     | number                       | Latitude in degrees.
 lon                     | number                       | Longitude in degrees.
+
+## Driver
+
+Property                | Type                                       | Description
+----------------------- | ------------------------------------------ | -----------
+driverId                | string                                     | Unique id of the driver. Used to match driver position with driver details.
+name                    | string                                     | Name of the driver.
+phoneNumber             | string                                     | Phone number of the driver including country code.
+profilePhoto            | string                                     | Optional. Link to driver's profile photo if available.
+vehicle                 | object - [DriversVehicle](#driversvehicle) | Information about driver's vehicle.
+
+## DriversVehicle
+
+Property                | Type                                       | Description
+----------------------- | ------------------------------------------ | -----------
+title                   | string                                     | Make and model of the vehicle.
+color                   | string                                     | Optional. Color of the vehicle if known.
+licensePlate            | string                                     | Optional. Licence plate of the vehicle if known.
