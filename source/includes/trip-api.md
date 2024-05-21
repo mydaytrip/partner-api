@@ -1357,7 +1357,7 @@ curl https://api.staging.mydaytrip.net/partners/v3/trip/drivers/bookingId
          "driverId": "4381b73d-be1d-4d7d-bf7c-cdde5292c1b9",
          "name": "John Doe",
          "phoneNumber": "+1 628 201 9501",
-         "profilePhoto": "link to image of driver's profile photo",
+         "profilePhoto": "link to driver's profile photo image",
          "vehicle": {
             "title": "Mercedes-Benz E-class",
             "color": "Black",
