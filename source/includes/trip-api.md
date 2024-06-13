@@ -841,7 +841,9 @@ Status code | Description
 
 This endpoint returns details of a booked trip. It provides the status of the booking, information about the trip option and the data that were provided when booking the trip.
 
-> To get details of a booked trip, use the following call:
+There are two versions of the endpoint: `/partners/v3/trip/details/boookingId` and `/partners/v3/trip/external/details/externalId`. The second version can be used to retrieve trip details by the `externalId` you provided when creating the booking. The response of both versions of the endpoint is exactly the same.
+
+> To get details of a booked trip by `bookingId`, use the following call:
 
 ```bash
 curl https://api.staging.mydaytrip.net/partners/v3/trip/details/bookingId 
@@ -858,10 +860,28 @@ curl https://api.staging.mydaytrip.net/partners/v3/trip/details/bookingId
 
 > Make sure to replace `bookingId` with the real booking id.
 
+> To get details of a booked trip by `externalId`, use the following call:
+
+```bash
+curl https://api.staging.mydaytrip.net/partners/v3/trip/external/details/externalId 
+  -H "x-api-key: your-api-key" 
+```
+
+```javascript
+
+```
+
+```python
+
+```
+
+> Make sure to replace `externalId` with the real external id.
+
 > Example response without meeting and drop off positions:
 
 ```json
 {
+   "bookingId": "cb102786-f663-47d7-9635-7ef61a51bf29",
    "bookingReference": "CB1027",
    "status": "Confirmed",
    "createdAt": "2022-12-05T18:00:00Z",
@@ -944,6 +964,7 @@ curl https://api.staging.mydaytrip.net/partners/v3/trip/details/bookingId
 
 ```json
 {
+   "bookingId": "72r53786-f663-47d7-9635-7ef61a51bf29",
    "bookingReference": "72R537",
    "status": "Confirmed",
    "createdAt": "2022-12-05T18:00:00Z",
@@ -1020,14 +1041,19 @@ curl https://api.staging.mydaytrip.net/partners/v3/trip/details/bookingId
 
 `/partners/v3/trip/details/bookingId`
 
-Replace `bookingId` with the id of the booking you want to retrieve details for.
+OR
+
+`/partners/v3/trip/external/details/externalId`
+
+Replace `bookingId`/`externalId` with the id of the booking you want to retrieve details for.
 
 ### Response body
 
 Property           | Type                                        | Description
 ------------------ | ------------------------------------------- | -----------
+bookingId          | string                                      | Unique id of the booking.
 bookingReference   | string                                      | Short booking reference that can be shared with the customer in order for him to be able to contact Daytrip customer support easily.
-externalId         | string                                      | Optional. If you sent the `externalId` parameter to the [/book](#book-endpoint) it will be returned here.
+externalId         | string                                      | Optional. If you sent the `externalId` parameter to the [/book](#book-endpoint) endpoint it will be returned here.
 status             | string                                      | Booking status. "Confirmed" or "Cancelled".
 createdAt          | string                                      | UTC timestamp of when this booking was created.
 cancelledAt        | string                                      | UTC timestamp of when this booking was cancelled. Optional.
@@ -1078,6 +1104,7 @@ curl -d '{ "bookingId": "cb102778-a3d7-426e-8d18-6bd6b296f283", "customerNote": 
 
 ```json
 {
+   "bookingId": "cb102786-f663-47d7-9635-7ef61a51bf29",
    "bookingReference": "CB1027",
    "status": "Confirmed",
    "createdAt": "2022-12-05T18:00:00Z",
@@ -1169,7 +1196,6 @@ Disclaimer: in the last 24 hours before the departure the [/update](#update-endp
 Property           | Type                                          | Description
 ------------------ | --------------------------------------------- | -----------
 bookingId          | string                                        | Id of the booking to cancel. Taken from [/book](#book-endpoint) endpoint response.
-externalId         | string                                        | Optional. If you sent the `externalId` parameter to the [/book](#book-endpoint) it will be returned here.
 pickUpAddressNote  | string                                        | Optional note for the driver with details about the pick up location.
 dropOffAddressNote | string                                        | Optional note for the driver with details about the drop off location.
 customerNote       | string                                        | Optional note for the driver not related to pick up or drop off.
@@ -1180,7 +1206,9 @@ passengerDetails   | list of [PassengerDetail](#passengerdetail)   | Optional. L
 
 Property           | Type                                        | Description
 ------------------ | ------------------------------------------- | -----------
+bookingId          | string                                      | Unique id of the booking.
 bookingReference   | string                                      | Short booking reference that can be shared with the customer in order for him to be able to contact Daytrip customer support easily.
+externalId         | string                                      | Optional. If you sent the `externalId` parameter to the [/book](#book-endpoint) endpoint it will be returned here.
 status             | string                                      | Booking status. "Confirmed" or "Cancelled".
 createdAt          | string                                      | UTC timestamp of when this booking was created.
 cancelledAt        | string                                      | UTC timestamp of when this booking was cancelled. Optional.
