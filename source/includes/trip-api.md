@@ -759,8 +759,8 @@ Property           | Type                                        | Description
 ------------------ | ------------------------------------------- | -----------
 optionId           | string                                      | Id of the option you want to book. Taken from [/search](#search-endpoint) or [/customize](#customize-endpoint) endpoint response.
 departureTime      | integer                                     | Optional. Departure time as a UNIX epoch timestamp in seconds to use instead of the `departureTime` provided to the [/search](#search-endpoint). You can only move departure time less than 24 hours into the past or into the future compared to the original `departureTime`, otherwise the booking will be rejected (403 HTTP status code). Also if the new price after changing the departure time would be different, booking will also get rejected. Such price change should be extremely rare but your integration should be ready for it if you are sending different `departureTime`. Note that UNIX timestamps are UTC so you need to convert from local time to UTC when calculating it. 
-pickUpAddressNote  | string                                      | Optional note for the driver with details about the pick up location.
-dropOffAddressNote | string                                      | Optional note for the driver with details about the drop off location.
+pickUpAddressNote  | string                                      | Pick up address or a note describing the pick up point. Optional but should be provided if available.
+dropOffAddressNote | string                                      | Dropp off address or a note describing the drop off point. Optional but should be provided if available.
 customerNote       | string                                      | Optional note for the driver not related to pick up or drop off.
 flightNumber       | string                                      | Optional flight number in case this is an airport pick up.
 passengerDetails   | list of [PassengerDetail](#passengerdetail) | List of passengers that will go on this trip. For trips with "Private" type the number of passengers must be below or equal to `maxPassengers` of the `vehicle` in the trip option. For trips with "Shared" type the number of passengers must match the `passengersCount` query parameter from the Search endpoint. There must always be exactly one passenger of type "Lead" with contact details filled. For passenger of type "Child" you must specify a child seat of proper type offered in the trip option's `availableChildSeatTypes`. For older children that do not need any child seat use `Adult` passenger type.
@@ -1064,8 +1064,8 @@ originTimezone     | string                                      | IANA timezone
 meetAndGreet       | boolean                                     | Specifies if meet and greet is provided for the pick up of this booking.
 meetingPosition    | object - [MeetingPosition](#meetingposition)| Information about the meeting position, important for unreachable places or when meet and greet is not provided. Optional.
 dropOffPosition    | object - [DropOffPosition](#dropoffposition)| Information about the drop off position, important for unreachable places. Optional.
-pickUpAddressNote  | string                                      | Optional note for the driver with details about the pick up location.
-dropOffAddressNote | string                                      | Optional note for the driver with details about the drop off location.
+pickUpAddressNote  | string                                      | Pick up address or a note describing the pick up point. Optional.
+dropOffAddressNote | string                                      | Drop off address or a note describing the drop off point. Optional.
 customerNote       | string                                      | Optional note for the driver not related to pick up or drop off.
 flightNumber       | string                                      | Optional flight number in case this is an airport pick up.
 passengerDetails   | list of [PassengerDetail](#passengerdetail) | List of passengers that will go on this trip.
@@ -1196,8 +1196,8 @@ Disclaimer: in the last 24 hours before the departure the [/update](#update-endp
 Property           | Type                                          | Description
 ------------------ | --------------------------------------------- | -----------
 bookingId          | string                                        | Id of the booking to cancel. Taken from [/book](#book-endpoint) endpoint response.
-pickUpAddressNote  | string                                        | Optional note for the driver with details about the pick up location.
-dropOffAddressNote | string                                        | Optional note for the driver with details about the drop off location.
+pickUpAddressNote  | string                                        | Pick up address or a note describing the pick up point. Optional.
+dropOffAddressNote | string                                        | Drop off address or a note describing the drop off point. Optional.
 customerNote       | string                                        | Optional note for the driver not related to pick up or drop off.
 flightNumber       | string                                        | Optional flight number in case this is an airport pick up.
 passengerDetails   | list of [PassengerDetail](#passengerdetail)   | Optional. List of passengers that will go on this trip. For trips with "Private" type the number of passengers must be below or equal to `maxPassengers` of the `vehicle` in the trip option. For trips with "Shared" type the number of passengers must match the `passengersCount` query parameter from the Search endpoint. There must always be exactly one passenger of type "Lead" with contact details filled. For passenger of type "Child" you must specify a child seat of proper type offered in the trip option's `availableChildSeatTypes`. For older children that do not need any child seat use `Adult` passenger type.
@@ -1219,8 +1219,8 @@ originTimezone     | string                                      | IANA timezone
 meetAndGreet       | boolean                                     | Specifies if meet and greet is provided for the pick up of this booking.
 meetingPosition    | object - [MeetingPosition](#meetingposition)| Information about the meeting position, important for unreachable places or when meet and greet is not provided. Optional.
 dropOffPosition    | object - [DropOffPosition](#dropoffposition)| Information about the drop off position, important for unreachable places. Optional.
-pickUpAddressNote  | string                                      | Optional note for the driver with details about the pick up location.
-dropOffAddressNote | string                                      | Optional note for the driver with details about the drop off location.
+pickUpAddressNote  | string                                      | Pick up address or a note describing the pick up point. Optional.
+dropOffAddressNote | string                                      | Drop off address or a note describing the drop off point. Optional.
 customerNote       | string                                      | Optional note for the driver not related to pick up or drop off.
 flightNumber       | string                                      | Optional flight number in case this is an airport pick up.
 passengerDetails   | list of [PassengerDetail](#passengerdetail) | List of passengers that will go on this trip.
