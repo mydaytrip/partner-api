@@ -505,7 +505,7 @@ destinationLatitude       | number  | Destination latitude in degrees.
 destinationLongitude      | number  | Destination longitude in degrees.
 departureTime             | integer | Departure time as a UNIX epoch timestamp in seconds. Note that UNIX timestamps are UTC so you need to convert from local time to UTC when calculating it.
 passengersCount           | integer | Count of passengers to transport. Must be between 1 and 10.
-includeStops              | boolean | Optional. Default value true. When set to false no stops will be returned in trip options.
+includeStops              | boolean | Optional. Default value true. When set to false no stops will be returned in trip options. This applies to predefined stops, not custom stops.
 includeShared             | boolean | Optional. Default value true. When set to false no shared trip options will be returned.
 includeNonEnglishSpeaking | boolean | Optional. Default value true. When set to false no trip options without an English speaking driver will be returned.
 
@@ -527,9 +527,238 @@ Status code | Description
 401         | API key missing or invalid.
 404         | No trip options found for given request.
 
+## Search with custom stops endpoint
+
+This endpoint adds the possibility to specify custom stops along the way compared to the simple Search endpoint. It returns all trip options for given origin, destination, departure time, passenger count (must be between 1 and 10) and custom stops along the way. Origin, destination and custom stops are passed as latitude and longitude coordinates. The unit used is degree with decimal places, for example `39.753657, -117.610215`. Departure time is passed as a UNIX epoch timestamp in seconds, like `1679463169`. Note that UNIX timestamps are UTC so you need to convert from local time to UTC when calculating it.
+
+> To search for a trip from Prague to Vienna with a stop in Brno, use this call:
+
+```bash
+curl -d '{ "originLongitude": 14.2559, "originLatitude": 50.10, "destinationLongitude": 16.3738, "destinationLongitude": 48.2082, "departureTime": 1766227088, "passengersCount": 3, "customStops": [ { "name": "Linz, Austria", "latitude": 48.3069, "longitude": 14.2858, "durationInMinutes": 120 } ] }' 
+  -H "Content-Type: application/json" 
+  -H "x-api-key: your-api-key" 
+  -X POST https://api.staging.mydaytrip.net/partners/v3/trip/searchWithCustomStops
+```
+
+```javascript
+
+```
+
+```python
+
+```
+
+> The above call returns a JSON structured like this:
+
+```json
+{
+   "searchId":"f0e34a1b-2b3d-4747-b426-292633b615b4",
+   "expiresAt": "2022-12-04T18:00:00Z",
+   "passengersCount":3,
+   "currency":"EUR",
+   "options":[
+      {
+         "id":"1d32109f-c2e2-44fe-b2cf-461ef3730541",
+         "type":"Private",
+         "englishSpeakingDriver": true,
+         "distanceKm":427,
+         "travelTimeMinutes":432,
+         "pickUp":{
+            "lat":50.10,
+            "lon":14.25,
+            "time":"2022-12-05T18:00:00Z"
+         },
+         "dropOff":{
+            "lat":48.20,
+            "lon":16.37
+         },
+         "pricing":{
+            "totalPrice":420
+         },
+         "vehicle":{
+            "type":"Sedan",
+            "maxPassengers":3,
+            "description":"Sedan comparable to a Volkswagen Passat, up to 3 passengers with luggage.",
+            "image":"https://daytrip.imgix.net/site/sedan.png"
+         },
+         "luggage":{
+            "maxTotalCarryons":3,
+            "maxTotalSuitcases":3
+         },
+         "availableChildSeatTypes":[
+            {
+               "childSeatType":"RearFacing",
+               "description":"Rear-facing infant seat",
+               "ageFrom":0,
+               "ageTo":1,
+               "weightInPoundsFrom":0,
+               "weightInPoundsTo":26,
+               "weightInKilosFrom":0,
+               "weightInKilosTo":10
+            },
+            {
+               "childSeatType":"ForwardFacing",
+               "description":"Forward-facing w/harness",
+               "ageFrom":1,
+               "ageTo":4,
+               "weightInPoundsFrom":18,
+               "weightInPoundsTo":36,
+               "weightInKilosFrom":8,
+               "weightInKilosTo":16
+            },
+            {
+               "childSeatType":"BoosterSeat",
+               "description":"Booster seat with high back",
+               "ageFrom":4,
+               "ageTo":6,
+               "weightInPoundsFrom":30,
+               "weightInPoundsTo":50,
+               "weightInKilosFrom":14,
+               "weightInKilosTo":23
+            },
+            {
+               "childSeatType":"Booster",
+               "description":"Backless booster",
+               "ageFrom":6,
+               "ageTo":12,
+               "weightInPoundsFrom":44,
+               "weightInPoundsTo":72,
+               "weightInKilosFrom":20,
+               "weightInKilosTo":33
+            }
+         ],
+         "includedCustomStops":[
+            {
+               "name": "Linz, Austria",
+               "latitude": 48.3069,
+               "longitude": 14.2858,
+               "durationInMinutes": 120,
+            }
+         ]
+      },
+      {
+         "id":"b071e9f8-54d9-44be-bb5f-feae5aafd771",
+         "type":"Private",
+         "englishSpeakingDriver": true,
+         "distanceKm":427,
+         "travelTimeMinutes":432,
+         "pickUp":{
+            "lat":50.10,
+            "lon":14.25,
+            "time":"2022-12-05T18:00:00Z"
+         },
+         "dropOff":{
+            "lat":48.20,
+            "lon":16.37
+         },
+         "pricing":{
+            "totalPrice":500
+         },
+         "vehicle":{
+            "type":"MPV",
+            "maxPassengers":4,
+            "description":"Compact MPV comparable to a Volkswagen Touran, up to 4 passengers with luggage.",
+            "image":"https://daytrip.imgix.net/site/mpv.png"
+         },
+         "luggage":{
+            "maxTotalCarryons":4,
+            "maxTotalSuitcases":4
+         },
+         "availableChildSeatTypes":[
+            {
+               "childSeatType":"RearFacing",
+               "description":"Rear-facing infant seat",
+               "ageFrom":0,
+               "ageTo":1,
+               "weightInPoundsFrom":0,
+               "weightInPoundsTo":26,
+               "weightInKilosFrom":0,
+               "weightInKilosTo":10
+            },
+            {
+               "childSeatType":"ForwardFacing",
+               "description":"Forward-facing w/harness",
+               "ageFrom":1,
+               "ageTo":4,
+               "weightInPoundsFrom":18,
+               "weightInPoundsTo":36,
+               "weightInKilosFrom":8,
+               "weightInKilosTo":16
+            },
+            {
+               "childSeatType":"BoosterSeat",
+               "description":"Booster seat with high back",
+               "ageFrom":4,
+               "ageTo":6,
+               "weightInPoundsFrom":30,
+               "weightInPoundsTo":50,
+               "weightInKilosFrom":14,
+               "weightInKilosTo":23
+            },
+            {
+               "childSeatType":"Booster",
+               "description":"Backless booster",
+               "ageFrom":6,
+               "ageTo":12,
+               "weightInPoundsFrom":44,
+               "weightInPoundsTo":72,
+               "weightInKilosFrom":20,
+               "weightInKilosTo":33
+            }
+         ],
+         "includedCustomStops":[
+            {
+               "name": "Linz, Austria",
+               "latitude": 48.3069,
+               "longitude": 14.2858,
+               "durationInMinutes": 120,
+            }
+         ]
+      }
+   ]
+}
+```
+
+### URL path
+
+`/partners/v3/trip/searchWithCustomStops`
+
+### Request body
+
+Parameter                 | Type    | Description
+------------------------- | ------- | -----------
+originLatitude            | number  | Origin latitude in degrees.
+originLongitude           | number  | Origin longitude in degrees.
+destinationLatitude       | number  | Destination latitude in degrees.
+destinationLongitude      | number  | Destination longitude in degrees.
+departureTime             | integer | Departure time as a UNIX epoch timestamp in seconds. Note that UNIX timestamps are UTC so you need to convert from local time to UTC when calculating it.
+passengersCount           | integer | Count of passengers to transport. Must be between 1 and 10.
+includeStops              | boolean | Optional. Default value true. When set to false no stops will be returned in trip options.
+includeShared             | boolean | Optional. Default value true. When set to false no shared trip options will be returned.
+includeNonEnglishSpeaking | boolean | Optional. Default value true. When set to false no trip options without an English speaking driver will be returned.
+customStops               | list of [CustomStop](#customstop) | Optional. Customs stops for this trip in the desired order. When a custom stop is requested then origin can be equal to destination, making the trip a same day roundtrip.
+
+### Response body
+
+Property        | Type                              | Description
+--------------- | --------------------------------- | -----------
+searchId        | string                            | Unique id of your search query.
+expiresAt       | string                            | UTC timestamp of when the offers in this response expire. After this time it is no longer possible to book them, you need to make a new search.
+passengersCount | integer                           | The count of passengers this search query was for.
+currency        | string                            | Currency used for all prices in this response.
+options         | list of [TripOption](#tripoption) | List of options for this trip.
+
+### Error status codes
+
+Status code | Description
+----------- | -----------
+400         | Invalid request - missing mandatory query parameter, parameter has wrong type or wrong passenger count.
+401         | API key missing or invalid.
+404         | No trip options found for given request.
+
 ## Customize endpoint
 
-This endpoint is used to customize a trip option returned by the Search endpoint. The result is a new trip option with a new id that can be booked or customized again. The format of the response body is the same as for the Search endpoint. Currently the only supported customization operation is selection of stops for private trips. Selected stops will appear in `includedStops` of the returned option. In case of repeated calls, previously selected stops will be replaced, so if you selected one stop and want to change it to two stops, you need to send both stops in `selectedStops`. `totalPrice` and `travelTimeMinutes` will be automatically updated to reflect the selected stops.
+This endpoint is used to customize a trip option returned by the Search endpoint. The result is a new trip option with a new id that can be booked or customized again. The format of the response body is the same as for the Search endpoint. Currently the only supported customization operation is selection of stops for private trips. Selected stops will appear in `includedStops` of the returned option. In case of repeated calls, previously selected stops will be replaced, so if you selected one stop and want to change it to two stops, you need to send both stops in `selectedStops`. `totalPrice` and `travelTimeMinutes` will be automatically updated to reflect the selected stops. Trip options with custom stops returned by the Search with customs stops endpoint can't be customized. To add or remove custom stops, make a new call to the Search with customs stops endpoint.
 
 > To add the Mikulov stop to the sedan vehicle type private trip option from the Search endpoint example above, use the following call:
 
@@ -694,7 +923,7 @@ Status code | Description
 
 ## Book endpoint
 
-This endpoint is used to book a trip option. Any trip option from Search or Customize endpoint response can be booked if the search results have not expired yet (see `expiresAt` property). You need to send id of the chosen option and passenger details to this endpoint. The result is a booking id that can be used to cancel the booking if not too close to departure.
+This endpoint is used to book a trip option. Any trip option from Search, Search with custom stops or Customize endpoint response can be booked if the search results have not expired yet (see `expiresAt` property). You need to send id of the chosen option and passenger details to this endpoint. The result is a booking id that can be used to cancel the booking if not too close to departure.
 
 > To book the customized trip option with stops from the example above or to book a trip option from the original Search endpoint response for two adults and one child with a booster seat, use the following call:
 
@@ -1428,6 +1657,15 @@ Status code | Description
 
 Below is a documentation of all object entities returned by the Daytrip API endpoints.
 
+## CustomStop
+
+Property          | Type   | Description
+----------------- | ------ | -----------
+name              | string | Name of the stop. Preferably a valid Google Maps address.
+latitude          | number | Stop location latitude in degrees.
+longitude         | number | Stop location longitude in degrees.
+durationInMinutes | number | Stop duration in minutes. 30 minutes minimum, 300 minutes maximum.
+
 ## TripOption
 
 Property                | Type                                    | Description
@@ -1446,6 +1684,7 @@ seatsAvailable          | integer                                 | Number of av
 availableChildSeatTypes | list of [ChildSeatType](#childseattype) | List of available child seat types for this trip.
 possibleStops           | list of [Stop](#stop)                   | Stops that can be added to this trip option.
 includedStops           | list of [Stop](#stop)                   | Stops that are already included in this option.
+includedCustomStops     | list of [CustomStop](#customstop)       | Custom stops included in this option. When custom stops are included then both `possibleStops` and `includedStops` will always be empty.
 
 ## Location
 
