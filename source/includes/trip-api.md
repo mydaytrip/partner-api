@@ -504,7 +504,8 @@ originLongitude           | number  | Origin longitude in degrees.
 destinationLatitude       | number  | Destination latitude in degrees.
 destinationLongitude      | number  | Destination longitude in degrees.
 departureTime             | integer | Departure time as a UNIX epoch timestamp in seconds. Note that UNIX timestamps are UTC so you need to convert from local time to UTC when calculating it.
-passengersCount           | integer | Count of passengers to transport. Must be between 1 and 10.
+passengersCount           | integer | Total number of passengers to transport (adults and children). Must be between 1 and 10.
+childrenCount             | integer | Optional. Number of children in the group. Required for shared trip options.
 includeStops              | boolean | Optional. Default value true. When set to false no stops will be returned in trip options.
 includeShared             | boolean | Optional. Default value true. When set to false no shared trip options will be returned.
 includeNonEnglishSpeaking | boolean | Optional. Default value true. When set to false no trip options without an English speaking driver will be returned.
@@ -1430,32 +1431,42 @@ Below is a documentation of all object entities returned by the Daytrip API endp
 
 ## TripOption
 
-Property                | Type                                    | Description
------------------------ | --------------------------------------- | -----------
-id                      | string                                  | Unique id of the trip option. Used to customize or book this option.
-type                    | string                                  | Type of this option. "Private" or "Shared" (predefined shuttle trips).
-englishSpeakingDriver   | boolean                                 | Specifies if this option includes an English speaking driver.
-distanceKm              | number                                  | Length of the trip.
-travelTimeMinutes       | number                                  | Expected duration of the trip in minutes.
-pickUp                  | object - [Location](#location)          | Details about the pick up point.
-dropOff                 | object - [Location](#location)          | Details about the drop off point.
-pricing                 | object - [Pricing](#pricing)            | Details about the pricing.
-vehicle                 | object - [Vehicle](#vehicle)            | Details about the vehicle.
-luggage                 | object - [Luggage](#luggage)            | Details about the luggage.
-seatsAvailable          | integer                                 | Number of available seats in the shared shuttle. Optional.
-availableChildSeatTypes | list of [ChildSeatType](#childseattype) | List of available child seat types for this trip.
-possibleStops           | list of [Stop](#stop)                   | Stops that can be added to this trip option.
-includedStops           | list of [Stop](#stop)                   | Stops that are already included in this option.
+Property                | Type                                                    | Description
+----------------------- | ------------------------------------------------------- | -----------
+id                      | string                                                  | Unique id of the trip option. Used to customize or book this option.
+type                    | string                                                  | Type of this option. "Private" or "Shared" (predefined shuttle trips).
+englishSpeakingDriver   | boolean                                                 | Specifies if this option includes an English speaking driver.
+distanceKm              | number                                                  | Length of the trip.
+travelTimeMinutes       | number                                                  | Expected duration of the trip in minutes.
+pickUp                  | object - [Location](#location)                          | Details about the pick up point.
+dropOff                 | object - [Location](#location)                          | Details about the drop off point.
+pricing                 | object - [Pricing](#pricing)                            | Details about the pricing.
+vehicle                 | object - [Vehicle](#vehicle)                            | Details about the vehicle.
+luggage                 | object - [Luggage](#luggage)                            | Details about the luggage.
+seatsAvailable          | integer                                                 | Number of available seats in the shared shuttle. Optional.
+availableChildSeatTypes | list of [ChildSeatType](#childseattype)                 | List of available child seat types for this trip.
+possibleStops           | list of [Stop](#stop)                                   | Stops that can be added to this trip option.
+includedStops           | list of [Stop](#stop)                                   | Stops that are already included in this option.
+cancellationPolicy      | one of [CancellationPolicyType](cancellationpolicytype) | Cancellation policy for this trip option. Optional. Populated only for shared trips.
+expiresAt               | string                                                  | UTC timestamp of when this offer expires. After this time it is no longer possible to book it, you need to make a new search. Optional. Populated only for shared trips.
 
 ## Location
 
+Property                | Type                                   | Description
+----------------------- | -------------------------------------- | -----------
+lat                     | number                                 | Latitude in degrees.
+lon                     | number                                 | Longitude in degrees.
+time                    | string                                 | UTC timestamp of the departure or arrival time. Optional. For pick up only in case of the private trip. Always present for shared trips.
+interval                | object - [TimeInterval](#timeinterval) | Estimated departure or arrival interval. Optional, for shared trips only.
+description             | string                                 | Description of the pick up or drop off. Optional.
+meetAndGreet            | boolean                                | Specifies if meet and greet is provided for this pick up. Optional, for pick up only.
+
+## TimeInterval
+
 Property                | Type                         | Description
 ----------------------- | ---------------------------- | -----------
-lat                     | number                       | Latitude in degrees.
-lon                     | number                       | Longitude in degrees.
-time                    | string                       | UTC timestamp of the departure time. Optional, for pick up only.
-description             | string                       | Description of the pick up or drop off. Optional.
-meetAndGreet            | boolean                      | Specifies if meet and greet is provided for this pick up. Optional, for pick up only.
+earliest                | string                       | UTC timestamp of the start of the interval.
+latest                  | string                       | UTC timestamp of the end of the interval.
 
 ## Pricing
 
@@ -1580,3 +1591,11 @@ Property                | Type                                       | Descripti
 title                   | string                                     | Make and model of the vehicle.
 color                   | string                                     | Optional. Color of the vehicle if known.
 licensePlate            | string                                     | Optional. Licence plate of the vehicle if known.
+
+## CancellationPolicyType
+
+Property                | Type                         | Description
+----------------------- | ---------------------------- | -----------
+NonRefundable           | string                       | No refunds for cancellations.
+Flexible                | string                       | 100% refundable up to 24 hours before departure.
+SuperFlexible           | string                       | 100% refundable up to 15 minutes before departure.
