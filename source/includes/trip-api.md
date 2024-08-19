@@ -791,7 +791,7 @@ Status code | Description
 
 ## Cancel endpoint
 
-This endpoint is used to cancel a booked trip. Only trips that have departure more than 24 hours in the future can be cancelled - this threshold is a subject to change.
+This endpoint is used to cancel a booked trip. For private trips only trips that have departure more than 24 hours in the future can be cancelled - this threshold is a subject to change. The shared trips can be cancelled at any time before departure, and compensated according to the selected [cancellation policy](#cancellationpolicytype).
 
 > To cancel a booked trip, use the following call:
 
