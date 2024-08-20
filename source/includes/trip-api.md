@@ -1050,27 +1050,28 @@ Replace `bookingId`/`externalId` with the id of the booking you want to retrieve
 
 ### Response body
 
-Property           | Type                                        | Description
------------------- | ------------------------------------------- | -----------
-bookingId          | string                                      | Unique id of the booking.
-bookingReference   | string                                      | Short booking reference that can be shared with the customer in order for him to be able to contact Daytrip customer support easily.
-externalId         | string                                      | Optional. If you sent the `externalId` parameter to the [/book](#book-endpoint) endpoint it will be returned here.
-status             | string                                      | Booking status. "Confirmed" or "Cancelled".
-createdAt          | string                                      | UTC timestamp of when this booking was created.
-cancelledAt        | string                                      | UTC timestamp of when this booking was cancelled. Optional.
-passengersCount    | integer                                     | The count of passengers this booking is for.
-currency           | string                                      | Currency used for all prices in this response.
-departureTimeUtc   | string                                      | Date and time of departure in UTC. This reflects possible changes made by customer support.
-originTimezone     | string                                      | IANA timezone for the origin location. Can be used to convert `departureTimeUtc` to local time.
-meetAndGreet       | boolean                                     | Specifies if meet and greet is provided for the pick up of this booking.
-meetingPosition    | object - [MeetingPosition](#meetingposition)| Information about the meeting position, important for unreachable places or when meet and greet is not provided. Optional.
-dropOffPosition    | object - [DropOffPosition](#dropoffposition)| Information about the drop off position, important for unreachable places. Optional.
-pickUpAddressNote  | string                                      | Pick up address or a note describing the pick up point. Optional.
-dropOffAddressNote | string                                      | Drop off address or a note describing the drop off point. Optional.
-customerNote       | string                                      | Optional note for the driver not related to pick up or drop off.
-flightNumber       | string                                      | Optional flight number in case this is an airport pick up.
-passengerDetails   | list of [PassengerDetail](#passengerdetail) | List of passengers that will go on this trip.
-trip               | object - [TripOption](#tripoption)          | Information about the trip. This does not reflect changes made after the booking was created.
+Property           | Type                                                     | Description
+------------------ | -------------------------------------------------------- | -----------
+bookingId          | string                                                   | Unique id of the booking.
+bookingReference   | string                                                   | Short booking reference that can be shared with the customer in order for him to be able to contact Daytrip customer support easily.
+externalId         | string                                                   | Optional. If you sent the `externalId` parameter to the [/book](#book-endpoint) endpoint it will be returned here.
+status             | string                                                   | Booking status. "Confirmed" or "Cancelled".
+createdAt          | string                                                   | UTC timestamp of when this booking was created.
+cancelledAt        | string                                                   | UTC timestamp of when this booking was cancelled. Optional.
+passengersCount    | integer                                                  | The count of passengers this booking is for.
+currency           | string                                                   | Currency used for all prices in this response.
+departureTimeUtc   | string                                                   | Date and time of departure in UTC. This reflects possible changes made by customer support.
+originTimezone     | string                                                   | IANA timezone for the origin location. Can be used to convert `departureTimeUtc` to local time.
+meetAndGreet       | boolean                                                  | Specifies if meet and greet is provided for the pick up of this booking.
+meetingPosition    | object - [MeetingPosition](#meetingposition)             | Information about the meeting position, important for unreachable places or when meet and greet is not provided. Optional.
+dropOffPosition    | object - [DropOffPosition](#dropoffposition)             | Information about the drop off position, important for unreachable places. Optional.
+pickUpAddressNote  | string                                                   | Pick up address or a note describing the pick up point. Optional.
+dropOffAddressNote | string                                                   | Drop off address or a note describing the drop off point. Optional.
+customerNote       | string                                                   | Optional note for the driver not related to pick up or drop off.
+flightNumber       | string                                                   | Optional flight number in case this is an airport pick up.
+passengerDetails   | list of [PassengerDetail](#passengerdetail)              | List of passengers that will go on this trip.
+cancellationPolicy | one of [CancellationPolicyType](#cancellationpolicytype) | Cancellation policy for this booking. Optional. Populated only for shared trips.
+trip               | object - [TripOption](#tripoption)                       | Information about the trip. This does not reflect changes made after the booking was created.
 
 ### Error status codes
 
