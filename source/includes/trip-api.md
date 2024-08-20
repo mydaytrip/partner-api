@@ -1431,24 +1431,24 @@ Below is a documentation of all object entities returned by the Daytrip API endp
 
 ## TripOption
 
-Property                | Type                                                    | Description
------------------------ | ------------------------------------------------------- | -----------
-id                      | string                                                  | Unique id of the trip option. Used to customize or book this option.
-type                    | string                                                  | Type of this option. "Private" or "Shared" (predefined shuttle trips).
-englishSpeakingDriver   | boolean                                                 | Specifies if this option includes an English speaking driver.
-distanceKm              | number                                                  | Length of the trip.
-travelTimeMinutes       | number                                                  | Expected duration of the trip in minutes.
-pickUp                  | object - [Location](#location)                          | Details about the pick up point.
-dropOff                 | object - [Location](#location)                          | Details about the drop off point.
-pricing                 | object - [Pricing](#pricing)                            | Details about the pricing.
-vehicle                 | object - [Vehicle](#vehicle)                            | Details about the vehicle.
-luggage                 | object - [Luggage](#luggage)                            | Details about the luggage.
-seatsAvailable          | integer                                                 | Number of available seats in the shared shuttle. Optional.
-availableChildSeatTypes | list of [ChildSeatType](#childseattype)                 | List of available child seat types for this trip.
-possibleStops           | list of [Stop](#stop)                                   | Stops that can be added to this trip option.
-includedStops           | list of [Stop](#stop)                                   | Stops that are already included in this option.
-cancellationPolicy      | one of [CancellationPolicyType](cancellationpolicytype) | Cancellation policy for this trip option. Optional. Populated only for shared trips.
-expiresAt               | string                                                  | UTC timestamp of when this offer expires. After this time it is no longer possible to book it, you need to make a new search. Optional. Populated only for shared trips.
+Property                | Type                                                     | Description
+----------------------- | -------------------------------------------------------- | -----------
+id                      | string                                                   | Unique id of the trip option. Used to customize or book this option.
+type                    | string                                                   | Type of this option. "Private" or "Shared" (predefined shuttle trips).
+englishSpeakingDriver   | boolean                                                  | Specifies if this option includes an English speaking driver.
+distanceKm              | number                                                   | Length of the trip.
+travelTimeMinutes       | number                                                   | Expected duration of the trip in minutes.
+pickUp                  | object - [Location](#location)                           | Details about the pick up point.
+dropOff                 | object - [Location](#location)                           | Details about the drop off point.
+pricing                 | object - [Pricing](#pricing)                             | Details about the pricing.
+vehicle                 | object - [Vehicle](#vehicle)                             | Details about the vehicle.
+luggage                 | object - [Luggage](#luggage)                             | Details about the luggage.
+seatsAvailable          | integer                                                  | Number of available seats in the shared shuttle. Optional.
+availableChildSeatTypes | list of [ChildSeatType](#childseattype)                  | List of available child seat types for this trip.
+possibleStops           | list of [Stop](#stop)                                    | Stops that can be added to this trip option.
+includedStops           | list of [Stop](#stop)                                    | Stops that are already included in this option.
+cancellationPolicy      | one of [CancellationPolicyType](#cancellationpolicytype) | Cancellation policy for this trip option. Optional. Populated only for shared trips.
+expiresAt               | string                                                   | UTC timestamp of when this offer expires. After this time it is no longer possible to book it, you need to make a new search. Optional. Populated only for shared trips.
 
 ## Location
 
