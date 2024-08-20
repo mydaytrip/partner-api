@@ -818,7 +818,13 @@ curl -d '{ "bookingId": "cb102778-a3d7-426e-8d18-6bd6b296f283" }'
 
 ```
 
-> The above call returns an empty object:
+> Example response with the penalty amount for the cancellation:
+
+```json
+{
+   "penalty":0,
+   "currency":"EUR"
+}
 
 ```json
 {
@@ -835,6 +841,13 @@ curl -d '{ "bookingId": "cb102778-a3d7-426e-8d18-6bd6b296f283" }'
 Property         | Type                         | Description
 ---------------- | ---------------------------- | -----------
 bookingId        | string                       | Id of the booking to cancel. Taken from [/book](#book-endpoint) endpoint response.
+
+### Response body
+
+Property         | Type                         | Description
+---------------- | ---------------------------- | -----------
+penalty          | number                       | Amount of money that will be deducted from the refund. If the penalty is 0, the cancellation is free of charge.
+currency         | string                       | Currency of the penalty amount.
 
 ### Error status codes
 
