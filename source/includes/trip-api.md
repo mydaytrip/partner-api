@@ -53,7 +53,7 @@ This endpoint returns all trip options for given origin, destination, departure 
 > To search for a trip from Prague to Vienna for two passengers, use this call:
 
 ```bash
-curl "https://api.staging.mydaytrip.net/partners/v3/trip/search?originLongitude=14.2559&originLatitude=50.10&destinationLongitude=16.3738&destinationLatitude=48.2082&departureTime=1766227088&passengersCount=3"
+curl "https://api.staging.mydaytrip.net/partners/v3/trip/search?originLongitude=14.2559&originLatitude=50.10&destinationLongitude=16.3738&destinationLatitude=48.2082&departureTime=1766227088&passengersCount=3&childrenCount=1"
   -H "x-api-key: your-api-key"
 ```
 
@@ -396,12 +396,21 @@ curl "https://api.staging.mydaytrip.net/partners/v3/trip/search?originLongitude=
             "lat":50.12,
             "lon":14.27,
             "time":"2022-12-05T19:00:00Z",
+            "interval":{
+               "earliest":"2022-12-05T19:00:00Z",
+               "latest":"2022-12-05T19:10:00Z"
+            },
             "description":"In front of the hotel Europa",
             "meetAndGreet": false
          },
          "dropOff":{
             "lat":48.21,
             "lon":16.36,
+            "time":"2022-12-05T22:55:00Z",
+            "interval":{
+               "earliest":"2022-12-05T22:40:00Z",
+               "latest":"2022-12-05T22:55:00Z"
+            },
             "description":"Next to the railway station"
          },
          "pricing":{
@@ -426,7 +435,9 @@ curl "https://api.staging.mydaytrip.net/partners/v3/trip/search?originLongitude=
          ],
          "possibleStops":[
             
-         ]
+         ],
+         "cancellationPolicy": "Flexible",
+         "expiresAt": "2022-12-04T15:00:00Z",
       },
       {
          "id":"4b137906-008a-49cf-b248-e3827b3a3175",
@@ -437,13 +448,22 @@ curl "https://api.staging.mydaytrip.net/partners/v3/trip/search?originLongitude=
          "pickUp":{
             "lat":50.12,
             "lon":14.27,
-            "time":"2022-12-05T21:00:00Z",
+            "time":"2022-12-05T20:00:00Z",
+            "interval":{
+               "earliest":"2022-12-05T20:00:00Z",
+               "latest":"2022-12-05T20:10:00Z"
+            },
             "description":"In front of the hotel Europa",
             "meetAndGreet": false
          },
          "dropOff":{
             "lat":48.21,
             "lon":16.36,
+            "time":"2022-12-05T23:55:00Z",
+            "interval":{
+               "earliest":"2022-12-05T23:40:00Z",
+               "latest":"2022-12-05T23:55:00Z"
+            },
             "description":"Next to the railway station"
          },
          "pricing":{
@@ -470,22 +490,10 @@ curl "https://api.staging.mydaytrip.net/partners/v3/trip/search?originLongitude=
             
          ],
          "includedStops":[
-            {
-               "id":"d280ce2a-6224-4d95-af17-a250f81b97dd",
-               "price":31,
-               "name":"Lednice Chateau and Park",
-               "image":"https://daytrip.imgix.net/lednice-chateau-and-park4.jpg",
-               "title":"Vacation like a King",
-               "perex":"This UNESCO-listed chateau and sprawling park was the Lichtenstein's holiday home - exactly the kind of extravagance you'd expect from a dynasty with their own country. ",
-               "description":"The Liechtensteins really came into the money with the fortunes seized from Czech noblemen after their victory at the Battle of White Mountain in 1620, and Lednice was one of the presents they bought themselves. In the mid-19th century the baroque manor was given a complete makeover in the 'Windsor Gothic' style, leaving it as we see it today: a shameless flaunting of fabulous wealth, a slap in the face to anyone foolish enough to think that the French Revolution had ended high-living in Europe. The surrounding English landscape park, the largest in the country, is an incomparable swath of green, sprinkled with Romantic follies. There's also a monumental greenhouse open all year round, overflowing with exotic growths gathered by an army of botanists across the Americas. The greenhouse's exoticism is echoed by the charming minaret, constructed at the turn of the 18th century, bringing a whiff of Morocco to Moravia.\nFor more info: www.zamek-lednice.com",
-               "durationInMinutes":60,
-               "order":1,
-               "timezone":"Europe/Prague",
-               "country":{
-                  "englishName":"Czech Republic"
-               }
-            }
-         ]
+
+         ],
+         "cancellationPolicy": "Flexible",
+         "expiresAt": "2022-12-04T15:00:00Z",
       }
    ]
 }
