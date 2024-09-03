@@ -730,7 +730,81 @@ curl -d '{ "optionId": "f0e34a1b-2b3d-4747-b426-292633b615b4", "pickUpAddressNot
    "bookingReference": "CB1027",
    "departureTimeUtc": "2022-12-05T18:00:00Z",
    "originTimezone": "Europe/Prague",
-   "meetAndGreet": true
+   "meetAndGreet": true,
+   "trip": {
+      "id":"f0e34a1b-2b3d-4747-b426-292633b615b4",
+      "type":"Private",
+      "englishSpeakingDriver": true,
+      "distanceKm":334,
+      "travelTimeMinutes":268,
+      "pickUp":{
+         "lat":50.10,
+         "lon":14.25,
+         "time":"2022-12-05T18:00:00Z",
+         "meetAndGreet": true
+      },
+      "dropOff":{
+         "lat":48.20,
+         "lon":16.37
+      },
+      "pricing":{
+         "totalPrice":288
+      },
+      "vehicle":{
+         "type":"Sedan",
+         "maxPassengers":3,
+         "description":"Sedan comparable to a Volkswagen Passat, up to 3 passengers with luggage.",
+         "image":"https://daytrip.imgix.net/site/sedan.png"
+      },
+      "luggage":{
+         "maxTotalCarryons":3,
+         "maxTotalSuitcases":3
+      },
+      "availableChildSeatTypes":[
+         {
+            "childSeatType":"RearFacing",
+            "description":"Rear-facing infant seat",
+            "ageFrom":0,
+            "ageTo":1,
+            "weightInPoundsFrom":0,
+            "weightInPoundsTo":26,
+            "weightInKilosFrom":0,
+            "weightInKilosTo":10
+         },
+         {
+            "childSeatType":"ForwardFacing",
+            "description":"Forward-facing w/harness",
+            "ageFrom":1,
+            "ageTo":4,
+            "weightInPoundsFrom":18,
+            "weightInPoundsTo":36,
+            "weightInKilosFrom":8,
+            "weightInKilosTo":16
+         },
+         {
+            "childSeatType":"BoosterSeat",
+            "description":"Booster seat with high back",
+            "ageFrom":4,
+            "ageTo":6,
+            "weightInPoundsFrom":30,
+            "weightInPoundsTo":50,
+            "weightInKilosFrom":14,
+            "weightInKilosTo":23
+         },
+         {
+            "childSeatType":"Booster",
+            "description":"Backless booster",
+            "ageFrom":6,
+            "ageTo":12,
+            "weightInPoundsFrom":44,
+            "weightInPoundsTo":72,
+            "weightInKilosFrom":20,
+            "weightInKilosTo":33
+         }
+      ],
+      "includedStops":[],
+      "possibleStops":[]
+   }
 }
 ```
 
@@ -755,6 +829,80 @@ curl -d '{ "optionId": "f0e34a1b-2b3d-4747-b426-292633b615b4", "pickUpAddressNot
       "description": "Piazzale Roma",
       "image": "https://daytrip.imgix.net/management/venice.png?w=480&q=50"
    },
+   "trip": {
+      "id":"519314e3-cd92-41e0-85b6-c652c345e9d0",
+      "type":"Private",
+      "englishSpeakingDriver": false,
+      "distanceKm":334,
+      "travelTimeMinutes":268,
+      "pickUp":{
+         "lat": 46.067648,
+         "lon": 7.775185,
+         "time":"2022-12-05T18:00:00Z",
+         "meetAndGreet": true
+      },
+      "dropOff":{
+         "lat": 45.4374041,
+         "lon": 12.3190675,
+      },
+      "pricing":{
+         "totalPrice":288
+      },
+      "vehicle":{
+         "type":"Sedan",
+         "maxPassengers":3,
+         "description":"Sedan comparable to a Volkswagen Passat, up to 3 passengers with luggage.",
+         "image":"https://daytrip.imgix.net/site/sedan.png"
+      },
+      "luggage":{
+         "maxTotalCarryons":3,
+         "maxTotalSuitcases":3
+      },
+      "availableChildSeatTypes":[
+         {
+            "childSeatType":"RearFacing",
+            "description":"Rear-facing infant seat",
+            "ageFrom":0,
+            "ageTo":1,
+            "weightInPoundsFrom":0,
+            "weightInPoundsTo":26,
+            "weightInKilosFrom":0,
+            "weightInKilosTo":10
+         },
+         {
+            "childSeatType":"ForwardFacing",
+            "description":"Forward-facing w/harness",
+            "ageFrom":1,
+            "ageTo":4,
+            "weightInPoundsFrom":18,
+            "weightInPoundsTo":36,
+            "weightInKilosFrom":8,
+            "weightInKilosTo":16
+         },
+         {
+            "childSeatType":"BoosterSeat",
+            "description":"Booster seat with high back",
+            "ageFrom":4,
+            "ageTo":6,
+            "weightInPoundsFrom":30,
+            "weightInPoundsTo":50,
+            "weightInKilosFrom":14,
+            "weightInKilosTo":23
+         },
+         {
+            "childSeatType":"Booster",
+            "description":"Backless booster",
+            "ageFrom":6,
+            "ageTo":12,
+            "weightInPoundsFrom":44,
+            "weightInPoundsTo":72,
+            "weightInKilosFrom":20,
+            "weightInKilosTo":33
+         }
+      ],
+      "includedStops":[],
+      "possibleStops":[]
+   }
 }
 ```
 
@@ -786,6 +934,7 @@ originTimezone     | string                                      | IANA timezone
 meetAndGreet       | boolean                                     | Specifies if meet and greet is provided for the pick up of this booking.
 meetingPosition    | object - [MeetingPosition](#meetingposition)| Information about the meeting position, important for unreachable places or when meet and greet is not provided. Optional.
 dropOffPosition    | object - [DropOffPosition](#dropoffposition)| Information about the drop off position, important for unreachable places. Optional.
+trip               | object - [TripOption](#tripoption)          | Trip option used to make the booking.
 
 ### Error status codes
 
