@@ -839,7 +839,7 @@ curl -d '{ "optionId": "f0e34a1b-2b3d-4747-b426-292633b615b4", "pickUpAddressNot
          "lat": 46.067648,
          "lon": 7.775185,
          "time":"2022-12-05T18:00:00Z",
-         "meetAndGreet": true
+         "meetAndGreet": false
       },
       "dropOff":{
          "lat": 45.4374041,
