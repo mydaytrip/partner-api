@@ -515,7 +515,7 @@ departureTime             | integer | Departure time as a UNIX epoch timestamp i
 passengersCount           | integer | Total number of passengers to transport (adults and children). Must be between 1 and 10.
 childrenCount             | integer | Optional. Number of children in the group. Required for shared trip options.
 includeStops              | boolean | Optional. Default value true. When set to false no stops will be returned in trip options.
-includeShared             | boolean | Optional. Default value true. When set to false no shared trip options will be returned.
+includeShared             | boolean | Optional. Default value false. When set to true shared trip options will be returned.
 includeNonEnglishSpeaking | boolean | Optional. Default value true. When set to false no trip options without an English speaking driver will be returned.
 
 ### Response body
