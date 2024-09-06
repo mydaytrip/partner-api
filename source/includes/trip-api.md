@@ -1240,7 +1240,6 @@ dropOffAddressNote | string                                                   | 
 customerNote       | string                                                   | Optional note for the driver not related to pick up or drop off.
 flightNumber       | string                                                   | Optional flight number in case this is an airport pick up.
 passengerDetails   | list of [PassengerDetail](#passengerdetail)              | List of passengers that will go on this trip.
-cancellationPolicy | one of [CancellationPolicyType](#cancellationpolicytype) | Cancellation policy for this booking. Optional. Populated only for shared trips.
 trip               | object - [TripOption](#tripoption)                       | Information about the trip. This does not reflect changes made after the booking was created.
 
 ### Error status codes
