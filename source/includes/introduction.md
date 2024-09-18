@@ -22,8 +22,8 @@ The Daytrip API is organized around REST. Our API accepts JSON-encoded request b
 
 ### Onboarding
 
-If you want to integrate with our API, contact us at <partners@mydaytrip.com> to get a partner account and an API key. 
+If you want to integrate with our API, contact us at <partners@daytrip.com> to get a partner account and an API key. 
 
 ### Customer support emergency
 
-To solve problems with bookings created via the API you can contact <daytrip@mydaytrip.com> or call [+44 20 3318 1119](tel:+442033181119).
+To solve problems with bookings created via the API you can contact <daytrip@daytrip.com> or call [+44 20 3318 1119](tel:+442033181119) or [+1 628 201 9501](tel:+16282019501).
