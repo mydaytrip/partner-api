@@ -1529,6 +1529,11 @@ Status code | Description
 
 This endpoint allows you to retrieve the information about driver(s) and vehicle(s) currently assigned to the trip. The assigned driver might change so it is recommended to pass this information to the customer only few days before the trip and give him an update if the response of this endpoint changes. The `driverId` returned by this endpoint is the same as the `driverId` returned by the [/tracking](#tracking-endpoint) endpoint and can be used to identify which driver is at which position in case of trips with multiple drivers.
 
+Proposed frequency of calling this endpoint depending on the time before the departure time:
+* the first check is ideal to do 48 hours before the departure;
+* in the period 48-24 hours before the departure, it is recommended to check the assigned drivers every 4 hours;
+* in the last 24 hours before the departure, it is recommended to check the assigned drivers every hour.
+
 > To get drivers currently assigned to a trip
 
 ```bash
