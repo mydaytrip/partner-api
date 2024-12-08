@@ -53,7 +53,7 @@ This endpoint returns all trip options for given origin, destination, departure 
 > To search for a trip from Prague to Vienna for two passengers, use this call:
 
 ```bash
-curl "https://api.staging.mydaytrip.net/partners/v3/trip/search?originLongitude=14.2559&originLatitude=50.10&destinationLongitude=16.3738&destinationLatitude=48.2082&departureTime=1766227088&passengersCount=3&childrenCount=1"
+curl "https://api.staging.mydaytrip.net/partners/v3/trip/search?originLongitude=14.2559&originLatitude=50.10&destinationLongitude=16.3738&destinationLatitude=48.2082&departureTime=1766227088&passengersCount=3&childrenCount=1&includeShared=true"
   -H "x-api-key: your-api-key"
 ```
 
