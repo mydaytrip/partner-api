@@ -4,7 +4,7 @@ A trip is a representation of passenger transportation from point A to point B. 
 
 ## Flows
 
-Trip API can be used to search for trip options, customizing an option with stops and then booking the option. 
+Trip API can be used to search for trip options, customizing an option with stops and then booking the option.
 
 ### Simple trip
 
@@ -431,10 +431,10 @@ curl "https://api.staging.mydaytrip.net/partners/v3/trip/search?originLongitude=
          },
          "seatsAvailable":8,
          "availableChildSeatTypes":[
-            
+
          ],
          "possibleStops":[
-            
+
          ],
          "cancellationPolicy": "Flexible",
          "expiresAt": "2022-12-04T15:00:00Z",
@@ -484,10 +484,10 @@ curl "https://api.staging.mydaytrip.net/partners/v3/trip/search?originLongitude=
          },
          "seatsAvailable":5,
          "availableChildSeatTypes":[
-            
+
          ],
          "possibleStops":[
-            
+
          ],
          "includedStops":[
 
@@ -543,9 +543,9 @@ This endpoint is used to customize a trip option returned by the Search endpoint
 > To add the Mikulov stop to the sedan vehicle type private trip option from the Search endpoint example above, use the following call:
 
 ```bash
-curl -d '{ "optionId": "1d32109f-c2e2-44fe-b2cf-461ef3730541", "selectedStops": ["4ee58c0c-4e56-46ef-bd22-406a1bc60e1c"] }' 
-  -H "Content-Type: application/json" 
-  -H "x-api-key: your-api-key" 
+curl -d '{ "optionId": "1d32109f-c2e2-44fe-b2cf-461ef3730541", "selectedStops": ["4ee58c0c-4e56-46ef-bd22-406a1bc60e1c"] }'
+  -H "Content-Type: application/json"
+  -H "x-api-key: your-api-key"
   -X POST https://api.staging.mydaytrip.net/partners/v3/trip/search/customize
 ```
 
@@ -708,9 +708,9 @@ This endpoint is used to book a trip option. Any trip option from Search or Cust
 > To book the customized trip option with stops from the example above or to book a trip option from the original Search endpoint response for two adults and one child with a booster seat, use the following call:
 
 ```bash
-curl -d '{ "optionId": "f0e34a1b-2b3d-4747-b426-292633b615b4", "pickUpAddressNote": "Havel airport", "dropOffAddressNote": "Vienna central square", "customerNote": "We will stand next to the entrance", "flightNumber": "FR008", "passengerDetails": [ { "type": "Lead", "firstName": "John", "lastName": "Doe", "phone": "+41555555555", "email": "client-email@example.com", "birthday": 629424000 }, { "type": "Adult" }, { "type": "Child", "childSeatType": "Booster" } ] }' 
-  -H "Content-Type: application/json" 
-  -H "x-api-key: your-api-key" 
+curl -d '{ "optionId": "f0e34a1b-2b3d-4747-b426-292633b615b4", "pickUpAddressNote": "Havel airport", "dropOffAddressNote": "Vienna central square", "customerNote": "We will stand next to the entrance", "flightNumber": "FR008", "passengerDetails": [ { "type": "Lead", "firstName": "John", "lastName": "Doe", "phone": "+41555555555", "email": "client-email@example.com", "birthday": 629424000 }, { "type": "Adult" }, { "type": "Child", "childSeatType": "Booster" } ] }'
+  -H "Content-Type: application/json"
+  -H "x-api-key: your-api-key"
   -X POST https://api.staging.mydaytrip.net/partners/v3/trip/book
 ```
 
@@ -953,9 +953,9 @@ This endpoint is used to cancel a booked trip. For private trips only trips that
 > To cancel a booked trip, use the following call:
 
 ```bash
-curl -d '{ "bookingId": "cb102778-a3d7-426e-8d18-6bd6b296f283" }' 
-  -H "Content-Type: application/json" 
-  -H "x-api-key: your-api-key" 
+curl -d '{ "bookingId": "cb102778-a3d7-426e-8d18-6bd6b296f283" }'
+  -H "Content-Type: application/json"
+  -H "x-api-key: your-api-key"
   -X POST https://api.staging.mydaytrip.net/partners/v3/trip/cancel
 ```
 
@@ -1017,8 +1017,8 @@ There are two versions of the endpoint: `/partners/v3/trip/details/boookingId` a
 > To get details of a booked trip by `bookingId`, use the following call:
 
 ```bash
-curl https://api.staging.mydaytrip.net/partners/v3/trip/details/bookingId 
-  -H "x-api-key: your-api-key" 
+curl https://api.staging.mydaytrip.net/partners/v3/trip/details/bookingId
+  -H "x-api-key: your-api-key"
 ```
 
 ```javascript
@@ -1034,8 +1034,8 @@ curl https://api.staging.mydaytrip.net/partners/v3/trip/details/bookingId
 > To get details of a booked trip by `externalId`, use the following call:
 
 ```bash
-curl https://api.staging.mydaytrip.net/partners/v3/trip/external/details/externalId 
-  -H "x-api-key: your-api-key" 
+curl https://api.staging.mydaytrip.net/partners/v3/trip/external/details/externalId
+  -H "x-api-key: your-api-key"
 ```
 
 ```javascript
@@ -1061,25 +1061,25 @@ curl https://api.staging.mydaytrip.net/partners/v3/trip/external/details/externa
    "departureTimeUtc": "2022-12-05T18:00:00Z",
    "originTimezone": "Europe/Prague",
    "meetAndGreet": true,
-   "pickUpAddressNote": "Havel airport", 
-   "dropOffAddressNote": "Vienna central square", 
-   "customerNote": "We will stand next to the entrance", 
+   "pickUpAddressNote": "Havel airport",
+   "dropOffAddressNote": "Vienna central square",
+   "customerNote": "We will stand next to the entrance",
    "flightNumber": "FR008",
-   "passengerDetails": [ 
+   "passengerDetails": [
       {
-         "type": "Lead", 
-         "firstName": "John", 
-         "lastName": "Doe", 
-         "phone": "+41555555555", 
+         "type": "Lead",
+         "firstName": "John",
+         "lastName": "Doe",
+         "phone": "+41555555555",
          "email": "client-email@example.com",
-         "birthday": 629424000 
-      }, 
-      { 
-         "type": "Adult" 
-      }, 
-      { 
-         "type": "Child", 
-         "childSeatType": "Booster" 
+         "birthday": 629424000
+      },
+      {
+         "type": "Adult"
+      },
+      {
+         "type": "Child",
+         "childSeatType": "Booster"
       }
    ],
    "trip": {
@@ -1156,23 +1156,23 @@ curl https://api.staging.mydaytrip.net/partners/v3/trip/external/details/externa
       "description": "Piazzale Roma",
       "image": "https://daytrip.imgix.net/management/venice.png?w=480&q=50"
    },
-   "pickUpAddressNote": "Zermatt", 
-   "dropOffAddressNote": "Venice", 
-   "passengerDetails": [ 
+   "pickUpAddressNote": "Zermatt",
+   "dropOffAddressNote": "Venice",
+   "passengerDetails": [
       {
-         "type": "Lead", 
-         "firstName": "John", 
-         "lastName": "Doe", 
-         "phone": "+41555555555", 
+         "type": "Lead",
+         "firstName": "John",
+         "lastName": "Doe",
+         "phone": "+41555555555",
          "email": "client-email@example.com",
-         "birthday": 629424000 
-      }, 
-      { 
-         "type": "Adult" 
-      }, 
-      { 
-         "type": "Child", 
-         "childSeatType": "Booster" 
+         "birthday": 629424000
+      },
+      {
+         "type": "Adult"
+      },
+      {
+         "type": "Child",
+         "childSeatType": "Booster"
       }
    ],
    "trip": {
@@ -1258,8 +1258,8 @@ This endpoint is used to update minor details of an existing booking. If you wan
 
 ```bash
 curl -d '{ "bookingId": "cb102778-a3d7-426e-8d18-6bd6b296f283", "customerNote": "We will wait inside the Airport building", "passengerDetails": [ { "type": "Lead", "firstName": "John", "lastName": "Doe", "phone": "+4166666666", "email": "client-email@example.com", "birthday": 629424000 }, { "type": "Adult" }, { "type": "Child", "childSeatType": "BoosterSeat" } ] }'
-  -H "Content-Type: application/json" 
-  -H "x-api-key: your-api-key" 
+  -H "Content-Type: application/json"
+  -H "x-api-key: your-api-key"
   -X POST https://api.staging.mydaytrip.net/partners/v3/trip/update
 ```
 
@@ -1414,8 +1414,8 @@ This endpoint allows you to retrieve the latest position of driver(s) assigned t
 > To get driver position(s) of a trip currently in progress, use the following call:
 
 ```bash
-curl https://api.staging.mydaytrip.net/partners/v3/trip/tracking/bookingId 
-  -H "x-api-key: your-api-key" 
+curl https://api.staging.mydaytrip.net/partners/v3/trip/tracking/bookingId
+  -H "x-api-key: your-api-key"
 ```
 
 ```javascript
@@ -1505,8 +1505,8 @@ This endpoint allows you to retrieve the information about driver(s) and vehicle
 > To get drivers currently assigned to a trip
 
 ```bash
-curl https://api.staging.mydaytrip.net/partners/v3/trip/drivers/bookingId 
-  -H "x-api-key: your-api-key" 
+curl https://api.staging.mydaytrip.net/partners/v3/trip/drivers/bookingId
+  -H "x-api-key: your-api-key"
 ```
 
 ```javascript
