@@ -10,7 +10,7 @@
       <link href=css/screen.21a86285.css rel=stylesheet media=screen>
       <link href=css/print.0babe0f0.css rel=stylesheet media=print>
       <link href=css/highlight-monokai.f7211925.css rel=stylesheet media=screen,print>
-      <script src=js/all.acd92fee.js></script>
+      <script src=js/all.b91557b5.js></script>
    </head>
    <body class="" data-languages="[&#34;bash&#34;]">
       <a href=# id=nav-button>
@@ -38,6 +38,7 @@
             <h3 id="what-can-our-partner-api-do">What can our Partner API do?</h3>
             <ul>
                <li>Return quotes for point to point transfers ranging from short airport transfers to long trips between countries</li>
+               <li>Return quotes for shared transfers between predefined routes</li>
                <li>Offer sightseeing stops on selected routes (including visuals and descriptions so you can display them on your website)</li>
                <li>Book trips directly over the API</li>
                <li>Update trips directly over the API</li>
@@ -47,9 +48,9 @@
             </ul>
             <h2 id="contacts">Contacts</h2>
             <h3 id="onboarding">Onboarding</h3>
-            <p>If you want to integrate with our API, contact us at <a href="mailto:&#112;&#97;&#x72;&#116;&#x6e;&#x65;&#114;&#115;&#64;&#100;&#x61;&#x79;&#x74;&#x72;&#x69;&#x70;&#46;&#99;&#x6f;&#x6d;">&#112;&#97;&#x72;&#116;&#x6e;&#x65;&#114;&#115;&#64;&#100;&#x61;&#x79;&#x74;&#x72;&#x69;&#x70;&#46;&#99;&#x6f;&#x6d;</a> to get a partner account and an API key. </p>
+            <p>If you want to integrate with our API, contact us at <a href="mailto:&#112;&#97;&#114;&#x74;&#110;&#x65;&#114;&#x73;&#x40;&#x64;&#97;&#x79;&#116;&#114;&#x69;&#x70;&#46;&#99;&#111;&#x6d;">&#112;&#97;&#114;&#x74;&#110;&#x65;&#114;&#x73;&#x40;&#x64;&#97;&#x79;&#116;&#114;&#x69;&#x70;&#46;&#99;&#111;&#x6d;</a> to get a partner account and an API key.</p>
             <h3 id="customer-support-emergency">Customer support emergency</h3>
-            <p>To solve problems with bookings created via the API you can contact <a href="mailto:&#x64;&#x61;&#x79;&#x74;&#x72;&#105;&#112;&#64;&#x64;&#97;&#x79;&#x74;&#x72;&#105;&#x70;&#46;&#x63;&#111;&#x6d;">&#x64;&#x61;&#x79;&#x74;&#x72;&#105;&#112;&#64;&#x64;&#97;&#x79;&#x74;&#x72;&#105;&#x70;&#46;&#x63;&#111;&#x6d;</a> or call <a href="tel:+442033181119">+44 20 3318 1119</a> or <a href="tel:+16282019501">+1 628 201 9501</a>.</p>
+            <p>To solve problems with bookings created via the API you can contact <a href="mailto:&#100;&#x61;&#x79;&#x74;&#x72;&#x69;&#x70;&#x40;&#x64;&#x61;&#121;&#x74;&#114;&#105;&#112;&#46;&#99;&#x6f;&#x6d;">&#100;&#x61;&#x79;&#x74;&#x72;&#x69;&#x70;&#x40;&#x64;&#x61;&#121;&#x74;&#114;&#105;&#112;&#46;&#99;&#x6f;&#x6d;</a> or call <a href="tel:+442033181119">+44 20 3318 1119</a> or <a href="tel:+16282019501">+1 628 201 9501</a>.</p>
             <h1 id="environments">Environments</h1>
             <p>Daytrip offers a sandbox environment where you can test your integration with the API without creating real bookings. All the code examples provided in this documentation are using this sandbox environment. Each environment requires a different API key. When your integration is ready and tested against the sandbox environment, you can request an API key for the production environment.</p>
             <h2 id="urls">URLs</h2>
@@ -158,9 +159,9 @@
             <p>If you are using correlation ids on your side as well, you can send us <code>x-correlation-id</code> header with your requests and we will use your own correlation id value.</p>
             <p><a href="https://microsoft.github.io/code-with-engineering-playbook/observability/correlation-id/">About correlation ids</a></p>
             <h1 id="trip-api">Trip API</h1>
-            <p>A trip is a representation of passenger transportation from point A to point B. Each search will usually return multiple trip options that can be booked. Options can differ by vehicle type or by being private or shared with other travelers. Shared trips have predefined pick up and drop off points and departure times. For private trips pick up and drop off points as well as departure time are matching the search request. Private trips can also be customized by adding stops if available.</p>
+            <p>A trip is a representation of passenger transportation from point A to point B. Each search will usually return multiple trip options that can be booked. Options can differ by vehicle type or by being private or shared with other travelers. Shared trips have predefined pickup and dropoff points and departure times. For private trips pickup and dropoff points as well as departure time are matching the search request. Private trips can also be customized by adding stops if available.</p>
             <h2 id="flows">Flows</h2>
-            <p>Trip API can be used to search for trip options, customizing an option with stops and then booking the option. </p>
+            <p>Trip API can be used to search for trip options, customizing an option with stops and then booking the option.</p>
             <h3 id="simple-trip">Simple trip</h3>
             <p>A typical simple flow without stop customization would look like this:</p>
             <ol>
@@ -188,20 +189,20 @@
                <li><code>optional</code> - call <a href="#details-endpoint">/details</a> endpoint to get trip and booking details (status should be &quot;Cancelled&quot;)</li>
             </ol>
             <h3 id="updating-a-trip">Updating a trip</h3>
-            <p>If you want to change departure time or add/remove stops you need to cancel the booking and create it again as it can affect the price. For small adjustments like changing passenger phone number, email, child seat type, pick up and drop off address notes (within the scope of original search coordinates), customer note or flight number you can use the <a href="#update-endpoint">/update</a> endpoint:</p>
+            <p>If you want to change departure time or add/remove stops you need to cancel the booking and create it again as it can affect the price. For small adjustments like changing passenger phone number, email, child seat type, pickup and dropoff address notes (within the scope of original search coordinates), customer note or flight number you can use the <a href="#update-endpoint">/update</a> endpoint:</p>
             <ol>
                <li>call <a href="#search-endpoint">/search</a> endpoint to get possible options</li>
                <li>call <a href="#book-endpoint">/book</a> endpoint to book the chosen option</li>
                <li><code>optional</code> - call <a href="#details-endpoint">/details</a> endpoint to get trip and booking details</li>
                <li>call <a href="#update-endpoint">/update</a> endpoint to update the booking details</li>
             </ol>
-            <p>Disclaimer: in the last 24 hours before the departure the <a href="#update-endpoint">/update</a> endpoint will no longer accept updates. For updates in the last 24 hours please contact our customer support at <a href="mailto:&#100;&#x61;&#x79;&#116;&#x72;&#x69;&#112;&#64;&#109;&#x79;&#x64;&#97;&#x79;&#x74;&#114;&#105;&#112;&#46;&#99;&#x6f;&#x6d;">&#100;&#x61;&#x79;&#116;&#x72;&#x69;&#112;&#64;&#109;&#x79;&#x64;&#97;&#x79;&#x74;&#114;&#105;&#112;&#46;&#99;&#x6f;&#x6d;</a> or call <a href="tel:+442033181119">+44 20 3318 1119</a>.</p>
+            <p>Disclaimer: in the last 24 hours before the departure the <a href="#update-endpoint">/update</a> endpoint will no longer accept updates. For updates in the last 24 hours please contact our customer support at <a href="mailto:&#x64;&#97;&#121;&#116;&#114;&#x69;&#x70;&#64;&#109;&#121;&#100;&#97;&#x79;&#x74;&#114;&#105;&#112;&#x2e;&#x63;&#111;&#x6d;">&#x64;&#97;&#121;&#116;&#114;&#x69;&#x70;&#64;&#109;&#121;&#100;&#97;&#x79;&#x74;&#114;&#105;&#112;&#x2e;&#x63;&#111;&#x6d;</a> or call <a href="tel:+442033181119">+44 20 3318 1119</a>.</p>
             <h2 id="search-endpoint">Search endpoint</h2>
             <p>This endpoint returns all trip options for given origin, destination, departure time and passenger count (must be between 1 and 10). Origin and destination are passed as latitude and longitude coordinates. The unit used is degree with decimal places, for example <code>39.753657, -117.610215</code>. Departure time is passed as a UNIX epoch timestamp in seconds, like <code>1679463169</code>. Note that UNIX timestamps are UTC so you need to convert from local time to UTC when calculating it.</p>
             <blockquote>
                <p>To search for a trip from Prague to Vienna for two passengers, use this call:</p>
             </blockquote>
-            <pre class="highlight bash"><code>curl <span class="hljs-string">&quot;https://api.staging.mydaytrip.net/partners/v3/trip/search?originLongitude=14.2559&amp;originLatitude=50.10&amp;destinationLongitude=16.3738&amp;destinationLatitude=48.2082&amp;departureTime=1766227088&amp;passengersCount=3&amp;childrenCount=1&quot;</span>
+            <pre class="highlight bash"><code>curl <span class="hljs-string">&quot;https://api.staging.mydaytrip.net/partners/v3/trip/search?originLongitude=14.2559&amp;originLatitude=50.10&amp;destinationLongitude=16.3738&amp;destinationLatitude=48.2082&amp;departureTime=1766227088&amp;passengersCount=3&amp;childrenCount=1&amp;includeShared=true&quot;</span> \
   -H <span class="hljs-string">&quot;x-api-key: your-api-key&quot;</span></code></pre><pre class="highlight javascript"><code></code></pre><pre class="highlight python"><code></code></pre>
             <blockquote>
                <p>The above call returns a JSON structured like this:</p>
@@ -222,6 +223,7 @@
             <span class="hljs-attr">&quot;lat&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">50.10</span><span class="hljs-punctuation">,</span>
             <span class="hljs-attr">&quot;lon&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">14.25</span><span class="hljs-punctuation">,</span>
             <span class="hljs-attr">&quot;time&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;2022-12-05T18:00:00Z&quot;</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;timezone&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;Europe/Prague&quot;</span><span class="hljs-punctuation">,</span>
             <span class="hljs-attr">&quot;meetAndGreet&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span>
          <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
          <span class="hljs-attr">&quot;dropOff&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-punctuation">{</span>
@@ -326,6 +328,7 @@
             <span class="hljs-attr">&quot;lat&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">50.10</span><span class="hljs-punctuation">,</span>
             <span class="hljs-attr">&quot;lon&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">14.25</span><span class="hljs-punctuation">,</span>
             <span class="hljs-attr">&quot;time&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;2022-12-05T18:00:00Z&quot;</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;timezone&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;Europe/Prague&quot;</span><span class="hljs-punctuation">,</span>
             <span class="hljs-attr">&quot;meetAndGreet&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span>
          <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
          <span class="hljs-attr">&quot;dropOff&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-punctuation">{</span>
@@ -430,6 +433,7 @@
             <span class="hljs-attr">&quot;lat&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">50.10</span><span class="hljs-punctuation">,</span>
             <span class="hljs-attr">&quot;lon&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">14.25</span><span class="hljs-punctuation">,</span>
             <span class="hljs-attr">&quot;time&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;2022-12-05T18:00:00Z&quot;</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;timezone&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;Europe/Prague&quot;</span><span class="hljs-punctuation">,</span>
             <span class="hljs-attr">&quot;meetAndGreet&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span>
          <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
          <span class="hljs-attr">&quot;dropOff&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-punctuation">{</span>
@@ -538,6 +542,7 @@
                <span class="hljs-attr">&quot;earliest&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;2022-12-05T19:00:00Z&quot;</span><span class="hljs-punctuation">,</span>
                <span class="hljs-attr">&quot;latest&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;2022-12-05T19:10:00Z&quot;</span>
             <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;timezone&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;Europe/Prague&quot;</span><span class="hljs-punctuation">,</span>
             <span class="hljs-attr">&quot;description&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;In front of the hotel Europa&quot;</span><span class="hljs-punctuation">,</span>
             <span class="hljs-attr">&quot;meetAndGreet&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">false</span></span>
          <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
@@ -549,6 +554,7 @@
                <span class="hljs-attr">&quot;earliest&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;2022-12-05T22:40:00Z&quot;</span><span class="hljs-punctuation">,</span>
                <span class="hljs-attr">&quot;latest&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;2022-12-05T22:55:00Z&quot;</span>
             <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;timezone&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;Europe/Vienna&quot;</span><span class="hljs-punctuation">,</span>
             <span class="hljs-attr">&quot;description&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;Next to the railway station&quot;</span>
          <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
          <span class="hljs-attr">&quot;pricing&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-punctuation">{</span>
@@ -568,14 +574,10 @@
             <span class="hljs-attr">&quot;maxTotalSuitcases&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">2</span>
          <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
          <span class="hljs-attr">&quot;seatsAvailable&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">8</span><span class="hljs-punctuation">,</span>
-         <span class="hljs-attr">&quot;availableChildSeatTypes&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-punctuation">[</span>
-            
-         <span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
-         <span class="hljs-attr">&quot;possibleStops&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-punctuation">[</span>
-            
-         <span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+         <span class="hljs-attr">&quot;availableChildSeatTypes&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-punctuation">[</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+         <span class="hljs-attr">&quot;possibleStops&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-punctuation">[</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
          <span class="hljs-attr">&quot;cancellationPolicy&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Flexible&quot;</span><span class="hljs-punctuation">,</span>
-         <span class="hljs-attr">&quot;expiresAt&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;2022-12-04T15:00:00Z&quot;</span><span class="hljs-punctuation">,</span>
+         <span class="hljs-attr">&quot;expiresAt&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;2022-12-04T15:00:00Z&quot;</span>
       <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
       <span class="hljs-punctuation">{</span>
          <span class="hljs-attr">&quot;id&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;4b137906-008a-49cf-b248-e3827b3a3175&quot;</span><span class="hljs-punctuation">,</span>
@@ -591,6 +593,7 @@
                <span class="hljs-attr">&quot;earliest&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;2022-12-05T20:00:00Z&quot;</span><span class="hljs-punctuation">,</span>
                <span class="hljs-attr">&quot;latest&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;2022-12-05T20:10:00Z&quot;</span>
             <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;timezone&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;Europe/Prague&quot;</span><span class="hljs-punctuation">,</span>
             <span class="hljs-attr">&quot;description&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;In front of the hotel Europa&quot;</span><span class="hljs-punctuation">,</span>
             <span class="hljs-attr">&quot;meetAndGreet&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">false</span></span>
          <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
@@ -602,6 +605,7 @@
                <span class="hljs-attr">&quot;earliest&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;2022-12-05T23:40:00Z&quot;</span><span class="hljs-punctuation">,</span>
                <span class="hljs-attr">&quot;latest&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;2022-12-05T23:55:00Z&quot;</span>
             <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;timezone&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;Europe/Vienna&quot;</span><span class="hljs-punctuation">,</span>
             <span class="hljs-attr">&quot;description&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;Next to the railway station&quot;</span>
          <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
          <span class="hljs-attr">&quot;pricing&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-punctuation">{</span>
@@ -621,17 +625,11 @@
             <span class="hljs-attr">&quot;maxTotalSuitcases&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">2</span>
          <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
          <span class="hljs-attr">&quot;seatsAvailable&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">5</span><span class="hljs-punctuation">,</span>
-         <span class="hljs-attr">&quot;availableChildSeatTypes&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-punctuation">[</span>
-            
-         <span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
-         <span class="hljs-attr">&quot;possibleStops&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-punctuation">[</span>
-            
-         <span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
-         <span class="hljs-attr">&quot;includedStops&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-punctuation">[</span>
-
-         <span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+         <span class="hljs-attr">&quot;availableChildSeatTypes&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-punctuation">[</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+         <span class="hljs-attr">&quot;possibleStops&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-punctuation">[</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+         <span class="hljs-attr">&quot;includedStops&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-punctuation">[</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
          <span class="hljs-attr">&quot;cancellationPolicy&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Flexible&quot;</span><span class="hljs-punctuation">,</span>
-         <span class="hljs-attr">&quot;expiresAt&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;2022-12-04T15:00:00Z&quot;</span><span class="hljs-punctuation">,</span>
+         <span class="hljs-attr">&quot;expiresAt&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;2022-12-04T15:00:00Z&quot;</span>
       <span class="hljs-punctuation">}</span>
    <span class="hljs-punctuation">]</span>
 <span class="hljs-punctuation">}</span></code></pre>
@@ -764,9 +762,12 @@
             <blockquote>
                <p>To add the Mikulov stop to the sedan vehicle type private trip option from the Search endpoint example above, use the following call:</p>
             </blockquote>
-            <pre class="highlight bash"><code>curl -d <span class="hljs-string">&#x27;{ &quot;optionId&quot;: &quot;1d32109f-c2e2-44fe-b2cf-461ef3730541&quot;, &quot;selectedStops&quot;: [&quot;4ee58c0c-4e56-46ef-bd22-406a1bc60e1c&quot;] }&#x27;</span> 
-  -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> 
-  -H <span class="hljs-string">&quot;x-api-key: your-api-key&quot;</span> 
+            <pre class="highlight bash"><code>curl -d <span class="hljs-string">&#x27;{
+  &quot;optionId&quot;: &quot;1d32109f-c2e2-44fe-b2cf-461ef3730541&quot;,
+  &quot;selectedStops&quot;: [&quot;4ee58c0c-4e56-46ef-bd22-406a1bc60e1c&quot;]
+}&#x27;</span> \
+  -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;x-api-key: your-api-key&quot;</span> \
   -X POST https://api.staging.mydaytrip.net/partners/v3/trip/search/customize</code></pre><pre class="highlight javascript"><code></code></pre><pre class="highlight python"><code></code></pre>
             <blockquote>
                <p>The above call returns a JSON structured like this:</p>
@@ -787,6 +788,7 @@
             <span class="hljs-attr">&quot;lat&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">50.10</span><span class="hljs-punctuation">,</span>
             <span class="hljs-attr">&quot;lon&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">14.25</span><span class="hljs-punctuation">,</span>
             <span class="hljs-attr">&quot;time&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;2022-12-05T18:00:00Z&quot;</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;timezone&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;Europe/Prague&quot;</span><span class="hljs-punctuation">,</span>
             <span class="hljs-attr">&quot;meetAndGreet&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span>
          <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
          <span class="hljs-attr">&quot;dropOff&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-punctuation">{</span>
@@ -947,12 +949,33 @@
             <blockquote>
                <p>To book the customized trip option with stops from the example above or to book a trip option from the original Search endpoint response for two adults and one child with a booster seat, use the following call:</p>
             </blockquote>
-            <pre class="highlight bash"><code>curl -d <span class="hljs-string">&#x27;{ &quot;optionId&quot;: &quot;f0e34a1b-2b3d-4747-b426-292633b615b4&quot;, &quot;pickUpAddressNote&quot;: &quot;Havel airport&quot;, &quot;dropOffAddressNote&quot;: &quot;Vienna central square&quot;, &quot;customerNote&quot;: &quot;We will stand next to the entrance&quot;, &quot;flightNumber&quot;: &quot;FR008&quot;, &quot;passengerDetails&quot;: [ { &quot;type&quot;: &quot;Lead&quot;, &quot;firstName&quot;: &quot;John&quot;, &quot;lastName&quot;: &quot;Doe&quot;, &quot;phone&quot;: &quot;+41555555555&quot;, &quot;email&quot;: &quot;client-email@example.com&quot;, &quot;birthday&quot;: 629424000 }, { &quot;type&quot;: &quot;Adult&quot; }, { &quot;type&quot;: &quot;Child&quot;, &quot;childSeatType&quot;: &quot;Booster&quot; } ] }&#x27;</span> 
-  -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> 
-  -H <span class="hljs-string">&quot;x-api-key: your-api-key&quot;</span> 
+            <pre class="highlight bash"><code>curl -d <span class="hljs-string">&#x27;{
+  &quot;optionId&quot;: &quot;f0e34a1b-2b3d-4747-b426-292633b615b4&quot;,
+  &quot;pickUpAddressNote&quot;: &quot;Havel airport&quot;,
+  &quot;dropOffAddressNote&quot;: &quot;Vienna central square&quot;,
+  &quot;customerNote&quot;: &quot;We will stand next to the entrance&quot;,
+  &quot;flightNumber&quot;: &quot;FR008&quot;,
+  &quot;passengerDetails&quot;: [
+    {
+      &quot;type&quot;: &quot;Lead&quot;,
+      &quot;firstName&quot;: &quot;John&quot;,
+      &quot;lastName&quot;: &quot;Doe&quot;,
+      &quot;phone&quot;: &quot;+41555555555&quot;,
+      &quot;email&quot;: &quot;client-email@example.com&quot;,
+      &quot;birthday&quot;: 629424000
+    },
+    { &quot;type&quot;: &quot;Adult&quot; },
+    {
+      &quot;type&quot;: &quot;Child&quot;,
+      &quot;childSeatType&quot;: &quot;Booster&quot;
+    }
+  ]
+}&#x27;</span> \
+  -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;x-api-key: your-api-key&quot;</span> \
   -X POST https://api.staging.mydaytrip.net/partners/v3/trip/book</code></pre><pre class="highlight javascript"><code></code></pre><pre class="highlight python"><code></code></pre>
             <blockquote>
-               <p>Example response without meeting and drop off positions:</p>
+               <p>Example response without meeting and dropoff positions:</p>
             </blockquote>
             <pre class="highlight json"><code><span class="hljs-punctuation">{</span>
    <span class="hljs-attr">&quot;bookingId&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;cb102778-a3d7-426e-8d18-6bd6b296f283&quot;</span><span class="hljs-punctuation">,</span>
@@ -970,6 +993,7 @@
          <span class="hljs-attr">&quot;lat&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">50.10</span><span class="hljs-punctuation">,</span>
          <span class="hljs-attr">&quot;lon&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">14.25</span><span class="hljs-punctuation">,</span>
          <span class="hljs-attr">&quot;time&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;2022-12-05T18:00:00Z&quot;</span><span class="hljs-punctuation">,</span>
+         <span class="hljs-attr">&quot;timezone&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;Europe/Prague&quot;</span><span class="hljs-punctuation">,</span>
          <span class="hljs-attr">&quot;meetAndGreet&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span>
       <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
       <span class="hljs-attr">&quot;dropOff&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-punctuation">{</span>
@@ -1036,7 +1060,7 @@
    <span class="hljs-punctuation">}</span>
 <span class="hljs-punctuation">}</span></code></pre>
             <blockquote>
-               <p>Example response with meeting and drop off positions:</p>
+               <p>Example response with meeting and dropoff positions:</p>
             </blockquote>
             <pre class="highlight json"><code><span class="hljs-punctuation">{</span>
    <span class="hljs-attr">&quot;bookingId&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;72r537a9-b846-4b46-b638-de8121337229&quot;</span><span class="hljs-punctuation">,</span>
@@ -1066,11 +1090,12 @@
          <span class="hljs-attr">&quot;lat&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">46.067648</span><span class="hljs-punctuation">,</span>
          <span class="hljs-attr">&quot;lon&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">7.775185</span><span class="hljs-punctuation">,</span>
          <span class="hljs-attr">&quot;time&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;2022-12-05T18:00:00Z&quot;</span><span class="hljs-punctuation">,</span>
+         <span class="hljs-attr">&quot;timezone&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;Europe/Zurich&quot;</span><span class="hljs-punctuation">,</span>
          <span class="hljs-attr">&quot;meetAndGreet&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">false</span></span>
       <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
       <span class="hljs-attr">&quot;dropOff&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-punctuation">{</span>
          <span class="hljs-attr">&quot;lat&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">45.4374041</span><span class="hljs-punctuation">,</span>
-         <span class="hljs-attr">&quot;lon&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">12.3190675</span><span class="hljs-punctuation">,</span>
+         <span class="hljs-attr">&quot;lon&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">12.3190675</span>
       <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
       <span class="hljs-attr">&quot;pricing&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-punctuation">{</span>
          <span class="hljs-attr">&quot;totalPrice&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">288</span>
@@ -1151,32 +1176,32 @@
                   <tr>
                      <td>departureTime</td>
                      <td>integer</td>
-                     <td>Optional. Departure time as a UNIX epoch timestamp in seconds to use instead of the <code>departureTime</code> provided to the <a href="#search-endpoint">/search</a>. You can only move departure time less than 24 hours into the past or into the future compared to the original <code>departureTime</code>, otherwise the booking will be rejected (403 HTTP status code). Also if the new price after changing the departure time would be different, booking will also get rejected. Such price change should be extremely rare but your integration should be ready for it if you are sending different <code>departureTime</code>. Note that UNIX timestamps are UTC so you need to convert from local time to UTC when calculating it. Applicable only for the private trip.</td>
+                     <td>Optional. Departure time as a UNIX epoch timestamp in seconds to use instead of the <code>departureTime</code> provided to the <a href="#search-endpoint">/search</a>. You can only move departure time less than 24 hours into the past or into the future compared to the original <code>departureTime</code>, otherwise the booking will be rejected (403 HTTP status code). Also if the new price after changing the departure time would be different, booking will also get rejected. Such price change should be extremely rare but your integration should be ready for it if you are sending different <code>departureTime</code>. Note that UNIX timestamps are UTC so you need to convert from local time to UTC when calculating it. Change of the departure time is applicable only for the private trip.</td>
                   </tr>
                   <tr>
                      <td>pickUpAddressNote</td>
                      <td>string</td>
-                     <td>Pick up address or a note describing the pick up point. Optional, but should be provided if available. Applicable only for the private trip.</td>
+                     <td>Pickup address or a note describing the pickup point. Optional, but should be provided if available at the booking time; otherwise, it should be provided via the <a href="#update-endpoint">/update</a> endpoint. Applicable only for the private trip.</td>
                   </tr>
                   <tr>
                      <td>dropOffAddressNote</td>
                      <td>string</td>
-                     <td>Dropp off address or a note describing the drop off point. Optional, but should be provided if available. Applicable only for the private trip.</td>
+                     <td>Dropoff address or a note describing the dropoff point. Optional, but should be provided if available at the booking time; otherwise, it should be provided via the <a href="#update-endpoint">/update</a> endpoint. Applicable only for the private trip.</td>
                   </tr>
                   <tr>
                      <td>customerNote</td>
                      <td>string</td>
-                     <td>Optional note for the driver not related to pick up or drop off. Applicable only for the private trip.</td>
+                     <td>Optional note for the driver not related to pickup or dropoff. Applicable only for the private trip.</td>
                   </tr>
                   <tr>
                      <td>flightNumber</td>
                      <td>string</td>
-                     <td>Optional flight number in case this is an airport pick up. Applicable only for the private trip.</td>
+                     <td>Optional flight number in case this is an airport pickup. Applicable only for the private trip.</td>
                   </tr>
                   <tr>
                      <td>passengerDetails</td>
                      <td>list of <a href="#passengerdetail">PassengerDetail</a></td>
-                     <td>List of passengers that will go on this trip. For trips with &quot;Private&quot; type the number of passengers must be below or equal to <code>maxPassengers</code> of the <code>vehicle</code> in the trip option. For trips with &quot;Shared&quot; type the number of passengers must match the <code>passengersCount</code> query parameter from the Search endpoint. There must always be exactly one passenger of type &quot;Lead&quot; with contact details filled. For passenger of type &quot;Child&quot; you must specify a child seat of proper type offered in the trip option&#39;s <code>availableChildSeatTypes</code>. For older children that do not need any child seat use <code>Adult</code> passenger type.</td>
+                     <td>List of passengers that will go on this trip. For trips with &quot;Private&quot; type the number of passengers must be below or equal to <code>maxPassengers</code> of the <code>vehicle</code> in the trip option. For trips with &quot;Shared&quot; type the number of passengers must match the <code>passengersCount</code> query parameter from the Search endpoint. There must always be exactly one passenger of type &quot;Lead&quot; with contact details filled. For passenger of type &quot;Child&quot; you must specify a child seat of proper type offered in the trip option&#39;s <a href="#tripoption">availableChildSeatTypes</a>. For older children that do not need any child seat use <code>Adult</code> passenger type.</td>
                   </tr>
                   <tr>
                      <td>externalId</td>
@@ -1218,7 +1243,7 @@
                   <tr>
                      <td>meetAndGreet</td>
                      <td>boolean</td>
-                     <td>Specifies if meet and greet is provided for the pick up of this booking.</td>
+                     <td>Specifies if meet and greet is provided for the pickup of this booking.</td>
                   </tr>
                   <tr>
                      <td>meetingPosition</td>
@@ -1228,7 +1253,7 @@
                   <tr>
                      <td>dropOffPosition</td>
                      <td>object - <a href="#dropoffposition">DropOffPosition</a></td>
-                     <td>Information about the drop off position, important for unreachable places. Optional.</td>
+                     <td>Information about the dropoff position, important for unreachable places. Optional.</td>
                   </tr>
                   <tr>
                      <td>trip</td>
@@ -1273,9 +1298,9 @@
             <blockquote>
                <p>To cancel a booked trip, use the following call:</p>
             </blockquote>
-            <pre class="highlight bash"><code>curl -d <span class="hljs-string">&#x27;{ &quot;bookingId&quot;: &quot;cb102778-a3d7-426e-8d18-6bd6b296f283&quot; }&#x27;</span> 
-  -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> 
-  -H <span class="hljs-string">&quot;x-api-key: your-api-key&quot;</span> 
+            <pre class="highlight bash"><code>curl -d <span class="hljs-string">&#x27;{ &quot;bookingId&quot;: &quot;cb102778-a3d7-426e-8d18-6bd6b296f283&quot; }&#x27;</span> \
+  -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;x-api-key: your-api-key&quot;</span> \
   -X POST https://api.staging.mydaytrip.net/partners/v3/trip/cancel</code></pre><pre class="highlight javascript"><code></code></pre><pre class="highlight python"><code></code></pre>
             <blockquote>
                <p>Example response with the penalty amount for the cancellation:</p>
@@ -1283,11 +1308,6 @@
             <pre class="highlight json"><code><span class="hljs-punctuation">{</span>
    <span class="hljs-attr">&quot;penalty&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">0</span><span class="hljs-punctuation">,</span>
    <span class="hljs-attr">&quot;currency&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;EUR&quot;</span>
-<span class="hljs-punctuation">}</span>
-
-```json
-<span class="hljs-punctuation">{</span>
-
 <span class="hljs-punctuation">}</span></code></pre>
             <h3 id="url-path-3">URL path</h3>
             <p><code>/partners/v3/trip/cancel</code></p>
@@ -1367,21 +1387,21 @@
             <blockquote>
                <p>To get details of a booked trip by <code>bookingId</code>, use the following call:</p>
             </blockquote>
-            <pre class="highlight bash"><code>curl https://api.staging.mydaytrip.net/partners/v3/trip/details/bookingId 
-  -H <span class="hljs-string">&quot;x-api-key: your-api-key&quot;</span> </code></pre><pre class="highlight javascript"><code></code></pre><pre class="highlight python"><code></code></pre>
+            <pre class="highlight bash"><code>curl https://api.staging.mydaytrip.net/partners/v3/trip/details/bookingId \
+  -H <span class="hljs-string">&quot;x-api-key: your-api-key&quot;</span></code></pre><pre class="highlight javascript"><code></code></pre><pre class="highlight python"><code></code></pre>
             <blockquote>
                <p>Make sure to replace <code>bookingId</code> with the real booking id.</p>
             </blockquote>
             <blockquote>
                <p>To get details of a booked trip by <code>externalId</code>, use the following call:</p>
             </blockquote>
-            <pre class="highlight bash"><code>curl https://api.staging.mydaytrip.net/partners/v3/trip/external/details/externalId 
-  -H <span class="hljs-string">&quot;x-api-key: your-api-key&quot;</span> </code></pre><pre class="highlight javascript"><code></code></pre><pre class="highlight python"><code></code></pre>
+            <pre class="highlight bash"><code>curl https://api.staging.mydaytrip.net/partners/v3/trip/external/details/externalId \
+  -H <span class="hljs-string">&quot;x-api-key: your-api-key&quot;</span></code></pre><pre class="highlight javascript"><code></code></pre><pre class="highlight python"><code></code></pre>
             <blockquote>
                <p>Make sure to replace <code>externalId</code> with the real external id.</p>
             </blockquote>
             <blockquote>
-               <p>Example response without meeting and drop off positions:</p>
+               <p>Example response without meeting and dropoff positions:</p>
             </blockquote>
             <pre class="highlight json"><code><span class="hljs-punctuation">{</span>
    <span class="hljs-attr">&quot;bookingId&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;cb102786-f663-47d7-9635-7ef61a51bf29&quot;</span><span class="hljs-punctuation">,</span>
@@ -1393,25 +1413,25 @@
    <span class="hljs-attr">&quot;departureTimeUtc&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;2022-12-05T18:00:00Z&quot;</span><span class="hljs-punctuation">,</span>
    <span class="hljs-attr">&quot;originTimezone&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Europe/Prague&quot;</span><span class="hljs-punctuation">,</span>
    <span class="hljs-attr">&quot;meetAndGreet&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span><span class="hljs-punctuation">,</span>
-   <span class="hljs-attr">&quot;pickUpAddressNote&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Havel airport&quot;</span><span class="hljs-punctuation">,</span> 
-   <span class="hljs-attr">&quot;dropOffAddressNote&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Vienna central square&quot;</span><span class="hljs-punctuation">,</span> 
-   <span class="hljs-attr">&quot;customerNote&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;We will stand next to the entrance&quot;</span><span class="hljs-punctuation">,</span> 
+   <span class="hljs-attr">&quot;pickUpAddressNote&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Havel airport&quot;</span><span class="hljs-punctuation">,</span>
+   <span class="hljs-attr">&quot;dropOffAddressNote&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Vienna central square&quot;</span><span class="hljs-punctuation">,</span>
+   <span class="hljs-attr">&quot;customerNote&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;We will stand next to the entrance&quot;</span><span class="hljs-punctuation">,</span>
    <span class="hljs-attr">&quot;flightNumber&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;FR008&quot;</span><span class="hljs-punctuation">,</span>
-   <span class="hljs-attr">&quot;passengerDetails&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span> 
+   <span class="hljs-attr">&quot;passengerDetails&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
       <span class="hljs-punctuation">{</span>
-         <span class="hljs-attr">&quot;type&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Lead&quot;</span><span class="hljs-punctuation">,</span> 
-         <span class="hljs-attr">&quot;firstName&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;John&quot;</span><span class="hljs-punctuation">,</span> 
-         <span class="hljs-attr">&quot;lastName&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Doe&quot;</span><span class="hljs-punctuation">,</span> 
-         <span class="hljs-attr">&quot;phone&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;+41555555555&quot;</span><span class="hljs-punctuation">,</span> 
+         <span class="hljs-attr">&quot;type&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Lead&quot;</span><span class="hljs-punctuation">,</span>
+         <span class="hljs-attr">&quot;firstName&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;John&quot;</span><span class="hljs-punctuation">,</span>
+         <span class="hljs-attr">&quot;lastName&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Doe&quot;</span><span class="hljs-punctuation">,</span>
+         <span class="hljs-attr">&quot;phone&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;+41555555555&quot;</span><span class="hljs-punctuation">,</span>
          <span class="hljs-attr">&quot;email&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;client-email@example.com&quot;</span><span class="hljs-punctuation">,</span>
-         <span class="hljs-attr">&quot;birthday&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">629424000</span> 
-      <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span> 
-      <span class="hljs-punctuation">{</span> 
-         <span class="hljs-attr">&quot;type&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Adult&quot;</span> 
-      <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span> 
-      <span class="hljs-punctuation">{</span> 
-         <span class="hljs-attr">&quot;type&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Child&quot;</span><span class="hljs-punctuation">,</span> 
-         <span class="hljs-attr">&quot;childSeatType&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Booster&quot;</span> 
+         <span class="hljs-attr">&quot;birthday&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">629424000</span>
+      <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-punctuation">{</span>
+         <span class="hljs-attr">&quot;type&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Adult&quot;</span>
+      <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-punctuation">{</span>
+         <span class="hljs-attr">&quot;type&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Child&quot;</span><span class="hljs-punctuation">,</span>
+         <span class="hljs-attr">&quot;childSeatType&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Booster&quot;</span>
       <span class="hljs-punctuation">}</span>
    <span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
    <span class="hljs-attr">&quot;trip&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
@@ -1423,6 +1443,7 @@
          <span class="hljs-attr">&quot;lat&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">50.10</span><span class="hljs-punctuation">,</span>
          <span class="hljs-attr">&quot;lon&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">14.25</span><span class="hljs-punctuation">,</span>
          <span class="hljs-attr">&quot;time&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;2022-12-05T18:00:00Z&quot;</span><span class="hljs-punctuation">,</span>
+         <span class="hljs-attr">&quot;timezone&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;Europe/Prague&quot;</span><span class="hljs-punctuation">,</span>
          <span class="hljs-attr">&quot;meetAndGreet&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span>
       <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
       <span class="hljs-attr">&quot;dropOff&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-punctuation">{</span>
@@ -1458,11 +1479,11 @@
                <span class="hljs-attr">&quot;englishName&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;Czech Republic&quot;</span>
             <span class="hljs-punctuation">}</span>
          <span class="hljs-punctuation">}</span>
-      <span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-punctuation">]</span>
    <span class="hljs-punctuation">}</span>
 <span class="hljs-punctuation">}</span></code></pre>
             <blockquote>
-               <p>Example response without meeting and drop off positions:</p>
+               <p>Example response with meeting and dropoff positions:</p>
             </blockquote>
             <pre class="highlight json"><code><span class="hljs-punctuation">{</span>
    <span class="hljs-attr">&quot;bookingId&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;72r53786-f663-47d7-9635-7ef61a51bf29&quot;</span><span class="hljs-punctuation">,</span>
@@ -1486,23 +1507,23 @@
       <span class="hljs-attr">&quot;description&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Piazzale Roma&quot;</span><span class="hljs-punctuation">,</span>
       <span class="hljs-attr">&quot;image&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;https://daytrip.imgix.net/management/venice.png?w=480&amp;q=50&quot;</span>
    <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
-   <span class="hljs-attr">&quot;pickUpAddressNote&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Zermatt&quot;</span><span class="hljs-punctuation">,</span> 
-   <span class="hljs-attr">&quot;dropOffAddressNote&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Venice&quot;</span><span class="hljs-punctuation">,</span> 
-   <span class="hljs-attr">&quot;passengerDetails&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span> 
+   <span class="hljs-attr">&quot;pickUpAddressNote&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Zermatt&quot;</span><span class="hljs-punctuation">,</span>
+   <span class="hljs-attr">&quot;dropOffAddressNote&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Venice&quot;</span><span class="hljs-punctuation">,</span>
+   <span class="hljs-attr">&quot;passengerDetails&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
       <span class="hljs-punctuation">{</span>
-         <span class="hljs-attr">&quot;type&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Lead&quot;</span><span class="hljs-punctuation">,</span> 
-         <span class="hljs-attr">&quot;firstName&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;John&quot;</span><span class="hljs-punctuation">,</span> 
-         <span class="hljs-attr">&quot;lastName&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Doe&quot;</span><span class="hljs-punctuation">,</span> 
-         <span class="hljs-attr">&quot;phone&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;+41555555555&quot;</span><span class="hljs-punctuation">,</span> 
+         <span class="hljs-attr">&quot;type&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Lead&quot;</span><span class="hljs-punctuation">,</span>
+         <span class="hljs-attr">&quot;firstName&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;John&quot;</span><span class="hljs-punctuation">,</span>
+         <span class="hljs-attr">&quot;lastName&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Doe&quot;</span><span class="hljs-punctuation">,</span>
+         <span class="hljs-attr">&quot;phone&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;+41555555555&quot;</span><span class="hljs-punctuation">,</span>
          <span class="hljs-attr">&quot;email&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;client-email@example.com&quot;</span><span class="hljs-punctuation">,</span>
-         <span class="hljs-attr">&quot;birthday&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">629424000</span> 
-      <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span> 
-      <span class="hljs-punctuation">{</span> 
-         <span class="hljs-attr">&quot;type&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Adult&quot;</span> 
-      <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span> 
-      <span class="hljs-punctuation">{</span> 
-         <span class="hljs-attr">&quot;type&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Child&quot;</span><span class="hljs-punctuation">,</span> 
-         <span class="hljs-attr">&quot;childSeatType&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Booster&quot;</span> 
+         <span class="hljs-attr">&quot;birthday&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">629424000</span>
+      <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-punctuation">{</span>
+         <span class="hljs-attr">&quot;type&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Adult&quot;</span>
+      <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-punctuation">{</span>
+         <span class="hljs-attr">&quot;type&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Child&quot;</span><span class="hljs-punctuation">,</span>
+         <span class="hljs-attr">&quot;childSeatType&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Booster&quot;</span>
       <span class="hljs-punctuation">}</span>
    <span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
    <span class="hljs-attr">&quot;trip&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
@@ -1514,6 +1535,7 @@
          <span class="hljs-attr">&quot;lat&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">46.02079170845689</span><span class="hljs-punctuation">,</span>
          <span class="hljs-attr">&quot;lon&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">7.748169219390801</span><span class="hljs-punctuation">,</span>
          <span class="hljs-attr">&quot;time&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;2022-12-05T18:00:00Z&quot;</span><span class="hljs-punctuation">,</span>
+         <span class="hljs-attr">&quot;timezone&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;Europe/Zurich&quot;</span><span class="hljs-punctuation">,</span>
          <span class="hljs-attr">&quot;meetAndGreet&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span>
       <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
       <span class="hljs-attr">&quot;dropOff&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-punctuation">{</span>
@@ -1533,7 +1555,7 @@
          <span class="hljs-attr">&quot;maxTotalCarryons&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">3</span><span class="hljs-punctuation">,</span>
          <span class="hljs-attr">&quot;maxTotalSuitcases&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">3</span>
       <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
-      <span class="hljs-attr">&quot;includedStops&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-punctuation">[</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;includedStops&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-punctuation">[</span><span class="hljs-punctuation">]</span>
    <span class="hljs-punctuation">}</span>
 <span class="hljs-punctuation">}</span></code></pre>
             <h3 id="url-path-4">URL path</h3>
@@ -1604,7 +1626,7 @@
                   <tr>
                      <td>meetAndGreet</td>
                      <td>boolean</td>
-                     <td>Specifies if meet and greet is provided for the pick up of this booking.</td>
+                     <td>Specifies if meet and greet is provided for the pickup of this booking.</td>
                   </tr>
                   <tr>
                      <td>meetingPosition</td>
@@ -1614,27 +1636,27 @@
                   <tr>
                      <td>dropOffPosition</td>
                      <td>object - <a href="#dropoffposition">DropOffPosition</a></td>
-                     <td>Information about the drop off position, important for unreachable places. Optional.</td>
+                     <td>Information about the dropoff position, important for unreachable places. Optional.</td>
                   </tr>
                   <tr>
                      <td>pickUpAddressNote</td>
                      <td>string</td>
-                     <td>Pick up address or a note describing the pick up point. Optional.</td>
+                     <td>Pickup address or a note describing the pickup point. Optional, but should be provided it it was unknown at the booking time. Applicable only for the private trip.</td>
                   </tr>
                   <tr>
                      <td>dropOffAddressNote</td>
                      <td>string</td>
-                     <td>Drop off address or a note describing the drop off point. Optional.</td>
+                     <td>Dropoff address or a note describing the dropoff point. Optional, but should be provided it it was unknown at the booking time. Applicable only for the private trip.</td>
                   </tr>
                   <tr>
                      <td>customerNote</td>
                      <td>string</td>
-                     <td>Optional note for the driver not related to pick up or drop off.</td>
+                     <td>Optional note for the driver not related to pickup or dropoff.</td>
                   </tr>
                   <tr>
                      <td>flightNumber</td>
                      <td>string</td>
-                     <td>Optional flight number in case this is an airport pick up.</td>
+                     <td>Optional flight number in case this is an airport pickup.</td>
                   </tr>
                   <tr>
                      <td>passengerDetails</td>
@@ -1676,9 +1698,27 @@
             <blockquote>
                <p>To update passenger details and customer note of a booked trip, use the following call:</p>
             </blockquote>
-            <pre class="highlight bash"><code>curl -d <span class="hljs-string">&#x27;{ &quot;bookingId&quot;: &quot;cb102778-a3d7-426e-8d18-6bd6b296f283&quot;, &quot;customerNote&quot;: &quot;We will wait inside the Airport building&quot;, &quot;passengerDetails&quot;: [ { &quot;type&quot;: &quot;Lead&quot;, &quot;firstName&quot;: &quot;John&quot;, &quot;lastName&quot;: &quot;Doe&quot;, &quot;phone&quot;: &quot;+4166666666&quot;, &quot;email&quot;: &quot;client-email@example.com&quot;, &quot;birthday&quot;: 629424000 }, { &quot;type&quot;: &quot;Adult&quot; }, { &quot;type&quot;: &quot;Child&quot;, &quot;childSeatType&quot;: &quot;BoosterSeat&quot; } ] }&#x27;</span>
-  -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> 
-  -H <span class="hljs-string">&quot;x-api-key: your-api-key&quot;</span> 
+            <pre class="highlight bash"><code>curl -d <span class="hljs-string">&#x27;{
+  &quot;bookingId&quot;: &quot;cb102778-a3d7-426e-8d18-6bd6b296f283&quot;,
+  &quot;customerNote&quot;: &quot;We will wait inside the Airport building&quot;,
+  &quot;passengerDetails&quot;: [
+    {
+      &quot;type&quot;: &quot;Lead&quot;,
+      &quot;firstName&quot;: &quot;John&quot;,
+      &quot;lastName&quot;: &quot;Doe&quot;,
+      &quot;phone&quot;: &quot;+4166666666&quot;,
+      &quot;email&quot;: &quot;client-email@example.com&quot;,
+      &quot;birthday&quot;: 629424000
+    },
+    { &quot;type&quot;: &quot;Adult&quot; },
+    {
+      &quot;type&quot;: &quot;Child&quot;,
+      &quot;childSeatType&quot;: &quot;BoosterSeat&quot;
+    }
+  ]
+}&#x27;</span> \
+  -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;x-api-key: your-api-key&quot;</span> \
   -X POST https://api.staging.mydaytrip.net/partners/v3/trip/update</code></pre><pre class="highlight javascript"><code></code></pre><pre class="highlight python"><code></code></pre>
             <blockquote>
                <p>The above call returns a JSON structured like this:</p>
@@ -1723,6 +1763,7 @@
          <span class="hljs-attr">&quot;lat&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">50.10</span><span class="hljs-punctuation">,</span>
          <span class="hljs-attr">&quot;lon&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">14.25</span><span class="hljs-punctuation">,</span>
          <span class="hljs-attr">&quot;time&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;2022-12-05T18:00:00Z&quot;</span><span class="hljs-punctuation">,</span>
+         <span class="hljs-attr">&quot;timezone&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;Europe/Prague&quot;</span><span class="hljs-punctuation">,</span>
          <span class="hljs-attr">&quot;meetAndGreet&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span>
       <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
       <span class="hljs-attr">&quot;dropOff&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-punctuation">{</span>
@@ -1758,14 +1799,14 @@
                <span class="hljs-attr">&quot;englishName&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;Czech Republic&quot;</span>
             <span class="hljs-punctuation">}</span>
          <span class="hljs-punctuation">}</span>
-      <span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-punctuation">]</span>
    <span class="hljs-punctuation">}</span>
 <span class="hljs-punctuation">}</span></code></pre>
             <h3 id="url-path-5">URL path</h3>
             <p><code>/partners/v3/trip/update</code></p>
             <h3 id="request-body-3">Request body</h3>
             <p>All properties except <code>bookingId</code> are optional. When a property is not included in the request it won&#39;t be updated and it will keep it&#39;s previous value. If you want to remove a property value like <code>customerNote</code> then send an empty string <code>&quot;&quot;</code> as the value. If you want to make changes to any passenger you need to provide full <code>passengerDetails</code> array - it&#39;s not possible to send only details of the passenger you want to update.</p>
-            <p>Disclaimer: in the last 24 hours before the departure the <a href="#update-endpoint">/update</a> endpoint will no longer accept updates. For updates in the last 24 hours please contact our customer support at <a href="mailto:&#x64;&#x61;&#x79;&#x74;&#x72;&#105;&#112;&#x40;&#x6d;&#121;&#x64;&#x61;&#x79;&#x74;&#114;&#x69;&#x70;&#x2e;&#x63;&#x6f;&#109;">&#x64;&#x61;&#x79;&#x74;&#x72;&#105;&#112;&#x40;&#x6d;&#121;&#x64;&#x61;&#x79;&#x74;&#114;&#x69;&#x70;&#x2e;&#x63;&#x6f;&#109;</a> or call <a href="tel:+442033181119">+44 20 3318 1119</a>.</p>
+            <p>Disclaimer: in the last 24 hours before the departure the <a href="#update-endpoint">/update</a> endpoint will no longer accept updates. For updates in the last 24 hours please contact our customer support at <a href="mailto:&#x64;&#97;&#x79;&#116;&#x72;&#x69;&#112;&#x40;&#109;&#121;&#x64;&#97;&#x79;&#116;&#x72;&#105;&#x70;&#x2e;&#99;&#x6f;&#109;">&#x64;&#97;&#x79;&#116;&#x72;&#x69;&#112;&#x40;&#109;&#121;&#x64;&#97;&#x79;&#116;&#x72;&#105;&#x70;&#x2e;&#99;&#x6f;&#109;</a> or call <a href="tel:+442033181119">+44 20 3318 1119</a>.</p>
             <table>
                <thead>
                   <tr>
@@ -1783,27 +1824,27 @@
                   <tr>
                      <td>pickUpAddressNote</td>
                      <td>string</td>
-                     <td>Pick up address or a note describing the pick up point. Optional.</td>
+                     <td>Pickup address or a note describing the pickup point. Optional.</td>
                   </tr>
                   <tr>
                      <td>dropOffAddressNote</td>
                      <td>string</td>
-                     <td>Drop off address or a note describing the drop off point. Optional.</td>
+                     <td>Dropoff address or a note describing the dropoff point. Optional.</td>
                   </tr>
                   <tr>
                      <td>customerNote</td>
                      <td>string</td>
-                     <td>Optional note for the driver not related to pick up or drop off.</td>
+                     <td>Optional note for the driver not related to pickup or dropoff.</td>
                   </tr>
                   <tr>
                      <td>flightNumber</td>
                      <td>string</td>
-                     <td>Optional flight number in case this is an airport pick up.</td>
+                     <td>Optional flight number in case this is an airport pickup.</td>
                   </tr>
                   <tr>
                      <td>passengerDetails</td>
                      <td>list of <a href="#passengerdetail">PassengerDetail</a></td>
-                     <td>Optional. List of passengers that will go on this trip. For trips with &quot;Private&quot; type the number of passengers must be below or equal to <code>maxPassengers</code> of the <code>vehicle</code> in the trip option. For trips with &quot;Shared&quot; type the number of passengers must match the <code>passengersCount</code> query parameter from the Search endpoint. There must always be exactly one passenger of type &quot;Lead&quot; with contact details filled. For passenger of type &quot;Child&quot; you must specify a child seat of proper type offered in the trip option&#39;s <code>availableChildSeatTypes</code>. For older children that do not need any child seat use <code>Adult</code> passenger type.</td>
+                     <td>Optional. List of passengers that will go on this trip. For trips with &quot;Private&quot; type the number of passengers must be below or equal to <code>maxPassengers</code> of the <code>vehicle</code> in the trip option. For trips with &quot;Shared&quot; type the number of passengers must match the <code>passengersCount</code> query parameter from the Search endpoint. There must always be exactly one passenger of type &quot;Lead&quot; with contact details filled. For passenger of type &quot;Child&quot; you must specify a child seat of proper type offered in the trip option&#39;s <a href="#tripoption">availableChildSeatTypes</a>. For older children that do not need any child seat use <code>Adult</code> passenger type.</td>
                   </tr>
                </tbody>
             </table>
@@ -1870,7 +1911,7 @@
                   <tr>
                      <td>meetAndGreet</td>
                      <td>boolean</td>
-                     <td>Specifies if meet and greet is provided for the pick up of this booking.</td>
+                     <td>Specifies if meet and greet is provided for the pickup of this booking.</td>
                   </tr>
                   <tr>
                      <td>meetingPosition</td>
@@ -1880,27 +1921,27 @@
                   <tr>
                      <td>dropOffPosition</td>
                      <td>object - <a href="#dropoffposition">DropOffPosition</a></td>
-                     <td>Information about the drop off position, important for unreachable places. Optional.</td>
+                     <td>Information about the dropoff position, important for unreachable places. Optional.</td>
                   </tr>
                   <tr>
                      <td>pickUpAddressNote</td>
                      <td>string</td>
-                     <td>Pick up address or a note describing the pick up point. Optional.</td>
+                     <td>Pickup address or a note describing the pickup point. Optional.</td>
                   </tr>
                   <tr>
                      <td>dropOffAddressNote</td>
                      <td>string</td>
-                     <td>Drop off address or a note describing the drop off point. Optional.</td>
+                     <td>Dropoff address or a note describing the dropoff point. Optional.</td>
                   </tr>
                   <tr>
                      <td>customerNote</td>
                      <td>string</td>
-                     <td>Optional note for the driver not related to pick up or drop off.</td>
+                     <td>Optional note for the driver not related to pickup or dropoff.</td>
                   </tr>
                   <tr>
                      <td>flightNumber</td>
                      <td>string</td>
-                     <td>Optional flight number in case this is an airport pick up.</td>
+                     <td>Optional flight number in case this is an airport pickup.</td>
                   </tr>
                   <tr>
                      <td>passengerDetails</td>
@@ -1950,8 +1991,8 @@
             <blockquote>
                <p>To get driver position(s) of a trip currently in progress, use the following call:</p>
             </blockquote>
-            <pre class="highlight bash"><code>curl https://api.staging.mydaytrip.net/partners/v3/trip/tracking/bookingId 
-  -H <span class="hljs-string">&quot;x-api-key: your-api-key&quot;</span> </code></pre><pre class="highlight javascript"><code></code></pre><pre class="highlight python"><code></code></pre>
+            <pre class="highlight bash"><code>curl https://api.staging.mydaytrip.net/partners/v3/trip/tracking/bookingId \
+  -H <span class="hljs-string">&quot;x-api-key: your-api-key&quot;</span></code></pre><pre class="highlight javascript"><code></code></pre><pre class="highlight python"><code></code></pre>
             <blockquote>
                <p>Make sure to replace <code>bookingId</code> with the real booking id.</p>
             </blockquote>
@@ -2044,11 +2085,17 @@
             </table>
             <h2 id="drivers-endpoint">Drivers endpoint</h2>
             <p>This endpoint allows you to retrieve the information about driver(s) and vehicle(s) currently assigned to the trip. The assigned driver might change so it is recommended to pass this information to the customer only few days before the trip and give him an update if the response of this endpoint changes. The <code>driverId</code> returned by this endpoint is the same as the <code>driverId</code> returned by the <a href="#tracking-endpoint">/tracking</a> endpoint and can be used to identify which driver is at which position in case of trips with multiple drivers.</p>
+            <p>Proposed frequency of calling this endpoint depending on the time before the departure time:</p>
+            <ul>
+               <li>the first check is ideal to do 48 hours before the departure;</li>
+               <li>in the period 48-24 hours before the departure, it is recommended to check the assigned drivers every 4 hours;</li>
+               <li>in the last 24 hours before the departure, it is recommended to check the assigned drivers every hour.</li>
+            </ul>
             <blockquote>
                <p>To get drivers currently assigned to a trip</p>
             </blockquote>
-            <pre class="highlight bash"><code>curl https://api.staging.mydaytrip.net/partners/v3/trip/drivers/bookingId 
-  -H <span class="hljs-string">&quot;x-api-key: your-api-key&quot;</span> </code></pre><pre class="highlight javascript"><code></code></pre><pre class="highlight python"><code></code></pre>
+            <pre class="highlight bash"><code>curl https://api.staging.mydaytrip.net/partners/v3/trip/drivers/bookingId \
+  -H <span class="hljs-string">&quot;x-api-key: your-api-key&quot;</span></code></pre><pre class="highlight javascript"><code></code></pre><pre class="highlight python"><code></code></pre>
             <blockquote>
                <p>Make sure to replace <code>bookingId</code> with the real booking id.</p>
             </blockquote>
@@ -2185,12 +2232,12 @@
                   <tr>
                      <td>pickUp</td>
                      <td>object - <a href="#location">Location</a></td>
-                     <td>Details about the pick up point.</td>
+                     <td>Details about the pickup point.</td>
                   </tr>
                   <tr>
                      <td>dropOff</td>
                      <td>object - <a href="#location">Location</a></td>
-                     <td>Details about the drop off point.</td>
+                     <td>Details about the dropoff point.</td>
                   </tr>
                   <tr>
                      <td>pricing</td>
@@ -2262,7 +2309,7 @@
                   <tr>
                      <td>time</td>
                      <td>string</td>
-                     <td>UTC timestamp of the departure or arrival time. Optional. For pick up only in case of the private trip. Always present for shared trips.</td>
+                     <td>UTC timestamp of the departure or arrival time. Optional. For pickup only in case of the private trip. Always present for shared trips.</td>
                   </tr>
                   <tr>
                      <td>interval</td>
@@ -2270,14 +2317,19 @@
                      <td>Estimated departure or arrival interval. Optional, for shared trips only.</td>
                   </tr>
                   <tr>
+                     <td>timezone</td>
+                     <td>string</td>
+                     <td>IANA timezone matching the location. Presents if <code>time</code> or <code>interval</code> are present. Can be used to convert UTC timestamps from <code>time</code>/<code>interval</code> to local time.</td>
+                  </tr>
+                  <tr>
                      <td>description</td>
                      <td>string</td>
-                     <td>Description of the pick up or drop off. Optional.</td>
+                     <td>Description of the pickup or dropoff. Optional.</td>
                   </tr>
                   <tr>
                      <td>meetAndGreet</td>
                      <td>boolean</td>
-                     <td>Specifies if meet and greet is provided for this pick up. Optional, for pick up only.</td>
+                     <td>Specifies if meet and greet is provided for this pickup. Optional, for pickup only.</td>
                   </tr>
                </tbody>
             </table>
@@ -2499,7 +2551,7 @@
                   <tr>
                      <td>timezone</td>
                      <td>string</td>
-                     <td>Name of the timezone matching the location of the stop.</td>
+                     <td>IANA timezone matching the location of the stop.</td>
                   </tr>
                   <tr>
                      <td>country</td>
@@ -2568,7 +2620,7 @@
                   <tr>
                      <td>childSeatType</td>
                      <td>string</td>
-                     <td>Requested child seat type for a passenger of type &quot;Child&quot;. Must match one of offered child seat types from <code>availableChildSeatTypes</code> of the trip option you are booking.</td>
+                     <td>Requested child seat type for a passenger of type &quot;Child&quot;. Must match one of offered child seat types from <a href="#tripoption">availableChildSeatTypes</a> of the trip option you are booking.</td>
                   </tr>
                </tbody>
             </table>
