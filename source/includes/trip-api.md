@@ -84,6 +84,7 @@ curl "https://api.staging.mydaytrip.net/partners/v3/trip/search?originLongitude=
             "lat":50.10,
             "lon":14.25,
             "time":"2022-12-05T18:00:00Z",
+            "timezone":"Europe/Prague",
             "meetAndGreet": true
          },
          "dropOff":{
@@ -188,6 +189,7 @@ curl "https://api.staging.mydaytrip.net/partners/v3/trip/search?originLongitude=
             "lat":50.10,
             "lon":14.25,
             "time":"2022-12-05T18:00:00Z",
+            "timezone":"Europe/Prague",
             "meetAndGreet": true
          },
          "dropOff":{
@@ -292,6 +294,7 @@ curl "https://api.staging.mydaytrip.net/partners/v3/trip/search?originLongitude=
             "lat":50.10,
             "lon":14.25,
             "time":"2022-12-05T18:00:00Z",
+            "timezone":"Europe/Prague",
             "meetAndGreet": true
          },
          "dropOff":{
@@ -400,6 +403,7 @@ curl "https://api.staging.mydaytrip.net/partners/v3/trip/search?originLongitude=
                "earliest":"2022-12-05T19:00:00Z",
                "latest":"2022-12-05T19:10:00Z"
             },
+            "timezone":"Europe/Prague",
             "description":"In front of the hotel Europa",
             "meetAndGreet": false
          },
@@ -411,6 +415,7 @@ curl "https://api.staging.mydaytrip.net/partners/v3/trip/search?originLongitude=
                "earliest":"2022-12-05T22:40:00Z",
                "latest":"2022-12-05T22:55:00Z"
             },
+            "timezone":"Europe/Vienna",
             "description":"Next to the railway station"
          },
          "pricing":{
@@ -449,6 +454,7 @@ curl "https://api.staging.mydaytrip.net/partners/v3/trip/search?originLongitude=
                "earliest":"2022-12-05T20:00:00Z",
                "latest":"2022-12-05T20:10:00Z"
             },
+            "timezone":"Europe/Prague",
             "description":"In front of the hotel Europa",
             "meetAndGreet": false
          },
@@ -460,6 +466,7 @@ curl "https://api.staging.mydaytrip.net/partners/v3/trip/search?originLongitude=
                "earliest":"2022-12-05T23:40:00Z",
                "latest":"2022-12-05T23:55:00Z"
             },
+            "timezone":"Europe/Vienna",
             "description":"Next to the railway station"
          },
          "pricing":{
@@ -569,6 +576,7 @@ curl -d '{
             "lat":50.10,
             "lon":14.25,
             "time":"2022-12-05T18:00:00Z",
+            "timezone":"Europe/Prague",
             "meetAndGreet": true
          },
          "dropOff":{
@@ -755,6 +763,7 @@ curl -d '{
          "lat":50.10,
          "lon":14.25,
          "time":"2022-12-05T18:00:00Z",
+         "timezone":"Europe/Prague",
          "meetAndGreet": true
       },
       "dropOff":{
@@ -853,6 +862,7 @@ curl -d '{
          "lat": 46.067648,
          "lon": 7.775185,
          "time":"2022-12-05T18:00:00Z",
+         "timezone":"Europe/Zurich",
          "meetAndGreet": false
       },
       "dropOff":{
@@ -1100,6 +1110,7 @@ curl https://api.staging.mydaytrip.net/partners/v3/trip/external/details/externa
          "lat":50.10,
          "lon":14.25,
          "time":"2022-12-05T18:00:00Z",
+         "timezone":"Europe/Prague",
          "meetAndGreet": true
       },
       "dropOff":{
@@ -1193,6 +1204,7 @@ curl https://api.staging.mydaytrip.net/partners/v3/trip/external/details/externa
          "lat":46.02079170845689,
          "lon":7.748169219390801,
          "time":"2022-12-05T18:00:00Z",
+         "timezone":"Europe/Zurich",
          "meetAndGreet": true
       },
       "dropOff":{
@@ -1341,6 +1353,7 @@ curl -d '{
          "lat":50.10,
          "lon":14.25,
          "time":"2022-12-05T18:00:00Z",
+         "timezone":"Europe/Prague",
          "meetAndGreet": true
       },
       "dropOff":{
@@ -1660,6 +1673,7 @@ lat                     | number                                 | Latitude in d
 lon                     | number                                 | Longitude in degrees.
 time                    | string                                 | UTC timestamp of the departure or arrival time. Optional. For pickup only in case of the private trip. Always present for shared trips.
 interval                | object - [TimeInterval](#timeinterval) | Estimated departure or arrival interval. Optional, for shared trips only.
+timezone                | string                                 | IANA timezone matching the location. Presents if `time` or `interval` are present. Can be used to convert UTC timestamps from `time`/`interval` to local time.
 description             | string                                 | Description of the pickup or dropoff. Optional.
 meetAndGreet            | boolean                                | Specifies if meet and greet is provided for this pickup. Optional, for pickup only.
 
@@ -1721,7 +1735,7 @@ perex                   | string                       | Perex of the stop descr
 description             | string                       | The stop description.
 durationInMinutes       | integer                      | Expected duration of the stop.
 order                   | integer                      | Order of this stop on this trip.
-timezone                | string                       | Name of the timezone matching the location of the stop.
+timezone                | string                       | IANA timezone matching the location of the stop.
 country                 | object - [Country](#country) | Details about the country where the stop is located.
 
 ## Country
