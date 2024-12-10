@@ -11,6 +11,7 @@ The Daytrip API is organized around REST. Our API accepts JSON-encoded request b
 ### What can our Partner API do?
 
 - Return quotes for point to point transfers ranging from short airport transfers to long trips between countries
+- Return quotes for shared transfers between predefined routes
 - Offer sightseeing stops on selected routes (including visuals and descriptions so you can display them on your website)
 - Book trips directly over the API
 - Update trips directly over the API
@@ -22,7 +23,7 @@ The Daytrip API is organized around REST. Our API accepts JSON-encoded request b
 
 ### Onboarding
 
-If you want to integrate with our API, contact us at <partners@daytrip.com> to get a partner account and an API key. 
+If you want to integrate with our API, contact us at <partners@daytrip.com> to get a partner account and an API key.
 
 ### Customer support emergency
 

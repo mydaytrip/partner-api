@@ -1,10 +1,10 @@
 # Trip API
 
-A trip is a representation of passenger transportation from point A to point B. Each search will usually return multiple trip options that can be booked. Options can differ by vehicle type or by being private or shared with other travelers. Shared trips have predefined pick up and drop off points and departure times. For private trips pick up and drop off points as well as departure time are matching the search request. Private trips can also be customized by adding stops if available.
+A trip is a representation of passenger transportation from point A to point B. Each search will usually return multiple trip options that can be booked. Options can differ by vehicle type or by being private or shared with other travelers. Shared trips have predefined pickup and dropoff points and departure times. For private trips pickup and dropoff points as well as departure time are matching the search request. Private trips can also be customized by adding stops if available.
 
 ## Flows
 
-Trip API can be used to search for trip options, customizing an option with stops and then booking the option. 
+Trip API can be used to search for trip options, customizing an option with stops and then booking the option.
 
 ### Simple trip
 
@@ -37,7 +37,7 @@ A flow to book a trip, get details about it and then cancel it would look like t
 
 ### Updating a trip
 
-If you want to change departure time or add/remove stops you need to cancel the booking and create it again as it can affect the price. For small adjustments like changing passenger phone number, email, child seat type, pick up and drop off address notes (within the scope of original search coordinates), customer note or flight number you can use the [/update](#update-endpoint) endpoint:
+If you want to change departure time or add/remove stops you need to cancel the booking and create it again as it can affect the price. For small adjustments like changing passenger phone number, email, child seat type, pickup and dropoff address notes (within the scope of original search coordinates), customer note or flight number you can use the [/update](#update-endpoint) endpoint:
 
 1. call [/search](#search-endpoint) endpoint to get possible options
 2. call [/book](#book-endpoint) endpoint to book the chosen option
@@ -53,7 +53,7 @@ This endpoint returns all trip options for given origin, destination, departure 
 > To search for a trip from Prague to Vienna for two passengers, use this call:
 
 ```bash
-curl "https://api.staging.mydaytrip.net/partners/v3/trip/search?originLongitude=14.2559&originLatitude=50.10&destinationLongitude=16.3738&destinationLatitude=48.2082&departureTime=1766227088&passengersCount=3&childrenCount=1"
+curl "https://api.staging.mydaytrip.net/partners/v3/trip/search?originLongitude=14.2559&originLatitude=50.10&destinationLongitude=16.3738&destinationLatitude=48.2082&departureTime=1766227088&passengersCount=3&childrenCount=1&includeShared=true" \
   -H "x-api-key: your-api-key"
 ```
 
@@ -84,6 +84,7 @@ curl "https://api.staging.mydaytrip.net/partners/v3/trip/search?originLongitude=
             "lat":50.10,
             "lon":14.25,
             "time":"2022-12-05T18:00:00Z",
+            "timezone":"Europe/Prague",
             "meetAndGreet": true
          },
          "dropOff":{
@@ -188,6 +189,7 @@ curl "https://api.staging.mydaytrip.net/partners/v3/trip/search?originLongitude=
             "lat":50.10,
             "lon":14.25,
             "time":"2022-12-05T18:00:00Z",
+            "timezone":"Europe/Prague",
             "meetAndGreet": true
          },
          "dropOff":{
@@ -292,6 +294,7 @@ curl "https://api.staging.mydaytrip.net/partners/v3/trip/search?originLongitude=
             "lat":50.10,
             "lon":14.25,
             "time":"2022-12-05T18:00:00Z",
+            "timezone":"Europe/Prague",
             "meetAndGreet": true
          },
          "dropOff":{
@@ -400,6 +403,7 @@ curl "https://api.staging.mydaytrip.net/partners/v3/trip/search?originLongitude=
                "earliest":"2022-12-05T19:00:00Z",
                "latest":"2022-12-05T19:10:00Z"
             },
+            "timezone":"Europe/Prague",
             "description":"In front of the hotel Europa",
             "meetAndGreet": false
          },
@@ -411,6 +415,7 @@ curl "https://api.staging.mydaytrip.net/partners/v3/trip/search?originLongitude=
                "earliest":"2022-12-05T22:40:00Z",
                "latest":"2022-12-05T22:55:00Z"
             },
+            "timezone":"Europe/Vienna",
             "description":"Next to the railway station"
          },
          "pricing":{
@@ -430,14 +435,10 @@ curl "https://api.staging.mydaytrip.net/partners/v3/trip/search?originLongitude=
             "maxTotalSuitcases":2
          },
          "seatsAvailable":8,
-         "availableChildSeatTypes":[
-            
-         ],
-         "possibleStops":[
-            
-         ],
+         "availableChildSeatTypes":[],
+         "possibleStops":[],
          "cancellationPolicy": "Flexible",
-         "expiresAt": "2022-12-04T15:00:00Z",
+         "expiresAt": "2022-12-04T15:00:00Z"
       },
       {
          "id":"4b137906-008a-49cf-b248-e3827b3a3175",
@@ -453,6 +454,7 @@ curl "https://api.staging.mydaytrip.net/partners/v3/trip/search?originLongitude=
                "earliest":"2022-12-05T20:00:00Z",
                "latest":"2022-12-05T20:10:00Z"
             },
+            "timezone":"Europe/Prague",
             "description":"In front of the hotel Europa",
             "meetAndGreet": false
          },
@@ -464,6 +466,7 @@ curl "https://api.staging.mydaytrip.net/partners/v3/trip/search?originLongitude=
                "earliest":"2022-12-05T23:40:00Z",
                "latest":"2022-12-05T23:55:00Z"
             },
+            "timezone":"Europe/Vienna",
             "description":"Next to the railway station"
          },
          "pricing":{
@@ -483,17 +486,11 @@ curl "https://api.staging.mydaytrip.net/partners/v3/trip/search?originLongitude=
             "maxTotalSuitcases":2
          },
          "seatsAvailable":5,
-         "availableChildSeatTypes":[
-            
-         ],
-         "possibleStops":[
-            
-         ],
-         "includedStops":[
-
-         ],
+         "availableChildSeatTypes":[],
+         "possibleStops":[],
+         "includedStops":[],
          "cancellationPolicy": "Flexible",
-         "expiresAt": "2022-12-04T15:00:00Z",
+         "expiresAt": "2022-12-04T15:00:00Z"
       }
    ]
 }
@@ -543,9 +540,12 @@ This endpoint is used to customize a trip option returned by the Search endpoint
 > To add the Mikulov stop to the sedan vehicle type private trip option from the Search endpoint example above, use the following call:
 
 ```bash
-curl -d '{ "optionId": "1d32109f-c2e2-44fe-b2cf-461ef3730541", "selectedStops": ["4ee58c0c-4e56-46ef-bd22-406a1bc60e1c"] }' 
-  -H "Content-Type: application/json" 
-  -H "x-api-key: your-api-key" 
+curl -d '{
+  "optionId": "1d32109f-c2e2-44fe-b2cf-461ef3730541",
+  "selectedStops": ["4ee58c0c-4e56-46ef-bd22-406a1bc60e1c"]
+}' \
+  -H "Content-Type: application/json" \
+  -H "x-api-key: your-api-key" \
   -X POST https://api.staging.mydaytrip.net/partners/v3/trip/search/customize
 ```
 
@@ -576,6 +576,7 @@ curl -d '{ "optionId": "1d32109f-c2e2-44fe-b2cf-461ef3730541", "selectedStops": 
             "lat":50.10,
             "lon":14.25,
             "time":"2022-12-05T18:00:00Z",
+            "timezone":"Europe/Prague",
             "meetAndGreet": true
          },
          "dropOff":{
@@ -708,9 +709,30 @@ This endpoint is used to book a trip option. Any trip option from Search or Cust
 > To book the customized trip option with stops from the example above or to book a trip option from the original Search endpoint response for two adults and one child with a booster seat, use the following call:
 
 ```bash
-curl -d '{ "optionId": "f0e34a1b-2b3d-4747-b426-292633b615b4", "pickUpAddressNote": "Havel airport", "dropOffAddressNote": "Vienna central square", "customerNote": "We will stand next to the entrance", "flightNumber": "FR008", "passengerDetails": [ { "type": "Lead", "firstName": "John", "lastName": "Doe", "phone": "+41555555555", "email": "client-email@example.com", "birthday": 629424000 }, { "type": "Adult" }, { "type": "Child", "childSeatType": "Booster" } ] }' 
-  -H "Content-Type: application/json" 
-  -H "x-api-key: your-api-key" 
+curl -d '{
+  "optionId": "f0e34a1b-2b3d-4747-b426-292633b615b4",
+  "pickUpAddressNote": "Havel airport",
+  "dropOffAddressNote": "Vienna central square",
+  "customerNote": "We will stand next to the entrance",
+  "flightNumber": "FR008",
+  "passengerDetails": [
+    {
+      "type": "Lead",
+      "firstName": "John",
+      "lastName": "Doe",
+      "phone": "+41555555555",
+      "email": "client-email@example.com",
+      "birthday": 629424000
+    },
+    { "type": "Adult" },
+    {
+      "type": "Child",
+      "childSeatType": "Booster"
+    }
+  ]
+}' \
+  -H "Content-Type: application/json" \
+  -H "x-api-key: your-api-key" \
   -X POST https://api.staging.mydaytrip.net/partners/v3/trip/book
 ```
 
@@ -722,7 +744,7 @@ curl -d '{ "optionId": "f0e34a1b-2b3d-4747-b426-292633b615b4", "pickUpAddressNot
 
 ```
 
-> Example response without meeting and drop off positions:
+> Example response without meeting and dropoff positions:
 
 ```json
 {
@@ -741,6 +763,7 @@ curl -d '{ "optionId": "f0e34a1b-2b3d-4747-b426-292633b615b4", "pickUpAddressNot
          "lat":50.10,
          "lon":14.25,
          "time":"2022-12-05T18:00:00Z",
+         "timezone":"Europe/Prague",
          "meetAndGreet": true
       },
       "dropOff":{
@@ -808,7 +831,7 @@ curl -d '{ "optionId": "f0e34a1b-2b3d-4747-b426-292633b615b4", "pickUpAddressNot
 }
 ```
 
-> Example response with meeting and drop off positions:
+> Example response with meeting and dropoff positions:
 
 ```json
 {
@@ -839,11 +862,12 @@ curl -d '{ "optionId": "f0e34a1b-2b3d-4747-b426-292633b615b4", "pickUpAddressNot
          "lat": 46.067648,
          "lon": 7.775185,
          "time":"2022-12-05T18:00:00Z",
+         "timezone":"Europe/Zurich",
          "meetAndGreet": false
       },
       "dropOff":{
          "lat": 45.4374041,
-         "lon": 12.3190675,
+         "lon": 12.3190675
       },
       "pricing":{
          "totalPrice":288
@@ -915,12 +939,12 @@ curl -d '{ "optionId": "f0e34a1b-2b3d-4747-b426-292633b615b4", "pickUpAddressNot
 Property           | Type                                        | Description
 ------------------ | ------------------------------------------- | -----------
 optionId           | string                                      | Id of the option you want to book. Taken from [/search](#search-endpoint) or [/customize](#customize-endpoint) endpoint response.
-departureTime      | integer                                     | Optional. Departure time as a UNIX epoch timestamp in seconds to use instead of the `departureTime` provided to the [/search](#search-endpoint). You can only move departure time less than 24 hours into the past or into the future compared to the original `departureTime`, otherwise the booking will be rejected (403 HTTP status code). Also if the new price after changing the departure time would be different, booking will also get rejected. Such price change should be extremely rare but your integration should be ready for it if you are sending different `departureTime`. Note that UNIX timestamps are UTC so you need to convert from local time to UTC when calculating it. Applicable only for the private trip.
-pickUpAddressNote  | string                                      | Pick up address or a note describing the pick up point. Optional, but should be provided if available. Applicable only for the private trip.
-dropOffAddressNote | string                                      | Dropp off address or a note describing the drop off point. Optional, but should be provided if available. Applicable only for the private trip.
-customerNote       | string                                      | Optional note for the driver not related to pick up or drop off. Applicable only for the private trip.
-flightNumber       | string                                      | Optional flight number in case this is an airport pick up. Applicable only for the private trip.
-passengerDetails   | list of [PassengerDetail](#passengerdetail) | List of passengers that will go on this trip. For trips with "Private" type the number of passengers must be below or equal to `maxPassengers` of the `vehicle` in the trip option. For trips with "Shared" type the number of passengers must match the `passengersCount` query parameter from the Search endpoint. There must always be exactly one passenger of type "Lead" with contact details filled. For passenger of type "Child" you must specify a child seat of proper type offered in the trip option's `availableChildSeatTypes`. For older children that do not need any child seat use `Adult` passenger type.
+departureTime      | integer                                     | Optional. Departure time as a UNIX epoch timestamp in seconds to use instead of the `departureTime` provided to the [/search](#search-endpoint). You can only move departure time less than 24 hours into the past or into the future compared to the original `departureTime`, otherwise the booking will be rejected (403 HTTP status code). Also if the new price after changing the departure time would be different, booking will also get rejected. Such price change should be extremely rare but your integration should be ready for it if you are sending different `departureTime`. Note that UNIX timestamps are UTC so you need to convert from local time to UTC when calculating it. Change of the departure time is applicable only for the private trip.
+pickUpAddressNote  | string                                      | Pickup address or a note describing the pickup point. Optional, but should be provided if available at the booking time; otherwise, it should be provided via the [/update](#update-endpoint) endpoint. Applicable only for the private trip.
+dropOffAddressNote | string                                      | Dropoff address or a note describing the dropoff point. Optional, but should be provided if available at the booking time; otherwise, it should be provided via the [/update](#update-endpoint) endpoint. Applicable only for the private trip.
+customerNote       | string                                      | Optional note for the driver not related to pickup or dropoff. Applicable only for the private trip.
+flightNumber       | string                                      | Optional flight number in case this is an airport pickup. Applicable only for the private trip.
+passengerDetails   | list of [PassengerDetail](#passengerdetail) | List of passengers that will go on this trip. For trips with "Private" type the number of passengers must be below or equal to `maxPassengers` of the `vehicle` in the trip option. For trips with "Shared" type the number of passengers must match the `passengersCount` query parameter from the Search endpoint. There must always be exactly one passenger of type "Lead" with contact details filled. For passenger of type "Child" you must specify a child seat of proper type offered in the trip option's [availableChildSeatTypes](#tripoption). For older children that do not need any child seat use `Adult` passenger type.
 externalId         | string                                      | Optional. You can send us the id of the booking in your system to help with communication when our support team needs to identify a booking and you are not able to provide our own `bookingReference`.
 
 ### Response body
@@ -931,9 +955,9 @@ bookingId          | string                                      | Id of the cre
 bookingReference   | string                                      | Short booking reference that can be shared with the customer in order for him to be able to contact Daytrip customer support easily.
 departureTimeUtc   | string                                      | Date and time of departure in UTC.
 originTimezone     | string                                      | IANA timezone for the origin location. Can be used to convert `departureTimeUtc` to local time.
-meetAndGreet       | boolean                                     | Specifies if meet and greet is provided for the pick up of this booking.
+meetAndGreet       | boolean                                     | Specifies if meet and greet is provided for the pickup of this booking.
 meetingPosition    | object - [MeetingPosition](#meetingposition)| Information about the meeting position, important for unreachable places or when meet and greet is not provided. Optional.
-dropOffPosition    | object - [DropOffPosition](#dropoffposition)| Information about the drop off position, important for unreachable places. Optional.
+dropOffPosition    | object - [DropOffPosition](#dropoffposition)| Information about the dropoff position, important for unreachable places. Optional.
 trip               | object - [TripOption](#tripoption)          | Trip option used to make the booking.
 
 ### Error status codes
@@ -953,9 +977,9 @@ This endpoint is used to cancel a booked trip. For private trips only trips that
 > To cancel a booked trip, use the following call:
 
 ```bash
-curl -d '{ "bookingId": "cb102778-a3d7-426e-8d18-6bd6b296f283" }' 
-  -H "Content-Type: application/json" 
-  -H "x-api-key: your-api-key" 
+curl -d '{ "bookingId": "cb102778-a3d7-426e-8d18-6bd6b296f283" }' \
+  -H "Content-Type: application/json" \
+  -H "x-api-key: your-api-key" \
   -X POST https://api.staging.mydaytrip.net/partners/v3/trip/cancel
 ```
 
@@ -973,11 +997,6 @@ curl -d '{ "bookingId": "cb102778-a3d7-426e-8d18-6bd6b296f283" }'
 {
    "penalty":0,
    "currency":"EUR"
-}
-
-```json
-{
-
 }
 ```
 
@@ -1017,8 +1036,8 @@ There are two versions of the endpoint: `/partners/v3/trip/details/boookingId` a
 > To get details of a booked trip by `bookingId`, use the following call:
 
 ```bash
-curl https://api.staging.mydaytrip.net/partners/v3/trip/details/bookingId 
-  -H "x-api-key: your-api-key" 
+curl https://api.staging.mydaytrip.net/partners/v3/trip/details/bookingId \
+  -H "x-api-key: your-api-key"
 ```
 
 ```javascript
@@ -1034,8 +1053,8 @@ curl https://api.staging.mydaytrip.net/partners/v3/trip/details/bookingId
 > To get details of a booked trip by `externalId`, use the following call:
 
 ```bash
-curl https://api.staging.mydaytrip.net/partners/v3/trip/external/details/externalId 
-  -H "x-api-key: your-api-key" 
+curl https://api.staging.mydaytrip.net/partners/v3/trip/external/details/externalId \
+  -H "x-api-key: your-api-key"
 ```
 
 ```javascript
@@ -1048,7 +1067,7 @@ curl https://api.staging.mydaytrip.net/partners/v3/trip/external/details/externa
 
 > Make sure to replace `externalId` with the real external id.
 
-> Example response without meeting and drop off positions:
+> Example response without meeting and dropoff positions:
 
 ```json
 {
@@ -1061,25 +1080,25 @@ curl https://api.staging.mydaytrip.net/partners/v3/trip/external/details/externa
    "departureTimeUtc": "2022-12-05T18:00:00Z",
    "originTimezone": "Europe/Prague",
    "meetAndGreet": true,
-   "pickUpAddressNote": "Havel airport", 
-   "dropOffAddressNote": "Vienna central square", 
-   "customerNote": "We will stand next to the entrance", 
+   "pickUpAddressNote": "Havel airport",
+   "dropOffAddressNote": "Vienna central square",
+   "customerNote": "We will stand next to the entrance",
    "flightNumber": "FR008",
-   "passengerDetails": [ 
+   "passengerDetails": [
       {
-         "type": "Lead", 
-         "firstName": "John", 
-         "lastName": "Doe", 
-         "phone": "+41555555555", 
+         "type": "Lead",
+         "firstName": "John",
+         "lastName": "Doe",
+         "phone": "+41555555555",
          "email": "client-email@example.com",
-         "birthday": 629424000 
-      }, 
-      { 
-         "type": "Adult" 
-      }, 
-      { 
-         "type": "Child", 
-         "childSeatType": "Booster" 
+         "birthday": 629424000
+      },
+      {
+         "type": "Adult"
+      },
+      {
+         "type": "Child",
+         "childSeatType": "Booster"
       }
    ],
    "trip": {
@@ -1091,6 +1110,7 @@ curl https://api.staging.mydaytrip.net/partners/v3/trip/external/details/externa
          "lat":50.10,
          "lon":14.25,
          "time":"2022-12-05T18:00:00Z",
+         "timezone":"Europe/Prague",
          "meetAndGreet": true
       },
       "dropOff":{
@@ -1126,12 +1146,12 @@ curl https://api.staging.mydaytrip.net/partners/v3/trip/external/details/externa
                "englishName":"Czech Republic"
             }
          }
-      ],
+      ]
    }
 }
 ```
 
-> Example response without meeting and drop off positions:
+> Example response with meeting and dropoff positions:
 
 ```json
 {
@@ -1156,23 +1176,23 @@ curl https://api.staging.mydaytrip.net/partners/v3/trip/external/details/externa
       "description": "Piazzale Roma",
       "image": "https://daytrip.imgix.net/management/venice.png?w=480&q=50"
    },
-   "pickUpAddressNote": "Zermatt", 
-   "dropOffAddressNote": "Venice", 
-   "passengerDetails": [ 
+   "pickUpAddressNote": "Zermatt",
+   "dropOffAddressNote": "Venice",
+   "passengerDetails": [
       {
-         "type": "Lead", 
-         "firstName": "John", 
-         "lastName": "Doe", 
-         "phone": "+41555555555", 
+         "type": "Lead",
+         "firstName": "John",
+         "lastName": "Doe",
+         "phone": "+41555555555",
          "email": "client-email@example.com",
-         "birthday": 629424000 
-      }, 
-      { 
-         "type": "Adult" 
-      }, 
-      { 
-         "type": "Child", 
-         "childSeatType": "Booster" 
+         "birthday": 629424000
+      },
+      {
+         "type": "Adult"
+      },
+      {
+         "type": "Child",
+         "childSeatType": "Booster"
       }
    ],
    "trip": {
@@ -1184,6 +1204,7 @@ curl https://api.staging.mydaytrip.net/partners/v3/trip/external/details/externa
          "lat":46.02079170845689,
          "lon":7.748169219390801,
          "time":"2022-12-05T18:00:00Z",
+         "timezone":"Europe/Zurich",
          "meetAndGreet": true
       },
       "dropOff":{
@@ -1203,7 +1224,7 @@ curl https://api.staging.mydaytrip.net/partners/v3/trip/external/details/externa
          "maxTotalCarryons":3,
          "maxTotalSuitcases":3
       },
-      "includedStops":[],
+      "includedStops":[]
    }
 }
 ```
@@ -1232,13 +1253,13 @@ passengersCount    | integer                                                  | 
 currency           | string                                                   | Currency used for all prices in this response.
 departureTimeUtc   | string                                                   | Date and time of departure in UTC. This reflects possible changes made by customer support.
 originTimezone     | string                                                   | IANA timezone for the origin location. Can be used to convert `departureTimeUtc` to local time.
-meetAndGreet       | boolean                                                  | Specifies if meet and greet is provided for the pick up of this booking.
+meetAndGreet       | boolean                                                  | Specifies if meet and greet is provided for the pickup of this booking.
 meetingPosition    | object - [MeetingPosition](#meetingposition)             | Information about the meeting position, important for unreachable places or when meet and greet is not provided. Optional.
-dropOffPosition    | object - [DropOffPosition](#dropoffposition)             | Information about the drop off position, important for unreachable places. Optional.
-pickUpAddressNote  | string                                                   | Pick up address or a note describing the pick up point. Optional.
-dropOffAddressNote | string                                                   | Drop off address or a note describing the drop off point. Optional.
-customerNote       | string                                                   | Optional note for the driver not related to pick up or drop off.
-flightNumber       | string                                                   | Optional flight number in case this is an airport pick up.
+dropOffPosition    | object - [DropOffPosition](#dropoffposition)             | Information about the dropoff position, important for unreachable places. Optional.
+pickUpAddressNote  | string                                                   | Pickup address or a note describing the pickup point. Optional, but should be provided it it was unknown at the booking time. Applicable only for the private trip.
+dropOffAddressNote | string                                                   | Dropoff address or a note describing the dropoff point. Optional, but should be provided it it was unknown at the booking time. Applicable only for the private trip.
+customerNote       | string                                                   | Optional note for the driver not related to pickup or dropoff.
+flightNumber       | string                                                   | Optional flight number in case this is an airport pickup.
 passengerDetails   | list of [PassengerDetail](#passengerdetail)              | List of passengers that will go on this trip.
 trip               | object - [TripOption](#tripoption)                       | Information about the trip. This does not reflect changes made after the booking was created.
 
@@ -1257,9 +1278,27 @@ This endpoint is used to update minor details of an existing booking. If you wan
 > To update passenger details and customer note of a booked trip, use the following call:
 
 ```bash
-curl -d '{ "bookingId": "cb102778-a3d7-426e-8d18-6bd6b296f283", "customerNote": "We will wait inside the Airport building", "passengerDetails": [ { "type": "Lead", "firstName": "John", "lastName": "Doe", "phone": "+4166666666", "email": "client-email@example.com", "birthday": 629424000 }, { "type": "Adult" }, { "type": "Child", "childSeatType": "BoosterSeat" } ] }'
-  -H "Content-Type: application/json" 
-  -H "x-api-key: your-api-key" 
+curl -d '{
+  "bookingId": "cb102778-a3d7-426e-8d18-6bd6b296f283",
+  "customerNote": "We will wait inside the Airport building",
+  "passengerDetails": [
+    {
+      "type": "Lead",
+      "firstName": "John",
+      "lastName": "Doe",
+      "phone": "+4166666666",
+      "email": "client-email@example.com",
+      "birthday": 629424000
+    },
+    { "type": "Adult" },
+    {
+      "type": "Child",
+      "childSeatType": "BoosterSeat"
+    }
+  ]
+}' \
+  -H "Content-Type: application/json" \
+  -H "x-api-key: your-api-key" \
   -X POST https://api.staging.mydaytrip.net/partners/v3/trip/update
 ```
 
@@ -1314,6 +1353,7 @@ curl -d '{ "bookingId": "cb102778-a3d7-426e-8d18-6bd6b296f283", "customerNote": 
          "lat":50.10,
          "lon":14.25,
          "time":"2022-12-05T18:00:00Z",
+         "timezone":"Europe/Prague",
          "meetAndGreet": true
       },
       "dropOff":{
@@ -1349,7 +1389,7 @@ curl -d '{ "bookingId": "cb102778-a3d7-426e-8d18-6bd6b296f283", "customerNote": 
                "englishName":"Czech Republic"
             }
          }
-      ],
+      ]
    }
 }
 ```
@@ -1367,11 +1407,11 @@ Disclaimer: in the last 24 hours before the departure the [/update](#update-endp
 Property           | Type                                          | Description
 ------------------ | --------------------------------------------- | -----------
 bookingId          | string                                        | Id of the booking to cancel. Taken from [/book](#book-endpoint) endpoint response.
-pickUpAddressNote  | string                                        | Pick up address or a note describing the pick up point. Optional.
-dropOffAddressNote | string                                        | Drop off address or a note describing the drop off point. Optional.
-customerNote       | string                                        | Optional note for the driver not related to pick up or drop off.
-flightNumber       | string                                        | Optional flight number in case this is an airport pick up.
-passengerDetails   | list of [PassengerDetail](#passengerdetail)   | Optional. List of passengers that will go on this trip. For trips with "Private" type the number of passengers must be below or equal to `maxPassengers` of the `vehicle` in the trip option. For trips with "Shared" type the number of passengers must match the `passengersCount` query parameter from the Search endpoint. There must always be exactly one passenger of type "Lead" with contact details filled. For passenger of type "Child" you must specify a child seat of proper type offered in the trip option's `availableChildSeatTypes`. For older children that do not need any child seat use `Adult` passenger type.
+pickUpAddressNote  | string                                        | Pickup address or a note describing the pickup point. Optional.
+dropOffAddressNote | string                                        | Dropoff address or a note describing the dropoff point. Optional.
+customerNote       | string                                        | Optional note for the driver not related to pickup or dropoff.
+flightNumber       | string                                        | Optional flight number in case this is an airport pickup.
+passengerDetails   | list of [PassengerDetail](#passengerdetail)   | Optional. List of passengers that will go on this trip. For trips with "Private" type the number of passengers must be below or equal to `maxPassengers` of the `vehicle` in the trip option. For trips with "Shared" type the number of passengers must match the `passengersCount` query parameter from the Search endpoint. There must always be exactly one passenger of type "Lead" with contact details filled. For passenger of type "Child" you must specify a child seat of proper type offered in the trip option's [availableChildSeatTypes](#tripoption). For older children that do not need any child seat use `Adult` passenger type.
 
 ### Response body
 
@@ -1387,13 +1427,13 @@ passengersCount    | integer                                     | The count of 
 currency           | string                                      | Currency used for all prices in this response.
 departureTimeUtc   | string                                      | Date and time of departure in UTC. This reflects possible changes made by customer support.
 originTimezone     | string                                      | IANA timezone for the origin location. Can be used to convert `departureTimeUtc` to local time.
-meetAndGreet       | boolean                                     | Specifies if meet and greet is provided for the pick up of this booking.
+meetAndGreet       | boolean                                     | Specifies if meet and greet is provided for the pickup of this booking.
 meetingPosition    | object - [MeetingPosition](#meetingposition)| Information about the meeting position, important for unreachable places or when meet and greet is not provided. Optional.
-dropOffPosition    | object - [DropOffPosition](#dropoffposition)| Information about the drop off position, important for unreachable places. Optional.
-pickUpAddressNote  | string                                      | Pick up address or a note describing the pick up point. Optional.
-dropOffAddressNote | string                                      | Drop off address or a note describing the drop off point. Optional.
-customerNote       | string                                      | Optional note for the driver not related to pick up or drop off.
-flightNumber       | string                                      | Optional flight number in case this is an airport pick up.
+dropOffPosition    | object - [DropOffPosition](#dropoffposition)| Information about the dropoff position, important for unreachable places. Optional.
+pickUpAddressNote  | string                                      | Pickup address or a note describing the pickup point. Optional.
+dropOffAddressNote | string                                      | Dropoff address or a note describing the dropoff point. Optional.
+customerNote       | string                                      | Optional note for the driver not related to pickup or dropoff.
+flightNumber       | string                                      | Optional flight number in case this is an airport pickup.
 passengerDetails   | list of [PassengerDetail](#passengerdetail) | List of passengers that will go on this trip.
 trip               | object - [TripOption](#tripoption)          | Information about the trip. This does not reflect changes made after the booking was created.
 
@@ -1414,8 +1454,8 @@ This endpoint allows you to retrieve the latest position of driver(s) assigned t
 > To get driver position(s) of a trip currently in progress, use the following call:
 
 ```bash
-curl https://api.staging.mydaytrip.net/partners/v3/trip/tracking/bookingId 
-  -H "x-api-key: your-api-key" 
+curl https://api.staging.mydaytrip.net/partners/v3/trip/tracking/bookingId \
+  -H "x-api-key: your-api-key"
 ```
 
 ```javascript
@@ -1502,11 +1542,16 @@ Status code | Description
 
 This endpoint allows you to retrieve the information about driver(s) and vehicle(s) currently assigned to the trip. The assigned driver might change so it is recommended to pass this information to the customer only few days before the trip and give him an update if the response of this endpoint changes. The `driverId` returned by this endpoint is the same as the `driverId` returned by the [/tracking](#tracking-endpoint) endpoint and can be used to identify which driver is at which position in case of trips with multiple drivers.
 
+Proposed frequency of calling this endpoint depending on the time before the departure time:
+* the first check is ideal to do 48 hours before the departure;
+* in the period 48-24 hours before the departure, it is recommended to check the assigned drivers every 4 hours;
+* in the last 24 hours before the departure, it is recommended to check the assigned drivers every hour.
+
 > To get drivers currently assigned to a trip
 
 ```bash
-curl https://api.staging.mydaytrip.net/partners/v3/trip/drivers/bookingId 
-  -H "x-api-key: your-api-key" 
+curl https://api.staging.mydaytrip.net/partners/v3/trip/drivers/bookingId \
+  -H "x-api-key: your-api-key"
 ```
 
 ```javascript
@@ -1608,8 +1653,8 @@ type                    | string                                                
 englishSpeakingDriver   | boolean                                                  | Specifies if this option includes an English speaking driver.
 distanceKm              | number                                                   | Length of the trip.
 travelTimeMinutes       | number                                                   | Expected duration of the trip in minutes.
-pickUp                  | object - [Location](#location)                           | Details about the pick up point.
-dropOff                 | object - [Location](#location)                           | Details about the drop off point.
+pickUp                  | object - [Location](#location)                           | Details about the pickup point.
+dropOff                 | object - [Location](#location)                           | Details about the dropoff point.
 pricing                 | object - [Pricing](#pricing)                             | Details about the pricing.
 vehicle                 | object - [Vehicle](#vehicle)                             | Details about the vehicle.
 luggage                 | object - [Luggage](#luggage)                             | Details about the luggage.
@@ -1626,10 +1671,11 @@ Property                | Type                                   | Description
 ----------------------- | -------------------------------------- | -----------
 lat                     | number                                 | Latitude in degrees.
 lon                     | number                                 | Longitude in degrees.
-time                    | string                                 | UTC timestamp of the departure or arrival time. Optional. For pick up only in case of the private trip. Always present for shared trips.
+time                    | string                                 | UTC timestamp of the departure or arrival time. Optional. For pickup only in case of the private trip. Always present for shared trips.
 interval                | object - [TimeInterval](#timeinterval) | Estimated departure or arrival interval. Optional, for shared trips only.
-description             | string                                 | Description of the pick up or drop off. Optional.
-meetAndGreet            | boolean                                | Specifies if meet and greet is provided for this pick up. Optional, for pick up only.
+timezone                | string                                 | IANA timezone matching the location. Presents if `time` or `interval` are present. Can be used to convert UTC timestamps from `time`/`interval` to local time.
+description             | string                                 | Description of the pickup or dropoff. Optional.
+meetAndGreet            | boolean                                | Specifies if meet and greet is provided for this pickup. Optional, for pickup only.
 
 ## TimeInterval
 
@@ -1689,7 +1735,7 @@ perex                   | string                       | Perex of the stop descr
 description             | string                       | The stop description.
 durationInMinutes       | integer                      | Expected duration of the stop.
 order                   | integer                      | Order of this stop on this trip.
-timezone                | string                       | Name of the timezone matching the location of the stop.
+timezone                | string                       | IANA timezone matching the location of the stop.
 country                 | object - [Country](#country) | Details about the country where the stop is located.
 
 ## Country
@@ -1708,7 +1754,7 @@ lastName         | string                       | Last name of the passenger - r
 phone            | string                       | Phone number of the passenger - required for the lead passenger. Include country prefix.
 email            | string                       | Email of the passenger - required for the lead passenger.
 birthday         | integer                      | Birthday of the passenger - required for the lead passenger. UNIX epoch timestamp in seconds.
-childSeatType    | string                       | Requested child seat type for a passenger of type "Child". Must match one of offered child seat types from `availableChildSeatTypes` of the trip option you are booking.
+childSeatType    | string                       | Requested child seat type for a passenger of type "Child". Must match one of offered child seat types from [availableChildSeatTypes](#tripoption) of the trip option you are booking.
 
 ## MeetingPosition
 
