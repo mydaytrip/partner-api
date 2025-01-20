@@ -1,16 +1,17 @@
 title: Daytrip API Reference
 
 language_tabs:
-   - bash
+    - bash
 
 includes:
-   - introduction
-   - environments
-   - authentication
-   - errors
-   - debugging
-   - trip-api
-   - faq
+    - introduction
+    - environments
+    - authentication
+    - errors
+    - debugging
+    - trip-api
+    - faq
+    - change-log
 
 search: true
 
