@@ -1,4 +1,4 @@
-## Daytrip Partner API spec
+# Daytrip Partner API spec
 
 To make changes:
 
