@@ -48,13 +48,28 @@ Disclaimer: in the last 24 hours before the departure the [/update](#update-endp
 
 ## Search endpoint
 
-This endpoint returns all trip options for given origin, destination, departure time and passenger count (must be between 1 and 10). Origin and destination are passed as latitude and longitude coordinates. The unit used is degree with decimal places, for example `39.753657, -117.610215`. Departure time is passed as a UNIX epoch timestamp in seconds, like `1679463169`. Note that UNIX timestamps are UTC so you need to convert from local time to UTC when calculating it.
+This endpoint returns all available trip options based on the specified origin, destination, departure time, and passenger count (which must be between 1 and 10). The origin and destination can be provided either as geographic coordinates or as IATA airport codes. Geographic coordinates should be specified as latitude and longitude in decimal degrees format, for example: `39.753657`, `-117.610215`. The departure time must be supplied as a UNIX epoch timestamp in seconds (e.g., 1679463169). Note that UNIX timestamps are in UTC, so it is necessary to convert local time to UTC before sending the request.
 
-> To search for a trip from Prague to Vienna for two passengers, use this call:
+> To search for a trip from Prague to Vienna for three passengers, use this call:
 
 ```bash
 curl "https://api.staging.mydaytrip.net/partners/v3/trip/search?originLongitude=14.2559&originLatitude=50.10&destinationLongitude=16.3738&destinationLatitude=48.2082&departureTime=1766227088&passengersCount=3&childrenCount=1&includeShared=true" \
-  -H "x-api-key: your-api-key"
+  -H "x-api-key: your_api_key"
+```
+
+```javascript
+
+```
+
+```python
+
+```
+
+> To search for a trip from Prague Airport to Vienna for three passengers, use this call:
+
+```bash
+curl "https://api.staging.mydaytrip.net/partners/v3/trip/search?originType=iata&origin=PRG&destinationType=coordinates&destinationLongitude=16.3738&destinationLatitude=48.2082&departureTime=1766227088&passengersCount=3&childrenCount=1&includeShared=true" \
+  -H "x-api-key: your_api_key"
 ```
 
 ```javascript
@@ -504,16 +519,20 @@ curl "https://api.staging.mydaytrip.net/partners/v3/trip/search?originLongitude=
 
 Parameter                 | Type    | Description
 ------------------------- | ------- | -----------
-originLatitude            | number  | Origin latitude in degrees.
-originLongitude           | number  | Origin longitude in degrees.
-destinationLatitude       | number  | Destination latitude in degrees.
-destinationLongitude      | number  | Destination longitude in degrees.
-departureTime             | integer | Departure time as a UNIX epoch timestamp in seconds. Note that UNIX timestamps are UTC so you need to convert from local time to UTC when calculating it.
+originType                | string  | Specifies whether the origin is provided as geo-coordinates or as an airport code. Possible values: `coordinates`, `iata`. If omitted, the default value is `coordinates`.
+originLatitude            | number  | Origin latitude in degrees. Required if `originType` is set to `coordinates` or omitted.
+originLongitude           | number  | Origin longitude in degrees. Required if `originType` is set to `coordinates` or omitted.
+origin                    | string  | IATA airport code of the origin airport. Required if `originType` is set to `iata`.
+destinationType           | string  | Specifies whether the destination is provided as geo-coordinates or as an airport code. Possible values: `coordinates`, `iata`. If omitted, the default value is `coordinates`.
+destinationLatitude       | number  | Destination latitude in degrees. Required if `destinationType` is set to `coordinates` or omitted.
+destinationLongitude      | number  | Destination longitude in degrees. Required if `destinationType` is set to `coordinates` or omitted.
+destination               | string  | IATA airport code of the destination airport. Required if `destinationType` is set to `iata`.
+departureTime             | integer | Departure time as a UNIX epoch timestamp in seconds. Note that UNIX timestamps are in UTC, so you need to convert local time to UTC when calculating it.
 passengersCount           | integer | Total number of passengers to transport (adults and children). Must be between 1 and 10.
-childrenCount             | integer | Optional. Number of children in the group. Required for shared trip options.
-includeStops              | boolean | Optional. Default value true. When set to false no stops will be returned in trip options.
-includeShared             | boolean | Optional. Default value false. When set to true shared trip options will be returned.
-includeNonEnglishSpeaking | boolean | Optional. Default value true. When set to false no trip options without an English speaking driver will be returned.
+childrenCount             | integer | Optional. Specifies the number of children in the group. Required for shared trip options.
+includeStops              | boolean | Optional. Defaults to `true`. When set to `false`, no stops will be included in the trip options.
+includeShared             | boolean | Optional. Defaults to `false`. When set to `true`, shared trip options will be included.
+includeNonEnglishSpeaking | boolean | Optional. Defaults to `true`. When set to `false`, no trip options with non-English-speaking drivers will be included.
 
 ### Response body
 
@@ -545,7 +564,7 @@ curl -d '{
   "selectedStops": ["4ee58c0c-4e56-46ef-bd22-406a1bc60e1c"]
 }' \
   -H "Content-Type: application/json" \
-  -H "x-api-key: your-api-key" \
+  -H "x-api-key: your_api_key" \
   -X POST https://api.staging.mydaytrip.net/partners/v3/trip/search/customize
 ```
 
@@ -732,7 +751,7 @@ curl -d '{
   ]
 }' \
   -H "Content-Type: application/json" \
-  -H "x-api-key: your-api-key" \
+  -H "x-api-key: your_api_key" \
   -X POST https://api.staging.mydaytrip.net/partners/v3/trip/book
 ```
 
@@ -979,7 +998,7 @@ This endpoint is used to cancel a booked trip. For private trips only trips that
 ```bash
 curl -d '{ "bookingId": "cb102778-a3d7-426e-8d18-6bd6b296f283" }' \
   -H "Content-Type: application/json" \
-  -H "x-api-key: your-api-key" \
+  -H "x-api-key: your_api_key" \
   -X POST https://api.staging.mydaytrip.net/partners/v3/trip/cancel
 ```
 
@@ -1037,7 +1056,7 @@ There are two versions of the endpoint: `/partners/v3/trip/details/boookingId` a
 
 ```bash
 curl https://api.staging.mydaytrip.net/partners/v3/trip/details/bookingId \
-  -H "x-api-key: your-api-key"
+  -H "x-api-key: your_api_key"
 ```
 
 ```javascript
@@ -1054,7 +1073,7 @@ curl https://api.staging.mydaytrip.net/partners/v3/trip/details/bookingId \
 
 ```bash
 curl https://api.staging.mydaytrip.net/partners/v3/trip/external/details/externalId \
-  -H "x-api-key: your-api-key"
+  -H "x-api-key: your_api_key"
 ```
 
 ```javascript
@@ -1298,7 +1317,7 @@ curl -d '{
   ]
 }' \
   -H "Content-Type: application/json" \
-  -H "x-api-key: your-api-key" \
+  -H "x-api-key: your_api_key" \
   -X POST https://api.staging.mydaytrip.net/partners/v3/trip/update
 ```
 
@@ -1455,7 +1474,7 @@ This endpoint allows you to retrieve the latest position of driver(s) assigned t
 
 ```bash
 curl https://api.staging.mydaytrip.net/partners/v3/trip/tracking/bookingId \
-  -H "x-api-key: your-api-key"
+  -H "x-api-key: your_api_key"
 ```
 
 ```javascript
@@ -1551,7 +1570,7 @@ Proposed frequency of calling this endpoint depending on the time before the dep
 
 ```bash
 curl https://api.staging.mydaytrip.net/partners/v3/trip/drivers/bookingId \
-  -H "x-api-key: your-api-key"
+  -H "x-api-key: your_api_key"
 ```
 
 ```javascript
