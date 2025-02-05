@@ -2,7 +2,7 @@
 
 ## About Daytrip
 
-With Daytrip, you can offer your clients private car transfers in 130+ countries across 6 continents through our network of 9000+ English-speaking drivers. You can learn more about what we do [here](https://drive.google.com/file/d/1qCAgEbh1XgfpfOSP7XeawQX66nabRFbf/view).
+We make traveling between cities easy. With Daytrip, you can offer your clients private car transfers in 130+ countries across 6 continents through our network of over 10,000+ English-speaking drivers. You can learn more about what we do in our [B2B booklet](https://drive.google.com/file/d/1U06-qDCHWfGKtbBVPfgaiu6FGGwbQQpc/view) or [B2B partner page](https://partners.daytrip.com/).
 
 ## Daytrip Partner API
 
