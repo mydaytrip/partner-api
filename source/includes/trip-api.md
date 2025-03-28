@@ -220,7 +220,6 @@ curl "https://api.staging.mydaytrip.net/partners/v3/trip/search?originType=iata&
         "maxPassengers": 3,
         "description": "Sedan comparable to a Volkswagen Passat, up to 3 passengers with luggage.",
         "modelDescription": "VW Passat or similar",
-
         "image": "https://daytrip.imgix.net/site/sedan.png"
       },
       "luggage": {
