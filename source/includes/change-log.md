@@ -1,5 +1,6 @@
 # Change Log
 
+- **2025-03-28**: Added modelDescription field to Vehicle object.
 - **2025-01-20**: Added the ability to search by airport code.
 - **2024-12-10**: Added timezone information to pickup and dropoff positions in the search response.
 - **2024-09-09**: Added the ability to search and book shared trips.
