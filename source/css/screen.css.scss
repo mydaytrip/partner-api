@@ -298,6 +298,7 @@ html, body {
       content: '';
       display: block;
       clear: both;
+      min-height: 30vh;
       }
    &>h1, &>h2, &>h3, &>h4, &>h5, &>h6, &>p, &>table, &>ul, &>ol, &>aside, &>dl {
       margin-right: $examples-width;
