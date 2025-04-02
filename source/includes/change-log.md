@@ -1,5 +1,6 @@
 # Change Log
 
+- **2025-04-02**: Extended /search and /book endpoints to accept departure time in local time.
 - **2025-03-28**: Added modelDescription field to Vehicle object.
 - **2025-01-20**: Added the ability to search by airport code.
 - **2024-12-10**: Added timezone information to pickup and dropoff positions in the search response.
