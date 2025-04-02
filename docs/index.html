@@ -48,9 +48,9 @@
             </ul>
             <h2 id="contacts">Contacts</h2>
             <h3 id="onboarding">Onboarding</h3>
-            <p>If you want to integrate with our API, contact us at <a href="mailto:&#112;&#x61;&#114;&#116;&#x6e;&#101;&#x72;&#x73;&#64;&#100;&#x61;&#x79;&#116;&#x72;&#x69;&#x70;&#46;&#99;&#x6f;&#x6d;">&#112;&#x61;&#114;&#116;&#x6e;&#101;&#x72;&#x73;&#64;&#100;&#x61;&#x79;&#116;&#x72;&#x69;&#x70;&#46;&#99;&#x6f;&#x6d;</a> to get a partner account and an API key.</p>
+            <p>If you want to integrate with our API, contact us at <a href="mailto:&#x70;&#x61;&#x72;&#x74;&#110;&#x65;&#114;&#115;&#x40;&#x64;&#x61;&#x79;&#x74;&#114;&#105;&#112;&#46;&#99;&#x6f;&#109;">&#x70;&#x61;&#x72;&#x74;&#110;&#x65;&#114;&#115;&#x40;&#x64;&#x61;&#x79;&#x74;&#114;&#105;&#112;&#46;&#99;&#x6f;&#109;</a> to get a partner account and an API key.</p>
             <h3 id="customer-support-emergency">Customer support emergency</h3>
-            <p>To solve problems with bookings created via the API you can contact <a href="mailto:&#100;&#97;&#121;&#x74;&#114;&#105;&#x70;&#x40;&#x64;&#x61;&#x79;&#x74;&#114;&#105;&#x70;&#46;&#99;&#111;&#109;">&#100;&#97;&#121;&#x74;&#114;&#105;&#x70;&#x40;&#x64;&#x61;&#x79;&#x74;&#114;&#105;&#x70;&#46;&#99;&#111;&#109;</a> or call <a href="tel:+442033181119">+44 20 3318 1119</a> or <a href="tel:+16282019501">+1 628 201 9501</a>.</p>
+            <p>To solve problems with bookings created via the API you can contact <a href="mailto:&#100;&#97;&#121;&#x74;&#114;&#105;&#x70;&#x40;&#100;&#x61;&#121;&#116;&#x72;&#105;&#112;&#46;&#99;&#111;&#109;">&#100;&#97;&#121;&#x74;&#114;&#105;&#x70;&#x40;&#100;&#x61;&#121;&#116;&#x72;&#105;&#112;&#46;&#99;&#111;&#109;</a> or call <a href="tel:+442033181119">+44 20 3318 1119</a> or <a href="tel:+16282019501">+1 628 201 9501</a>.</p>
             <h1 id="environments">Environments</h1>
             <p>Daytrip offers a sandbox environment where you can test your integration with the API without creating real bookings. All the code examples provided in this documentation are using this sandbox environment. Each environment requires a different API key. When your integration is ready and tested against the sandbox environment, you can request an API key for the production environment.</p>
             <h2 id="urls">URLs</h2>
@@ -196,9 +196,9 @@
                <li><code>optional</code> - call <a href="#details-endpoint">/details</a> endpoint to get trip and booking details</li>
                <li>call <a href="#update-endpoint">/update</a> endpoint to update the booking details</li>
             </ol>
-            <p>Disclaimer: in the last 24 hours before the departure the <a href="#update-endpoint">/update</a> endpoint will no longer accept updates. For updates in the last 24 hours please contact our customer support at <a href="mailto:&#x64;&#x61;&#x79;&#116;&#114;&#105;&#112;&#64;&#x6d;&#121;&#x64;&#x61;&#121;&#116;&#114;&#x69;&#x70;&#x2e;&#99;&#111;&#x6d;">&#x64;&#x61;&#x79;&#116;&#114;&#105;&#112;&#64;&#x6d;&#121;&#x64;&#x61;&#121;&#116;&#114;&#x69;&#x70;&#x2e;&#99;&#111;&#x6d;</a> or call <a href="tel:+442033181119">+44 20 3318 1119</a>.</p>
+            <p>Disclaimer: in the last 24 hours before the departure the <a href="#update-endpoint">/update</a> endpoint will no longer accept updates. For updates in the last 24 hours please contact our customer support at <a href="mailto:&#x64;&#x61;&#121;&#116;&#x72;&#x69;&#x70;&#64;&#109;&#121;&#x64;&#97;&#121;&#116;&#x72;&#x69;&#112;&#46;&#x63;&#111;&#109;">&#x64;&#x61;&#121;&#116;&#x72;&#x69;&#x70;&#64;&#109;&#121;&#x64;&#97;&#121;&#116;&#x72;&#x69;&#112;&#46;&#x63;&#111;&#109;</a> or call <a href="tel:+442033181119">+44 20 3318 1119</a>.</p>
             <h2 id="search-endpoint">Search endpoint</h2>
-            <p>This endpoint returns all available trip options based on the specified origin, destination, departure time, and passenger count (which must be between 1 and 10). The origin and destination can be provided either as geographic coordinates or as IATA airport codes. Geographic coordinates should be specified as latitude and longitude in decimal degrees format, for example: <code>39.753657</code>, <code>-117.610215</code>. The departure time must be supplied as a UNIX epoch timestamp in seconds (e.g., 1679463169). Note that UNIX timestamps are in UTC, so it is necessary to convert local time to UTC before sending the request.</p>
+            <p>This endpoint returns all available trip options based on the specified origin, destination, departure time, and passenger count (which must be between 1 and 10). The origin and destination can be provided either as geographic coordinates or as IATA airport codes. Geographic coordinates should be specified as latitude and longitude in decimal degrees format, for example: <code>39.753657</code>, <code>-117.610215</code>. The departure time must be supplied as a UNIX epoch timestamp in seconds (e.g., 1679463169).</p>
             <blockquote>
                <p>To search for a trip from Prague to Vienna for three passengers, use this call:</p>
             </blockquote>
@@ -349,7 +349,6 @@
         <span class="hljs-attr">&quot;maxPassengers&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">3</span><span class="hljs-punctuation">,</span>
         <span class="hljs-attr">&quot;description&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Sedan comparable to a Volkswagen Passat, up to 3 passengers with luggage.&quot;</span><span class="hljs-punctuation">,</span>
         <span class="hljs-attr">&quot;modelDescription&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;VW Passat or similar&quot;</span><span class="hljs-punctuation">,</span>
-
         <span class="hljs-attr">&quot;image&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;https://daytrip.imgix.net/site/sedan.png&quot;</span>
       <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
       <span class="hljs-attr">&quot;luggage&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
@@ -699,7 +698,12 @@
                   <tr>
                      <td>departureTime</td>
                      <td>integer</td>
-                     <td>Departure time as a UNIX epoch timestamp in seconds. Note that UNIX timestamps are in UTC, so you need to convert local time to UTC when calculating it.</td>
+                     <td>Departure time as a UNIX epoch timestamp in seconds. This timestamp should be calculated from the local departure time converted to UTC. It can be omitted, if departureTimeLocal is provided.</td>
+                  </tr>
+                  <tr>
+                     <td>departureTimeLocal</td>
+                     <td>integer</td>
+                     <td>Departure time as a UNIX epoch timestamp in seconds. This timestamp should be calculated from the local departure time, when timezone is unknown and it is not possible to get the time in UTC. It can be omitted if departureTime is provided.</td>
                   </tr>
                   <tr>
                      <td>passengersCount</td>
@@ -1210,6 +1214,11 @@
                      <td>departureTime</td>
                      <td>integer</td>
                      <td>Optional. Departure time as a UNIX epoch timestamp in seconds to use instead of the <code>departureTime</code> provided to the <a href="#search-endpoint">/search</a>. You can only move departure time less than 24 hours into the past or into the future compared to the original <code>departureTime</code>, otherwise the booking will be rejected (403 HTTP status code). Also if the new price after changing the departure time would be different, booking will also get rejected. Such price change should be extremely rare but your integration should be ready for it if you are sending different <code>departureTime</code>. Note that UNIX timestamps are UTC so you need to convert from local time to UTC when calculating it. Change of the departure time is applicable only for the private trip.</td>
+                  </tr>
+                  <tr>
+                     <td>departureTimeLocal</td>
+                     <td>integer</td>
+                     <td>Optional. The same as <code>departureTime</code> but the local departure time is not converted to UTC. If <code>departureTime</code> is specified, this parameter cannot be sent, and wice versa.</td>
                   </tr>
                   <tr>
                      <td>pickUpAddressNote</td>
@@ -1842,7 +1851,7 @@
             <p><code>/partners/v3/trip/update</code></p>
             <h3 id="request-body-3">Request body</h3>
             <p>All properties except <code>bookingId</code> are optional. When a property is not included in the request it won&#39;t be updated and it will keep it&#39;s previous value. If you want to remove a property value like <code>customerNote</code> then send an empty string <code>&quot;&quot;</code> as the value. If you want to make changes to any passenger you need to provide full <code>passengerDetails</code> array - it&#39;s not possible to send only details of the passenger you want to update.</p>
-            <p>Disclaimer: in the last 24 hours before the departure the <a href="#update-endpoint">/update</a> endpoint will no longer accept updates. For updates in the last 24 hours please contact our customer support at <a href="mailto:&#x64;&#x61;&#121;&#x74;&#x72;&#x69;&#x70;&#64;&#x6d;&#x79;&#100;&#97;&#121;&#116;&#x72;&#x69;&#x70;&#46;&#x63;&#111;&#109;">&#x64;&#x61;&#121;&#x74;&#x72;&#x69;&#x70;&#64;&#x6d;&#x79;&#100;&#97;&#121;&#116;&#x72;&#x69;&#x70;&#46;&#x63;&#111;&#109;</a> or call <a href="tel:+442033181119">+44 20 3318 1119</a>.</p>
+            <p>Disclaimer: in the last 24 hours before the departure the <a href="#update-endpoint">/update</a> endpoint will no longer accept updates. For updates in the last 24 hours please contact our customer support at <a href="mailto:&#x64;&#97;&#121;&#x74;&#114;&#105;&#112;&#x40;&#x6d;&#121;&#x64;&#97;&#121;&#116;&#114;&#x69;&#112;&#46;&#x63;&#x6f;&#109;">&#x64;&#97;&#121;&#x74;&#114;&#105;&#112;&#x40;&#x6d;&#121;&#x64;&#97;&#121;&#116;&#114;&#x69;&#112;&#46;&#x63;&#x6f;&#109;</a> or call <a href="tel:+442033181119">+44 20 3318 1119</a>.</p>
             <table>
                <thead>
                   <tr>
@@ -2889,6 +2898,7 @@
             <p>You can send up to 2000 requests per minute.</p>
             <h1 id="change-log">Change Log</h1>
             <ul>
+               <li><strong>2025-04-02</strong>: Extended /search and /book endpoints to accept departure time in local time.</li>
                <li><strong>2025-03-28</strong>: Added modelDescription field to Vehicle object.</li>
                <li><strong>2025-01-20</strong>: Added the ability to search by airport code.</li>
                <li><strong>2024-12-10</strong>: Added timezone information to pickup and dropoff positions in the search response.</li>
