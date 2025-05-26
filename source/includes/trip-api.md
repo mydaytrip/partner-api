@@ -516,29 +516,333 @@ curl "https://api.staging.mydaytrip.net/partners/v3/trip/search?originType=iata&
 }
 ```
 
+> To search for a trip from Prague to Vienna for ten passengers, with multivehicle options included:
+
+```bash
+curl "https://api.staging.mydaytrip.net/partners/v3/trip/search?originLongitude=14.2559&originLatitude=50.10&destinationLongitude=16.3738&destinationLatitude=48.2082&departureTime=1766227088&passengersCount=10&childrenCount=1&includeShared=true&includeMultipleVehicles=true" \
+  -H "x-api-key: your_api_key"
+```
+
+```javascript
+
+```
+
+```python
+
+```
+
+> The above call returns a JSON structured like this:
+
+```json
+{
+  "searchId": "f41dc34f-5218-46b1-8e46-1de8ccc5f5c3",
+  "expiresAt": "2025-05-27T05:53:46Z",
+  "passengersCount": 10,
+  "currency": "EUR",
+  "options": [
+    {
+      "id": "68646974-023a-4f9c-8358-869c7ab8db3d",
+      "type": "Private",
+      "englishSpeakingDriver": true,
+      "distanceKm": 338,
+      "travelTimeMinutes": 214,
+      "pickUp": {
+        "lat": 50.1,
+        "lon": 14.2559,
+        "time": "2025-12-20T10:38:08Z",
+        "timezone": "Europe/Prague",
+        "meetAndGreet": true
+      },
+      "dropOff": {
+        "lat": 48.2082,
+        "lon": 16.3738
+      },
+      "pricing": {
+        "totalPrice": 678
+      },
+      "vehicles": [
+        {
+          "type": "Van",
+          "maxPassengers": 7,
+          "description": "Van comparable to a VW Transporter, up to 7 passengers with luggage.",
+          "modelDescription": "VW Transporter or similar",
+          "image": "https://daytrip.imgix.net/site/van-vw.png"
+        },
+        {
+          "type": "Sedan",
+          "maxPassengers": 3,
+          "description": "Sedan comparable to a Volkswagen Passat, up to 3 passengers with luggage.",
+          "modelDescription": "VW Passat or similar",
+          "image": "https://daytrip.imgix.net/site/sedan.png"
+        }
+      ],
+      "luggage": {
+        "maxTotalCarryons": 10,
+        "maxTotalSuitcases": 10
+      },
+      "possibleStops": [
+        {
+          "id": "359be11a-9284-48b0-8ea1-03f99d63805a",
+          "price": 22,
+          "name": "Sazava monastery",
+          "image": "https://daytrip2.imgix.net/366.jpg",
+          "title": "An Abbey Fit for a Saint",
+          "perex": "Founded in 1032, Sázava Monastery is a former Benedictine abbey that has endured much struggle and strife throughout its long history.",
+          "description": "Declared a national cultural monument in 1962, Sázava Monastery is one of the oldest and best preserved monasteries in all of Bohemia. During its early years, Sázava was seen as a cultural bridge between the eastern and western branches of the church due its use of the Old Slavonic, the first written Slavic language. However this came to an abrupt end in 1097, when the Pope forbade Slavic liturgies during religious ceremonies and Slavic monks were banished from the monastery. During the 15th century Hussite War Sázava was burnt down, then remodeled in the Baroque style in the 17th century before finally being abolished in the 19th century and rebuilt as a Pseudo-Renaissance chateau. Nowadays Sázava has been returned to its original aesthetic and acts as a cultural centre for the traditions of Old Slavonic and a museum of historical artefacts from the region.",
+          "durationInMinutes": 60,
+          "order": 1,
+          "timezone": "Europe/Prague",
+          "country": {
+            "englishName": "Czech Republic"
+          }
+        },
+        {
+          "id": "6073e7ce-74e1-4aa9-88db-850e1e2822e3",
+          "price": 43,
+          "name": "Kutna Hora",
+          "image": "https://daytrip2.imgix.net/kutna-hora1.jpg",
+          "title": "Medieval silver-mining boom town",
+          "perex": "Some cities, as 'Starship' sang, are built on rock 'n' roll but Kutná Hora was built on silver, a more durable substance, and almost as profitable.",
+          "description": "Its extensive deposits lured a flood of settlers in the Thirteenth Century and by its end the town was the seat of the Czech national mint and financial centre of the country. Today, its wealth lies in a thousand years worth of architectural heritage which, unlike Prague's, can be savoured without the pressure of crowds. A daunting prospect perhaps but Kutná Hora's attractions can be found as much in small-scale detail as in the large-scale magnificence of the Fourteenth Century Cathedral of St. Barbara. Stroll along the immaculately-preserved medieval street Ruthardka, or marvel at the Stone Fountain sitting like a giant sandstone crown amid burgher houses.  One or two of the larger-scale items shouldn't be missed however. The Bone Church, or Ossuary, is one such, a Cistercian chapel representing a medieval revolution in interior design: bones and nothing but the bones of the dead, from 'noughts and crosses' floor to chandeliered ceiling.",
+          "durationInMinutes": 90,
+          "order": 2,
+          "timezone": "Europe/Prague",
+          "country": {
+            "englishName": "Czech Republic"
+          }
+        },
+        {
+          "id": "370a27f6-0c45-4795-b268-22eab1fbb95f",
+          "price": 18,
+          "name": "Trebic",
+          "image": "https://daytrip2.imgix.net/60.jpg",
+          "title": "Big History in a Little Town",
+          "perex": "The two UNESCO World Heritage Sites in this quiet town are a beautiful testament to the co-existence of Jewish and Christian cultures.",
+          "description": "Trebic has experienced a new lease of life after two of its most historic sites were awarded UNESCO World Heritage status. The Basilica of St. Procopius began as a monastery in the 12th century and helped establish Trebic as a thriving market town. It's since undergone various remodels, with today's impressive structure coming from alterations in the early 1700s. One particular feature that stands out is a rare example of a ten-part rose window. Trebic’s Jewish Quarter is one of the best-preserved and largest Jewish Ghettos in Europe. All the original inhabitants were deported and sent to concentration camps in WW2, with only ten managing to return after the war. While many of the buildings in the area are now owned by non-Jewish residents, the Quarter still contains two synagogues and an ancient Jewish cemetery as an act of memorial.",
+          "durationInMinutes": 60,
+          "order": 3,
+          "timezone": "Europe/Prague",
+          "country": {
+            "englishName": "Czech Republic"
+          }
+        },
+        {
+          "id": "cf4e3df5-7f72-4b1a-8f40-347a031f7654",
+          "price": 18,
+          "name": "Sonberk Winery",
+          "image": "https://daytrip2.imgix.net/sonberk-winery.jpg",
+          "title": "The Drink of Kings",
+          "perex": "For centuries, Sonberk has produced some of the best dry wines in Central Europe, becoming a favourite of European nobility.",
+          "description": "Praised for its excellence, since the early 16th-century Sonberk’s vineyards were regularly supplying the Bohemian and Austrian kings with wine. The vineyards have grown and developed dramatically since then, yet one thing hasn’t changed - the wine. The present-day vineyards are dominated by Sonberk’s massive masterpiece of modern architecture. What’s more, visitors can taste Sonberk’s world-class products. It is also possible to combine the tasting with a tour around the vineyards and learn about the process sustainable grape growing. The tour needs to be reserved two days prior arrival. Reservations are not required for the wine tasting, but we still recommend checking their availability in advance. For more details about the winery, its offers, and reservations, please visit: http://www.sonberk.cz/en/",
+          "durationInMinutes": 60,
+          "order": 4,
+          "timezone": "Europe/Prague",
+          "country": {
+            "englishName": "Czech Republic"
+          }
+        },
+        {
+          "id": "4ee58c0c-4e56-46ef-bd22-406a1bc60e1c",
+          "price": 18,
+          "name": "Mikulov",
+          "image": "https://daytrip2.imgix.net/510.jpg",
+          "title": "The Heart of Czech Wine Country",
+          "perex": "A town with a history as deep and flavourful as its wine, Mikulov provides a perfect combination of relaxation and exploration.",
+          "description": "Often favoured by visitors with a more active approach to life, Mikulov has much to offer. Surrounded by idyllic countryside, crisscrossed by bicycle paths and marked hiking trails, and the nearby Nové Mlýny lakes, there is something for everyone to enjoy. After all that fresh air, a glass of wine will be more than welcome, and fortunately, Mikulov is the centre for Czech wine making. Due to a high concentration of limestone in the local soil, wine from this region has a unique character and distinct taste. If you like your wine with a side-serving of history, Mikulov Castle dates from the 1730s, and the Dietrichstein Tomb is the final resting place of a Bohemian noble family. Mikulov is also significant for its strong Jewish history. In the early 1800s Mikulov's Jewish Quarter was the largest in Moravia with half the town's inhabitants being of Jewish faith.",
+          "durationInMinutes": 60,
+          "order": 5,
+          "timezone": "Europe/Prague",
+          "country": {
+            "englishName": "Czech Republic"
+          }
+        },
+        {
+          "id": "d280ce2a-6224-4d95-af17-a250f81b97dd",
+          "price": 18,
+          "name": "Lednice Chateau and Park",
+          "image": "https://daytrip2.imgix.net/lednice-chateau-and-park4.jpg",
+          "title": "Vacation like a King",
+          "perex": "This UNESCO-listed chateau and sprawling park was the Lichtenstein's holiday home - exactly the kind of extravagance you'd expect from a dynasty with their own country. ",
+          "description": "The Liechtensteins really came into the money with the fortunes seized from Czech noblemen after their victory at the Battle of White Mountain in 1620, and Lednice was one of the presents they bought themselves. In the mid-19th century the baroque manor was given a complete makeover in the 'Windsor Gothic' style, leaving it as we see it today: a shameless flaunting of fabulous wealth, a slap in the face to anyone foolish enough to think that the French Revolution had ended high-living in Europe. The surrounding English landscape park, the largest in the country, is an incomparable swath of green, sprinkled with Romantic follies. There's also a monumental greenhouse open all year round, overflowing with exotic growths gathered by an army of botanists across the Americas. The greenhouse's exoticism is echoed by the charming minaret, constructed at the turn of the 18th century, bringing a whiff of Morocco to Moravia.\nFor more info: www.zamek-lednice.com",
+          "durationInMinutes": 60,
+          "order": 6,
+          "timezone": "Europe/Prague",
+          "country": {
+            "englishName": "Czech Republic"
+          }
+        }
+      ],
+      "includedStops": [],
+      "availableChildSeatTypes": [
+        {
+          "childSeatType": "RearFacing",
+          "description": "Rear-facing infant seat",
+          "ageFrom": 0,
+          "ageTo": 1,
+          "weightInPoundsFrom": 0,
+          "weightInPoundsTo": 26,
+          "weightInKilosFrom": 0,
+          "weightInKilosTo": 10
+        },
+        {
+          "childSeatType": "ForwardFacing",
+          "description": "Forward-facing w/harness",
+          "ageFrom": 1,
+          "ageTo": 4,
+          "weightInPoundsFrom": 18,
+          "weightInPoundsTo": 36,
+          "weightInKilosFrom": 8,
+          "weightInKilosTo": 16
+        },
+        {
+          "childSeatType": "BoosterSeat",
+          "description": "Booster seat with high back",
+          "ageFrom": 4,
+          "ageTo": 6,
+          "weightInPoundsFrom": 30,
+          "weightInPoundsTo": 50,
+          "weightInKilosFrom": 14,
+          "weightInKilosTo": 23
+        },
+        {
+          "childSeatType": "Booster",
+          "description": "Backless booster",
+          "ageFrom": 6,
+          "ageTo": 12,
+          "weightInPoundsFrom": 44,
+          "weightInPoundsTo": 72,
+          "weightInKilosFrom": 20,
+          "weightInKilosTo": 33
+        }
+      ]
+    },
+    {
+      "id": "9b172d56-b696-4df2-908e-729990766ad2",
+      "type": "Private",
+      "englishSpeakingDriver": false,
+      "distanceKm": 338,
+      "travelTimeMinutes": 214,
+      "pickUp": {
+        "lat": 50.1,
+        "lon": 14.2559,
+        "time": "2025-12-20T10:38:08Z",
+        "timezone": "Europe/Prague",
+        "meetAndGreet": true
+      },
+      "dropOff": {
+        "lat": 48.2082,
+        "lon": 16.3738
+      },
+      "pricing": {
+        "totalPrice": 612
+      },
+      "vehicles": [
+        {
+          "type": "Sedan",
+          "maxPassengers": 3,
+          "description": "Sedan comparable to a Volkswagen Passat, up to 3 passengers with luggage.",
+          "modelDescription": "VW Passat or similar",
+          "image": "https://daytrip.imgix.net/site/sedan.png"
+        },
+        {
+          "type": "Sedan",
+          "maxPassengers": 3,
+          "description": "Sedan comparable to a Volkswagen Passat, up to 3 passengers with luggage.",
+          "modelDescription": "VW Passat or similar",
+          "image": "https://daytrip.imgix.net/site/sedan.png"
+        },
+        {
+          "type": "Sedan",
+          "maxPassengers": 3,
+          "description": "Sedan comparable to a Volkswagen Passat, up to 3 passengers with luggage.",
+          "modelDescription": "VW Passat or similar",
+          "image": "https://daytrip.imgix.net/site/sedan.png"
+        },
+        {
+          "type": "Sedan",
+          "maxPassengers": 3,
+          "description": "Sedan comparable to a Volkswagen Passat, up to 3 passengers with luggage.",
+          "modelDescription": "VW Passat or similar",
+          "image": "https://daytrip.imgix.net/site/sedan.png"
+        }
+      ],
+      "luggage": {
+        "maxTotalCarryons": 12,
+        "maxTotalSuitcases": 12
+      },
+      "possibleStops": [],
+      "includedStops": [],
+      "availableChildSeatTypes": [
+        {
+          "childSeatType": "RearFacing",
+          "description": "Rear-facing infant seat",
+          "ageFrom": 0,
+          "ageTo": 1,
+          "weightInPoundsFrom": 0,
+          "weightInPoundsTo": 26,
+          "weightInKilosFrom": 0,
+          "weightInKilosTo": 10
+        },
+        {
+          "childSeatType": "ForwardFacing",
+          "description": "Forward-facing w/harness",
+          "ageFrom": 1,
+          "ageTo": 4,
+          "weightInPoundsFrom": 18,
+          "weightInPoundsTo": 36,
+          "weightInKilosFrom": 8,
+          "weightInKilosTo": 16
+        },
+        {
+          "childSeatType": "BoosterSeat",
+          "description": "Booster seat with high back",
+          "ageFrom": 4,
+          "ageTo": 6,
+          "weightInPoundsFrom": 30,
+          "weightInPoundsTo": 50,
+          "weightInKilosFrom": 14,
+          "weightInKilosTo": 23
+        },
+        {
+          "childSeatType": "Booster",
+          "description": "Backless booster",
+          "ageFrom": 6,
+          "ageTo": 12,
+          "weightInPoundsFrom": 44,
+          "weightInPoundsTo": 72,
+          "weightInKilosFrom": 20,
+          "weightInKilosTo": 33
+        }
+      ]
+    }
+  ]
+}
+```
+
 ### URL path
 
 `/partners/v3/trip/search`
 
 ### Query Parameters
 
-| Parameter                 | Type    | Description                                                                                                                                                                     |
-| ------------------------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| originType                | string  | Specifies whether the origin is provided as geo-coordinates or as an airport code. Possible values: `coordinates`, `iata`. If omitted, the default value is `coordinates`.      |
-| originLatitude            | number  | Origin latitude in degrees. Required if `originType` is set to `coordinates` or omitted.                                                                                        |
-| originLongitude           | number  | Origin longitude in degrees. Required if `originType` is set to `coordinates` or omitted.                                                                                       |
-| origin                    | string  | IATA airport code of the origin airport. Required if `originType` is set to `iata`.                                                                                             |
-| destinationType           | string  | Specifies whether the destination is provided as geo-coordinates or as an airport code. Possible values: `coordinates`, `iata`. If omitted, the default value is `coordinates`. |
-| destinationLatitude       | number  | Destination latitude in degrees. Required if `destinationType` is set to `coordinates` or omitted.                                                                              |
-| destinationLongitude      | number  | Destination longitude in degrees. Required if `destinationType` is set to `coordinates` or omitted.                                                                             |
-| destination               | string  | IATA airport code of the destination airport. Required if `destinationType` is set to `iata`.                                                                                   |
-| departureTime             | integer | Departure time as a UNIX epoch timestamp in seconds. This timestamp should be calculated from the local departure time and converted to UTC. It can be omitted, if `departureTimeLocal` is provided. |
+| Parameter                 | Type    | Description                                                                                                                                                                                                                                                                                                           |
+| ------------------------- | ------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| originType                | string  | Specifies whether the origin is provided as geo-coordinates or as an airport code. Possible values: `coordinates`, `iata`. If omitted, the default value is `coordinates`.                                                                                                                                            |
+| originLatitude            | number  | Origin latitude in degrees. Required if `originType` is set to `coordinates` or omitted.                                                                                                                                                                                                                              |
+| originLongitude           | number  | Origin longitude in degrees. Required if `originType` is set to `coordinates` or omitted.                                                                                                                                                                                                                             |
+| origin                    | string  | IATA airport code of the origin airport. Required if `originType` is set to `iata`.                                                                                                                                                                                                                                   |
+| destinationType           | string  | Specifies whether the destination is provided as geo-coordinates or as an airport code. Possible values: `coordinates`, `iata`. If omitted, the default value is `coordinates`.                                                                                                                                       |
+| destinationLatitude       | number  | Destination latitude in degrees. Required if `destinationType` is set to `coordinates` or omitted.                                                                                                                                                                                                                    |
+| destinationLongitude      | number  | Destination longitude in degrees. Required if `destinationType` is set to `coordinates` or omitted.                                                                                                                                                                                                                   |
+| destination               | string  | IATA airport code of the destination airport. Required if `destinationType` is set to `iata`.                                                                                                                                                                                                                         |
+| departureTime             | integer | Departure time as a UNIX epoch timestamp in seconds. This timestamp should be calculated from the local departure time and converted to UTC. It can be omitted, if `departureTimeLocal` is provided.                                                                                                                  |
 | departureTimeLocal        | integer | Departure time as a UNIX epoch timestamp in seconds. This parameter can be used, when the origin timezone is unknown and conversion to UTC cannot be done. In this case the departure time can be sent as a local time converted to the Unix epoch. This parameter is not required, when `departureTime` is provided. |
-| passengersCount           | integer | Total number of passengers to transport (adults and children). Must be between 1 and 10.                                                                                        |
-| childrenCount             | integer | Optional. Specifies the number of children in the group. Required for shared trip options.                                                                                      |
-| includeStops              | boolean | Optional. Defaults to `true`. When set to `false`, no stops will be included in the trip options.                                                                               |
-| includeShared             | boolean | Optional. Defaults to `false`. When set to `true`, shared trip options will be included.                                                                                        |
-| includeNonEnglishSpeaking | boolean | Optional. Defaults to `true`. When set to `false`, no trip options with non-English-speaking drivers will be included.                                                          |
+| passengersCount           | integer | Total number of passengers to transport (adults and children). Must be between 1 and 7 if `includeMultipleVehicles` is set to `false` or not provided. In case that `includeMultipleVehicles` is set to `true` this parameter must be between 1 and 99.                                                               |
+| childrenCount             | integer | Optional. Specifies the number of children in the group. Required for shared trip options.                                                                                                                                                                                                                            |
+| includeStops              | boolean | Optional. Defaults to `true`. When set to `false`, no stops will be included in the trip options.                                                                                                                                                                                                                     |
+| includeShared             | boolean | Optional. Defaults to `false`. When set to `true`, shared trip options will be included.                                                                                                                                                                                                                              |
+| includeNonEnglishSpeaking | boolean | Optional. Defaults to `true`. When set to `false`, no trip options with non-English-speaking drivers will be included.                                                                                                                                                                                                |
+| includeMultipleVehicles   | boolean | Optional. Defaults to `false`. When set to `true`, if single vehicle options cannot be found we will try to provide trip options with multiple vehicles.                                                                                                                                                              |
 
 ### Response body
 
@@ -1688,7 +1992,8 @@ Below is a documentation of all object entities returned by the Daytrip API endp
 | pickUp                  | object - [Location](#location)                           | Details about the pickup point.                                                                                                                                          |
 | dropOff                 | object - [Location](#location)                           | Details about the dropoff point.                                                                                                                                         |
 | pricing                 | object - [Pricing](#pricing)                             | Details about the pricing.                                                                                                                                               |
-| vehicle                 | object - [Vehicle](#vehicle)                             | Details about the vehicle.                                                                                                                                               |
+| vehicle                 | object - [Vehicle](#vehicle)                             | Details about the vehicle. Defined only if `includeMultipleVehicles` set to `false` or not defined.                                                                      |
+| vehicles                | list of [Vehicle](#vehicle)                              | Details about vehicles. Defined only if `includeMultipleVehicles` set to `true`.                                                                                         |
 | luggage                 | object - [Luggage](#luggage)                             | Details about the luggage.                                                                                                                                               |
 | seatsAvailable          | integer                                                  | Number of available seats in the shared shuttle. Optional.                                                                                                               |
 | availableChildSeatTypes | list of [ChildSeatType](#childseattype)                  | List of available child seat types for this trip.                                                                                                                        |
