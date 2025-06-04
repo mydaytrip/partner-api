@@ -48,12 +48,12 @@ Disclaimer: in the last 24 hours before the departure the [/update](#update-endp
 
 ## Search endpoint
 
-This endpoint returns all available trip options based on the specified origin, destination, departure time, and passenger count (which must be between 1 and 10). The origin and destination can be provided either as geographic coordinates or as IATA airport codes. Geographic coordinates should be specified as latitude and longitude in decimal degrees format, for example: `39.753657`, `-117.610215`. The departure time must be supplied as a UNIX epoch timestamp in seconds (e.g., 1679463169).
+This endpoint returns all available trip options based on the specified origin, destination, departure time, and passenger count. The origin and destination can be provided either as geographic coordinates or as IATA airport codes. Geographic coordinates should be specified as latitude and longitude in decimal degrees format, for example: `39.753657`, `-117.610215`. The departure time must be supplied as a UNIX epoch timestamp in seconds (e.g., 1679463169).
 
-> To search for a trip from Prague to Vienna for three passengers, use this call:
+> To search for a private or shared trip from Prague to Vienna for 3 passengers, use this call:
 
 ```bash
-curl "https://api.staging.mydaytrip.net/partners/v3/trip/search?originLongitude=14.2559&originLatitude=50.10&destinationLongitude=16.3738&destinationLatitude=48.2082&departureTime=1766227088&passengersCount=3&childrenCount=1&includeShared=true" \
+curl "https://api.staging.mydaytrip.net/partners/v3/trip/search?originLatitude=50.10&originLongitude=14.2559&destinationLatitude=48.2082&destinationLongitude=16.3738&departureTime=1766227088&passengersCount=3&childrenCount=1&includeShared=true" \
   -H "x-api-key: your_api_key"
 ```
 
@@ -65,10 +65,10 @@ curl "https://api.staging.mydaytrip.net/partners/v3/trip/search?originLongitude=
 
 ```
 
-> To search for a trip from Prague Airport to Vienna for three passengers, use this call:
+> To search for a private or shared trip from Prague Airport to Vienna for 3 passengers, use this call:
 
 ```bash
-curl "https://api.staging.mydaytrip.net/partners/v3/trip/search?originType=iata&origin=PRG&destinationType=coordinates&destinationLongitude=16.3738&destinationLatitude=48.2082&departureTime=1766227088&passengersCount=3&childrenCount=1&includeShared=true" \
+curl "https://api.staging.mydaytrip.net/partners/v3/trip/search?originType=iata&origin=PRG&destinationType=coordinates&destinationLatitude=48.2082&destinationLongitude=16.3738&departureTime=1766227088&passengersCount=3&childrenCount=1&includeShared=true" \
   -H "x-api-key: your_api_key"
 ```
 
@@ -100,11 +100,15 @@ curl "https://api.staging.mydaytrip.net/partners/v3/trip/search?originType=iata&
         "lon": 14.25,
         "time": "2022-12-05T18:00:00Z",
         "timezone": "Europe/Prague",
-        "meetAndGreet": true
+        "meetAndGreet": true,
+        "state": "original",
+        "immutable": false
       },
       "dropOff": {
         "lat": 48.2,
-        "lon": 16.37
+        "lon": 16.37,
+        "state": "original",
+        "immutable": false
       },
       "pricing": {
         "totalPrice": 260
@@ -206,11 +210,15 @@ curl "https://api.staging.mydaytrip.net/partners/v3/trip/search?originType=iata&
         "lon": 14.25,
         "time": "2022-12-05T18:00:00Z",
         "timezone": "Europe/Prague",
-        "meetAndGreet": true
+        "meetAndGreet": true,
+        "state": "original",
+        "immutable": false
       },
       "dropOff": {
         "lat": 48.2,
-        "lon": 16.37
+        "lon": 16.37,
+        "state": "original",
+        "immutable": false
       },
       "pricing": {
         "totalPrice": 240
@@ -312,11 +320,15 @@ curl "https://api.staging.mydaytrip.net/partners/v3/trip/search?originType=iata&
         "lon": 14.25,
         "time": "2022-12-05T18:00:00Z",
         "timezone": "Europe/Prague",
-        "meetAndGreet": true
+        "meetAndGreet": true,
+        "state": "original",
+        "immutable": false
       },
       "dropOff": {
         "lat": 48.2,
-        "lon": 16.37
+        "lon": 16.37,
+        "state": "original",
+        "immutable": false
       },
       "pricing": {
         "totalPrice": 320
@@ -423,7 +435,10 @@ curl "https://api.staging.mydaytrip.net/partners/v3/trip/search?originType=iata&
         },
         "timezone": "Europe/Prague",
         "description": "In front of the hotel Europa",
-        "meetAndGreet": false
+        "address": "Evropska 1540/41, Prague, Czechia",
+        "meetAndGreet": false,
+        "state": "adjusted",
+        "immutable": true
       },
       "dropOff": {
         "lat": 48.21,
@@ -434,7 +449,10 @@ curl "https://api.staging.mydaytrip.net/partners/v3/trip/search?originType=iata&
           "latest": "2022-12-05T22:55:00Z"
         },
         "timezone": "Europe/Vienna",
-        "description": "Next to the railway station"
+        "description": "Next to the railway station",
+        "address": "Bahnhofplatz, 1010 Wien, Austria",
+        "state": "adjusted",
+        "immutable": true
       },
       "pricing": {
         "pricePerPassenger": 180,
@@ -454,225 +472,6 @@ curl "https://api.staging.mydaytrip.net/partners/v3/trip/search?originType=iata&
         "maxTotalSuitcases": 2
       },
       "seatsAvailable": 8,
-      "availableChildSeatTypes": [],
-      "possibleStops": [],
-      "cancellationPolicy": "Flexible",
-      "expiresAt": "2022-12-04T15:00:00Z"
-    },
-    {
-      "id": "4b137906-008a-49cf-b248-e3827b3a3175",
-      "type": "Shared",
-      "englishSpeakingDriver": false,
-      "distanceKm": 350,
-      "travelTimeMinutes": 235,
-      "pickUp": {
-        "lat": 50.12,
-        "lon": 14.27,
-        "time": "2022-12-05T20:00:00Z",
-        "interval": {
-          "earliest": "2022-12-05T20:00:00Z",
-          "latest": "2022-12-05T20:10:00Z"
-        },
-        "timezone": "Europe/Prague",
-        "description": "In front of the hotel Europa",
-        "meetAndGreet": false
-      },
-      "dropOff": {
-        "lat": 48.21,
-        "lon": 16.36,
-        "time": "2022-12-05T23:55:00Z",
-        "interval": {
-          "earliest": "2022-12-05T23:40:00Z",
-          "latest": "2022-12-05T23:55:00Z"
-        },
-        "timezone": "Europe/Vienna",
-        "description": "Next to the railway station"
-      },
-      "pricing": {
-        "pricePerPassenger": 190,
-        "totalPrice": 380
-      },
-      "vehicle": {
-        "type": "Shuttle",
-        "maxPassengers": 10,
-        "description": "Shuttle comparable to a Mercedes-Benz Vito, up to 10 passengers with luggage.",
-        "modelDescription": "Mercedes-Benz Vito or similar",
-        "image": "https://daytrip.imgix.net/site/shuttle.png"
-      },
-      "luggage": {
-        "maxCarryonsPerPerson": 1,
-        "maxSuitcasesPerPerson": 1,
-        "maxTotalCarryons": 2,
-        "maxTotalSuitcases": 2
-      },
-      "seatsAvailable": 5,
-      "availableChildSeatTypes": [],
-      "possibleStops": [],
-      "includedStops": [],
-      "cancellationPolicy": "Flexible",
-      "expiresAt": "2022-12-04T15:00:00Z"
-    }
-  ]
-}
-```
-
-> To search for a trip from Prague to Vienna for ten passengers, with multivehicle options included:
-
-```bash
-curl "https://api.staging.mydaytrip.net/partners/v3/trip/search?originLongitude=14.2559&originLatitude=50.10&destinationLongitude=16.3738&destinationLatitude=48.2082&departureTime=1766227088&passengersCount=10&childrenCount=1&includeShared=true&includeMultipleVehicles=true" \
-  -H "x-api-key: your_api_key"
-```
-
-```javascript
-
-```
-
-```python
-
-```
-
-> The above call returns a JSON structured like this:
-
-```json
-{
-  "searchId": "f41dc34f-5218-46b1-8e46-1de8ccc5f5c3",
-  "expiresAt": "2025-05-27T05:53:46Z",
-  "passengersCount": 10,
-  "currency": "EUR",
-  "options": [
-    {
-      "id": "68646974-023a-4f9c-8358-869c7ab8db3d",
-      "type": "Private",
-      "englishSpeakingDriver": true,
-      "distanceKm": 338,
-      "travelTimeMinutes": 214,
-      "pickUp": {
-        "lat": 50.1,
-        "lon": 14.2559,
-        "time": "2025-12-20T10:38:08Z",
-        "timezone": "Europe/Prague",
-        "meetAndGreet": true
-      },
-      "dropOff": {
-        "lat": 48.2082,
-        "lon": 16.3738
-      },
-      "pricing": {
-        "totalPrice": 678
-      },
-      "vehicles": [
-        {
-          "type": "Van",
-          "maxPassengers": 7,
-          "description": "Van comparable to a VW Transporter, up to 7 passengers with luggage.",
-          "modelDescription": "VW Transporter or similar",
-          "image": "https://daytrip.imgix.net/site/van-vw.png"
-        },
-        {
-          "type": "Sedan",
-          "maxPassengers": 3,
-          "description": "Sedan comparable to a Volkswagen Passat, up to 3 passengers with luggage.",
-          "modelDescription": "VW Passat or similar",
-          "image": "https://daytrip.imgix.net/site/sedan.png"
-        }
-      ],
-      "luggage": {
-        "maxTotalCarryons": 10,
-        "maxTotalSuitcases": 10
-      },
-      "possibleStops": [
-        {
-          "id": "359be11a-9284-48b0-8ea1-03f99d63805a",
-          "price": 22,
-          "name": "Sazava monastery",
-          "image": "https://daytrip2.imgix.net/366.jpg",
-          "title": "An Abbey Fit for a Saint",
-          "perex": "Founded in 1032, Sázava Monastery is a former Benedictine abbey that has endured much struggle and strife throughout its long history.",
-          "description": "Declared a national cultural monument in 1962, Sázava Monastery is one of the oldest and best preserved monasteries in all of Bohemia. During its early years, Sázava was seen as a cultural bridge between the eastern and western branches of the church due its use of the Old Slavonic, the first written Slavic language. However this came to an abrupt end in 1097, when the Pope forbade Slavic liturgies during religious ceremonies and Slavic monks were banished from the monastery. During the 15th century Hussite War Sázava was burnt down, then remodeled in the Baroque style in the 17th century before finally being abolished in the 19th century and rebuilt as a Pseudo-Renaissance chateau. Nowadays Sázava has been returned to its original aesthetic and acts as a cultural centre for the traditions of Old Slavonic and a museum of historical artefacts from the region.",
-          "durationInMinutes": 60,
-          "order": 1,
-          "timezone": "Europe/Prague",
-          "country": {
-            "englishName": "Czech Republic"
-          }
-        },
-        {
-          "id": "6073e7ce-74e1-4aa9-88db-850e1e2822e3",
-          "price": 43,
-          "name": "Kutna Hora",
-          "image": "https://daytrip2.imgix.net/kutna-hora1.jpg",
-          "title": "Medieval silver-mining boom town",
-          "perex": "Some cities, as 'Starship' sang, are built on rock 'n' roll but Kutná Hora was built on silver, a more durable substance, and almost as profitable.",
-          "description": "Its extensive deposits lured a flood of settlers in the Thirteenth Century and by its end the town was the seat of the Czech national mint and financial centre of the country. Today, its wealth lies in a thousand years worth of architectural heritage which, unlike Prague's, can be savoured without the pressure of crowds. A daunting prospect perhaps but Kutná Hora's attractions can be found as much in small-scale detail as in the large-scale magnificence of the Fourteenth Century Cathedral of St. Barbara. Stroll along the immaculately-preserved medieval street Ruthardka, or marvel at the Stone Fountain sitting like a giant sandstone crown amid burgher houses.  One or two of the larger-scale items shouldn't be missed however. The Bone Church, or Ossuary, is one such, a Cistercian chapel representing a medieval revolution in interior design: bones and nothing but the bones of the dead, from 'noughts and crosses' floor to chandeliered ceiling.",
-          "durationInMinutes": 90,
-          "order": 2,
-          "timezone": "Europe/Prague",
-          "country": {
-            "englishName": "Czech Republic"
-          }
-        },
-        {
-          "id": "370a27f6-0c45-4795-b268-22eab1fbb95f",
-          "price": 18,
-          "name": "Trebic",
-          "image": "https://daytrip2.imgix.net/60.jpg",
-          "title": "Big History in a Little Town",
-          "perex": "The two UNESCO World Heritage Sites in this quiet town are a beautiful testament to the co-existence of Jewish and Christian cultures.",
-          "description": "Trebic has experienced a new lease of life after two of its most historic sites were awarded UNESCO World Heritage status. The Basilica of St. Procopius began as a monastery in the 12th century and helped establish Trebic as a thriving market town. It's since undergone various remodels, with today's impressive structure coming from alterations in the early 1700s. One particular feature that stands out is a rare example of a ten-part rose window. Trebic’s Jewish Quarter is one of the best-preserved and largest Jewish Ghettos in Europe. All the original inhabitants were deported and sent to concentration camps in WW2, with only ten managing to return after the war. While many of the buildings in the area are now owned by non-Jewish residents, the Quarter still contains two synagogues and an ancient Jewish cemetery as an act of memorial.",
-          "durationInMinutes": 60,
-          "order": 3,
-          "timezone": "Europe/Prague",
-          "country": {
-            "englishName": "Czech Republic"
-          }
-        },
-        {
-          "id": "cf4e3df5-7f72-4b1a-8f40-347a031f7654",
-          "price": 18,
-          "name": "Sonberk Winery",
-          "image": "https://daytrip2.imgix.net/sonberk-winery.jpg",
-          "title": "The Drink of Kings",
-          "perex": "For centuries, Sonberk has produced some of the best dry wines in Central Europe, becoming a favourite of European nobility.",
-          "description": "Praised for its excellence, since the early 16th-century Sonberk’s vineyards were regularly supplying the Bohemian and Austrian kings with wine. The vineyards have grown and developed dramatically since then, yet one thing hasn’t changed - the wine. The present-day vineyards are dominated by Sonberk’s massive masterpiece of modern architecture. What’s more, visitors can taste Sonberk’s world-class products. It is also possible to combine the tasting with a tour around the vineyards and learn about the process sustainable grape growing. The tour needs to be reserved two days prior arrival. Reservations are not required for the wine tasting, but we still recommend checking their availability in advance. For more details about the winery, its offers, and reservations, please visit: http://www.sonberk.cz/en/",
-          "durationInMinutes": 60,
-          "order": 4,
-          "timezone": "Europe/Prague",
-          "country": {
-            "englishName": "Czech Republic"
-          }
-        },
-        {
-          "id": "4ee58c0c-4e56-46ef-bd22-406a1bc60e1c",
-          "price": 18,
-          "name": "Mikulov",
-          "image": "https://daytrip2.imgix.net/510.jpg",
-          "title": "The Heart of Czech Wine Country",
-          "perex": "A town with a history as deep and flavourful as its wine, Mikulov provides a perfect combination of relaxation and exploration.",
-          "description": "Often favoured by visitors with a more active approach to life, Mikulov has much to offer. Surrounded by idyllic countryside, crisscrossed by bicycle paths and marked hiking trails, and the nearby Nové Mlýny lakes, there is something for everyone to enjoy. After all that fresh air, a glass of wine will be more than welcome, and fortunately, Mikulov is the centre for Czech wine making. Due to a high concentration of limestone in the local soil, wine from this region has a unique character and distinct taste. If you like your wine with a side-serving of history, Mikulov Castle dates from the 1730s, and the Dietrichstein Tomb is the final resting place of a Bohemian noble family. Mikulov is also significant for its strong Jewish history. In the early 1800s Mikulov's Jewish Quarter was the largest in Moravia with half the town's inhabitants being of Jewish faith.",
-          "durationInMinutes": 60,
-          "order": 5,
-          "timezone": "Europe/Prague",
-          "country": {
-            "englishName": "Czech Republic"
-          }
-        },
-        {
-          "id": "d280ce2a-6224-4d95-af17-a250f81b97dd",
-          "price": 18,
-          "name": "Lednice Chateau and Park",
-          "image": "https://daytrip2.imgix.net/lednice-chateau-and-park4.jpg",
-          "title": "Vacation like a King",
-          "perex": "This UNESCO-listed chateau and sprawling park was the Lichtenstein's holiday home - exactly the kind of extravagance you'd expect from a dynasty with their own country. ",
-          "description": "The Liechtensteins really came into the money with the fortunes seized from Czech noblemen after their victory at the Battle of White Mountain in 1620, and Lednice was one of the presents they bought themselves. In the mid-19th century the baroque manor was given a complete makeover in the 'Windsor Gothic' style, leaving it as we see it today: a shameless flaunting of fabulous wealth, a slap in the face to anyone foolish enough to think that the French Revolution had ended high-living in Europe. The surrounding English landscape park, the largest in the country, is an incomparable swath of green, sprinkled with Romantic follies. There's also a monumental greenhouse open all year round, overflowing with exotic growths gathered by an army of botanists across the Americas. The greenhouse's exoticism is echoed by the charming minaret, constructed at the turn of the 18th century, bringing a whiff of Morocco to Moravia.\nFor more info: www.zamek-lednice.com",
-          "durationInMinutes": 60,
-          "order": 6,
-          "timezone": "Europe/Prague",
-          "country": {
-            "englishName": "Czech Republic"
-          }
-        }
-      ],
-      "includedStops": [],
       "availableChildSeatTypes": [
         {
           "childSeatType": "RearFacing",
@@ -714,49 +513,178 @@ curl "https://api.staging.mydaytrip.net/partners/v3/trip/search?originLongitude=
           "weightInKilosFrom": 20,
           "weightInKilosTo": 33
         }
-      ]
+      ],
+      "possibleStops": [],
+      "cancellationPolicy": "Flexible",
+      "expiresAt": "2022-12-04T15:00:00Z"
     },
     {
-      "id": "9b172d56-b696-4df2-908e-729990766ad2",
-      "type": "Private",
+      "id": "4b137906-008a-49cf-b248-e3827b3a3175",
+      "type": "Shared",
       "englishSpeakingDriver": false,
-      "distanceKm": 338,
-      "travelTimeMinutes": 214,
+      "distanceKm": 350,
+      "travelTimeMinutes": 235,
       "pickUp": {
-        "lat": 50.1,
-        "lon": 14.2559,
-        "time": "2025-12-20T10:38:08Z",
+        "lat": 50.12,
+        "lon": 14.27,
+        "time": "2022-12-05T20:00:00Z",
+        "interval": {
+          "earliest": "2022-12-05T20:00:00Z",
+          "latest": "2022-12-05T20:10:00Z"
+        },
         "timezone": "Europe/Prague",
-        "meetAndGreet": true
+        "description": "In front of the hotel Europa",
+        "address": "Evropska 1540/41, Prague, Czechia",
+        "meetAndGreet": false,
+        "state": "adjusted",
+        "immutable": true
       },
       "dropOff": {
-        "lat": 48.2082,
-        "lon": 16.3738
+        "lat": 48.21,
+        "lon": 16.36,
+        "time": "2022-12-05T23:55:00Z",
+        "interval": {
+          "earliest": "2022-12-05T23:40:00Z",
+          "latest": "2022-12-05T23:55:00Z"
+        },
+        "timezone": "Europe/Vienna",
+        "description": "Next to the railway station",
+        "address": "Bahnhofplatz, 1010 Wien, Austria",
+        "state": "adjusted",
+        "immutable": true
       },
       "pricing": {
-        "totalPrice": 612
+        "pricePerPassenger": 190,
+        "totalPrice": 380
+      },
+      "vehicle": {
+        "type": "Shuttle",
+        "maxPassengers": 10,
+        "description": "Shuttle comparable to a Mercedes-Benz Vito, up to 10 passengers with luggage.",
+        "modelDescription": "Mercedes-Benz Vito or similar",
+        "image": "https://daytrip.imgix.net/site/shuttle.png"
+      },
+      "luggage": {
+        "maxCarryonsPerPerson": 1,
+        "maxSuitcasesPerPerson": 1,
+        "maxTotalCarryons": 2,
+        "maxTotalSuitcases": 2
+      },
+      "seatsAvailable": 5,
+      "availableChildSeatTypes": [
+        {
+          "childSeatType": "RearFacing",
+          "description": "Rear-facing infant seat",
+          "ageFrom": 0,
+          "ageTo": 1,
+          "weightInPoundsFrom": 0,
+          "weightInPoundsTo": 26,
+          "weightInKilosFrom": 0,
+          "weightInKilosTo": 10
+        },
+        {
+          "childSeatType": "ForwardFacing",
+          "description": "Forward-facing w/harness",
+          "ageFrom": 1,
+          "ageTo": 4,
+          "weightInPoundsFrom": 18,
+          "weightInPoundsTo": 36,
+          "weightInKilosFrom": 8,
+          "weightInKilosTo": 16
+        },
+        {
+          "childSeatType": "BoosterSeat",
+          "description": "Booster seat with high back",
+          "ageFrom": 4,
+          "ageTo": 6,
+          "weightInPoundsFrom": 30,
+          "weightInPoundsTo": 50,
+          "weightInKilosFrom": 14,
+          "weightInKilosTo": 23
+        },
+        {
+          "childSeatType": "Booster",
+          "description": "Backless booster",
+          "ageFrom": 6,
+          "ageTo": 12,
+          "weightInPoundsFrom": 44,
+          "weightInPoundsTo": 72,
+          "weightInKilosFrom": 20,
+          "weightInKilosTo": 33
+        }
+      ],
+      "possibleStops": [],
+      "includedStops": [],
+      "cancellationPolicy": "Flexible",
+      "expiresAt": "2022-12-04T15:00:00Z"
+    }
+  ]
+}
+```
+
+> To search for a private trip from Dubrovnik to Venice for 10 passengers, with multiple vehicle options and meeting positions:
+
+```bash
+curl "https://api.staging.mydaytrip.net/partners/v3/trip/search?originLatitude=42.639515&originLongitude=18.108064&destinationLatitude=45.434143&destinationLongitude=12.333497&departureTime=1766227088&includeShared=false&includeStops=false&passengersCount=10&includeMultipleVehicles=true&includeMeetingPositions=true" \
+  -H "x-api-key: your_api_key"
+```
+
+```javascript
+
+```
+
+```python
+
+```
+
+> The above call returns a JSON structured like this:
+
+```json
+{
+  "searchId": "f41dc34f-5218-46b1-8e46-1de8ccc5f5c3",
+  "expiresAt": "2025-05-27T05:53:46Z",
+  "passengersCount": 10,
+  "currency": "EUR",
+  "options": [
+    {
+      "id": "68646974-023a-4f9c-8358-869c7ab8db3d",
+      "type": "Private",
+      "englishSpeakingDriver": true,
+      "distanceKm": 833,
+      "travelTimeMinutes": 536,
+      "pickUp": {
+        "lat": 42.6420418,
+        "lon": 18.11293,
+        "time": "2025-12-20T10:38:08Z",
+        "timezone": "Europe/Zagreb",
+        "description": "Ploce Gate, Ul. Frana Supila 2",
+        "address": "Vrata od Ploča, Ul. Vrata od Ploča, 20000, Dubrovnik, Croatia",
+        "image": "https://daytrip.imgix.net/meeting-point-3.png",
+        "meetAndGreet": false,
+        "state": "adjusted",
+        "adjustmentReason": "restricted_area",
+        "immutable": true
+      },
+      "dropOff": {
+        "lat": 45.43731978047655,
+        "lon": 12.3191409718277,
+        "description": "Piazzale Roma",
+        "address": "Piazzale Roma, Venice, Metropolitan City of Venice, Italy",
+        "image": "https://daytrip.imgix.net/meeting-point-4.png",
+        "state": "adjusted",
+        "adjustmentReason": "restricted_area",
+        "immutable": true
+      },
+      "pricing": {
+        "totalPrice": 2131
       },
       "vehicles": [
         {
-          "type": "Sedan",
-          "maxPassengers": 3,
-          "description": "Sedan comparable to a Volkswagen Passat, up to 3 passengers with luggage.",
-          "modelDescription": "VW Passat or similar",
-          "image": "https://daytrip.imgix.net/site/sedan.png"
-        },
-        {
-          "type": "Sedan",
-          "maxPassengers": 3,
-          "description": "Sedan comparable to a Volkswagen Passat, up to 3 passengers with luggage.",
-          "modelDescription": "VW Passat or similar",
-          "image": "https://daytrip.imgix.net/site/sedan.png"
-        },
-        {
-          "type": "Sedan",
-          "maxPassengers": 3,
-          "description": "Sedan comparable to a Volkswagen Passat, up to 3 passengers with luggage.",
-          "modelDescription": "VW Passat or similar",
-          "image": "https://daytrip.imgix.net/site/sedan.png"
+          "type": "Van",
+          "maxPassengers": 7,
+          "description": "Van comparable to a VW Transporter, up to 7 passengers with luggage.",
+          "modelDescription": "VW Transporter or similar",
+          "image": "https://daytrip.imgix.net/site/van-vw.png"
         },
         {
           "type": "Sedan",
@@ -767,8 +695,8 @@ curl "https://api.staging.mydaytrip.net/partners/v3/trip/search?originLongitude=
         }
       ],
       "luggage": {
-        "maxTotalCarryons": 12,
-        "maxTotalSuitcases": 12
+        "maxTotalCarryons": 10,
+        "maxTotalSuitcases": 10
       },
       "possibleStops": [],
       "includedStops": [],
@@ -825,42 +753,43 @@ curl "https://api.staging.mydaytrip.net/partners/v3/trip/search?originLongitude=
 
 ### Query Parameters
 
-| Parameter                 | Type    | Description                                                                                                                                                                                                                                                                                                           |
-| ------------------------- | ------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| originType                | string  | Specifies whether the origin is provided as geo-coordinates or as an airport code. Possible values: `coordinates`, `iata`. If omitted, the default value is `coordinates`.                                                                                                                                            |
-| originLatitude            | number  | Origin latitude in degrees. Required if `originType` is set to `coordinates` or omitted.                                                                                                                                                                                                                              |
-| originLongitude           | number  | Origin longitude in degrees. Required if `originType` is set to `coordinates` or omitted.                                                                                                                                                                                                                             |
-| origin                    | string  | IATA airport code of the origin airport. Required if `originType` is set to `iata`.                                                                                                                                                                                                                                   |
-| destinationType           | string  | Specifies whether the destination is provided as geo-coordinates or as an airport code. Possible values: `coordinates`, `iata`. If omitted, the default value is `coordinates`.                                                                                                                                       |
-| destinationLatitude       | number  | Destination latitude in degrees. Required if `destinationType` is set to `coordinates` or omitted.                                                                                                                                                                                                                    |
-| destinationLongitude      | number  | Destination longitude in degrees. Required if `destinationType` is set to `coordinates` or omitted.                                                                                                                                                                                                                   |
-| destination               | string  | IATA airport code of the destination airport. Required if `destinationType` is set to `iata`.                                                                                                                                                                                                                         |
-| departureTime             | integer | Departure time as a UNIX epoch timestamp in seconds. This timestamp should be calculated from the local departure time and converted to UTC. It can be omitted, if `departureTimeLocal` is provided.                                                                                                                  |
+| Parameter                 | Type    | Description |
+| ------------------------- | ------- | ----------- |
+| originType                | string  | Specifies whether the origin is provided as geo-coordinates or as an airport code. Possible values: `coordinates`, `iata`. If omitted, the default value is `coordinates`. |
+| originLatitude            | number  | Origin latitude in degrees. Required if `originType` is set to `coordinates` or omitted. |
+| originLongitude           | number  | Origin longitude in degrees. Required if `originType` is set to `coordinates` or omitted. |
+| origin                    | string  | IATA airport code of the origin airport. Required if `originType` is set to `iata`. |
+| destinationType           | string  | Specifies whether the destination is provided as geo-coordinates or as an airport code. Possible values: `coordinates`, `iata`. If omitted, the default value is `coordinates`. |
+| destinationLatitude       | number  | Destination latitude in degrees. Required if `destinationType` is set to `coordinates` or omitted. |
+| destinationLongitude      | number  | Destination longitude in degrees. Required if `destinationType` is set to `coordinates` or omitted. |
+| destination               | string  | IATA airport code of the destination airport. Required if `destinationType` is set to `iata`. |
+| departureTime             | integer | Departure time as a UNIX epoch timestamp in seconds. This timestamp should be calculated from the local departure time and converted to UTC. It can be omitted, if `departureTimeLocal` is provided. |
 | departureTimeLocal        | integer | Departure time as a UNIX epoch timestamp in seconds. This parameter can be used, when the origin timezone is unknown and conversion to UTC cannot be done. In this case the departure time can be sent as a local time converted to the Unix epoch. This parameter is not required, when `departureTime` is provided. |
-| passengersCount           | integer | Total number of passengers to transport (adults and children). Must be between 1 and 7 if `includeMultipleVehicles` is set to `false` or not provided. In case that `includeMultipleVehicles` is set to `true` this parameter must be between 1 and 99.                                                               |
-| childrenCount             | integer | Optional. Specifies the number of children in the group. Required for shared trip options.                                                                                                                                                                                                                            |
-| includeStops              | boolean | Optional. Defaults to `true`. When set to `false`, no stops will be included in the trip options.                                                                                                                                                                                                                     |
-| includeShared             | boolean | Optional. Defaults to `false`. When set to `true`, shared trip options will be included.                                                                                                                                                                                                                              |
-| includeNonEnglishSpeaking | boolean | Optional. Defaults to `true`. When set to `false`, no trip options with non-English-speaking drivers will be included.                                                                                                                                                                                                |
-| includeMultipleVehicles   | boolean | Optional. Defaults to `false`. When set to `true`, if single vehicle options cannot be found we will try to provide trip options with multiple vehicles.                                                                                                                                                              |
+| passengersCount           | integer | Total number of passengers to transport (adults and children). Must be between 1 and 7 if `includeMultipleVehicles` is set to `false` or not provided. In case that `includeMultipleVehicles` is set to `true` this parameter must be between 1 and 99. |
+| childrenCount             | integer | Optional. Specifies the number of children in the group. Required for shared trip options. |
+| includeStops              | boolean | Optional. Defaults to `true`. When set to `false`, no stops will be included in the trip options. |
+| includeShared             | boolean | Optional. Defaults to `false`. When set to `true`, shared trip options will be included. |
+| includeNonEnglishSpeaking | boolean | Optional. Defaults to `true`. When set to `false`, no trip options with non-English-speaking drivers will be included. |
+| includeMeetingPositions   | boolean | Optional. Defaults to `false`. When set to `true`, trip options may include predefined meeting positions for pickup or dropoff when the requested address is in an area that vehicles cannot access directly. In these cases, the API will return the nearest accessible meeting point along with relevant details. |
+| includeMultipleVehicles   | boolean | Optional. Defaults to `false`. When set to `true`, if single vehicle options cannot be found we will try to provide trip options with multiple vehicles. |
 
 ### Response body
 
-| Property        | Type                              | Description                                                                                                                                     |
-| --------------- | --------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
-| searchId        | string                            | Unique id of your search query.                                                                                                                 |
+| Property        | Type                              | Description |
+| --------------- | --------------------------------- | ----------- |
+| searchId        | string                            | Unique id of your search query. |
 | expiresAt       | string                            | UTC timestamp of when the offers in this response expire. After this time it is no longer possible to book them, you need to make a new search. |
-| passengersCount | integer                           | The count of passengers this search query was for.                                                                                              |
-| currency        | string                            | Currency used for all prices in this response.                                                                                                  |
-| options         | list of [TripOption](#tripoption) | List of options for this trip.                                                                                                                  |
+| passengersCount | integer                           | The count of passengers this search query was for. |
+| currency        | string                            | Currency used for all prices in this response. |
+| options         | list of [TripOption](#tripoption) | List of options for this trip. |
 
 ### Error status codes
 
-| Status code | Description                                                                                             |
-| ----------- | ------------------------------------------------------------------------------------------------------- |
+| Status code | Description |
+| ----------- | ----------- |
 | 400         | Invalid request - missing mandatory query parameter, parameter has wrong type or wrong passenger count. |
-| 401         | API key missing or invalid.                                                                             |
-| 404         | No trip options found for given request.                                                                |
+| 401         | API key missing or invalid. |
+| 404         | No trip options found for given request. |
 
 ## Customize endpoint
 
@@ -906,11 +835,15 @@ curl -d '{
         "lon": 14.25,
         "time": "2022-12-05T18:00:00Z",
         "timezone": "Europe/Prague",
-        "meetAndGreet": true
+        "meetAndGreet": true,
+        "state": "original",
+        "immutable": false
       },
       "dropOff": {
         "lat": 48.2,
-        "lon": 16.37
+        "lon": 16.37,
+        "state": "original",
+        "immutable": false
       },
       "pricing": {
         "totalPrice": 288
@@ -1094,11 +1027,15 @@ curl -d '{
       "lon": 14.25,
       "time": "2022-12-05T18:00:00Z",
       "timezone": "Europe/Prague",
-      "meetAndGreet": true
+      "meetAndGreet": true,
+      "state": "original",
+      "immutable": false
     },
     "dropOff": {
       "lat": 48.2,
-      "lon": 16.37
+      "lon": 16.37,
+      "state": "original",
+      "immutable": false
     },
     "pricing": {
       "totalPrice": 288
@@ -1174,14 +1111,18 @@ curl -d '{
   "meetingPosition": {
     "lat": 46.067648,
     "lon": 7.775185,
-    "description": "the train station in Tasch",
-    "instructions": "As vehicle entry into Zermatt is heavily restricted, your driver will meet you nearby at the train station in Tasch, which can be reached by transit from Zermatt within about 10 minutes. Your driver will be waiting at the taxi stand just outside the entrance to the train station."
+    "description": "The train station in Tasch",
+    "address": "3929 Täsch, Switzerland",
+    "instructions": "As vehicle entry into Zermatt is heavily restricted, your driver will meet you nearby at the train station in Tasch, which can be reached by transit from Zermatt within about 10 minutes. Your driver will be waiting at the taxi stand just outside the entrance to the train station.",
+    "image": "https://daytrip.imgix.net/meeting-point-5.png"
   },
   "dropOffPosition": {
     "lat": 45.4374041,
     "lon": 12.3190675,
     "description": "Piazzale Roma",
-    "image": "https://daytrip.imgix.net/management/venice.png?w=480&q=50"
+    "address": "Piazzale Roma, Venice, Metropolitan City of Venice, Italy",
+    "instructions": "Venice’s historic center (the islands) is not accessible by car. Our partner driver will drop you off at Piazzale Roma.",
+    "image": "https://daytrip.imgix.net/meeting-point-4.png"
   },
   "trip": {
     "id": "519314e3-cd92-41e0-85b6-c652c345e9d0",
@@ -1194,11 +1135,23 @@ curl -d '{
       "lon": 7.775185,
       "time": "2022-12-05T18:00:00Z",
       "timezone": "Europe/Zurich",
-      "meetAndGreet": false
+      "description": "The train station in Tasch",
+      "address": "3929 Täsch, Switzerland",
+      "image": "https://daytrip.imgix.net/meeting-point-5.png",
+      "meetAndGreet": false,
+      "state": "adjusted",
+      "adjustmentReason": "restricted_area",
+      "immutable": true
     },
     "dropOff": {
       "lat": 45.4374041,
-      "lon": 12.3190675
+      "lon": 12.3190675,
+      "description": "Piazzale Roma",
+      "address": "Piazzale Roma, Venice, Metropolitan City of Venice, Italy",
+      "image": "https://daytrip.imgix.net/meeting-point-4.png",
+      "state": "adjusted",
+      "adjustmentReason": "restricted_area",
+      "immutable": true
     },
     "pricing": {
       "totalPrice": 288
@@ -1267,17 +1220,17 @@ curl -d '{
 
 ### Request body
 
-| Property           | Type                                        | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
-| ------------------ | ------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| optionId           | string                                      | Id of the option you want to book. Taken from [/search](#search-endpoint) or [/customize](#customize-endpoint) endpoint response.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| Property           | Type                                        | Description |
+| ------------------ | ------------------------------------------- | ----------- |
+| optionId           | string                                      | Id of the option you want to book. Taken from [/search](#search-endpoint) or [/customize](#customize-endpoint) endpoint response. |
 | departureTime      | integer                                     | Optional. Departure time as a UNIX epoch timestamp in seconds to use instead of the `departureTime` provided to the [/search](#search-endpoint). You can only move departure time less than 24 hours into the past or into the future compared to the original `departureTime`, otherwise the booking will be rejected (403 HTTP status code). Also if the new price after changing the departure time would be different, booking will also get rejected. Such price change should be extremely rare but your integration should be ready for it if you are sending different `departureTime`. Note that UNIX timestamps are UTC so you need to convert from local time to UTC when calculating it. Change of the departure time is applicable only for the private trip. |
-| departureTimeLocal | integer                                     | Optional. The same as `departureTime` but the local departure time is not converted to UTC. If `departureTime` is specified, this parameter cannot be sent, and vice versa.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
-| pickUpAddressNote  | string                                      | Pickup address or a note describing the pickup point. Optional, but should be provided if available at the booking time; otherwise, it should be provided via the [/update](#update-endpoint) endpoint. Applicable only for the private trip.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
-| dropOffAddressNote | string                                      | Dropoff address or a note describing the dropoff point. Optional, but should be provided if available at the booking time; otherwise, it should be provided via the [/update](#update-endpoint) endpoint. Applicable only for the private trip.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
-| customerNote       | string                                      | Optional note for the driver not related to pickup or dropoff. Applicable only for the private trip.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
-| flightNumber       | string                                      | Optional flight number in case this is an airport pickup. Applicable only for the private trip.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
-| passengerDetails   | list of [PassengerDetail](#passengerdetail) | List of passengers that will go on this trip. For trips with "Private" type the number of passengers must be below or equal to `maxPassengers` of the `vehicle` in the trip option. For trips with "Shared" type the number of passengers must match the `passengersCount` query parameter from the Search endpoint. There must always be exactly one passenger of type "Lead" with contact details filled. For passenger of type "Child" you must specify a child seat of proper type offered in the trip option's [availableChildSeatTypes](#tripoption). For older children that do not need any child seat use `Adult` passenger type.                                                                                                                                 |
-| externalId         | string                                      | Optional. You can send us the id of the booking in your system to help with communication when our support team needs to identify a booking and you are not able to provide our own `bookingReference`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| departureTimeLocal | integer                                     | Optional. The same as `departureTime` but the local departure time is not converted to UTC. If `departureTime` is specified, this parameter cannot be sent, and vice versa. |
+| pickUpAddressNote  | string                                      | Pickup address or a note describing the pickup point. Optional, but should be provided if available at the booking time; otherwise, it should be provided via the [/update](#update-endpoint) endpoint. Applicable only for the private trip. It will be ignored if the selected trip option already has a predefined meeting position that cannot be changed (immutable), i.e. the meeting position outside of a restricted area. |
+| dropOffAddressNote | string                                      | Dropoff address or a note describing the dropoff point. Optional, but should be provided if available at the booking time; otherwise, it should be provided via the [/update](#update-endpoint) endpoint. Applicable only for the private trip. It will be ignored if the selected trip option already has a predefined meeting position that cannot be changed (immutable), i.e. the meeting position outside of a restricted area. |
+| customerNote       | string                                      | Optional note for the driver not related to pickup or dropoff. Applicable only for the private trip. |
+| flightNumber       | string                                      | Optional flight number in case this is an airport pickup. Applicable only for the private trip. |
+| passengerDetails   | list of [PassengerDetail](#passengerdetail) | List of passengers that will go on this trip. For trips with "Private" type the number of passengers must be below or equal to `maxPassengers` of the `vehicle` in the trip option. For trips with "Shared" type the number of passengers must match the `passengersCount` query parameter from the Search endpoint. There must always be exactly one passenger of type "Lead" with contact details filled. For passenger of type "Child" you must specify a child seat of proper type offered in the trip option's [availableChildSeatTypes](#tripoption). For older children that do not need any child seat use `Adult` passenger type. |
+| externalId         | string                                      | Optional. You can send us the id of the booking in your system to help with communication when our support team needs to identify a booking and you are not able to provide our own `bookingReference`. |
 
 ### Response body
 
@@ -1443,11 +1396,15 @@ curl https://api.staging.mydaytrip.net/partners/v3/trip/external/details/externa
       "lon": 14.25,
       "time": "2022-12-05T18:00:00Z",
       "timezone": "Europe/Prague",
-      "meetAndGreet": true
+      "meetAndGreet": true,
+      "state": "original",
+      "immutable": false
     },
     "dropOff": {
       "lat": 48.2,
-      "lon": 16.37
+      "lon": 16.37,
+      "state": "original",
+      "immutable": false
     },
     "pricing": {
       "totalPrice": 288
@@ -1500,13 +1457,17 @@ curl https://api.staging.mydaytrip.net/partners/v3/trip/external/details/externa
   "meetingPosition": {
     "lat": 46.067648,
     "lon": 7.775185,
-    "description": "the train station in Tasch",
-    "instructions": "As vehicle entry into Zermatt is heavily restricted, your driver will meet you nearby at the train station in Tasch, which can be reached by transit from Zermatt within about 10 minutes. Your driver will be waiting at the taxi stand just outside the entrance to the train station."
+    "description": "The train station in Tasch",
+    "address": "3929 Täsch, Switzerland",
+    "instructions": "As vehicle entry into Zermatt is heavily restricted, your driver will meet you nearby at the train station in Tasch, which can be reached by transit from Zermatt within about 10 minutes. Your driver will be waiting at the taxi stand just outside the entrance to the train station.",
+    "image": "https://daytrip.imgix.net/meeting-point-5.png"
   },
   "dropOffPosition": {
     "lat": 45.4374041,
     "lon": 12.3190675,
     "description": "Piazzale Roma",
+    "address": "Piazzale Roma, Venice, Metropolitan City of Venice, Italy",
+    "instructions": "Venice’s historic center (the islands) is not accessible by car. Our partner driver will drop you off at Piazzale Roma.",
     "image": "https://daytrip.imgix.net/management/venice.png?w=480&q=50"
   },
   "pickUpAddressNote": "Zermatt",
@@ -1534,15 +1495,27 @@ curl https://api.staging.mydaytrip.net/partners/v3/trip/external/details/externa
     "distanceKm": 334,
     "travelTimeMinutes": 268,
     "pickUp": {
-      "lat": 46.02079170845689,
-      "lon": 7.748169219390801,
+      "lat": 46.067648,
+      "lon": 7.775185,
       "time": "2022-12-05T18:00:00Z",
       "timezone": "Europe/Zurich",
-      "meetAndGreet": true
+      "description": "The train station in Tasch",
+      "address": "3929 Täsch, Switzerland",
+      "image": "https://daytrip.imgix.net/meeting-point-5.png",
+      "meetAndGreet": false,
+      "state": "adjusted",
+      "adjustmentReason": "restricted_area",
+      "immutable": true
     },
     "dropOff": {
-      "lat": 45.438168912490426,
-      "lon": 12.327932808251374
+      "lat": 45.4374041,
+      "lon": 12.3190675,
+      "description": "Piazzale Roma",
+      "address": "Piazzale Roma, Venice, Metropolitan City of Venice, Italy",
+      "image": "https://daytrip.imgix.net/meeting-point-4.png",
+      "state": "adjusted",
+      "adjustmentReason": "restricted_area",
+      "immutable": true
     },
     "pricing": {
       "totalPrice": 1311
@@ -1688,11 +1661,15 @@ curl -d '{
       "lon": 14.25,
       "time": "2022-12-05T18:00:00Z",
       "timezone": "Europe/Prague",
-      "meetAndGreet": true
+      "meetAndGreet": true,
+      "state": "original",
+      "immutable": false
     },
     "dropOff": {
       "lat": 48.2,
-      "lon": 16.37
+      "lon": 16.37,
+      "state": "original",
+      "immutable": false
     },
     "pricing": {
       "totalPrice": 288
@@ -1739,13 +1716,13 @@ All properties except `bookingId` are optional. When a property is not included 
 
 Disclaimer: in the last 24 hours before the departure the [/update](#update-endpoint) endpoint will no longer accept updates. For updates in the last 24 hours please contact our customer support at <daytrip@mydaytrip.com> or call [+44 20 3318 1119](tel:+442033181119).
 
-| Property           | Type                                        | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
-| ------------------ | ------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| bookingId          | string                                      | Id of the booking to cancel. Taken from [/book](#book-endpoint) endpoint response.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
-| pickUpAddressNote  | string                                      | Pickup address or a note describing the pickup point. Optional.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
-| dropOffAddressNote | string                                      | Dropoff address or a note describing the dropoff point. Optional.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
-| customerNote       | string                                      | Optional note for the driver not related to pickup or dropoff.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
-| flightNumber       | string                                      | Optional flight number in case this is an airport pickup.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| Property           | Type                                        | Description |
+| ------------------ | ------------------------------------------- | ----------- |
+| bookingId          | string                                      | Id of the booking to cancel. Taken from [/book](#book-endpoint) endpoint response. |
+| pickUpAddressNote  | string                                      | Pickup address or a note describing the pickup point. Optional, but should be provided if it was not provided at the booking time. Applicable only for the private trip. It will be ignored if the selected trip option already has a predefined meeting position that cannot be changed (immutable), i.e. the meeting position outside of a restricted area. |
+| dropOffAddressNote | string                                      | Dropoff address or a note describing the dropoff point. Optional, but should be provided if it was not provided at the booking time. Applicable only for the private trip. It will be ignored if the selected trip option already has a predefined meeting position that cannot be changed (immutable), i.e. the meeting position outside of a restricted area. |
+| customerNote       | string                                      | Optional note for the driver not related to pickup or dropoff. |
+| flightNumber        | string                                      | Optional flight number in case this is an airport pickup. |
 | passengerDetails   | list of [PassengerDetail](#passengerdetail) | Optional. List of passengers that will go on this trip. For trips with "Private" type the number of passengers must be below or equal to `maxPassengers` of the `vehicle` in the trip option. For trips with "Shared" type the number of passengers must match the `passengersCount` query parameter from the Search endpoint. There must always be exactly one passenger of type "Lead" with contact details filled. For passenger of type "Child" you must specify a child seat of proper type offered in the trip option's [availableChildSeatTypes](#tripoption). For older children that do not need any child seat use `Adult` passenger type. |
 
 ### Response body
@@ -2004,15 +1981,20 @@ Below is a documentation of all object entities returned by the Daytrip API endp
 
 ## Location
 
-| Property     | Type                                   | Description                                                                                                                                                    |
-| ------------ | -------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| lat          | number                                 | Latitude in degrees.                                                                                                                                           |
-| lon          | number                                 | Longitude in degrees.                                                                                                                                          |
-| time         | string                                 | UTC timestamp of the departure or arrival time. Optional. For pickup only in case of the private trip. Always present for shared trips.                        |
-| interval     | object - [TimeInterval](#timeinterval) | Estimated departure or arrival interval. Optional, for shared trips only.                                                                                      |
-| timezone     | string                                 | IANA timezone matching the location. Presents if `time` or `interval` are present. Can be used to convert UTC timestamps from `time`/`interval` to local time. |
-| description  | string                                 | Description of the pickup or dropoff. Optional.                                                                                                                |
-| meetAndGreet | boolean                                | Specifies if meet and greet is provided for this pickup. Optional, for pickup only.                                                                            |
+| Property         | Type                                   | Description |
+| ---------------- | -------------------------------------- | ----------- |
+| lat              | number                                 | Latitude in degrees. |
+| lon              | number                                 | Longitude in degrees. |
+| time             | string                                 | UTC timestamp of the departure or arrival time. Optional. For pickup only in case of the private trip. Always present for shared trips. |
+| interval         | object - [TimeInterval](#timeinterval) | Estimated departure or arrival interval. Optional, for shared trips only. |
+| timezone         | string                                 | IANA timezone matching the location. Presents if `time` or `interval` are present. Can be used to convert UTC timestamps from `time`/`interval` to local time. |
+| description      | string                                 | Description of the pickup or dropoff. Optional. |
+| address          | string                                 | Address of the pickup or dropoff. Optional. |
+| image            | string                                 | Link to an image of the position. Optional. |
+| meetAndGreet     | boolean                                | Specifies if meet and greet is provided for this pickup. Optional, for pickup only. |
+| state            | string                                 | Represents a state of the location: `original` - customer provided; or `adjusted` - differs from the pickup or dropoff requested by the customer. |
+| adjustmentReason | string                                 | Reason for the adjustment of the pickup or dropoff. Optional. Possible values: `restricted_area`, `airport_pickup`. |
+| immutable        | boolean                                | Specifies if the pickup or dropoff position can be changed. If `true` then the position is predefined and cannot be changed. |
 
 ## TimeInterval
 
@@ -2102,6 +2084,7 @@ Below is a documentation of all object entities returned by the Daytrip API endp
 | lon          | number | Longitude in degrees.                       |
 | description  | string | Description of the position.                |
 | instructions | string | Meeting instructions for the customer.      |
+| address      | string | Address of the position. Optional.          |
 | image        | string | Link to an image of the position. Optional. |
 
 ## DropOffPosition
@@ -2111,6 +2094,7 @@ Below is a documentation of all object entities returned by the Daytrip API endp
 | lat         | number | Latitude in degrees.                        |
 | lon         | number | Longitude in degrees.                       |
 | description | string | Description of the position.                |
+| address     | string | Address of the position. Optional.          |
 | image       | string | Link to an image of the position. Optional. |
 
 ## DriverPosition

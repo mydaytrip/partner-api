@@ -1,5 +1,6 @@
 # Change Log
 
+- **2025-06-03**: Added support for meeting positions in private trips.
 - **2025-05-20**: Introduced multi-vehicle trip options.
 - **2025-04-02**: Extended /search and /book endpoints to accept departure time in local time.
 - **2025-03-28**: Added modelDescription field to Vehicle object.
