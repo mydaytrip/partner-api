@@ -50,9 +50,9 @@
             </ul>
             <h2 id="contacts">Contacts</h2>
             <h3 id="onboarding">Onboarding</h3>
-            <p>If you want to integrate with our API, contact us at <a href="mailto:&#112;&#x61;&#114;&#116;&#110;&#x65;&#x72;&#115;&#x40;&#100;&#x61;&#x79;&#116;&#114;&#x69;&#112;&#x2e;&#x63;&#x6f;&#109;">&#112;&#x61;&#114;&#116;&#110;&#x65;&#x72;&#115;&#x40;&#100;&#x61;&#x79;&#116;&#114;&#x69;&#112;&#x2e;&#x63;&#x6f;&#109;</a> to get a partner account and an API key.</p>
+            <p>If you want to integrate with our API, contact us at <a href="mailto:&#112;&#x61;&#x72;&#x74;&#x6e;&#x65;&#x72;&#x73;&#x40;&#x64;&#x61;&#x79;&#116;&#114;&#x69;&#112;&#46;&#x63;&#111;&#x6d;">&#112;&#x61;&#x72;&#x74;&#x6e;&#x65;&#x72;&#x73;&#x40;&#x64;&#x61;&#x79;&#116;&#114;&#x69;&#112;&#46;&#x63;&#111;&#x6d;</a> to get a partner account and an API key.</p>
             <h3 id="customer-support-emergency">Customer support emergency</h3>
-            <p>To solve problems with bookings created via the API you can contact <a href="mailto:&#x64;&#97;&#121;&#116;&#x72;&#105;&#x70;&#x40;&#x64;&#97;&#121;&#x74;&#114;&#105;&#x70;&#46;&#99;&#x6f;&#x6d;">&#x64;&#97;&#121;&#116;&#x72;&#105;&#x70;&#x40;&#x64;&#97;&#121;&#x74;&#114;&#105;&#x70;&#46;&#99;&#x6f;&#x6d;</a> or call <a href="tel:+442033181119">+44 20 3318 1119</a> or <a href="tel:+16282019501">+1 628 201 9501</a>.</p>
+            <p>To solve problems with bookings created via the API you can contact <a href="mailto:&#100;&#x61;&#121;&#116;&#114;&#x69;&#x70;&#64;&#100;&#x61;&#x79;&#x74;&#114;&#x69;&#x70;&#46;&#99;&#x6f;&#x6d;">&#100;&#x61;&#121;&#116;&#114;&#x69;&#x70;&#64;&#100;&#x61;&#x79;&#x74;&#114;&#x69;&#x70;&#46;&#99;&#x6f;&#x6d;</a> or call <a href="tel:+442033181119">+44 20 3318 1119</a> or <a href="tel:+16282019501">+1 628 201 9501</a>.</p>
             <h1 id="environments">Environments</h1>
             <p>Daytrip offers a sandbox environment where you can test your integration with the API without creating real bookings. All the code examples provided in this documentation are using this sandbox environment. Each environment requires a different API key. When your integration is ready and tested against the sandbox environment, you can request an API key for the production environment.</p>
             <h2 id="urls">URLs</h2>
@@ -66,11 +66,11 @@
                <tbody>
                   <tr>
                      <td>Sandbox</td>
-                     <td><a href="https://api.staging.mydaytrip.net/partners/v3/">https://api.staging.mydaytrip.net/partners/v3/</a></td>
+                     <td><a href="https://papi.staging.mydaytrip.net/partners/v3/">https://papi.staging.mydaytrip.net/partners/v3/</a></td>
                   </tr>
                   <tr>
                      <td>Production</td>
-                     <td><a href="https://api.mydaytrip.com/partners/v3/">https://api.mydaytrip.com/partners/v3/</a></td>
+                     <td><a href="https://papi.mydaytrip.com/partners/v3/">https://papi.mydaytrip.com/partners/v3/</a></td>
                   </tr>
                </tbody>
             </table>
@@ -78,7 +78,7 @@
             <blockquote>
                <p>To authorize your requests, add the <code>x-api-key</code> header like this:</p>
             </blockquote>
-            <pre class="highlight bash"><code>curl <span class="hljs-string">&quot;https://api.staging.mydaytrip.net/partners/v3/trip/search&quot;</span>
+            <pre class="highlight bash"><code>curl <span class="hljs-string">&quot;https://papi.staging.mydaytrip.net/partners/v3/trip/search&quot;</span>
   -H <span class="hljs-string">&quot;x-api-key: your-api-key&quot;</span></code></pre><pre class="highlight javascript"><code></code></pre><pre class="highlight python"><code></code></pre>
             <blockquote>
                <p>Make sure to replace <code>your-api-key</code> with your API key.</p>
@@ -202,18 +202,18 @@
                <li><code>optional</code> - call <a href="#details-endpoint">/details</a> endpoint to get trip and booking details</li>
                <li>call <a href="#update-endpoint">/update</a> endpoint to update the booking details</li>
             </ol>
-            <p>Disclaimer: in the last 24 hours before the departure the <a href="#update-endpoint">/update</a> endpoint will no longer accept updates. For updates in the last 24 hours please contact our customer support at <a href="mailto:&#100;&#x61;&#121;&#116;&#114;&#105;&#112;&#x40;&#x6d;&#121;&#x64;&#x61;&#121;&#116;&#x72;&#105;&#x70;&#x2e;&#99;&#x6f;&#x6d;">&#100;&#x61;&#121;&#116;&#114;&#105;&#112;&#x40;&#x6d;&#121;&#x64;&#x61;&#121;&#116;&#x72;&#105;&#x70;&#x2e;&#99;&#x6f;&#x6d;</a> or call <a href="tel:+442033181119">+44 20 3318 1119</a>.</p>
+            <p>Disclaimer: in the last 24 hours before the departure the <a href="#update-endpoint">/update</a> endpoint will no longer accept updates. For updates in the last 24 hours please contact our customer support at <a href="mailto:&#100;&#x61;&#121;&#x74;&#114;&#105;&#x70;&#64;&#x6d;&#121;&#x64;&#x61;&#121;&#x74;&#x72;&#x69;&#x70;&#46;&#99;&#111;&#x6d;">&#100;&#x61;&#121;&#x74;&#114;&#105;&#x70;&#64;&#x6d;&#121;&#x64;&#x61;&#121;&#x74;&#x72;&#x69;&#x70;&#46;&#99;&#111;&#x6d;</a> or call <a href="tel:+442033181119">+44 20 3318 1119</a>.</p>
             <h2 id="search-endpoint">Search endpoint</h2>
             <p>This endpoint returns all available trip options based on the specified origin, destination, departure time, and passenger count. The origin and destination can be provided either as geographic coordinates or as IATA airport codes. Geographic coordinates should be specified as latitude and longitude in decimal degrees format, for example: <code>39.753657</code>, <code>-117.610215</code>. The departure time must be supplied as a UNIX epoch timestamp in seconds (e.g., 1679463169).</p>
             <blockquote>
                <p>To search for a private or shared trip from Prague to Vienna for 3 passengers, use this call:</p>
             </blockquote>
-            <pre class="highlight bash"><code>curl <span class="hljs-string">&quot;https://api.staging.mydaytrip.net/partners/v3/trip/search?originLatitude=50.10&amp;originLongitude=14.2559&amp;destinationLatitude=48.2082&amp;destinationLongitude=16.3738&amp;departureTime=1766227088&amp;passengersCount=3&amp;childrenCount=1&amp;includeShared=true&quot;</span> \
+            <pre class="highlight bash"><code>curl <span class="hljs-string">&quot;https://papi.staging.mydaytrip.net/partners/v3/trip/search?originLatitude=50.10&amp;originLongitude=14.2559&amp;destinationLatitude=48.2082&amp;destinationLongitude=16.3738&amp;departureTime=1766227088&amp;passengersCount=3&amp;childrenCount=1&amp;includeShared=true&quot;</span> \
   -H <span class="hljs-string">&quot;x-api-key: your_api_key&quot;</span></code></pre><pre class="highlight javascript"><code></code></pre><pre class="highlight python"><code></code></pre>
             <blockquote>
                <p>To search for a private or shared trip from Prague Airport to Vienna for 3 passengers, use this call:</p>
             </blockquote>
-            <pre class="highlight bash"><code>curl <span class="hljs-string">&quot;https://api.staging.mydaytrip.net/partners/v3/trip/search?originType=iata&amp;origin=PRG&amp;destinationType=coordinates&amp;destinationLatitude=48.2082&amp;destinationLongitude=16.3738&amp;departureTime=1766227088&amp;passengersCount=3&amp;childrenCount=1&amp;includeShared=true&quot;</span> \
+            <pre class="highlight bash"><code>curl <span class="hljs-string">&quot;https://papi.staging.mydaytrip.net/partners/v3/trip/search?originType=iata&amp;origin=PRG&amp;destinationType=coordinates&amp;destinationLatitude=48.2082&amp;destinationLongitude=16.3738&amp;departureTime=1766227088&amp;passengersCount=3&amp;childrenCount=1&amp;includeShared=true&quot;</span> \
   -H <span class="hljs-string">&quot;x-api-key: your_api_key&quot;</span></code></pre><pre class="highlight javascript"><code></code></pre><pre class="highlight python"><code></code></pre>
             <blockquote>
                <p>The above call returns a JSON structured like this:</p>
@@ -758,7 +758,7 @@
             <blockquote>
                <p>To search for a private trip from Dubrovnik to Venice for 10 passengers, with multiple vehicle options and meeting positions:</p>
             </blockquote>
-            <pre class="highlight bash"><code>curl <span class="hljs-string">&quot;https://api.staging.mydaytrip.net/partners/v3/trip/search?originLatitude=42.639515&amp;originLongitude=18.108064&amp;destinationLatitude=45.434143&amp;destinationLongitude=12.333497&amp;departureTime=1766227088&amp;includeShared=false&amp;includeStops=false&amp;passengersCount=10&amp;includeMultipleVehicles=true&amp;includeMeetingPositions=true&quot;</span> \
+            <pre class="highlight bash"><code>curl <span class="hljs-string">&quot;https://papi.staging.mydaytrip.net/partners/v3/trip/search?originLatitude=42.639515&amp;originLongitude=18.108064&amp;destinationLatitude=45.434143&amp;destinationLongitude=12.333497&amp;departureTime=1766227088&amp;includeShared=false&amp;includeStops=false&amp;passengersCount=10&amp;includeMultipleVehicles=true&amp;includeMeetingPositions=true&quot;</span> \
   -H <span class="hljs-string">&quot;x-api-key: your_api_key&quot;</span></code></pre><pre class="highlight javascript"><code></code></pre><pre class="highlight python"><code></code></pre>
             <blockquote>
                <p>The above call returns a JSON structured like this:</p>
@@ -1038,7 +1038,7 @@
 }&#x27;</span> \
   -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
   -H <span class="hljs-string">&quot;x-api-key: your_api_key&quot;</span> \
-  -X POST https://api.staging.mydaytrip.net/partners/v3/trip/search/customize</code></pre><pre class="highlight javascript"><code></code></pre><pre class="highlight python"><code></code></pre>
+  -X POST https://papi.staging.mydaytrip.net/partners/v3/trip/search/customize</code></pre><pre class="highlight javascript"><code></code></pre><pre class="highlight python"><code></code></pre>
             <blockquote>
                <p>The above call returns a JSON structured like this:</p>
             </blockquote>
@@ -1248,7 +1248,7 @@
 }&#x27;</span> \
   -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
   -H <span class="hljs-string">&quot;x-api-key: your_api_key&quot;</span> \
-  -X POST https://api.staging.mydaytrip.net/partners/v3/trip/book</code></pre><pre class="highlight javascript"><code></code></pre><pre class="highlight python"><code></code></pre>
+  -X POST https://papi.staging.mydaytrip.net/partners/v3/trip/book</code></pre><pre class="highlight javascript"><code></code></pre><pre class="highlight python"><code></code></pre>
             <blockquote>
                <p>Example response without meeting and dropoff positions:</p>
             </blockquote>
@@ -1602,7 +1602,7 @@
             <pre class="highlight bash"><code>curl -d <span class="hljs-string">&#x27;{ &quot;bookingId&quot;: &quot;cb102778-a3d7-426e-8d18-6bd6b296f283&quot; }&#x27;</span> \
   -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
   -H <span class="hljs-string">&quot;x-api-key: your_api_key&quot;</span> \
-  -X POST https://api.staging.mydaytrip.net/partners/v3/trip/cancel</code></pre><pre class="highlight javascript"><code></code></pre><pre class="highlight python"><code></code></pre>
+  -X POST https://papi.staging.mydaytrip.net/partners/v3/trip/cancel</code></pre><pre class="highlight javascript"><code></code></pre><pre class="highlight python"><code></code></pre>
             <blockquote>
                <p>Example response with the penalty amount for the cancellation:</p>
             </blockquote>
@@ -1688,7 +1688,7 @@
             <blockquote>
                <p>To get details of a booked trip by <code>bookingId</code>, use the following call:</p>
             </blockquote>
-            <pre class="highlight bash"><code>curl https://api.staging.mydaytrip.net/partners/v3/trip/details/bookingId \
+            <pre class="highlight bash"><code>curl https://papi.staging.mydaytrip.net/partners/v3/trip/details/bookingId \
   -H <span class="hljs-string">&quot;x-api-key: your_api_key&quot;</span></code></pre><pre class="highlight javascript"><code></code></pre><pre class="highlight python"><code></code></pre>
             <blockquote>
                <p>Make sure to replace <code>bookingId</code> with the real booking id.</p>
@@ -1696,7 +1696,7 @@
             <blockquote>
                <p>To get details of a booked trip by <code>externalId</code>, use the following call:</p>
             </blockquote>
-            <pre class="highlight bash"><code>curl https://api.staging.mydaytrip.net/partners/v3/trip/external/details/externalId \
+            <pre class="highlight bash"><code>curl https://papi.staging.mydaytrip.net/partners/v3/trip/external/details/externalId \
   -H <span class="hljs-string">&quot;x-api-key: your_api_key&quot;</span></code></pre><pre class="highlight javascript"><code></code></pre><pre class="highlight python"><code></code></pre>
             <blockquote>
                <p>Make sure to replace <code>externalId</code> with the real external id.</p>
@@ -2042,7 +2042,7 @@
 }&#x27;</span> \
   -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
   -H <span class="hljs-string">&quot;x-api-key: your_api_key&quot;</span> \
-  -X POST https://api.staging.mydaytrip.net/partners/v3/trip/update</code></pre><pre class="highlight javascript"><code></code></pre><pre class="highlight python"><code></code></pre>
+  -X POST https://papi.staging.mydaytrip.net/partners/v3/trip/update</code></pre><pre class="highlight javascript"><code></code></pre><pre class="highlight python"><code></code></pre>
             <blockquote>
                <p>The above call returns a JSON structured like this:</p>
             </blockquote>
@@ -2134,7 +2134,7 @@
             <p><code>/partners/v3/trip/update</code></p>
             <h3 id="request-body-3">Request body</h3>
             <p>All properties except <code>bookingId</code> are optional. When a property is not included in the request it won&#39;t be updated and it will keep it&#39;s previous value. If you want to remove a property value like <code>customerNote</code> then send an empty string <code>&quot;&quot;</code> as the value. If you want to make changes to any passenger you need to provide full <code>passengerDetails</code> array - it&#39;s not possible to send only details of the passenger you want to update.</p>
-            <p>Disclaimer: in the last 24 hours before the departure the <a href="#update-endpoint">/update</a> endpoint will no longer accept updates. For updates in the last 24 hours please contact our customer support at <a href="mailto:&#100;&#x61;&#x79;&#x74;&#114;&#x69;&#112;&#64;&#x6d;&#121;&#x64;&#x61;&#x79;&#116;&#x72;&#105;&#x70;&#46;&#99;&#x6f;&#x6d;">&#100;&#x61;&#x79;&#x74;&#114;&#x69;&#112;&#64;&#x6d;&#121;&#x64;&#x61;&#x79;&#116;&#x72;&#105;&#x70;&#46;&#99;&#x6f;&#x6d;</a> or call <a href="tel:+442033181119">+44 20 3318 1119</a>.</p>
+            <p>Disclaimer: in the last 24 hours before the departure the <a href="#update-endpoint">/update</a> endpoint will no longer accept updates. For updates in the last 24 hours please contact our customer support at <a href="mailto:&#x64;&#x61;&#x79;&#116;&#x72;&#105;&#112;&#64;&#x6d;&#x79;&#100;&#x61;&#x79;&#116;&#x72;&#105;&#112;&#x2e;&#99;&#111;&#x6d;">&#x64;&#x61;&#x79;&#116;&#x72;&#105;&#112;&#64;&#x6d;&#x79;&#100;&#x61;&#x79;&#116;&#x72;&#105;&#112;&#x2e;&#99;&#111;&#x6d;</a> or call <a href="tel:+442033181119">+44 20 3318 1119</a>.</p>
             <table>
                <thead>
                   <tr>
@@ -2319,7 +2319,7 @@
             <blockquote>
                <p>To get driver position(s) of a trip currently in progress, use the following call:</p>
             </blockquote>
-            <pre class="highlight bash"><code>curl https://api.staging.mydaytrip.net/partners/v3/trip/tracking/bookingId \
+            <pre class="highlight bash"><code>curl https://papi.staging.mydaytrip.net/partners/v3/trip/tracking/bookingId \
   -H <span class="hljs-string">&quot;x-api-key: your_api_key&quot;</span></code></pre><pre class="highlight javascript"><code></code></pre><pre class="highlight python"><code></code></pre>
             <blockquote>
                <p>Make sure to replace <code>bookingId</code> with the real booking id.</p>
@@ -2422,7 +2422,7 @@
             <blockquote>
                <p>To get drivers currently assigned to a trip</p>
             </blockquote>
-            <pre class="highlight bash"><code>curl https://api.staging.mydaytrip.net/partners/v3/trip/drivers/bookingId \
+            <pre class="highlight bash"><code>curl https://papi.staging.mydaytrip.net/partners/v3/trip/drivers/bookingId \
   -H <span class="hljs-string">&quot;x-api-key: your_api_key&quot;</span></code></pre><pre class="highlight javascript"><code></code></pre><pre class="highlight python"><code></code></pre>
             <blockquote>
                <p>Make sure to replace <code>bookingId</code> with the real booking id.</p>
@@ -3221,6 +3221,7 @@
             <p>You can send up to 2000 requests per minute.</p>
             <h1 id="change-log">Change Log</h1>
             <ul>
+               <li><strong>2025-07-16</strong>: Updated base endpoint addresses with the new domain name.</li>
                <li><strong>2025-06-03</strong>: Added support for meeting positions in private trips.</li>
                <li><strong>2025-05-20</strong>: Introduced multi-vehicle trip options.</li>
                <li><strong>2025-04-02</strong>: Extended /search and /book endpoints to accept departure time in local time.</li>
