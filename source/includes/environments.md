@@ -6,5 +6,5 @@ Daytrip offers a sandbox environment where you can test your integration with th
 
 Environment | Base partner API url
 ----------- | --------------------
-Sandbox     | https://api.staging.mydaytrip.net/partners/v3/
-Production  | https://api.mydaytrip.com/partners/v3/
+Sandbox     | https://papi.staging.mydaytrip.net/partners/v3/
+Production  | https://papi.mydaytrip.com/partners/v3/
