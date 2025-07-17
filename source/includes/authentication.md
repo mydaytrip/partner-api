@@ -3,7 +3,7 @@
 > To authorize your requests, add the `x-api-key` header like this:
 
 ```bash
-curl "https://api.staging.mydaytrip.net/partners/v3/trip/search"
+curl "https://papi.staging.mydaytrip.net/partners/v3/trip/search"
   -H "x-api-key: your-api-key"
 ```
 
