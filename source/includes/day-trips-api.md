@@ -1,19 +1,8 @@
 # Day Trip API
 
-Day trips combine comfortable door‑to‑door transportation with guided sightseeing. Each product is a pre‑planned excursion with a fixed itinerary. Customers can discover available day trips by country or by geographic coordinates, inspect the full itinerary, and then book the trip for a specific departure time. Unlike the point‑to‑point trips from the core API, Day Trip products cannot be customised with additional stops or different routes – the itinerary and sightseeing stops are predefined.
+Day trips combine comfortable door‑to‑door transportation with guided sightseeing. Each product is a pre‑planned excursion with a fixed itinerary. Customers can discover available day trips by country or by geographic coordinates, inspect the full itinerary, and then book the trip for a specific departure time. Unlike the point‑to‑point trips from the Trip API, Day Trip products cannot be customized with additional stops or different routes – the itinerary and sightseeing stops are predefined.
 
 The Day Trips API allows partners to search, browse, and book curated day trip packages.
-
-## Authentication
-
-Authentication for the Day Trip API is consistent with the main PAPI. All requests must include your unique API key in the `x-api-key` header.
-
-```bash
-curl "https://papi.staging.mydaytrip.net/partners/v1/daytrips/..." \
-  -H "x-api-key: your_api_key"
-```
-
----
 
 ## Flows
 
@@ -768,7 +757,7 @@ All fields are optional except for `bookingId`. Only include the fields you wish
 
 ---
 
-# Day trip API Entities
+# Day Trips API Entities
 
 ## DayTripBooking
 

@@ -10,7 +10,7 @@ includes:
     - errors
     - debugging
     - trip-api
-    - day-trip-api
+    - day-trips-api
     - faq
     - change-log
 

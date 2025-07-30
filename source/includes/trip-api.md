@@ -1953,7 +1953,7 @@ Replace `bookingId` with the id of the booking you want to retrieve drivers and 
 | 403         | Forbidden request - trying to retrieve drivers for a booking owned by someone else. |
 | 404         | Booking not found.                                                                  |
 
-# Entities
+# Trip API Entities
 
 Below is a documentation of all object entities returned by the Daytrip API endpoints.
 
