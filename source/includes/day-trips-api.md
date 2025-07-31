@@ -1,4 +1,4 @@
-# Day Trip API
+# Day Trips API
 
 Day trips combine comfortable door‑to‑door transportation with guided sightseeing. Each product is a pre‑planned excursion with a fixed itinerary. Customers can discover available day trips by country or by geographic coordinates, inspect the full itinerary, and then book the trip for a specific departure time. Unlike the point‑to‑point trips from the Trip API, Day Trip products cannot be customized with additional stops or different routes – the itinerary and sightseeing stops are predefined.
 
@@ -12,7 +12,7 @@ The API is designed to support intuitive user flows, from discovery to booking m
 
 This flow is ideal when a user wants to explore available day trips starting from a specific country or city.
 
-1.  Call [`/partners/v1/daytrips/country/{isoCountryCode}`](#browse-locations-by-country) to discover all available departure locations within a country.
+1.  Call [`/partners/v1/daytrips/country/{countryIsoCode}`](#browse-locations-by-country) to discover all available departure locations within a country.
 2.  Present the locations to the user. Once a location is chosen, call [`/partners/v1/daytrips/location/{locationId}`](#get-day-trips-from-a-location) to fetch all available day trip packages from that city.
 3.  After the user selects a day trip, call [`/partners/v1/daytrips/book`](#create-day-trip-booking) with the `dayTripId` and passenger details to create a booking.
 4.  `optional` - Use [`/partners/v1/daytrips/details/{bookingId}`](#get-booking-details) to retrieve the complete booking information at any time.
@@ -98,13 +98,13 @@ curl "https://papi.staging.mydaytrip.net/partners/v1/daytrips/country/cz" \
 
 ### URL Path
 
-`GET /partners/v1/daytrips/country/{isoCountryCode}`
+`GET /partners/v1/daytrips/country/{countryIsoCode}`
 
 ### Request Parameters
 
 | Name             | Type   | Description                                                 |
 | ---------------- | ------ | ----------------------------------------------------------- |
-| `isoCountryCode` | string | **Required.** ISO 3166-1 alpha-2 country code (e.g., `cz`). |
+| `countryIsoCode` | string | **Required.** ISO 3166-1 alpha-2 country code (e.g., `cz`). |
 
 ### Response Body
 
@@ -757,9 +757,9 @@ All fields are optional except for `bookingId`. Only include the fields you wish
 
 ---
 
-# Day Trips API Entities
+## Day Trips API Entities
 
-## DayTripBooking
+### DayTripBooking
 
 | Property             | Type    | Description                                                                          |
 | -------------------- | ------- | ------------------------------------------------------------------------------------ |
@@ -772,7 +772,7 @@ All fields are optional except for `bookingId`. Only include the fields you wish
 | `pricing`            | object  | The pricing details for the booking. See [Price](#price).                            |
 | `vehicles`           | array   | An array of vehicles assigned to the booking. See [DayTripVehicle](#daytripvehicle). |
 
-## DayTripLocation
+### DayTripLocation
 
 | Property      | Type   | Description                                                                    |
 | ------------- | ------ | ------------------------------------------------------------------------------ |
@@ -782,14 +782,14 @@ All fields are optional except for `bookingId`. Only include the fields you wish
 | `images`      | array  | An array of URLs for images of the location.                                   |
 | `coordinates` | object | The geographical coordinates of the location. See [Coordinates](#coordinates). |
 
-## Coordinates
+### Coordinates
 
 | Property | Type  | Description                    |
 | -------- | ----- | ------------------------------ |
 | `lat`    | float | The latitude of the location.  |
 | `lon`    | float | The longitude of the location. |
 
-## DayTrip
+### DayTrip
 
 | Property                 | Type    | Description                                                                        |
 | ------------------------ | ------- | ---------------------------------------------------------------------------------- |
@@ -802,7 +802,7 @@ All fields are optional except for `bookingId`. Only include the fields you wish
 | `price`                  | object  | The pricing details for the day trip. See [Price](#price).                         |
 | `itineraryItems`         | array   | An array of itinerary items for the day trip. See [ItineraryItem](#itineraryitem). |
 
-## ItineraryItem
+### ItineraryItem
 
 | Property   | Type    | Description                                                           |
 | ---------- | ------- | --------------------------------------------------------------------- |
@@ -810,7 +810,7 @@ All fields are optional except for `bookingId`. Only include the fields you wish
 | `type`     | string  | The type of the itinerary item. Can be `edgeLocation` or `location`.  |
 | `location` | object  | The location of the itinerary item. See [Location](#daytriplocation). |
 
-## Price
+### Price
 
 | Property            | Type    | Description                                                 |
 | ------------------- | ------- | ----------------------------------------------------------- |
@@ -820,7 +820,7 @@ All fields are optional except for `bookingId`. Only include the fields you wish
 | `passengersCount`   | integer | The number of passengers for the booking.                   |
 | `totalPrice`        | float   | The total price for the booking.                            |
 
-## PassengerDetails
+### PassengerDetails
 
 | Property                 | Type    | Description                                              |
 | ------------------------ | ------- | -------------------------------------------------------- |
@@ -829,7 +829,7 @@ All fields are optional except for `bookingId`. Only include the fields you wish
 | `children.age`           | integer | The age of the child passenger.                          |
 | `children.childSeatType` | string  | The type of child seat required for the child passenger. |
 
-## LeadPassenger
+### LeadPassenger
 
 | Property    | Type    | Description                                         |
 | ----------- | ------- | --------------------------------------------------- |
@@ -839,7 +839,7 @@ All fields are optional except for `bookingId`. Only include the fields you wish
 | `email`     | string  | The email address of the lead passenger.            |
 | `over18`    | boolean | Whether the lead passenger is over 18 years of age. |
 
-## PickupLocation
+### PickupLocation
 
 | Property  | Type   | Description                                      |
 | --------- | ------ | ------------------------------------------------ |
@@ -848,7 +848,7 @@ All fields are optional except for `bookingId`. Only include the fields you wish
 | `address` | string | The address of the pickup location.              |
 | `note`    | string | A note for the driver about the pickup location. |
 
-## DayTripVehicle
+### DayTripVehicle
 
 | Property           | Type   | Description                         |
 | ------------------ | ------ | ----------------------------------- |
