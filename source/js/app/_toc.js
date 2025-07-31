@@ -3,7 +3,7 @@
     "use strict";
     function makeToc() {
         var options = {
-            selectors: "h1, h2, h3",
+            selectors: "h1, h2",
             extendPage: false,
             theme: "none",
             smoothScroll: false,
