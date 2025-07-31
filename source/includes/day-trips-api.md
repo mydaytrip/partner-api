@@ -100,9 +100,9 @@ curl "https://papi.staging.mydaytrip.net/partners/v1/daytrips/country/cz" \
 
 ### Request Parameters
 
-| Name           | Type   | Description                                                 |
-| -------------- | ------ | ----------------------------------------------------------- |
-| countryIsoCode | string | **Required.** ISO 3166-1 alpha-2 country code (e.g., `cz`). |
+| Name           | Type   | Description                                                                                       |
+| -------------- | ------ | ------------------------------------------------------------------------------------------------- |
+| countryIsoCode | string | **Required.** [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#search) country code (e.g., `cz`). |
 
 ### Response Body
 
@@ -404,7 +404,7 @@ curl "https://papi.staging.mydaytrip.net/partners/v1/daytrips/search?lat=50.0755
 
 ## Book Day Trip
 
-This endpoint creates a new booking for a selected day trip product.
+This endpoint creates a new booking for a selected day trip product. The minimum time to departure is 36 hours.
 
 > To book a day trip for 3 adults and 1 child:
 
@@ -512,6 +512,7 @@ curl -X POST "https://papi.staging.mydaytrip.net/partners/v1/daytrips/book" \
 ## Cancel Booking
 
 This endpoint cancels an existing day trip booking, if permitted by cancellation rules.
+Current cutoff for cancellations is 24 hours before the trip departure time.
 
 > To cancel a booking with reference "CB1027":
 
@@ -645,7 +646,7 @@ curl "https://papi.staging.mydaytrip.net/partners/v1/daytrips/details/123e4567-e
 
 ## Update Booking
 
-This endpoint modifies an existing booking, allowing changes to pickup time, location, and passenger count.
+This endpoint modifies an existing booking, allowing changes to pickup time, location, and passenger count. The current cutoff for updates is 24 hours before the trip departure time.
 
 > To update the passenger count and pickup location for a booking:
 
