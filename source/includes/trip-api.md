@@ -747,9 +747,9 @@ curl "https://papi.staging.mydaytrip.net/partners/v3/trip/search?originLatitude=
 }
 ```
 
-### URL path
+### Endpoint Details
 
-`/partners/v3/trip/search`
+`GET /partners/v3/trip/search`
 
 ### Query Parameters
 
@@ -940,9 +940,9 @@ curl -d '{
 }
 ```
 
-### URL path
+### Endpoint Details
 
-`/partners/v3/trip/search/customize`
+`POST /partners/v3/trip/search/customize`
 
 ### Request body
 
@@ -1214,9 +1214,9 @@ curl -d '{
 }
 ```
 
-### URL path
+### Endpoint Details
 
-`/partners/v3/trip/book`
+`POST /partners/v3/trip/book`
 
 ### Request body
 
@@ -1285,9 +1285,9 @@ curl -d '{ "bookingId": "cb102778-a3d7-426e-8d18-6bd6b296f283" }' \
 }
 ```
 
-### URL path
+### Endpoint Details
 
-`/partners/v3/trip/cancel`
+`POST /partners/v3/trip/cancel`
 
 ### Request body
 
@@ -1536,9 +1536,9 @@ curl https://papi.staging.mydaytrip.net/partners/v3/trip/external/details/extern
 }
 ```
 
-### URL path
+### Endpoint Details
 
-`/partners/v3/trip/details/bookingId`
+`GET /partners/v3/trip/details/bookingId`
 
 OR
 
@@ -1706,9 +1706,9 @@ curl -d '{
 }
 ```
 
-### URL path
+### Endpoint Details
 
-`/partners/v3/trip/update`
+`POST /partners/v3/trip/update`
 
 ### Request body
 
@@ -1830,9 +1830,9 @@ curl https://papi.staging.mydaytrip.net/partners/v3/trip/tracking/bookingId \
 }
 ```
 
-### URL path
+### Endpoint Details
 
-`/partners/v3/trip/tracking/bookingId`
+`GET /partners/v3/trip/tracking/bookingId`
 
 Replace `bookingId` with the id of the booking you want to track.
 
@@ -1933,9 +1933,9 @@ curl https://papi.staging.mydaytrip.net/partners/v3/trip/drivers/bookingId \
 }
 ```
 
-### URL path
+### Endpoint Details
 
-`/partners/v3/trip/drivers/bookingId`
+`GET /partners/v3/trip/drivers/bookingId`
 
 Replace `bookingId` with the id of the booking you want to retrieve drivers and vehicles for.
 
