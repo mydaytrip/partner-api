@@ -84,541 +84,541 @@ curl "https://papi.staging.mydaytrip.net/partners/v3/trip/search?originType=iata
 
 ```json
 {
-  "searchId": "f0e34a1b-2b3d-4747-b426-292633b615b4",
-  "expiresAt": "2022-12-04T18:00:00Z",
-  "passengersCount": 3,
-  "currency": "EUR",
-  "options": [
-    {
-      "id": "1d32109f-c2e2-44fe-b2cf-461ef3730541",
-      "type": "Private",
-      "englishSpeakingDriver": true,
-      "distanceKm": 334,
-      "travelTimeMinutes": 208,
-      "pickUp": {
-        "lat": 50.1,
-        "lon": 14.25,
-        "time": "2022-12-05T18:00:00Z",
-        "timezone": "Europe/Prague",
-        "meetAndGreet": true,
-        "state": "original",
-        "immutable": false
-      },
-      "dropOff": {
-        "lat": 48.2,
-        "lon": 16.37,
-        "state": "original",
-        "immutable": false
-      },
-      "pricing": {
-        "totalPrice": 260
-      },
-      "vehicle": {
-        "type": "Sedan",
-        "maxPassengers": 3,
-        "description": "Sedan comparable to a Volkswagen Passat, up to 3 passengers with luggage.",
-        "modelDescription": "VW Passat or similar",
-        "image": "https://daytrip.imgix.net/site/sedan.png"
-      },
-      "luggage": {
-        "maxTotalCarryons": 3,
-        "maxTotalSuitcases": 3
-      },
-      "availableChildSeatTypes": [
+    "searchId": "f0e34a1b-2b3d-4747-b426-292633b615b4",
+    "expiresAt": "2022-12-04T18:00:00Z",
+    "passengersCount": 3,
+    "currency": "EUR",
+    "options": [
         {
-          "childSeatType": "RearFacing",
-          "description": "Rear-facing infant seat",
-          "ageFrom": 0,
-          "ageTo": 1,
-          "weightInPoundsFrom": 0,
-          "weightInPoundsTo": 26,
-          "weightInKilosFrom": 0,
-          "weightInKilosTo": 10
+            "id": "1d32109f-c2e2-44fe-b2cf-461ef3730541",
+            "type": "Private",
+            "englishSpeakingDriver": true,
+            "distanceKm": 334,
+            "travelTimeMinutes": 208,
+            "pickUp": {
+                "lat": 50.1,
+                "lon": 14.25,
+                "time": "2022-12-05T18:00:00Z",
+                "timezone": "Europe/Prague",
+                "meetAndGreet": true,
+                "state": "original",
+                "immutable": false
+            },
+            "dropOff": {
+                "lat": 48.2,
+                "lon": 16.37,
+                "state": "original",
+                "immutable": false
+            },
+            "pricing": {
+                "totalPrice": 260
+            },
+            "vehicle": {
+                "type": "Sedan",
+                "maxPassengers": 3,
+                "description": "Sedan comparable to a Volkswagen Passat, up to 3 passengers with luggage.",
+                "modelDescription": "VW Passat or similar",
+                "image": "https://daytrip.imgix.net/site/sedan.png"
+            },
+            "luggage": {
+                "maxTotalCarryons": 3,
+                "maxTotalSuitcases": 3
+            },
+            "availableChildSeatTypes": [
+                {
+                    "childSeatType": "RearFacing",
+                    "description": "Rear-facing infant seat",
+                    "ageFrom": 0,
+                    "ageTo": 1,
+                    "weightInPoundsFrom": 0,
+                    "weightInPoundsTo": 26,
+                    "weightInKilosFrom": 0,
+                    "weightInKilosTo": 10
+                },
+                {
+                    "childSeatType": "ForwardFacing",
+                    "description": "Forward-facing w/harness",
+                    "ageFrom": 1,
+                    "ageTo": 4,
+                    "weightInPoundsFrom": 18,
+                    "weightInPoundsTo": 36,
+                    "weightInKilosFrom": 8,
+                    "weightInKilosTo": 16
+                },
+                {
+                    "childSeatType": "BoosterSeat",
+                    "description": "Booster seat with high back",
+                    "ageFrom": 4,
+                    "ageTo": 6,
+                    "weightInPoundsFrom": 30,
+                    "weightInPoundsTo": 50,
+                    "weightInKilosFrom": 14,
+                    "weightInKilosTo": 23
+                },
+                {
+                    "childSeatType": "Booster",
+                    "description": "Backless booster",
+                    "ageFrom": 6,
+                    "ageTo": 12,
+                    "weightInPoundsFrom": 44,
+                    "weightInPoundsTo": 72,
+                    "weightInKilosFrom": 20,
+                    "weightInKilosTo": 33
+                }
+            ],
+            "possibleStops": [
+                {
+                    "id": "d280ce2a-6224-4d95-af17-a250f81b97dd",
+                    "price": 31,
+                    "name": "Lednice Chateau and Park",
+                    "image": "https://daytrip.imgix.net/lednice-chateau-and-park4.jpg",
+                    "title": "Vacation like a King",
+                    "perex": "This UNESCO-listed chateau and sprawling park was the Lichtenstein's holiday home - exactly the kind of extravagance you'd expect from a dynasty with their own country. ",
+                    "description": "The Liechtensteins really came into the money with the fortunes seized from Czech noblemen after their victory at the Battle of White Mountain in 1620, and Lednice was one of the presents they bought themselves. In the mid-19th century the baroque manor was given a complete makeover in the 'Windsor Gothic' style, leaving it as we see it today: a shameless flaunting of fabulous wealth, a slap in the face to anyone foolish enough to think that the French Revolution had ended high-living in Europe. The surrounding English landscape park, the largest in the country, is an incomparable swath of green, sprinkled with Romantic follies. There's also a monumental greenhouse open all year round, overflowing with exotic growths gathered by an army of botanists across the Americas. The greenhouse's exoticism is echoed by the charming minaret, constructed at the turn of the 18th century, bringing a whiff of Morocco to Moravia.\nFor more info: www.zamek-lednice.com",
+                    "durationInMinutes": 60,
+                    "order": 1,
+                    "timezone": "Europe/Prague",
+                    "country": {
+                        "englishName": "Czech Republic"
+                    }
+                },
+                {
+                    "id": "4ee58c0c-4e56-46ef-bd22-406a1bc60e1c",
+                    "price": 28,
+                    "name": "Mikulov",
+                    "image": "https://daytrip.imgix.net/510.jpg",
+                    "title": "The Heart of Czech Wine Country",
+                    "perex": "A town with a history as deep and flavourful as its wine, Mikulov provides a perfect combination of relaxation and exploration.",
+                    "description": "Often favoured by visitors with a more active approach to life, Mikulov has much to offer. Surrounded by idyllic countryside, crisscrossed by bicycle paths and marked hiking trails, and the nearby Nové Mlýny lakes, there is something for everyone to enjoy. After all that fresh air, a glass of wine will be more than welcome, and fortunately, Mikulov is the centre for Czech wine making. Due to a high concentration of limestone in the local soil, wine from this region has a unique character and distinct taste. If you like your wine with a side-serving of history, Mikulov Castle dates from the 1730s, and the Dietrichstein Tomb is the final resting place of a Bohemian noble family. Mikulov is also significant for its strong Jewish history. In the early 1800s Mikulov's Jewish Quarter was the largest in Moravia with half the town's inhabitants being of Jewish faith.",
+                    "durationInMinutes": 60,
+                    "order": 2,
+                    "timezone": "Europe/Prague",
+                    "country": {
+                        "englishName": "Czech Republic"
+                    }
+                }
+            ]
         },
         {
-          "childSeatType": "ForwardFacing",
-          "description": "Forward-facing w/harness",
-          "ageFrom": 1,
-          "ageTo": 4,
-          "weightInPoundsFrom": 18,
-          "weightInPoundsTo": 36,
-          "weightInKilosFrom": 8,
-          "weightInKilosTo": 16
+            "id": "054ee064-d4dd-492f-9d0a-5251a7f791c2",
+            "type": "Private",
+            "englishSpeakingDriver": false,
+            "distanceKm": 334,
+            "travelTimeMinutes": 208,
+            "pickUp": {
+                "lat": 50.1,
+                "lon": 14.25,
+                "time": "2022-12-05T18:00:00Z",
+                "timezone": "Europe/Prague",
+                "meetAndGreet": true,
+                "state": "original",
+                "immutable": false
+            },
+            "dropOff": {
+                "lat": 48.2,
+                "lon": 16.37,
+                "state": "original",
+                "immutable": false
+            },
+            "pricing": {
+                "totalPrice": 240
+            },
+            "vehicle": {
+                "type": "Sedan",
+                "maxPassengers": 3,
+                "description": "Sedan comparable to a Volkswagen Passat, up to 3 passengers with luggage.",
+                "modelDescription": "VW Passat or similar",
+                "image": "https://daytrip.imgix.net/site/sedan.png"
+            },
+            "luggage": {
+                "maxTotalCarryons": 3,
+                "maxTotalSuitcases": 3
+            },
+            "availableChildSeatTypes": [
+                {
+                    "childSeatType": "RearFacing",
+                    "description": "Rear-facing infant seat",
+                    "ageFrom": 0,
+                    "ageTo": 1,
+                    "weightInPoundsFrom": 0,
+                    "weightInPoundsTo": 26,
+                    "weightInKilosFrom": 0,
+                    "weightInKilosTo": 10
+                },
+                {
+                    "childSeatType": "ForwardFacing",
+                    "description": "Forward-facing w/harness",
+                    "ageFrom": 1,
+                    "ageTo": 4,
+                    "weightInPoundsFrom": 18,
+                    "weightInPoundsTo": 36,
+                    "weightInKilosFrom": 8,
+                    "weightInKilosTo": 16
+                },
+                {
+                    "childSeatType": "BoosterSeat",
+                    "description": "Booster seat with high back",
+                    "ageFrom": 4,
+                    "ageTo": 6,
+                    "weightInPoundsFrom": 30,
+                    "weightInPoundsTo": 50,
+                    "weightInKilosFrom": 14,
+                    "weightInKilosTo": 23
+                },
+                {
+                    "childSeatType": "Booster",
+                    "description": "Backless booster",
+                    "ageFrom": 6,
+                    "ageTo": 12,
+                    "weightInPoundsFrom": 44,
+                    "weightInPoundsTo": 72,
+                    "weightInKilosFrom": 20,
+                    "weightInKilosTo": 33
+                }
+            ],
+            "possibleStops": [
+                {
+                    "id": "d280ce2a-6224-4d95-af17-a250f81b97dd",
+                    "price": 31,
+                    "name": "Lednice Chateau and Park",
+                    "image": "https://daytrip.imgix.net/lednice-chateau-and-park4.jpg",
+                    "title": "Vacation like a King",
+                    "perex": "This UNESCO-listed chateau and sprawling park was the Lichtenstein's holiday home - exactly the kind of extravagance you'd expect from a dynasty with their own country. ",
+                    "description": "The Liechtensteins really came into the money with the fortunes seized from Czech noblemen after their victory at the Battle of White Mountain in 1620, and Lednice was one of the presents they bought themselves. In the mid-19th century the baroque manor was given a complete makeover in the 'Windsor Gothic' style, leaving it as we see it today: a shameless flaunting of fabulous wealth, a slap in the face to anyone foolish enough to think that the French Revolution had ended high-living in Europe. The surrounding English landscape park, the largest in the country, is an incomparable swath of green, sprinkled with Romantic follies. There's also a monumental greenhouse open all year round, overflowing with exotic growths gathered by an army of botanists across the Americas. The greenhouse's exoticism is echoed by the charming minaret, constructed at the turn of the 18th century, bringing a whiff of Morocco to Moravia.\nFor more info: www.zamek-lednice.com",
+                    "durationInMinutes": 60,
+                    "order": 1,
+                    "timezone": "Europe/Prague",
+                    "country": {
+                        "englishName": "Czech Republic"
+                    }
+                },
+                {
+                    "id": "4ee58c0c-4e56-46ef-bd22-406a1bc60e1c",
+                    "price": 28,
+                    "name": "Mikulov",
+                    "image": "https://daytrip.imgix.net/510.jpg",
+                    "title": "The Heart of Czech Wine Country",
+                    "perex": "A town with a history as deep and flavourful as its wine, Mikulov provides a perfect combination of relaxation and exploration.",
+                    "description": "Often favoured by visitors with a more active approach to life, Mikulov has much to offer. Surrounded by idyllic countryside, crisscrossed by bicycle paths and marked hiking trails, and the nearby Nové Mlýny lakes, there is something for everyone to enjoy. After all that fresh air, a glass of wine will be more than welcome, and fortunately, Mikulov is the centre for Czech wine making. Due to a high concentration of limestone in the local soil, wine from this region has a unique character and distinct taste. If you like your wine with a side-serving of history, Mikulov Castle dates from the 1730s, and the Dietrichstein Tomb is the final resting place of a Bohemian noble family. Mikulov is also significant for its strong Jewish history. In the early 1800s Mikulov's Jewish Quarter was the largest in Moravia with half the town's inhabitants being of Jewish faith.",
+                    "durationInMinutes": 60,
+                    "order": 2,
+                    "timezone": "Europe/Prague",
+                    "country": {
+                        "englishName": "Czech Republic"
+                    }
+                }
+            ]
         },
         {
-          "childSeatType": "BoosterSeat",
-          "description": "Booster seat with high back",
-          "ageFrom": 4,
-          "ageTo": 6,
-          "weightInPoundsFrom": 30,
-          "weightInPoundsTo": 50,
-          "weightInKilosFrom": 14,
-          "weightInKilosTo": 23
+            "id": "b071e9f8-54d9-44be-bb5f-feae5aafd771",
+            "type": "Private",
+            "englishSpeakingDriver": true,
+            "distanceKm": 334,
+            "travelTimeMinutes": 208,
+            "pickUp": {
+                "lat": 50.1,
+                "lon": 14.25,
+                "time": "2022-12-05T18:00:00Z",
+                "timezone": "Europe/Prague",
+                "meetAndGreet": true,
+                "state": "original",
+                "immutable": false
+            },
+            "dropOff": {
+                "lat": 48.2,
+                "lon": 16.37,
+                "state": "original",
+                "immutable": false
+            },
+            "pricing": {
+                "totalPrice": 320
+            },
+            "vehicle": {
+                "type": "MPV",
+                "maxPassengers": 4,
+                "description": "Compact MPV comparable to a Volkswagen Touran, up to 4 passengers with luggage.",
+                "modelDescription": "VW Touran or similar",
+                "image": "https://daytrip.imgix.net/site/mpv.png"
+            },
+            "luggage": {
+                "maxTotalCarryons": 4,
+                "maxTotalSuitcases": 4
+            },
+            "availableChildSeatTypes": [
+                {
+                    "childSeatType": "RearFacing",
+                    "description": "Rear-facing infant seat",
+                    "ageFrom": 0,
+                    "ageTo": 1,
+                    "weightInPoundsFrom": 0,
+                    "weightInPoundsTo": 26,
+                    "weightInKilosFrom": 0,
+                    "weightInKilosTo": 10
+                },
+                {
+                    "childSeatType": "ForwardFacing",
+                    "description": "Forward-facing w/harness",
+                    "ageFrom": 1,
+                    "ageTo": 4,
+                    "weightInPoundsFrom": 18,
+                    "weightInPoundsTo": 36,
+                    "weightInKilosFrom": 8,
+                    "weightInKilosTo": 16
+                },
+                {
+                    "childSeatType": "BoosterSeat",
+                    "description": "Booster seat with high back",
+                    "ageFrom": 4,
+                    "ageTo": 6,
+                    "weightInPoundsFrom": 30,
+                    "weightInPoundsTo": 50,
+                    "weightInKilosFrom": 14,
+                    "weightInKilosTo": 23
+                },
+                {
+                    "childSeatType": "Booster",
+                    "description": "Backless booster",
+                    "ageFrom": 6,
+                    "ageTo": 12,
+                    "weightInPoundsFrom": 44,
+                    "weightInPoundsTo": 72,
+                    "weightInKilosFrom": 20,
+                    "weightInKilosTo": 33
+                }
+            ],
+            "possibleStops": [
+                {
+                    "id": "d280ce2a-6224-4d95-af17-a250f81b97dd",
+                    "price": 31,
+                    "name": "Lednice Chateau and Park",
+                    "image": "https://daytrip.imgix.net/lednice-chateau-and-park4.jpg",
+                    "title": "Vacation like a King",
+                    "perex": "This UNESCO-listed chateau and sprawling park was the Lichtenstein's holiday home - exactly the kind of extravagance you'd expect from a dynasty with their own country. ",
+                    "description": "The Liechtensteins really came into the money with the fortunes seized from Czech noblemen after their victory at the Battle of White Mountain in 1620, and Lednice was one of the presents they bought themselves. In the mid-19th century the baroque manor was given a complete makeover in the 'Windsor Gothic' style, leaving it as we see it today: a shameless flaunting of fabulous wealth, a slap in the face to anyone foolish enough to think that the French Revolution had ended high-living in Europe. The surrounding English landscape park, the largest in the country, is an incomparable swath of green, sprinkled with Romantic follies. There's also a monumental greenhouse open all year round, overflowing with exotic growths gathered by an army of botanists across the Americas. The greenhouse's exoticism is echoed by the charming minaret, constructed at the turn of the 18th century, bringing a whiff of Morocco to Moravia.\nFor more info: www.zamek-lednice.com",
+                    "durationInMinutes": 60,
+                    "order": 1,
+                    "timezone": "Europe/Prague",
+                    "country": {
+                        "englishName": "Czech Republic"
+                    }
+                },
+                {
+                    "id": "4ee58c0c-4e56-46ef-bd22-406a1bc60e1c",
+                    "price": 28,
+                    "name": "Mikulov",
+                    "image": "https://daytrip.imgix.net/510.jpg",
+                    "title": "The Heart of Czech Wine Country",
+                    "perex": "A town with a history as deep and flavourful as its wine, Mikulov provides a perfect combination of relaxation and exploration.",
+                    "description": "Often favoured by visitors with a more active approach to life, Mikulov has much to offer. Surrounded by idyllic countryside, crisscrossed by bicycle paths and marked hiking trails, and the nearby Nové Mlýny lakes, there is something for everyone to enjoy. After all that fresh air, a glass of wine will be more than welcome, and fortunately, Mikulov is the centre for Czech wine making. Due to a high concentration of limestone in the local soil, wine from this region has a unique character and distinct taste. If you like your wine with a side-serving of history, Mikulov Castle dates from the 1730s, and the Dietrichstein Tomb is the final resting place of a Bohemian noble family. Mikulov is also significant for its strong Jewish history. In the early 1800s Mikulov's Jewish Quarter was the largest in Moravia with half the town's inhabitants being of Jewish faith.",
+                    "durationInMinutes": 60,
+                    "order": 2,
+                    "timezone": "Europe/Prague",
+                    "country": {
+                        "englishName": "Czech Republic"
+                    }
+                }
+            ]
         },
         {
-          "childSeatType": "Booster",
-          "description": "Backless booster",
-          "ageFrom": 6,
-          "ageTo": 12,
-          "weightInPoundsFrom": 44,
-          "weightInPoundsTo": 72,
-          "weightInKilosFrom": 20,
-          "weightInKilosTo": 33
+            "id": "282a8a94-2a18-42f6-9af6-c53b13d007cb",
+            "type": "Shared",
+            "englishSpeakingDriver": true,
+            "distanceKm": 350,
+            "travelTimeMinutes": 235,
+            "pickUp": {
+                "lat": 50.12,
+                "lon": 14.27,
+                "time": "2022-12-05T19:00:00Z",
+                "interval": {
+                    "earliest": "2022-12-05T19:00:00Z",
+                    "latest": "2022-12-05T19:10:00Z"
+                },
+                "timezone": "Europe/Prague",
+                "description": "In front of the hotel Europa",
+                "address": "Evropska 1540/41, Prague, Czechia",
+                "meetAndGreet": false,
+                "state": "adjusted",
+                "immutable": true
+            },
+            "dropOff": {
+                "lat": 48.21,
+                "lon": 16.36,
+                "time": "2022-12-05T22:55:00Z",
+                "interval": {
+                    "earliest": "2022-12-05T22:40:00Z",
+                    "latest": "2022-12-05T22:55:00Z"
+                },
+                "timezone": "Europe/Vienna",
+                "description": "Next to the railway station",
+                "address": "Bahnhofplatz, 1010 Wien, Austria",
+                "state": "adjusted",
+                "immutable": true
+            },
+            "pricing": {
+                "pricePerPassenger": 180,
+                "totalPrice": 360
+            },
+            "vehicle": {
+                "type": "Shuttle",
+                "maxPassengers": 10,
+                "description": "Shuttle comparable to a Mercedes-Benz Vito, up to 10 passengers with luggage.",
+                "modelDescription": "Mercedes-Benz Vito or similar",
+                "image": "https://daytrip.imgix.net/site/shuttle.png"
+            },
+            "luggage": {
+                "maxCarryonsPerPerson": 1,
+                "maxSuitcasesPerPerson": 1,
+                "maxTotalCarryons": 2,
+                "maxTotalSuitcases": 2
+            },
+            "seatsAvailable": 8,
+            "availableChildSeatTypes": [
+                {
+                    "childSeatType": "RearFacing",
+                    "description": "Rear-facing infant seat",
+                    "ageFrom": 0,
+                    "ageTo": 1,
+                    "weightInPoundsFrom": 0,
+                    "weightInPoundsTo": 26,
+                    "weightInKilosFrom": 0,
+                    "weightInKilosTo": 10
+                },
+                {
+                    "childSeatType": "ForwardFacing",
+                    "description": "Forward-facing w/harness",
+                    "ageFrom": 1,
+                    "ageTo": 4,
+                    "weightInPoundsFrom": 18,
+                    "weightInPoundsTo": 36,
+                    "weightInKilosFrom": 8,
+                    "weightInKilosTo": 16
+                },
+                {
+                    "childSeatType": "BoosterSeat",
+                    "description": "Booster seat with high back",
+                    "ageFrom": 4,
+                    "ageTo": 6,
+                    "weightInPoundsFrom": 30,
+                    "weightInPoundsTo": 50,
+                    "weightInKilosFrom": 14,
+                    "weightInKilosTo": 23
+                },
+                {
+                    "childSeatType": "Booster",
+                    "description": "Backless booster",
+                    "ageFrom": 6,
+                    "ageTo": 12,
+                    "weightInPoundsFrom": 44,
+                    "weightInPoundsTo": 72,
+                    "weightInKilosFrom": 20,
+                    "weightInKilosTo": 33
+                }
+            ],
+            "possibleStops": [],
+            "cancellationPolicy": "Flexible",
+            "expiresAt": "2022-12-04T15:00:00Z"
+        },
+        {
+            "id": "4b137906-008a-49cf-b248-e3827b3a3175",
+            "type": "Shared",
+            "englishSpeakingDriver": false,
+            "distanceKm": 350,
+            "travelTimeMinutes": 235,
+            "pickUp": {
+                "lat": 50.12,
+                "lon": 14.27,
+                "time": "2022-12-05T20:00:00Z",
+                "interval": {
+                    "earliest": "2022-12-05T20:00:00Z",
+                    "latest": "2022-12-05T20:10:00Z"
+                },
+                "timezone": "Europe/Prague",
+                "description": "In front of the hotel Europa",
+                "address": "Evropska 1540/41, Prague, Czechia",
+                "meetAndGreet": false,
+                "state": "adjusted",
+                "immutable": true
+            },
+            "dropOff": {
+                "lat": 48.21,
+                "lon": 16.36,
+                "time": "2022-12-05T23:55:00Z",
+                "interval": {
+                    "earliest": "2022-12-05T23:40:00Z",
+                    "latest": "2022-12-05T23:55:00Z"
+                },
+                "timezone": "Europe/Vienna",
+                "description": "Next to the railway station",
+                "address": "Bahnhofplatz, 1010 Wien, Austria",
+                "state": "adjusted",
+                "immutable": true
+            },
+            "pricing": {
+                "pricePerPassenger": 190,
+                "totalPrice": 380
+            },
+            "vehicle": {
+                "type": "Shuttle",
+                "maxPassengers": 10,
+                "description": "Shuttle comparable to a Mercedes-Benz Vito, up to 10 passengers with luggage.",
+                "modelDescription": "Mercedes-Benz Vito or similar",
+                "image": "https://daytrip.imgix.net/site/shuttle.png"
+            },
+            "luggage": {
+                "maxCarryonsPerPerson": 1,
+                "maxSuitcasesPerPerson": 1,
+                "maxTotalCarryons": 2,
+                "maxTotalSuitcases": 2
+            },
+            "seatsAvailable": 5,
+            "availableChildSeatTypes": [
+                {
+                    "childSeatType": "RearFacing",
+                    "description": "Rear-facing infant seat",
+                    "ageFrom": 0,
+                    "ageTo": 1,
+                    "weightInPoundsFrom": 0,
+                    "weightInPoundsTo": 26,
+                    "weightInKilosFrom": 0,
+                    "weightInKilosTo": 10
+                },
+                {
+                    "childSeatType": "ForwardFacing",
+                    "description": "Forward-facing w/harness",
+                    "ageFrom": 1,
+                    "ageTo": 4,
+                    "weightInPoundsFrom": 18,
+                    "weightInPoundsTo": 36,
+                    "weightInKilosFrom": 8,
+                    "weightInKilosTo": 16
+                },
+                {
+                    "childSeatType": "BoosterSeat",
+                    "description": "Booster seat with high back",
+                    "ageFrom": 4,
+                    "ageTo": 6,
+                    "weightInPoundsFrom": 30,
+                    "weightInPoundsTo": 50,
+                    "weightInKilosFrom": 14,
+                    "weightInKilosTo": 23
+                },
+                {
+                    "childSeatType": "Booster",
+                    "description": "Backless booster",
+                    "ageFrom": 6,
+                    "ageTo": 12,
+                    "weightInPoundsFrom": 44,
+                    "weightInPoundsTo": 72,
+                    "weightInKilosFrom": 20,
+                    "weightInKilosTo": 33
+                }
+            ],
+            "possibleStops": [],
+            "includedStops": [],
+            "cancellationPolicy": "Flexible",
+            "expiresAt": "2022-12-04T15:00:00Z"
         }
-      ],
-      "possibleStops": [
-        {
-          "id": "d280ce2a-6224-4d95-af17-a250f81b97dd",
-          "price": 31,
-          "name": "Lednice Chateau and Park",
-          "image": "https://daytrip.imgix.net/lednice-chateau-and-park4.jpg",
-          "title": "Vacation like a King",
-          "perex": "This UNESCO-listed chateau and sprawling park was the Lichtenstein's holiday home - exactly the kind of extravagance you'd expect from a dynasty with their own country. ",
-          "description": "The Liechtensteins really came into the money with the fortunes seized from Czech noblemen after their victory at the Battle of White Mountain in 1620, and Lednice was one of the presents they bought themselves. In the mid-19th century the baroque manor was given a complete makeover in the 'Windsor Gothic' style, leaving it as we see it today: a shameless flaunting of fabulous wealth, a slap in the face to anyone foolish enough to think that the French Revolution had ended high-living in Europe. The surrounding English landscape park, the largest in the country, is an incomparable swath of green, sprinkled with Romantic follies. There's also a monumental greenhouse open all year round, overflowing with exotic growths gathered by an army of botanists across the Americas. The greenhouse's exoticism is echoed by the charming minaret, constructed at the turn of the 18th century, bringing a whiff of Morocco to Moravia.\nFor more info: www.zamek-lednice.com",
-          "durationInMinutes": 60,
-          "order": 1,
-          "timezone": "Europe/Prague",
-          "country": {
-            "englishName": "Czech Republic"
-          }
-        },
-        {
-          "id": "4ee58c0c-4e56-46ef-bd22-406a1bc60e1c",
-          "price": 28,
-          "name": "Mikulov",
-          "image": "https://daytrip.imgix.net/510.jpg",
-          "title": "The Heart of Czech Wine Country",
-          "perex": "A town with a history as deep and flavourful as its wine, Mikulov provides a perfect combination of relaxation and exploration.",
-          "description": "Often favoured by visitors with a more active approach to life, Mikulov has much to offer. Surrounded by idyllic countryside, crisscrossed by bicycle paths and marked hiking trails, and the nearby Nové Mlýny lakes, there is something for everyone to enjoy. After all that fresh air, a glass of wine will be more than welcome, and fortunately, Mikulov is the centre for Czech wine making. Due to a high concentration of limestone in the local soil, wine from this region has a unique character and distinct taste. If you like your wine with a side-serving of history, Mikulov Castle dates from the 1730s, and the Dietrichstein Tomb is the final resting place of a Bohemian noble family. Mikulov is also significant for its strong Jewish history. In the early 1800s Mikulov's Jewish Quarter was the largest in Moravia with half the town's inhabitants being of Jewish faith.",
-          "durationInMinutes": 60,
-          "order": 2,
-          "timezone": "Europe/Prague",
-          "country": {
-            "englishName": "Czech Republic"
-          }
-        }
-      ]
-    },
-    {
-      "id": "054ee064-d4dd-492f-9d0a-5251a7f791c2",
-      "type": "Private",
-      "englishSpeakingDriver": false,
-      "distanceKm": 334,
-      "travelTimeMinutes": 208,
-      "pickUp": {
-        "lat": 50.1,
-        "lon": 14.25,
-        "time": "2022-12-05T18:00:00Z",
-        "timezone": "Europe/Prague",
-        "meetAndGreet": true,
-        "state": "original",
-        "immutable": false
-      },
-      "dropOff": {
-        "lat": 48.2,
-        "lon": 16.37,
-        "state": "original",
-        "immutable": false
-      },
-      "pricing": {
-        "totalPrice": 240
-      },
-      "vehicle": {
-        "type": "Sedan",
-        "maxPassengers": 3,
-        "description": "Sedan comparable to a Volkswagen Passat, up to 3 passengers with luggage.",
-        "modelDescription": "VW Passat or similar",
-        "image": "https://daytrip.imgix.net/site/sedan.png"
-      },
-      "luggage": {
-        "maxTotalCarryons": 3,
-        "maxTotalSuitcases": 3
-      },
-      "availableChildSeatTypes": [
-        {
-          "childSeatType": "RearFacing",
-          "description": "Rear-facing infant seat",
-          "ageFrom": 0,
-          "ageTo": 1,
-          "weightInPoundsFrom": 0,
-          "weightInPoundsTo": 26,
-          "weightInKilosFrom": 0,
-          "weightInKilosTo": 10
-        },
-        {
-          "childSeatType": "ForwardFacing",
-          "description": "Forward-facing w/harness",
-          "ageFrom": 1,
-          "ageTo": 4,
-          "weightInPoundsFrom": 18,
-          "weightInPoundsTo": 36,
-          "weightInKilosFrom": 8,
-          "weightInKilosTo": 16
-        },
-        {
-          "childSeatType": "BoosterSeat",
-          "description": "Booster seat with high back",
-          "ageFrom": 4,
-          "ageTo": 6,
-          "weightInPoundsFrom": 30,
-          "weightInPoundsTo": 50,
-          "weightInKilosFrom": 14,
-          "weightInKilosTo": 23
-        },
-        {
-          "childSeatType": "Booster",
-          "description": "Backless booster",
-          "ageFrom": 6,
-          "ageTo": 12,
-          "weightInPoundsFrom": 44,
-          "weightInPoundsTo": 72,
-          "weightInKilosFrom": 20,
-          "weightInKilosTo": 33
-        }
-      ],
-      "possibleStops": [
-        {
-          "id": "d280ce2a-6224-4d95-af17-a250f81b97dd",
-          "price": 31,
-          "name": "Lednice Chateau and Park",
-          "image": "https://daytrip.imgix.net/lednice-chateau-and-park4.jpg",
-          "title": "Vacation like a King",
-          "perex": "This UNESCO-listed chateau and sprawling park was the Lichtenstein's holiday home - exactly the kind of extravagance you'd expect from a dynasty with their own country. ",
-          "description": "The Liechtensteins really came into the money with the fortunes seized from Czech noblemen after their victory at the Battle of White Mountain in 1620, and Lednice was one of the presents they bought themselves. In the mid-19th century the baroque manor was given a complete makeover in the 'Windsor Gothic' style, leaving it as we see it today: a shameless flaunting of fabulous wealth, a slap in the face to anyone foolish enough to think that the French Revolution had ended high-living in Europe. The surrounding English landscape park, the largest in the country, is an incomparable swath of green, sprinkled with Romantic follies. There's also a monumental greenhouse open all year round, overflowing with exotic growths gathered by an army of botanists across the Americas. The greenhouse's exoticism is echoed by the charming minaret, constructed at the turn of the 18th century, bringing a whiff of Morocco to Moravia.\nFor more info: www.zamek-lednice.com",
-          "durationInMinutes": 60,
-          "order": 1,
-          "timezone": "Europe/Prague",
-          "country": {
-            "englishName": "Czech Republic"
-          }
-        },
-        {
-          "id": "4ee58c0c-4e56-46ef-bd22-406a1bc60e1c",
-          "price": 28,
-          "name": "Mikulov",
-          "image": "https://daytrip.imgix.net/510.jpg",
-          "title": "The Heart of Czech Wine Country",
-          "perex": "A town with a history as deep and flavourful as its wine, Mikulov provides a perfect combination of relaxation and exploration.",
-          "description": "Often favoured by visitors with a more active approach to life, Mikulov has much to offer. Surrounded by idyllic countryside, crisscrossed by bicycle paths and marked hiking trails, and the nearby Nové Mlýny lakes, there is something for everyone to enjoy. After all that fresh air, a glass of wine will be more than welcome, and fortunately, Mikulov is the centre for Czech wine making. Due to a high concentration of limestone in the local soil, wine from this region has a unique character and distinct taste. If you like your wine with a side-serving of history, Mikulov Castle dates from the 1730s, and the Dietrichstein Tomb is the final resting place of a Bohemian noble family. Mikulov is also significant for its strong Jewish history. In the early 1800s Mikulov's Jewish Quarter was the largest in Moravia with half the town's inhabitants being of Jewish faith.",
-          "durationInMinutes": 60,
-          "order": 2,
-          "timezone": "Europe/Prague",
-          "country": {
-            "englishName": "Czech Republic"
-          }
-        }
-      ]
-    },
-    {
-      "id": "b071e9f8-54d9-44be-bb5f-feae5aafd771",
-      "type": "Private",
-      "englishSpeakingDriver": true,
-      "distanceKm": 334,
-      "travelTimeMinutes": 208,
-      "pickUp": {
-        "lat": 50.1,
-        "lon": 14.25,
-        "time": "2022-12-05T18:00:00Z",
-        "timezone": "Europe/Prague",
-        "meetAndGreet": true,
-        "state": "original",
-        "immutable": false
-      },
-      "dropOff": {
-        "lat": 48.2,
-        "lon": 16.37,
-        "state": "original",
-        "immutable": false
-      },
-      "pricing": {
-        "totalPrice": 320
-      },
-      "vehicle": {
-        "type": "MPV",
-        "maxPassengers": 4,
-        "description": "Compact MPV comparable to a Volkswagen Touran, up to 4 passengers with luggage.",
-        "modelDescription": "VW Touran or similar",
-        "image": "https://daytrip.imgix.net/site/mpv.png"
-      },
-      "luggage": {
-        "maxTotalCarryons": 4,
-        "maxTotalSuitcases": 4
-      },
-      "availableChildSeatTypes": [
-        {
-          "childSeatType": "RearFacing",
-          "description": "Rear-facing infant seat",
-          "ageFrom": 0,
-          "ageTo": 1,
-          "weightInPoundsFrom": 0,
-          "weightInPoundsTo": 26,
-          "weightInKilosFrom": 0,
-          "weightInKilosTo": 10
-        },
-        {
-          "childSeatType": "ForwardFacing",
-          "description": "Forward-facing w/harness",
-          "ageFrom": 1,
-          "ageTo": 4,
-          "weightInPoundsFrom": 18,
-          "weightInPoundsTo": 36,
-          "weightInKilosFrom": 8,
-          "weightInKilosTo": 16
-        },
-        {
-          "childSeatType": "BoosterSeat",
-          "description": "Booster seat with high back",
-          "ageFrom": 4,
-          "ageTo": 6,
-          "weightInPoundsFrom": 30,
-          "weightInPoundsTo": 50,
-          "weightInKilosFrom": 14,
-          "weightInKilosTo": 23
-        },
-        {
-          "childSeatType": "Booster",
-          "description": "Backless booster",
-          "ageFrom": 6,
-          "ageTo": 12,
-          "weightInPoundsFrom": 44,
-          "weightInPoundsTo": 72,
-          "weightInKilosFrom": 20,
-          "weightInKilosTo": 33
-        }
-      ],
-      "possibleStops": [
-        {
-          "id": "d280ce2a-6224-4d95-af17-a250f81b97dd",
-          "price": 31,
-          "name": "Lednice Chateau and Park",
-          "image": "https://daytrip.imgix.net/lednice-chateau-and-park4.jpg",
-          "title": "Vacation like a King",
-          "perex": "This UNESCO-listed chateau and sprawling park was the Lichtenstein's holiday home - exactly the kind of extravagance you'd expect from a dynasty with their own country. ",
-          "description": "The Liechtensteins really came into the money with the fortunes seized from Czech noblemen after their victory at the Battle of White Mountain in 1620, and Lednice was one of the presents they bought themselves. In the mid-19th century the baroque manor was given a complete makeover in the 'Windsor Gothic' style, leaving it as we see it today: a shameless flaunting of fabulous wealth, a slap in the face to anyone foolish enough to think that the French Revolution had ended high-living in Europe. The surrounding English landscape park, the largest in the country, is an incomparable swath of green, sprinkled with Romantic follies. There's also a monumental greenhouse open all year round, overflowing with exotic growths gathered by an army of botanists across the Americas. The greenhouse's exoticism is echoed by the charming minaret, constructed at the turn of the 18th century, bringing a whiff of Morocco to Moravia.\nFor more info: www.zamek-lednice.com",
-          "durationInMinutes": 60,
-          "order": 1,
-          "timezone": "Europe/Prague",
-          "country": {
-            "englishName": "Czech Republic"
-          }
-        },
-        {
-          "id": "4ee58c0c-4e56-46ef-bd22-406a1bc60e1c",
-          "price": 28,
-          "name": "Mikulov",
-          "image": "https://daytrip.imgix.net/510.jpg",
-          "title": "The Heart of Czech Wine Country",
-          "perex": "A town with a history as deep and flavourful as its wine, Mikulov provides a perfect combination of relaxation and exploration.",
-          "description": "Often favoured by visitors with a more active approach to life, Mikulov has much to offer. Surrounded by idyllic countryside, crisscrossed by bicycle paths and marked hiking trails, and the nearby Nové Mlýny lakes, there is something for everyone to enjoy. After all that fresh air, a glass of wine will be more than welcome, and fortunately, Mikulov is the centre for Czech wine making. Due to a high concentration of limestone in the local soil, wine from this region has a unique character and distinct taste. If you like your wine with a side-serving of history, Mikulov Castle dates from the 1730s, and the Dietrichstein Tomb is the final resting place of a Bohemian noble family. Mikulov is also significant for its strong Jewish history. In the early 1800s Mikulov's Jewish Quarter was the largest in Moravia with half the town's inhabitants being of Jewish faith.",
-          "durationInMinutes": 60,
-          "order": 2,
-          "timezone": "Europe/Prague",
-          "country": {
-            "englishName": "Czech Republic"
-          }
-        }
-      ]
-    },
-    {
-      "id": "282a8a94-2a18-42f6-9af6-c53b13d007cb",
-      "type": "Shared",
-      "englishSpeakingDriver": true,
-      "distanceKm": 350,
-      "travelTimeMinutes": 235,
-      "pickUp": {
-        "lat": 50.12,
-        "lon": 14.27,
-        "time": "2022-12-05T19:00:00Z",
-        "interval": {
-          "earliest": "2022-12-05T19:00:00Z",
-          "latest": "2022-12-05T19:10:00Z"
-        },
-        "timezone": "Europe/Prague",
-        "description": "In front of the hotel Europa",
-        "address": "Evropska 1540/41, Prague, Czechia",
-        "meetAndGreet": false,
-        "state": "adjusted",
-        "immutable": true
-      },
-      "dropOff": {
-        "lat": 48.21,
-        "lon": 16.36,
-        "time": "2022-12-05T22:55:00Z",
-        "interval": {
-          "earliest": "2022-12-05T22:40:00Z",
-          "latest": "2022-12-05T22:55:00Z"
-        },
-        "timezone": "Europe/Vienna",
-        "description": "Next to the railway station",
-        "address": "Bahnhofplatz, 1010 Wien, Austria",
-        "state": "adjusted",
-        "immutable": true
-      },
-      "pricing": {
-        "pricePerPassenger": 180,
-        "totalPrice": 360
-      },
-      "vehicle": {
-        "type": "Shuttle",
-        "maxPassengers": 10,
-        "description": "Shuttle comparable to a Mercedes-Benz Vito, up to 10 passengers with luggage.",
-        "modelDescription": "Mercedes-Benz Vito or similar",
-        "image": "https://daytrip.imgix.net/site/shuttle.png"
-      },
-      "luggage": {
-        "maxCarryonsPerPerson": 1,
-        "maxSuitcasesPerPerson": 1,
-        "maxTotalCarryons": 2,
-        "maxTotalSuitcases": 2
-      },
-      "seatsAvailable": 8,
-      "availableChildSeatTypes": [
-        {
-          "childSeatType": "RearFacing",
-          "description": "Rear-facing infant seat",
-          "ageFrom": 0,
-          "ageTo": 1,
-          "weightInPoundsFrom": 0,
-          "weightInPoundsTo": 26,
-          "weightInKilosFrom": 0,
-          "weightInKilosTo": 10
-        },
-        {
-          "childSeatType": "ForwardFacing",
-          "description": "Forward-facing w/harness",
-          "ageFrom": 1,
-          "ageTo": 4,
-          "weightInPoundsFrom": 18,
-          "weightInPoundsTo": 36,
-          "weightInKilosFrom": 8,
-          "weightInKilosTo": 16
-        },
-        {
-          "childSeatType": "BoosterSeat",
-          "description": "Booster seat with high back",
-          "ageFrom": 4,
-          "ageTo": 6,
-          "weightInPoundsFrom": 30,
-          "weightInPoundsTo": 50,
-          "weightInKilosFrom": 14,
-          "weightInKilosTo": 23
-        },
-        {
-          "childSeatType": "Booster",
-          "description": "Backless booster",
-          "ageFrom": 6,
-          "ageTo": 12,
-          "weightInPoundsFrom": 44,
-          "weightInPoundsTo": 72,
-          "weightInKilosFrom": 20,
-          "weightInKilosTo": 33
-        }
-      ],
-      "possibleStops": [],
-      "cancellationPolicy": "Flexible",
-      "expiresAt": "2022-12-04T15:00:00Z"
-    },
-    {
-      "id": "4b137906-008a-49cf-b248-e3827b3a3175",
-      "type": "Shared",
-      "englishSpeakingDriver": false,
-      "distanceKm": 350,
-      "travelTimeMinutes": 235,
-      "pickUp": {
-        "lat": 50.12,
-        "lon": 14.27,
-        "time": "2022-12-05T20:00:00Z",
-        "interval": {
-          "earliest": "2022-12-05T20:00:00Z",
-          "latest": "2022-12-05T20:10:00Z"
-        },
-        "timezone": "Europe/Prague",
-        "description": "In front of the hotel Europa",
-        "address": "Evropska 1540/41, Prague, Czechia",
-        "meetAndGreet": false,
-        "state": "adjusted",
-        "immutable": true
-      },
-      "dropOff": {
-        "lat": 48.21,
-        "lon": 16.36,
-        "time": "2022-12-05T23:55:00Z",
-        "interval": {
-          "earliest": "2022-12-05T23:40:00Z",
-          "latest": "2022-12-05T23:55:00Z"
-        },
-        "timezone": "Europe/Vienna",
-        "description": "Next to the railway station",
-        "address": "Bahnhofplatz, 1010 Wien, Austria",
-        "state": "adjusted",
-        "immutable": true
-      },
-      "pricing": {
-        "pricePerPassenger": 190,
-        "totalPrice": 380
-      },
-      "vehicle": {
-        "type": "Shuttle",
-        "maxPassengers": 10,
-        "description": "Shuttle comparable to a Mercedes-Benz Vito, up to 10 passengers with luggage.",
-        "modelDescription": "Mercedes-Benz Vito or similar",
-        "image": "https://daytrip.imgix.net/site/shuttle.png"
-      },
-      "luggage": {
-        "maxCarryonsPerPerson": 1,
-        "maxSuitcasesPerPerson": 1,
-        "maxTotalCarryons": 2,
-        "maxTotalSuitcases": 2
-      },
-      "seatsAvailable": 5,
-      "availableChildSeatTypes": [
-        {
-          "childSeatType": "RearFacing",
-          "description": "Rear-facing infant seat",
-          "ageFrom": 0,
-          "ageTo": 1,
-          "weightInPoundsFrom": 0,
-          "weightInPoundsTo": 26,
-          "weightInKilosFrom": 0,
-          "weightInKilosTo": 10
-        },
-        {
-          "childSeatType": "ForwardFacing",
-          "description": "Forward-facing w/harness",
-          "ageFrom": 1,
-          "ageTo": 4,
-          "weightInPoundsFrom": 18,
-          "weightInPoundsTo": 36,
-          "weightInKilosFrom": 8,
-          "weightInKilosTo": 16
-        },
-        {
-          "childSeatType": "BoosterSeat",
-          "description": "Booster seat with high back",
-          "ageFrom": 4,
-          "ageTo": 6,
-          "weightInPoundsFrom": 30,
-          "weightInPoundsTo": 50,
-          "weightInKilosFrom": 14,
-          "weightInKilosTo": 23
-        },
-        {
-          "childSeatType": "Booster",
-          "description": "Backless booster",
-          "ageFrom": 6,
-          "ageTo": 12,
-          "weightInPoundsFrom": 44,
-          "weightInPoundsTo": 72,
-          "weightInKilosFrom": 20,
-          "weightInKilosTo": 33
-        }
-      ],
-      "possibleStops": [],
-      "includedStops": [],
-      "cancellationPolicy": "Flexible",
-      "expiresAt": "2022-12-04T15:00:00Z"
-    }
-  ]
+    ]
 }
 ```
 
@@ -641,155 +641,155 @@ curl "https://papi.staging.mydaytrip.net/partners/v3/trip/search?originLatitude=
 
 ```json
 {
-  "searchId": "f41dc34f-5218-46b1-8e46-1de8ccc5f5c3",
-  "expiresAt": "2025-05-27T05:53:46Z",
-  "passengersCount": 10,
-  "currency": "EUR",
-  "options": [
-    {
-      "id": "68646974-023a-4f9c-8358-869c7ab8db3d",
-      "type": "Private",
-      "englishSpeakingDriver": true,
-      "distanceKm": 833,
-      "travelTimeMinutes": 536,
-      "pickUp": {
-        "lat": 42.6420418,
-        "lon": 18.11293,
-        "time": "2025-12-20T10:38:08Z",
-        "timezone": "Europe/Zagreb",
-        "description": "Ploce Gate, Ul. Frana Supila 2",
-        "address": "Vrata od Ploča, Ul. Vrata od Ploča, 20000, Dubrovnik, Croatia",
-        "image": "https://daytrip.imgix.net/meeting-point-3.png",
-        "meetAndGreet": false,
-        "state": "adjusted",
-        "adjustmentReason": "restricted_area",
-        "immutable": true
-      },
-      "dropOff": {
-        "lat": 45.43731978047655,
-        "lon": 12.3191409718277,
-        "description": "Piazzale Roma",
-        "address": "Piazzale Roma, Venice, Metropolitan City of Venice, Italy",
-        "image": "https://daytrip.imgix.net/meeting-point-4.png",
-        "state": "adjusted",
-        "adjustmentReason": "restricted_area",
-        "immutable": true
-      },
-      "pricing": {
-        "totalPrice": 2131
-      },
-      "vehicles": [
+    "searchId": "f41dc34f-5218-46b1-8e46-1de8ccc5f5c3",
+    "expiresAt": "2025-05-27T05:53:46Z",
+    "passengersCount": 10,
+    "currency": "EUR",
+    "options": [
         {
-          "type": "Van",
-          "maxPassengers": 7,
-          "description": "Van comparable to a VW Transporter, up to 7 passengers with luggage.",
-          "modelDescription": "VW Transporter or similar",
-          "image": "https://daytrip.imgix.net/site/van-vw.png"
-        },
-        {
-          "type": "Sedan",
-          "maxPassengers": 3,
-          "description": "Sedan comparable to a Volkswagen Passat, up to 3 passengers with luggage.",
-          "modelDescription": "VW Passat or similar",
-          "image": "https://daytrip.imgix.net/site/sedan.png"
+            "id": "68646974-023a-4f9c-8358-869c7ab8db3d",
+            "type": "Private",
+            "englishSpeakingDriver": true,
+            "distanceKm": 833,
+            "travelTimeMinutes": 536,
+            "pickUp": {
+                "lat": 42.6420418,
+                "lon": 18.11293,
+                "time": "2025-12-20T10:38:08Z",
+                "timezone": "Europe/Zagreb",
+                "description": "Ploce Gate, Ul. Frana Supila 2",
+                "address": "Vrata od Ploča, Ul. Vrata od Ploča, 20000, Dubrovnik, Croatia",
+                "image": "https://daytrip.imgix.net/meeting-point-3.png",
+                "meetAndGreet": false,
+                "state": "adjusted",
+                "adjustmentReason": "restricted_area",
+                "immutable": true
+            },
+            "dropOff": {
+                "lat": 45.43731978047655,
+                "lon": 12.3191409718277,
+                "description": "Piazzale Roma",
+                "address": "Piazzale Roma, Venice, Metropolitan City of Venice, Italy",
+                "image": "https://daytrip.imgix.net/meeting-point-4.png",
+                "state": "adjusted",
+                "adjustmentReason": "restricted_area",
+                "immutable": true
+            },
+            "pricing": {
+                "totalPrice": 2131
+            },
+            "vehicles": [
+                {
+                    "type": "Van",
+                    "maxPassengers": 7,
+                    "description": "Van comparable to a VW Transporter, up to 7 passengers with luggage.",
+                    "modelDescription": "VW Transporter or similar",
+                    "image": "https://daytrip.imgix.net/site/van-vw.png"
+                },
+                {
+                    "type": "Sedan",
+                    "maxPassengers": 3,
+                    "description": "Sedan comparable to a Volkswagen Passat, up to 3 passengers with luggage.",
+                    "modelDescription": "VW Passat or similar",
+                    "image": "https://daytrip.imgix.net/site/sedan.png"
+                }
+            ],
+            "luggage": {
+                "maxTotalCarryons": 10,
+                "maxTotalSuitcases": 10
+            },
+            "possibleStops": [],
+            "includedStops": [],
+            "availableChildSeatTypes": [
+                {
+                    "childSeatType": "RearFacing",
+                    "description": "Rear-facing infant seat",
+                    "ageFrom": 0,
+                    "ageTo": 1,
+                    "weightInPoundsFrom": 0,
+                    "weightInPoundsTo": 26,
+                    "weightInKilosFrom": 0,
+                    "weightInKilosTo": 10
+                },
+                {
+                    "childSeatType": "ForwardFacing",
+                    "description": "Forward-facing w/harness",
+                    "ageFrom": 1,
+                    "ageTo": 4,
+                    "weightInPoundsFrom": 18,
+                    "weightInPoundsTo": 36,
+                    "weightInKilosFrom": 8,
+                    "weightInKilosTo": 16
+                },
+                {
+                    "childSeatType": "BoosterSeat",
+                    "description": "Booster seat with high back",
+                    "ageFrom": 4,
+                    "ageTo": 6,
+                    "weightInPoundsFrom": 30,
+                    "weightInPoundsTo": 50,
+                    "weightInKilosFrom": 14,
+                    "weightInKilosTo": 23
+                },
+                {
+                    "childSeatType": "Booster",
+                    "description": "Backless booster",
+                    "ageFrom": 6,
+                    "ageTo": 12,
+                    "weightInPoundsFrom": 44,
+                    "weightInPoundsTo": 72,
+                    "weightInKilosFrom": 20,
+                    "weightInKilosTo": 33
+                }
+            ]
         }
-      ],
-      "luggage": {
-        "maxTotalCarryons": 10,
-        "maxTotalSuitcases": 10
-      },
-      "possibleStops": [],
-      "includedStops": [],
-      "availableChildSeatTypes": [
-        {
-          "childSeatType": "RearFacing",
-          "description": "Rear-facing infant seat",
-          "ageFrom": 0,
-          "ageTo": 1,
-          "weightInPoundsFrom": 0,
-          "weightInPoundsTo": 26,
-          "weightInKilosFrom": 0,
-          "weightInKilosTo": 10
-        },
-        {
-          "childSeatType": "ForwardFacing",
-          "description": "Forward-facing w/harness",
-          "ageFrom": 1,
-          "ageTo": 4,
-          "weightInPoundsFrom": 18,
-          "weightInPoundsTo": 36,
-          "weightInKilosFrom": 8,
-          "weightInKilosTo": 16
-        },
-        {
-          "childSeatType": "BoosterSeat",
-          "description": "Booster seat with high back",
-          "ageFrom": 4,
-          "ageTo": 6,
-          "weightInPoundsFrom": 30,
-          "weightInPoundsTo": 50,
-          "weightInKilosFrom": 14,
-          "weightInKilosTo": 23
-        },
-        {
-          "childSeatType": "Booster",
-          "description": "Backless booster",
-          "ageFrom": 6,
-          "ageTo": 12,
-          "weightInPoundsFrom": 44,
-          "weightInPoundsTo": 72,
-          "weightInKilosFrom": 20,
-          "weightInKilosTo": 33
-        }
-      ]
-    }
-  ]
+    ]
 }
 ```
 
-### URL path
+### Endpoint Details
 
-`/partners/v3/trip/search`
+`GET /partners/v3/trip/search`
 
 ### Query Parameters
 
-| Parameter                 | Type    | Description |
-| ------------------------- | ------- | ----------- |
-| originType                | string  | Specifies whether the origin is provided as geo-coordinates or as an airport code. Possible values: `coordinates`, `iata`. If omitted, the default value is `coordinates`. |
-| originLatitude            | number  | Origin latitude in degrees. Required if `originType` is set to `coordinates` or omitted. |
-| originLongitude           | number  | Origin longitude in degrees. Required if `originType` is set to `coordinates` or omitted. |
-| origin                    | string  | IATA airport code of the origin airport. Required if `originType` is set to `iata`. |
-| destinationType           | string  | Specifies whether the destination is provided as geo-coordinates or as an airport code. Possible values: `coordinates`, `iata`. If omitted, the default value is `coordinates`. |
-| destinationLatitude       | number  | Destination latitude in degrees. Required if `destinationType` is set to `coordinates` or omitted. |
-| destinationLongitude      | number  | Destination longitude in degrees. Required if `destinationType` is set to `coordinates` or omitted. |
-| destination               | string  | IATA airport code of the destination airport. Required if `destinationType` is set to `iata`. |
-| departureTime             | integer | Departure time as a UNIX epoch timestamp in seconds. This timestamp should be calculated from the local departure time and converted to UTC. It can be omitted, if `departureTimeLocal` is provided. |
+| Parameter                 | Type    | Description                                                                                                                                                                                                                                                                                                           |
+| ------------------------- | ------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| originType                | string  | Specifies whether the origin is provided as geo-coordinates or as an airport code. Possible values: `coordinates`, `iata`. If omitted, the default value is `coordinates`.                                                                                                                                            |
+| originLatitude            | number  | Origin latitude in degrees. Required if `originType` is set to `coordinates` or omitted.                                                                                                                                                                                                                              |
+| originLongitude           | number  | Origin longitude in degrees. Required if `originType` is set to `coordinates` or omitted.                                                                                                                                                                                                                             |
+| origin                    | string  | IATA airport code of the origin airport. Required if `originType` is set to `iata`.                                                                                                                                                                                                                                   |
+| destinationType           | string  | Specifies whether the destination is provided as geo-coordinates or as an airport code. Possible values: `coordinates`, `iata`. If omitted, the default value is `coordinates`.                                                                                                                                       |
+| destinationLatitude       | number  | Destination latitude in degrees. Required if `destinationType` is set to `coordinates` or omitted.                                                                                                                                                                                                                    |
+| destinationLongitude      | number  | Destination longitude in degrees. Required if `destinationType` is set to `coordinates` or omitted.                                                                                                                                                                                                                   |
+| destination               | string  | IATA airport code of the destination airport. Required if `destinationType` is set to `iata`.                                                                                                                                                                                                                         |
+| departureTime             | integer | Departure time as a UNIX epoch timestamp in seconds. This timestamp should be calculated from the local departure time and converted to UTC. It can be omitted, if `departureTimeLocal` is provided.                                                                                                                  |
 | departureTimeLocal        | integer | Departure time as a UNIX epoch timestamp in seconds. This parameter can be used, when the origin timezone is unknown and conversion to UTC cannot be done. In this case the departure time can be sent as a local time converted to the Unix epoch. This parameter is not required, when `departureTime` is provided. |
-| passengersCount           | integer | Total number of passengers to transport (adults and children). Must be between 1 and 7 if `includeMultipleVehicles` is set to `false` or not provided. In case that `includeMultipleVehicles` is set to `true` this parameter must be between 1 and 99. |
-| childrenCount             | integer | Optional. Specifies the number of children in the group. Required for shared trip options. |
-| includeStops              | boolean | Optional. Defaults to `true`. When set to `false`, no stops will be included in the trip options. |
-| includeShared             | boolean | Optional. Defaults to `false`. When set to `true`, shared trip options will be included. |
-| includeNonEnglishSpeaking | boolean | Optional. Defaults to `true`. When set to `false`, no trip options with non-English-speaking drivers will be included. |
-| includeMeetingPositions   | boolean | Optional. Defaults to `false`. When set to `true`, trip options may include predefined meeting positions for pickup or dropoff when the requested address is in an area that vehicles cannot access directly. In these cases, the API will return the nearest accessible meeting point along with relevant details. |
-| includeMultipleVehicles   | boolean | Optional. Defaults to `false`. When set to `true`, if single vehicle options cannot be found we will try to provide trip options with multiple vehicles. |
+| passengersCount           | integer | Total number of passengers to transport (adults and children). Must be between 1 and 7 if `includeMultipleVehicles` is set to `false` or not provided. In case that `includeMultipleVehicles` is set to `true` this parameter must be between 1 and 99.                                                               |
+| childrenCount             | integer | Optional. Specifies the number of children in the group. Required for shared trip options.                                                                                                                                                                                                                            |
+| includeStops              | boolean | Optional. Defaults to `true`. When set to `false`, no stops will be included in the trip options.                                                                                                                                                                                                                     |
+| includeShared             | boolean | Optional. Defaults to `false`. When set to `true`, shared trip options will be included.                                                                                                                                                                                                                              |
+| includeNonEnglishSpeaking | boolean | Optional. Defaults to `true`. When set to `false`, no trip options with non-English-speaking drivers will be included.                                                                                                                                                                                                |
+| includeMeetingPositions   | boolean | Optional. Defaults to `false`. When set to `true`, trip options may include predefined meeting positions for pickup or dropoff when the requested address is in an area that vehicles cannot access directly. In these cases, the API will return the nearest accessible meeting point along with relevant details.   |
+| includeMultipleVehicles   | boolean | Optional. Defaults to `false`. When set to `true`, if single vehicle options cannot be found we will try to provide trip options with multiple vehicles.                                                                                                                                                              |
 
 ### Response body
 
-| Property        | Type                              | Description |
-| --------------- | --------------------------------- | ----------- |
-| searchId        | string                            | Unique id of your search query. |
+| Property        | Type                              | Description                                                                                                                                     |
+| --------------- | --------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
+| searchId        | string                            | Unique id of your search query.                                                                                                                 |
 | expiresAt       | string                            | UTC timestamp of when the offers in this response expire. After this time it is no longer possible to book them, you need to make a new search. |
-| passengersCount | integer                           | The count of passengers this search query was for. |
-| currency        | string                            | Currency used for all prices in this response. |
-| options         | list of [TripOption](#tripoption) | List of options for this trip. |
+| passengersCount | integer                           | The count of passengers this search query was for.                                                                                              |
+| currency        | string                            | Currency used for all prices in this response.                                                                                                  |
+| options         | list of [TripOption](#tripoption) | List of options for this trip.                                                                                                                  |
 
 ### Error status codes
 
-| Status code | Description |
-| ----------- | ----------- |
+| Status code | Description                                                                                             |
+| ----------- | ------------------------------------------------------------------------------------------------------- |
 | 400         | Invalid request - missing mandatory query parameter, parameter has wrong type or wrong passenger count. |
-| 401         | API key missing or invalid. |
-| 404         | No trip options found for given request. |
+| 401         | API key missing or invalid.                                                                             |
+| 404         | No trip options found for given request.                                                                |
 
 ## Customize endpoint
 
@@ -819,130 +819,130 @@ curl -d '{
 
 ```json
 {
-  "searchId": "f0e34a1b-2b3d-4747-b426-292633b615b4",
-  "expiresAt": "2022-12-04T18:00:00Z",
-  "passengersCount": 3,
-  "currency": "EUR",
-  "options": [
-    {
-      "id": "519314e3-cd92-41e0-85b6-c652c345e9d0",
-      "type": "Private",
-      "englishSpeakingDriver": true,
-      "distanceKm": 334,
-      "travelTimeMinutes": 268,
-      "pickUp": {
-        "lat": 50.1,
-        "lon": 14.25,
-        "time": "2022-12-05T18:00:00Z",
-        "timezone": "Europe/Prague",
-        "meetAndGreet": true,
-        "state": "original",
-        "immutable": false
-      },
-      "dropOff": {
-        "lat": 48.2,
-        "lon": 16.37,
-        "state": "original",
-        "immutable": false
-      },
-      "pricing": {
-        "totalPrice": 288
-      },
-      "vehicle": {
-        "type": "Sedan",
-        "maxPassengers": 3,
-        "description": "Sedan comparable to a Volkswagen Passat, up to 3 passengers with luggage.",
-        "modelDescription": "VW Passat or similar",
-        "image": "https://daytrip.imgix.net/site/sedan.png"
-      },
-      "luggage": {
-        "maxTotalCarryons": 3,
-        "maxTotalSuitcases": 3
-      },
-      "availableChildSeatTypes": [
+    "searchId": "f0e34a1b-2b3d-4747-b426-292633b615b4",
+    "expiresAt": "2022-12-04T18:00:00Z",
+    "passengersCount": 3,
+    "currency": "EUR",
+    "options": [
         {
-          "childSeatType": "RearFacing",
-          "description": "Rear-facing infant seat",
-          "ageFrom": 0,
-          "ageTo": 1,
-          "weightInPoundsFrom": 0,
-          "weightInPoundsTo": 26,
-          "weightInKilosFrom": 0,
-          "weightInKilosTo": 10
-        },
-        {
-          "childSeatType": "ForwardFacing",
-          "description": "Forward-facing w/harness",
-          "ageFrom": 1,
-          "ageTo": 4,
-          "weightInPoundsFrom": 18,
-          "weightInPoundsTo": 36,
-          "weightInKilosFrom": 8,
-          "weightInKilosTo": 16
-        },
-        {
-          "childSeatType": "BoosterSeat",
-          "description": "Booster seat with high back",
-          "ageFrom": 4,
-          "ageTo": 6,
-          "weightInPoundsFrom": 30,
-          "weightInPoundsTo": 50,
-          "weightInKilosFrom": 14,
-          "weightInKilosTo": 23
-        },
-        {
-          "childSeatType": "Booster",
-          "description": "Backless booster",
-          "ageFrom": 6,
-          "ageTo": 12,
-          "weightInPoundsFrom": 44,
-          "weightInPoundsTo": 72,
-          "weightInKilosFrom": 20,
-          "weightInKilosTo": 33
+            "id": "519314e3-cd92-41e0-85b6-c652c345e9d0",
+            "type": "Private",
+            "englishSpeakingDriver": true,
+            "distanceKm": 334,
+            "travelTimeMinutes": 268,
+            "pickUp": {
+                "lat": 50.1,
+                "lon": 14.25,
+                "time": "2022-12-05T18:00:00Z",
+                "timezone": "Europe/Prague",
+                "meetAndGreet": true,
+                "state": "original",
+                "immutable": false
+            },
+            "dropOff": {
+                "lat": 48.2,
+                "lon": 16.37,
+                "state": "original",
+                "immutable": false
+            },
+            "pricing": {
+                "totalPrice": 288
+            },
+            "vehicle": {
+                "type": "Sedan",
+                "maxPassengers": 3,
+                "description": "Sedan comparable to a Volkswagen Passat, up to 3 passengers with luggage.",
+                "modelDescription": "VW Passat or similar",
+                "image": "https://daytrip.imgix.net/site/sedan.png"
+            },
+            "luggage": {
+                "maxTotalCarryons": 3,
+                "maxTotalSuitcases": 3
+            },
+            "availableChildSeatTypes": [
+                {
+                    "childSeatType": "RearFacing",
+                    "description": "Rear-facing infant seat",
+                    "ageFrom": 0,
+                    "ageTo": 1,
+                    "weightInPoundsFrom": 0,
+                    "weightInPoundsTo": 26,
+                    "weightInKilosFrom": 0,
+                    "weightInKilosTo": 10
+                },
+                {
+                    "childSeatType": "ForwardFacing",
+                    "description": "Forward-facing w/harness",
+                    "ageFrom": 1,
+                    "ageTo": 4,
+                    "weightInPoundsFrom": 18,
+                    "weightInPoundsTo": 36,
+                    "weightInKilosFrom": 8,
+                    "weightInKilosTo": 16
+                },
+                {
+                    "childSeatType": "BoosterSeat",
+                    "description": "Booster seat with high back",
+                    "ageFrom": 4,
+                    "ageTo": 6,
+                    "weightInPoundsFrom": 30,
+                    "weightInPoundsTo": 50,
+                    "weightInKilosFrom": 14,
+                    "weightInKilosTo": 23
+                },
+                {
+                    "childSeatType": "Booster",
+                    "description": "Backless booster",
+                    "ageFrom": 6,
+                    "ageTo": 12,
+                    "weightInPoundsFrom": 44,
+                    "weightInPoundsTo": 72,
+                    "weightInKilosFrom": 20,
+                    "weightInKilosTo": 33
+                }
+            ],
+            "includedStops": [
+                {
+                    "id": "4ee58c0c-4e56-46ef-bd22-406a1bc60e1c",
+                    "price": 28,
+                    "name": "Mikulov",
+                    "image": "https://daytrip.imgix.net/510.jpg",
+                    "title": "The Heart of Czech Wine Country",
+                    "perex": "A town with a history as deep and flavourful as its wine, Mikulov provides a perfect combination of relaxation and exploration.",
+                    "description": "Often favoured by visitors with a more active approach to life, Mikulov has much to offer. Surrounded by idyllic countryside, crisscrossed by bicycle paths and marked hiking trails, and the nearby Nové Mlýny lakes, there is something for everyone to enjoy. After all that fresh air, a glass of wine will be more than welcome, and fortunately, Mikulov is the centre for Czech wine making. Due to a high concentration of limestone in the local soil, wine from this region has a unique character and distinct taste. If you like your wine with a side-serving of history, Mikulov Castle dates from the 1730s, and the Dietrichstein Tomb is the final resting place of a Bohemian noble family. Mikulov is also significant for its strong Jewish history. In the early 1800s Mikulov's Jewish Quarter was the largest in Moravia with half the town's inhabitants being of Jewish faith.",
+                    "durationInMinutes": 60,
+                    "order": 2,
+                    "timezone": "Europe/Prague",
+                    "country": {
+                        "englishName": "Czech Republic"
+                    }
+                }
+            ],
+            "possibleStops": [
+                {
+                    "id": "d280ce2a-6224-4d95-af17-a250f81b97dd",
+                    "price": 31,
+                    "name": "Lednice Chateau and Park",
+                    "image": "https://daytrip.imgix.net/lednice-chateau-and-park4.jpg",
+                    "title": "Vacation like a King",
+                    "perex": "This UNESCO-listed chateau and sprawling park was the Lichtenstein's holiday home - exactly the kind of extravagance you'd expect from a dynasty with their own country. ",
+                    "description": "The Liechtensteins really came into the money with the fortunes seized from Czech noblemen after their victory at the Battle of White Mountain in 1620, and Lednice was one of the presents they bought themselves. In the mid-19th century the baroque manor was given a complete makeover in the 'Windsor Gothic' style, leaving it as we see it today: a shameless flaunting of fabulous wealth, a slap in the face to anyone foolish enough to think that the French Revolution had ended high-living in Europe. The surrounding English landscape park, the largest in the country, is an incomparable swath of green, sprinkled with Romantic follies. There's also a monumental greenhouse open all year round, overflowing with exotic growths gathered by an army of botanists across the Americas. The greenhouse's exoticism is echoed by the charming minaret, constructed at the turn of the 18th century, bringing a whiff of Morocco to Moravia.\nFor more info: www.zamek-lednice.com",
+                    "durationInMinutes": 60,
+                    "order": 1,
+                    "timezone": "Europe/Prague",
+                    "country": {
+                        "englishName": "Czech Republic"
+                    }
+                }
+            ]
         }
-      ],
-      "includedStops": [
-        {
-          "id": "4ee58c0c-4e56-46ef-bd22-406a1bc60e1c",
-          "price": 28,
-          "name": "Mikulov",
-          "image": "https://daytrip.imgix.net/510.jpg",
-          "title": "The Heart of Czech Wine Country",
-          "perex": "A town with a history as deep and flavourful as its wine, Mikulov provides a perfect combination of relaxation and exploration.",
-          "description": "Often favoured by visitors with a more active approach to life, Mikulov has much to offer. Surrounded by idyllic countryside, crisscrossed by bicycle paths and marked hiking trails, and the nearby Nové Mlýny lakes, there is something for everyone to enjoy. After all that fresh air, a glass of wine will be more than welcome, and fortunately, Mikulov is the centre for Czech wine making. Due to a high concentration of limestone in the local soil, wine from this region has a unique character and distinct taste. If you like your wine with a side-serving of history, Mikulov Castle dates from the 1730s, and the Dietrichstein Tomb is the final resting place of a Bohemian noble family. Mikulov is also significant for its strong Jewish history. In the early 1800s Mikulov's Jewish Quarter was the largest in Moravia with half the town's inhabitants being of Jewish faith.",
-          "durationInMinutes": 60,
-          "order": 2,
-          "timezone": "Europe/Prague",
-          "country": {
-            "englishName": "Czech Republic"
-          }
-        }
-      ],
-      "possibleStops": [
-        {
-          "id": "d280ce2a-6224-4d95-af17-a250f81b97dd",
-          "price": 31,
-          "name": "Lednice Chateau and Park",
-          "image": "https://daytrip.imgix.net/lednice-chateau-and-park4.jpg",
-          "title": "Vacation like a King",
-          "perex": "This UNESCO-listed chateau and sprawling park was the Lichtenstein's holiday home - exactly the kind of extravagance you'd expect from a dynasty with their own country. ",
-          "description": "The Liechtensteins really came into the money with the fortunes seized from Czech noblemen after their victory at the Battle of White Mountain in 1620, and Lednice was one of the presents they bought themselves. In the mid-19th century the baroque manor was given a complete makeover in the 'Windsor Gothic' style, leaving it as we see it today: a shameless flaunting of fabulous wealth, a slap in the face to anyone foolish enough to think that the French Revolution had ended high-living in Europe. The surrounding English landscape park, the largest in the country, is an incomparable swath of green, sprinkled with Romantic follies. There's also a monumental greenhouse open all year round, overflowing with exotic growths gathered by an army of botanists across the Americas. The greenhouse's exoticism is echoed by the charming minaret, constructed at the turn of the 18th century, bringing a whiff of Morocco to Moravia.\nFor more info: www.zamek-lednice.com",
-          "durationInMinutes": 60,
-          "order": 1,
-          "timezone": "Europe/Prague",
-          "country": {
-            "englishName": "Czech Republic"
-          }
-        }
-      ]
-    }
-  ]
+    ]
 }
 ```
 
-### URL path
+### Endpoint Details
 
-`/partners/v3/trip/search/customize`
+`POST /partners/v3/trip/search/customize`
 
 ### Request body
 
@@ -1011,91 +1011,91 @@ curl -d '{
 
 ```json
 {
-  "bookingId": "cb102778-a3d7-426e-8d18-6bd6b296f283",
-  "bookingReference": "CB1027",
-  "departureTimeUtc": "2022-12-05T18:00:00Z",
-  "originTimezone": "Europe/Prague",
-  "meetAndGreet": true,
-  "trip": {
-    "id": "f0e34a1b-2b3d-4747-b426-292633b615b4",
-    "type": "Private",
-    "englishSpeakingDriver": true,
-    "distanceKm": 334,
-    "travelTimeMinutes": 268,
-    "pickUp": {
-      "lat": 50.1,
-      "lon": 14.25,
-      "time": "2022-12-05T18:00:00Z",
-      "timezone": "Europe/Prague",
-      "meetAndGreet": true,
-      "state": "original",
-      "immutable": false
-    },
-    "dropOff": {
-      "lat": 48.2,
-      "lon": 16.37,
-      "state": "original",
-      "immutable": false
-    },
-    "pricing": {
-      "totalPrice": 288
-    },
-    "vehicle": {
-      "type": "Sedan",
-      "maxPassengers": 3,
-      "description": "Sedan comparable to a Volkswagen Passat, up to 3 passengers with luggage.",
-      "modelDescription": "VW Passat or similar",
-      "image": "https://daytrip.imgix.net/site/sedan.png"
-    },
-    "luggage": {
-      "maxTotalCarryons": 3,
-      "maxTotalSuitcases": 3
-    },
-    "availableChildSeatTypes": [
-      {
-        "childSeatType": "RearFacing",
-        "description": "Rear-facing infant seat",
-        "ageFrom": 0,
-        "ageTo": 1,
-        "weightInPoundsFrom": 0,
-        "weightInPoundsTo": 26,
-        "weightInKilosFrom": 0,
-        "weightInKilosTo": 10
-      },
-      {
-        "childSeatType": "ForwardFacing",
-        "description": "Forward-facing w/harness",
-        "ageFrom": 1,
-        "ageTo": 4,
-        "weightInPoundsFrom": 18,
-        "weightInPoundsTo": 36,
-        "weightInKilosFrom": 8,
-        "weightInKilosTo": 16
-      },
-      {
-        "childSeatType": "BoosterSeat",
-        "description": "Booster seat with high back",
-        "ageFrom": 4,
-        "ageTo": 6,
-        "weightInPoundsFrom": 30,
-        "weightInPoundsTo": 50,
-        "weightInKilosFrom": 14,
-        "weightInKilosTo": 23
-      },
-      {
-        "childSeatType": "Booster",
-        "description": "Backless booster",
-        "ageFrom": 6,
-        "ageTo": 12,
-        "weightInPoundsFrom": 44,
-        "weightInPoundsTo": 72,
-        "weightInKilosFrom": 20,
-        "weightInKilosTo": 33
-      }
-    ],
-    "includedStops": [],
-    "possibleStops": []
-  }
+    "bookingId": "cb102778-a3d7-426e-8d18-6bd6b296f283",
+    "bookingReference": "CB1027",
+    "departureTimeUtc": "2022-12-05T18:00:00Z",
+    "originTimezone": "Europe/Prague",
+    "meetAndGreet": true,
+    "trip": {
+        "id": "f0e34a1b-2b3d-4747-b426-292633b615b4",
+        "type": "Private",
+        "englishSpeakingDriver": true,
+        "distanceKm": 334,
+        "travelTimeMinutes": 268,
+        "pickUp": {
+            "lat": 50.1,
+            "lon": 14.25,
+            "time": "2022-12-05T18:00:00Z",
+            "timezone": "Europe/Prague",
+            "meetAndGreet": true,
+            "state": "original",
+            "immutable": false
+        },
+        "dropOff": {
+            "lat": 48.2,
+            "lon": 16.37,
+            "state": "original",
+            "immutable": false
+        },
+        "pricing": {
+            "totalPrice": 288
+        },
+        "vehicle": {
+            "type": "Sedan",
+            "maxPassengers": 3,
+            "description": "Sedan comparable to a Volkswagen Passat, up to 3 passengers with luggage.",
+            "modelDescription": "VW Passat or similar",
+            "image": "https://daytrip.imgix.net/site/sedan.png"
+        },
+        "luggage": {
+            "maxTotalCarryons": 3,
+            "maxTotalSuitcases": 3
+        },
+        "availableChildSeatTypes": [
+            {
+                "childSeatType": "RearFacing",
+                "description": "Rear-facing infant seat",
+                "ageFrom": 0,
+                "ageTo": 1,
+                "weightInPoundsFrom": 0,
+                "weightInPoundsTo": 26,
+                "weightInKilosFrom": 0,
+                "weightInKilosTo": 10
+            },
+            {
+                "childSeatType": "ForwardFacing",
+                "description": "Forward-facing w/harness",
+                "ageFrom": 1,
+                "ageTo": 4,
+                "weightInPoundsFrom": 18,
+                "weightInPoundsTo": 36,
+                "weightInKilosFrom": 8,
+                "weightInKilosTo": 16
+            },
+            {
+                "childSeatType": "BoosterSeat",
+                "description": "Booster seat with high back",
+                "ageFrom": 4,
+                "ageTo": 6,
+                "weightInPoundsFrom": 30,
+                "weightInPoundsTo": 50,
+                "weightInKilosFrom": 14,
+                "weightInKilosTo": 23
+            },
+            {
+                "childSeatType": "Booster",
+                "description": "Backless booster",
+                "ageFrom": 6,
+                "ageTo": 12,
+                "weightInPoundsFrom": 44,
+                "weightInPoundsTo": 72,
+                "weightInKilosFrom": 20,
+                "weightInKilosTo": 33
+            }
+        ],
+        "includedStops": [],
+        "possibleStops": []
+    }
 }
 ```
 
@@ -1103,134 +1103,134 @@ curl -d '{
 
 ```json
 {
-  "bookingId": "72r537a9-b846-4b46-b638-de8121337229",
-  "bookingReference": "72R537",
-  "departureTimeUtc": "2022-12-05T18:00:00Z",
-  "originTimezone": "Europe/Zurich",
-  "meetAndGreet": false,
-  "meetingPosition": {
-    "lat": 46.067648,
-    "lon": 7.775185,
-    "description": "The train station in Tasch",
-    "address": "3929 Täsch, Switzerland",
-    "instructions": "As vehicle entry into Zermatt is heavily restricted, your driver will meet you nearby at the train station in Tasch, which can be reached by transit from Zermatt within about 10 minutes. Your driver will be waiting at the taxi stand just outside the entrance to the train station.",
-    "image": "https://daytrip.imgix.net/meeting-point-5.png"
-  },
-  "dropOffPosition": {
-    "lat": 45.4374041,
-    "lon": 12.3190675,
-    "description": "Piazzale Roma",
-    "address": "Piazzale Roma, Venice, Metropolitan City of Venice, Italy",
-    "instructions": "Venice’s historic center (the islands) is not accessible by car. Our partner driver will drop you off at Piazzale Roma.",
-    "image": "https://daytrip.imgix.net/meeting-point-4.png"
-  },
-  "trip": {
-    "id": "519314e3-cd92-41e0-85b6-c652c345e9d0",
-    "type": "Private",
-    "englishSpeakingDriver": false,
-    "distanceKm": 334,
-    "travelTimeMinutes": 268,
-    "pickUp": {
-      "lat": 46.067648,
-      "lon": 7.775185,
-      "time": "2022-12-05T18:00:00Z",
-      "timezone": "Europe/Zurich",
-      "description": "The train station in Tasch",
-      "address": "3929 Täsch, Switzerland",
-      "image": "https://daytrip.imgix.net/meeting-point-5.png",
-      "meetAndGreet": false,
-      "state": "adjusted",
-      "adjustmentReason": "restricted_area",
-      "immutable": true
+    "bookingId": "72r537a9-b846-4b46-b638-de8121337229",
+    "bookingReference": "72R537",
+    "departureTimeUtc": "2022-12-05T18:00:00Z",
+    "originTimezone": "Europe/Zurich",
+    "meetAndGreet": false,
+    "meetingPosition": {
+        "lat": 46.067648,
+        "lon": 7.775185,
+        "description": "The train station in Tasch",
+        "address": "3929 Täsch, Switzerland",
+        "instructions": "As vehicle entry into Zermatt is heavily restricted, your driver will meet you nearby at the train station in Tasch, which can be reached by transit from Zermatt within about 10 minutes. Your driver will be waiting at the taxi stand just outside the entrance to the train station.",
+        "image": "https://daytrip.imgix.net/meeting-point-5.png"
     },
-    "dropOff": {
-      "lat": 45.4374041,
-      "lon": 12.3190675,
-      "description": "Piazzale Roma",
-      "address": "Piazzale Roma, Venice, Metropolitan City of Venice, Italy",
-      "image": "https://daytrip.imgix.net/meeting-point-4.png",
-      "state": "adjusted",
-      "adjustmentReason": "restricted_area",
-      "immutable": true
+    "dropOffPosition": {
+        "lat": 45.4374041,
+        "lon": 12.3190675,
+        "description": "Piazzale Roma",
+        "address": "Piazzale Roma, Venice, Metropolitan City of Venice, Italy",
+        "instructions": "Venice’s historic center (the islands) is not accessible by car. Our partner driver will drop you off at Piazzale Roma.",
+        "image": "https://daytrip.imgix.net/meeting-point-4.png"
     },
-    "pricing": {
-      "totalPrice": 288
-    },
-    "vehicle": {
-      "type": "Sedan",
-      "maxPassengers": 3,
-      "description": "Sedan comparable to a Volkswagen Passat, up to 3 passengers with luggage.",
-      "image": "https://daytrip.imgix.net/site/sedan.png"
-    },
-    "luggage": {
-      "maxTotalCarryons": 3,
-      "maxTotalSuitcases": 3
-    },
-    "availableChildSeatTypes": [
-      {
-        "childSeatType": "RearFacing",
-        "description": "Rear-facing infant seat",
-        "ageFrom": 0,
-        "ageTo": 1,
-        "weightInPoundsFrom": 0,
-        "weightInPoundsTo": 26,
-        "weightInKilosFrom": 0,
-        "weightInKilosTo": 10
-      },
-      {
-        "childSeatType": "ForwardFacing",
-        "description": "Forward-facing w/harness",
-        "ageFrom": 1,
-        "ageTo": 4,
-        "weightInPoundsFrom": 18,
-        "weightInPoundsTo": 36,
-        "weightInKilosFrom": 8,
-        "weightInKilosTo": 16
-      },
-      {
-        "childSeatType": "BoosterSeat",
-        "description": "Booster seat with high back",
-        "ageFrom": 4,
-        "ageTo": 6,
-        "weightInPoundsFrom": 30,
-        "weightInPoundsTo": 50,
-        "weightInKilosFrom": 14,
-        "weightInKilosTo": 23
-      },
-      {
-        "childSeatType": "Booster",
-        "description": "Backless booster",
-        "ageFrom": 6,
-        "ageTo": 12,
-        "weightInPoundsFrom": 44,
-        "weightInPoundsTo": 72,
-        "weightInKilosFrom": 20,
-        "weightInKilosTo": 33
-      }
-    ],
-    "includedStops": [],
-    "possibleStops": []
-  }
+    "trip": {
+        "id": "519314e3-cd92-41e0-85b6-c652c345e9d0",
+        "type": "Private",
+        "englishSpeakingDriver": false,
+        "distanceKm": 334,
+        "travelTimeMinutes": 268,
+        "pickUp": {
+            "lat": 46.067648,
+            "lon": 7.775185,
+            "time": "2022-12-05T18:00:00Z",
+            "timezone": "Europe/Zurich",
+            "description": "The train station in Tasch",
+            "address": "3929 Täsch, Switzerland",
+            "image": "https://daytrip.imgix.net/meeting-point-5.png",
+            "meetAndGreet": false,
+            "state": "adjusted",
+            "adjustmentReason": "restricted_area",
+            "immutable": true
+        },
+        "dropOff": {
+            "lat": 45.4374041,
+            "lon": 12.3190675,
+            "description": "Piazzale Roma",
+            "address": "Piazzale Roma, Venice, Metropolitan City of Venice, Italy",
+            "image": "https://daytrip.imgix.net/meeting-point-4.png",
+            "state": "adjusted",
+            "adjustmentReason": "restricted_area",
+            "immutable": true
+        },
+        "pricing": {
+            "totalPrice": 288
+        },
+        "vehicle": {
+            "type": "Sedan",
+            "maxPassengers": 3,
+            "description": "Sedan comparable to a Volkswagen Passat, up to 3 passengers with luggage.",
+            "image": "https://daytrip.imgix.net/site/sedan.png"
+        },
+        "luggage": {
+            "maxTotalCarryons": 3,
+            "maxTotalSuitcases": 3
+        },
+        "availableChildSeatTypes": [
+            {
+                "childSeatType": "RearFacing",
+                "description": "Rear-facing infant seat",
+                "ageFrom": 0,
+                "ageTo": 1,
+                "weightInPoundsFrom": 0,
+                "weightInPoundsTo": 26,
+                "weightInKilosFrom": 0,
+                "weightInKilosTo": 10
+            },
+            {
+                "childSeatType": "ForwardFacing",
+                "description": "Forward-facing w/harness",
+                "ageFrom": 1,
+                "ageTo": 4,
+                "weightInPoundsFrom": 18,
+                "weightInPoundsTo": 36,
+                "weightInKilosFrom": 8,
+                "weightInKilosTo": 16
+            },
+            {
+                "childSeatType": "BoosterSeat",
+                "description": "Booster seat with high back",
+                "ageFrom": 4,
+                "ageTo": 6,
+                "weightInPoundsFrom": 30,
+                "weightInPoundsTo": 50,
+                "weightInKilosFrom": 14,
+                "weightInKilosTo": 23
+            },
+            {
+                "childSeatType": "Booster",
+                "description": "Backless booster",
+                "ageFrom": 6,
+                "ageTo": 12,
+                "weightInPoundsFrom": 44,
+                "weightInPoundsTo": 72,
+                "weightInKilosFrom": 20,
+                "weightInKilosTo": 33
+            }
+        ],
+        "includedStops": [],
+        "possibleStops": []
+    }
 }
 ```
 
-### URL path
+### Endpoint Details
 
-`/partners/v3/trip/book`
+`POST /partners/v3/trip/book`
 
 ### Request body
 
-| Property           | Type                                        | Description |
-| ------------------ | ------------------------------------------- | ----------- |
-| optionId           | string                                      | Id of the option you want to book. Taken from [/search](#search-endpoint) or [/customize](#customize-endpoint) endpoint response. |
+| Property           | Type                                        | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| ------------------ | ------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| optionId           | string                                      | Id of the option you want to book. Taken from [/search](#search-endpoint) or [/customize](#customize-endpoint) endpoint response.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
 | departureTime      | integer                                     | Optional. Departure time as a UNIX epoch timestamp in seconds to use instead of the `departureTime` provided to the [/search](#search-endpoint). You can only move departure time less than 24 hours into the past or into the future compared to the original `departureTime`, otherwise the booking will be rejected (403 HTTP status code). Also if the new price after changing the departure time would be different, booking will also get rejected. Such price change should be extremely rare but your integration should be ready for it if you are sending different `departureTime`. Note that UNIX timestamps are UTC so you need to convert from local time to UTC when calculating it. Change of the departure time is applicable only for the private trip. |
-| departureTimeLocal | integer                                     | Optional. The same as `departureTime` but the local departure time is not converted to UTC. If `departureTime` is specified, this parameter cannot be sent, and vice versa. |
-| pickUpAddressNote  | string                                      | Pickup address or a note describing the pickup point. Optional, but should be provided if available at the booking time; otherwise, it should be provided via the [/update](#update-endpoint) endpoint. Applicable only for the private trip. It will be ignored if the selected trip option already has a predefined meeting position that cannot be changed (immutable), i.e. the meeting position outside of a restricted area. |
-| dropOffAddressNote | string                                      | Dropoff address or a note describing the dropoff point. Optional, but should be provided if available at the booking time; otherwise, it should be provided via the [/update](#update-endpoint) endpoint. Applicable only for the private trip. It will be ignored if the selected trip option already has a predefined meeting position that cannot be changed (immutable), i.e. the meeting position outside of a restricted area. |
-| customerNote       | string                                      | Optional note for the driver not related to pickup or dropoff. Applicable only for the private trip. |
-| flightNumber       | string                                      | Optional flight number in case this is an airport pickup. Applicable only for the private trip. |
-| passengerDetails   | list of [PassengerDetail](#passengerdetail) | List of passengers that will go on this trip. For trips with "Private" type the number of passengers must be below or equal to `maxPassengers` of the `vehicle` in the trip option. For trips with "Shared" type the number of passengers must match the `passengersCount` query parameter from the Search endpoint. There must always be exactly one passenger of type "Lead" with contact details filled. For passenger of type "Child" you must specify a child seat of proper type offered in the trip option's [availableChildSeatTypes](#tripoption). For older children that do not need any child seat use `Adult` passenger type. |
-| externalId         | string                                      | Optional. You can send us the id of the booking in your system to help with communication when our support team needs to identify a booking and you are not able to provide our own `bookingReference`. |
+| departureTimeLocal | integer                                     | Optional. The same as `departureTime` but the local departure time is not converted to UTC. If `departureTime` is specified, this parameter cannot be sent, and vice versa.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| pickUpAddressNote  | string                                      | Pickup address or a note describing the pickup point. Optional, but should be provided if available at the booking time; otherwise, it should be provided via the [/update](#update-endpoint) endpoint. Applicable only for the private trip. It will be ignored if the selected trip option already has a predefined meeting position that cannot be changed (immutable), i.e. the meeting position outside of a restricted area.                                                                                                                                                                                                                                                                                                                                         |
+| dropOffAddressNote | string                                      | Dropoff address or a note describing the dropoff point. Optional, but should be provided if available at the booking time; otherwise, it should be provided via the [/update](#update-endpoint) endpoint. Applicable only for the private trip. It will be ignored if the selected trip option already has a predefined meeting position that cannot be changed (immutable), i.e. the meeting position outside of a restricted area.                                                                                                                                                                                                                                                                                                                                       |
+| customerNote       | string                                      | Optional note for the driver not related to pickup or dropoff. Applicable only for the private trip.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| flightNumber       | string                                      | Optional flight number in case this is an airport pickup. Applicable only for the private trip.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| passengerDetails   | list of [PassengerDetail](#passengerdetail) | List of passengers that will go on this trip. For trips with "Private" type the number of passengers must be below or equal to `maxPassengers` of the `vehicle` in the trip option. For trips with "Shared" type the number of passengers must match the `passengersCount` query parameter from the Search endpoint. There must always be exactly one passenger of type "Lead" with contact details filled. For passenger of type "Child" you must specify a child seat of proper type offered in the trip option's [availableChildSeatTypes](#tripoption). For older children that do not need any child seat use `Adult` passenger type.                                                                                                                                 |
+| externalId         | string                                      | Optional. You can send us the id of the booking in your system to help with communication when our support team needs to identify a booking and you are not able to provide our own `bookingReference`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
 
 ### Response body
 
@@ -1280,14 +1280,14 @@ curl -d '{ "bookingId": "cb102778-a3d7-426e-8d18-6bd6b296f283" }' \
 
 ```json
 {
-  "penalty": 0,
-  "currency": "EUR"
+    "penalty": 0,
+    "currency": "EUR"
 }
 ```
 
-### URL path
+### Endpoint Details
 
-`/partners/v3/trip/cancel`
+`POST /partners/v3/trip/cancel`
 
 ### Request body
 
@@ -1356,88 +1356,88 @@ curl https://papi.staging.mydaytrip.net/partners/v3/trip/external/details/extern
 
 ```json
 {
-  "bookingId": "cb102786-f663-47d7-9635-7ef61a51bf29",
-  "bookingReference": "CB1027",
-  "status": "Confirmed",
-  "createdAt": "2022-12-05T18:00:00Z",
-  "passengersCount": 3,
-  "currency": "EUR",
-  "departureTimeUtc": "2022-12-05T18:00:00Z",
-  "originTimezone": "Europe/Prague",
-  "meetAndGreet": true,
-  "pickUpAddressNote": "Havel airport",
-  "dropOffAddressNote": "Vienna central square",
-  "customerNote": "We will stand next to the entrance",
-  "flightNumber": "FR008",
-  "passengerDetails": [
-    {
-      "type": "Lead",
-      "firstName": "John",
-      "lastName": "Doe",
-      "phone": "+41555555555",
-      "email": "client-email@example.com",
-      "birthday": 629424000
-    },
-    {
-      "type": "Adult"
-    },
-    {
-      "type": "Child",
-      "childSeatType": "Booster"
-    }
-  ],
-  "trip": {
-    "type": "Private",
-    "englishSpeakingDriver": true,
-    "distanceKm": 334,
-    "travelTimeMinutes": 268,
-    "pickUp": {
-      "lat": 50.1,
-      "lon": 14.25,
-      "time": "2022-12-05T18:00:00Z",
-      "timezone": "Europe/Prague",
-      "meetAndGreet": true,
-      "state": "original",
-      "immutable": false
-    },
-    "dropOff": {
-      "lat": 48.2,
-      "lon": 16.37,
-      "state": "original",
-      "immutable": false
-    },
-    "pricing": {
-      "totalPrice": 288
-    },
-    "vehicle": {
-      "type": "Sedan",
-      "maxPassengers": 3,
-      "description": "Sedan comparable to a Volkswagen Passat, up to 3 passengers with luggage.",
-      "modelDescription": "VW Passat or similar",
-      "image": "https://daytrip.imgix.net/site/sedan.png"
-    },
-    "luggage": {
-      "maxTotalCarryons": 3,
-      "maxTotalSuitcases": 3
-    },
-    "includedStops": [
-      {
-        "id": "4ee58c0c-4e56-46ef-bd22-406a1bc60e1c",
-        "price": 28,
-        "name": "Mikulov",
-        "image": "https://daytrip.imgix.net/510.jpg",
-        "title": "The Heart of Czech Wine Country",
-        "perex": "A town with a history as deep and flavourful as its wine, Mikulov provides a perfect combination of relaxation and exploration.",
-        "description": "Often favoured by visitors with a more active approach to life, Mikulov has much to offer. Surrounded by idyllic countryside, crisscrossed by bicycle paths and marked hiking trails, and the nearby Nové Mlýny lakes, there is something for everyone to enjoy. After all that fresh air, a glass of wine will be more than welcome, and fortunately, Mikulov is the centre for Czech wine making. Due to a high concentration of limestone in the local soil, wine from this region has a unique character and distinct taste. If you like your wine with a side-serving of history, Mikulov Castle dates from the 1730s, and the Dietrichstein Tomb is the final resting place of a Bohemian noble family. Mikulov is also significant for its strong Jewish history. In the early 1800s Mikulov's Jewish Quarter was the largest in Moravia with half the town's inhabitants being of Jewish faith.",
-        "durationInMinutes": 60,
-        "order": 2,
-        "timezone": "Europe/Prague",
-        "country": {
-          "englishName": "Czech Republic"
+    "bookingId": "cb102786-f663-47d7-9635-7ef61a51bf29",
+    "bookingReference": "CB1027",
+    "status": "Confirmed",
+    "createdAt": "2022-12-05T18:00:00Z",
+    "passengersCount": 3,
+    "currency": "EUR",
+    "departureTimeUtc": "2022-12-05T18:00:00Z",
+    "originTimezone": "Europe/Prague",
+    "meetAndGreet": true,
+    "pickUpAddressNote": "Havel airport",
+    "dropOffAddressNote": "Vienna central square",
+    "customerNote": "We will stand next to the entrance",
+    "flightNumber": "FR008",
+    "passengerDetails": [
+        {
+            "type": "Lead",
+            "firstName": "John",
+            "lastName": "Doe",
+            "phone": "+41555555555",
+            "email": "client-email@example.com",
+            "birthday": 629424000
+        },
+        {
+            "type": "Adult"
+        },
+        {
+            "type": "Child",
+            "childSeatType": "Booster"
         }
-      }
-    ]
-  }
+    ],
+    "trip": {
+        "type": "Private",
+        "englishSpeakingDriver": true,
+        "distanceKm": 334,
+        "travelTimeMinutes": 268,
+        "pickUp": {
+            "lat": 50.1,
+            "lon": 14.25,
+            "time": "2022-12-05T18:00:00Z",
+            "timezone": "Europe/Prague",
+            "meetAndGreet": true,
+            "state": "original",
+            "immutable": false
+        },
+        "dropOff": {
+            "lat": 48.2,
+            "lon": 16.37,
+            "state": "original",
+            "immutable": false
+        },
+        "pricing": {
+            "totalPrice": 288
+        },
+        "vehicle": {
+            "type": "Sedan",
+            "maxPassengers": 3,
+            "description": "Sedan comparable to a Volkswagen Passat, up to 3 passengers with luggage.",
+            "modelDescription": "VW Passat or similar",
+            "image": "https://daytrip.imgix.net/site/sedan.png"
+        },
+        "luggage": {
+            "maxTotalCarryons": 3,
+            "maxTotalSuitcases": 3
+        },
+        "includedStops": [
+            {
+                "id": "4ee58c0c-4e56-46ef-bd22-406a1bc60e1c",
+                "price": 28,
+                "name": "Mikulov",
+                "image": "https://daytrip.imgix.net/510.jpg",
+                "title": "The Heart of Czech Wine Country",
+                "perex": "A town with a history as deep and flavourful as its wine, Mikulov provides a perfect combination of relaxation and exploration.",
+                "description": "Often favoured by visitors with a more active approach to life, Mikulov has much to offer. Surrounded by idyllic countryside, crisscrossed by bicycle paths and marked hiking trails, and the nearby Nové Mlýny lakes, there is something for everyone to enjoy. After all that fresh air, a glass of wine will be more than welcome, and fortunately, Mikulov is the centre for Czech wine making. Due to a high concentration of limestone in the local soil, wine from this region has a unique character and distinct taste. If you like your wine with a side-serving of history, Mikulov Castle dates from the 1730s, and the Dietrichstein Tomb is the final resting place of a Bohemian noble family. Mikulov is also significant for its strong Jewish history. In the early 1800s Mikulov's Jewish Quarter was the largest in Moravia with half the town's inhabitants being of Jewish faith.",
+                "durationInMinutes": 60,
+                "order": 2,
+                "timezone": "Europe/Prague",
+                "country": {
+                    "englishName": "Czech Republic"
+                }
+            }
+        ]
+    }
 }
 ```
 
@@ -1445,100 +1445,100 @@ curl https://papi.staging.mydaytrip.net/partners/v3/trip/external/details/extern
 
 ```json
 {
-  "bookingId": "72r53786-f663-47d7-9635-7ef61a51bf29",
-  "bookingReference": "72R537",
-  "status": "Confirmed",
-  "createdAt": "2022-12-05T18:00:00Z",
-  "passengersCount": 3,
-  "currency": "EUR",
-  "departureTimeUtc": "2022-12-05T18:00:00Z",
-  "originTimezone": "Europe/Zurich",
-  "meetAndGreet": false,
-  "meetingPosition": {
-    "lat": 46.067648,
-    "lon": 7.775185,
-    "description": "The train station in Tasch",
-    "address": "3929 Täsch, Switzerland",
-    "instructions": "As vehicle entry into Zermatt is heavily restricted, your driver will meet you nearby at the train station in Tasch, which can be reached by transit from Zermatt within about 10 minutes. Your driver will be waiting at the taxi stand just outside the entrance to the train station.",
-    "image": "https://daytrip.imgix.net/meeting-point-5.png"
-  },
-  "dropOffPosition": {
-    "lat": 45.4374041,
-    "lon": 12.3190675,
-    "description": "Piazzale Roma",
-    "address": "Piazzale Roma, Venice, Metropolitan City of Venice, Italy",
-    "instructions": "Venice’s historic center (the islands) is not accessible by car. Our partner driver will drop you off at Piazzale Roma.",
-    "image": "https://daytrip.imgix.net/management/venice.png?w=480&q=50"
-  },
-  "pickUpAddressNote": "Zermatt",
-  "dropOffAddressNote": "Venice",
-  "passengerDetails": [
-    {
-      "type": "Lead",
-      "firstName": "John",
-      "lastName": "Doe",
-      "phone": "+41555555555",
-      "email": "client-email@example.com",
-      "birthday": 629424000
+    "bookingId": "72r53786-f663-47d7-9635-7ef61a51bf29",
+    "bookingReference": "72R537",
+    "status": "Confirmed",
+    "createdAt": "2022-12-05T18:00:00Z",
+    "passengersCount": 3,
+    "currency": "EUR",
+    "departureTimeUtc": "2022-12-05T18:00:00Z",
+    "originTimezone": "Europe/Zurich",
+    "meetAndGreet": false,
+    "meetingPosition": {
+        "lat": 46.067648,
+        "lon": 7.775185,
+        "description": "The train station in Tasch",
+        "address": "3929 Täsch, Switzerland",
+        "instructions": "As vehicle entry into Zermatt is heavily restricted, your driver will meet you nearby at the train station in Tasch, which can be reached by transit from Zermatt within about 10 minutes. Your driver will be waiting at the taxi stand just outside the entrance to the train station.",
+        "image": "https://daytrip.imgix.net/meeting-point-5.png"
     },
-    {
-      "type": "Adult"
+    "dropOffPosition": {
+        "lat": 45.4374041,
+        "lon": 12.3190675,
+        "description": "Piazzale Roma",
+        "address": "Piazzale Roma, Venice, Metropolitan City of Venice, Italy",
+        "instructions": "Venice’s historic center (the islands) is not accessible by car. Our partner driver will drop you off at Piazzale Roma.",
+        "image": "https://daytrip.imgix.net/management/venice.png?w=480&q=50"
     },
-    {
-      "type": "Child",
-      "childSeatType": "Booster"
+    "pickUpAddressNote": "Zermatt",
+    "dropOffAddressNote": "Venice",
+    "passengerDetails": [
+        {
+            "type": "Lead",
+            "firstName": "John",
+            "lastName": "Doe",
+            "phone": "+41555555555",
+            "email": "client-email@example.com",
+            "birthday": 629424000
+        },
+        {
+            "type": "Adult"
+        },
+        {
+            "type": "Child",
+            "childSeatType": "Booster"
+        }
+    ],
+    "trip": {
+        "type": "Private",
+        "englishSpeakingDriver": true,
+        "distanceKm": 334,
+        "travelTimeMinutes": 268,
+        "pickUp": {
+            "lat": 46.067648,
+            "lon": 7.775185,
+            "time": "2022-12-05T18:00:00Z",
+            "timezone": "Europe/Zurich",
+            "description": "The train station in Tasch",
+            "address": "3929 Täsch, Switzerland",
+            "image": "https://daytrip.imgix.net/meeting-point-5.png",
+            "meetAndGreet": false,
+            "state": "adjusted",
+            "adjustmentReason": "restricted_area",
+            "immutable": true
+        },
+        "dropOff": {
+            "lat": 45.4374041,
+            "lon": 12.3190675,
+            "description": "Piazzale Roma",
+            "address": "Piazzale Roma, Venice, Metropolitan City of Venice, Italy",
+            "image": "https://daytrip.imgix.net/meeting-point-4.png",
+            "state": "adjusted",
+            "adjustmentReason": "restricted_area",
+            "immutable": true
+        },
+        "pricing": {
+            "totalPrice": 1311
+        },
+        "vehicle": {
+            "type": "Sedan",
+            "maxPassengers": 3,
+            "description": "Sedan comparable to a Volkswagen Passat, up to 3 passengers with luggage.",
+            "modelDescription": "VW Passat or similar",
+            "image": "https://daytrip.imgix.net/site/sedan.png"
+        },
+        "luggage": {
+            "maxTotalCarryons": 3,
+            "maxTotalSuitcases": 3
+        },
+        "includedStops": []
     }
-  ],
-  "trip": {
-    "type": "Private",
-    "englishSpeakingDriver": true,
-    "distanceKm": 334,
-    "travelTimeMinutes": 268,
-    "pickUp": {
-      "lat": 46.067648,
-      "lon": 7.775185,
-      "time": "2022-12-05T18:00:00Z",
-      "timezone": "Europe/Zurich",
-      "description": "The train station in Tasch",
-      "address": "3929 Täsch, Switzerland",
-      "image": "https://daytrip.imgix.net/meeting-point-5.png",
-      "meetAndGreet": false,
-      "state": "adjusted",
-      "adjustmentReason": "restricted_area",
-      "immutable": true
-    },
-    "dropOff": {
-      "lat": 45.4374041,
-      "lon": 12.3190675,
-      "description": "Piazzale Roma",
-      "address": "Piazzale Roma, Venice, Metropolitan City of Venice, Italy",
-      "image": "https://daytrip.imgix.net/meeting-point-4.png",
-      "state": "adjusted",
-      "adjustmentReason": "restricted_area",
-      "immutable": true
-    },
-    "pricing": {
-      "totalPrice": 1311
-    },
-    "vehicle": {
-      "type": "Sedan",
-      "maxPassengers": 3,
-      "description": "Sedan comparable to a Volkswagen Passat, up to 3 passengers with luggage.",
-      "modelDescription": "VW Passat or similar",
-      "image": "https://daytrip.imgix.net/site/sedan.png"
-    },
-    "luggage": {
-      "maxTotalCarryons": 3,
-      "maxTotalSuitcases": 3
-    },
-    "includedStops": []
-  }
 }
 ```
 
-### URL path
+### Endpoint Details
 
-`/partners/v3/trip/details/bookingId`
+`GET /partners/v3/trip/details/bookingId`
 
 OR
 
@@ -1621,94 +1621,94 @@ curl -d '{
 
 ```json
 {
-  "bookingId": "cb102786-f663-47d7-9635-7ef61a51bf29",
-  "bookingReference": "CB1027",
-  "status": "Confirmed",
-  "createdAt": "2022-12-05T18:00:00Z",
-  "passengersCount": 3,
-  "currency": "EUR",
-  "departureTimeUtc": "2022-12-05T18:00:00Z",
-  "originTimezone": "Europe/Prague",
-  "meetAndGreet": true,
-  "pickUpAddressNote": "Havel airport",
-  "dropOffAddressNote": "Vienna central square",
-  "customerNote": "We will wait inside the Airport building",
-  "flightNumber": "FR008",
-  "passengerDetails": [
-    {
-      "type": "Lead",
-      "firstName": "John",
-      "lastName": "Doe",
-      "phone": "+4166666666",
-      "email": "client-email@example.com",
-      "birthday": 629424000
-    },
-    {
-      "type": "Adult"
-    },
-    {
-      "type": "Child",
-      "childSeatType": "BoosterSeat"
-    }
-  ],
-  "trip": {
-    "type": "Private",
-    "englishSpeakingDriver": true,
-    "distanceKm": 334,
-    "travelTimeMinutes": 268,
-    "pickUp": {
-      "lat": 50.1,
-      "lon": 14.25,
-      "time": "2022-12-05T18:00:00Z",
-      "timezone": "Europe/Prague",
-      "meetAndGreet": true,
-      "state": "original",
-      "immutable": false
-    },
-    "dropOff": {
-      "lat": 48.2,
-      "lon": 16.37,
-      "state": "original",
-      "immutable": false
-    },
-    "pricing": {
-      "totalPrice": 288
-    },
-    "vehicle": {
-      "type": "Sedan",
-      "maxPassengers": 3,
-      "description": "Sedan comparable to a Volkswagen Passat, up to 3 passengers with luggage.",
-      "modelDescription": "VW Passat or similar",
-      "image": "https://daytrip.imgix.net/site/sedan.png"
-    },
-    "luggage": {
-      "maxTotalCarryons": 3,
-      "maxTotalSuitcases": 3
-    },
-    "includedStops": [
-      {
-        "id": "4ee58c0c-4e56-46ef-bd22-406a1bc60e1c",
-        "price": 28,
-        "name": "Mikulov",
-        "image": "https://daytrip.imgix.net/510.jpg",
-        "title": "The Heart of Czech Wine Country",
-        "perex": "A town with a history as deep and flavourful as its wine, Mikulov provides a perfect combination of relaxation and exploration.",
-        "description": "Often favoured by visitors with a more active approach to life, Mikulov has much to offer. Surrounded by idyllic countryside, crisscrossed by bicycle paths and marked hiking trails, and the nearby Nové Mlýny lakes, there is something for everyone to enjoy. After all that fresh air, a glass of wine will be more than welcome, and fortunately, Mikulov is the centre for Czech wine making. Due to a high concentration of limestone in the local soil, wine from this region has a unique character and distinct taste. If you like your wine with a side-serving of history, Mikulov Castle dates from the 1730s, and the Dietrichstein Tomb is the final resting place of a Bohemian noble family. Mikulov is also significant for its strong Jewish history. In the early 1800s Mikulov's Jewish Quarter was the largest in Moravia with half the town's inhabitants being of Jewish faith.",
-        "durationInMinutes": 60,
-        "order": 2,
-        "timezone": "Europe/Prague",
-        "country": {
-          "englishName": "Czech Republic"
+    "bookingId": "cb102786-f663-47d7-9635-7ef61a51bf29",
+    "bookingReference": "CB1027",
+    "status": "Confirmed",
+    "createdAt": "2022-12-05T18:00:00Z",
+    "passengersCount": 3,
+    "currency": "EUR",
+    "departureTimeUtc": "2022-12-05T18:00:00Z",
+    "originTimezone": "Europe/Prague",
+    "meetAndGreet": true,
+    "pickUpAddressNote": "Havel airport",
+    "dropOffAddressNote": "Vienna central square",
+    "customerNote": "We will wait inside the Airport building",
+    "flightNumber": "FR008",
+    "passengerDetails": [
+        {
+            "type": "Lead",
+            "firstName": "John",
+            "lastName": "Doe",
+            "phone": "+4166666666",
+            "email": "client-email@example.com",
+            "birthday": 629424000
+        },
+        {
+            "type": "Adult"
+        },
+        {
+            "type": "Child",
+            "childSeatType": "BoosterSeat"
         }
-      }
-    ]
-  }
+    ],
+    "trip": {
+        "type": "Private",
+        "englishSpeakingDriver": true,
+        "distanceKm": 334,
+        "travelTimeMinutes": 268,
+        "pickUp": {
+            "lat": 50.1,
+            "lon": 14.25,
+            "time": "2022-12-05T18:00:00Z",
+            "timezone": "Europe/Prague",
+            "meetAndGreet": true,
+            "state": "original",
+            "immutable": false
+        },
+        "dropOff": {
+            "lat": 48.2,
+            "lon": 16.37,
+            "state": "original",
+            "immutable": false
+        },
+        "pricing": {
+            "totalPrice": 288
+        },
+        "vehicle": {
+            "type": "Sedan",
+            "maxPassengers": 3,
+            "description": "Sedan comparable to a Volkswagen Passat, up to 3 passengers with luggage.",
+            "modelDescription": "VW Passat or similar",
+            "image": "https://daytrip.imgix.net/site/sedan.png"
+        },
+        "luggage": {
+            "maxTotalCarryons": 3,
+            "maxTotalSuitcases": 3
+        },
+        "includedStops": [
+            {
+                "id": "4ee58c0c-4e56-46ef-bd22-406a1bc60e1c",
+                "price": 28,
+                "name": "Mikulov",
+                "image": "https://daytrip.imgix.net/510.jpg",
+                "title": "The Heart of Czech Wine Country",
+                "perex": "A town with a history as deep and flavourful as its wine, Mikulov provides a perfect combination of relaxation and exploration.",
+                "description": "Often favoured by visitors with a more active approach to life, Mikulov has much to offer. Surrounded by idyllic countryside, crisscrossed by bicycle paths and marked hiking trails, and the nearby Nové Mlýny lakes, there is something for everyone to enjoy. After all that fresh air, a glass of wine will be more than welcome, and fortunately, Mikulov is the centre for Czech wine making. Due to a high concentration of limestone in the local soil, wine from this region has a unique character and distinct taste. If you like your wine with a side-serving of history, Mikulov Castle dates from the 1730s, and the Dietrichstein Tomb is the final resting place of a Bohemian noble family. Mikulov is also significant for its strong Jewish history. In the early 1800s Mikulov's Jewish Quarter was the largest in Moravia with half the town's inhabitants being of Jewish faith.",
+                "durationInMinutes": 60,
+                "order": 2,
+                "timezone": "Europe/Prague",
+                "country": {
+                    "englishName": "Czech Republic"
+                }
+            }
+        ]
+    }
 }
 ```
 
-### URL path
+### Endpoint Details
 
-`/partners/v3/trip/update`
+`POST /partners/v3/trip/update`
 
 ### Request body
 
@@ -1716,13 +1716,13 @@ All properties except `bookingId` are optional. When a property is not included 
 
 Disclaimer: in the last 24 hours before the departure the [/update](#update-endpoint) endpoint will no longer accept updates. For updates in the last 24 hours please contact our customer support at <daytrip@mydaytrip.com> or call [+44 20 3318 1119](tel:+442033181119).
 
-| Property           | Type                                        | Description |
-| ------------------ | ------------------------------------------- | ----------- |
-| bookingId          | string                                      | Id of the booking to cancel. Taken from [/book](#book-endpoint) endpoint response. |
-| pickUpAddressNote  | string                                      | Pickup address or a note describing the pickup point. Optional, but should be provided if it was not provided at the booking time. Applicable only for the private trip. It will be ignored if the selected trip option already has a predefined meeting position that cannot be changed (immutable), i.e. the meeting position outside of a restricted area. |
-| dropOffAddressNote | string                                      | Dropoff address or a note describing the dropoff point. Optional, but should be provided if it was not provided at the booking time. Applicable only for the private trip. It will be ignored if the selected trip option already has a predefined meeting position that cannot be changed (immutable), i.e. the meeting position outside of a restricted area. |
-| customerNote       | string                                      | Optional note for the driver not related to pickup or dropoff. |
-| flightNumber        | string                                      | Optional flight number in case this is an airport pickup. |
+| Property           | Type                                        | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| ------------------ | ------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| bookingId          | string                                      | Id of the booking to cancel. Taken from [/book](#book-endpoint) endpoint response.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| pickUpAddressNote  | string                                      | Pickup address or a note describing the pickup point. Optional, but should be provided if it was not provided at the booking time. Applicable only for the private trip. It will be ignored if the selected trip option already has a predefined meeting position that cannot be changed (immutable), i.e. the meeting position outside of a restricted area.                                                                                                                                                                                                                                                                                        |
+| dropOffAddressNote | string                                      | Dropoff address or a note describing the dropoff point. Optional, but should be provided if it was not provided at the booking time. Applicable only for the private trip. It will be ignored if the selected trip option already has a predefined meeting position that cannot be changed (immutable), i.e. the meeting position outside of a restricted area.                                                                                                                                                                                                                                                                                      |
+| customerNote       | string                                      | Optional note for the driver not related to pickup or dropoff.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| flightNumber       | string                                      | Optional flight number in case this is an airport pickup.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
 | passengerDetails   | list of [PassengerDetail](#passengerdetail) | Optional. List of passengers that will go on this trip. For trips with "Private" type the number of passengers must be below or equal to `maxPassengers` of the `vehicle` in the trip option. For trips with "Shared" type the number of passengers must match the `passengersCount` query parameter from the Search endpoint. There must always be exactly one passenger of type "Lead" with contact details filled. For passenger of type "Child" you must specify a child seat of proper type offered in the trip option's [availableChildSeatTypes](#tripoption). For older children that do not need any child seat use `Adult` passenger type. |
 
 ### Response body
@@ -1784,16 +1784,16 @@ curl https://papi.staging.mydaytrip.net/partners/v3/trip/tracking/bookingId \
 
 ```json
 {
-  "driverPositions": [
-    {
-      "timestamp": "2023-12-04T18:00:00Z",
-      "driverId": "4381b73d-be1d-4d7d-bf7c-cdde5292c1b9",
-      "position": {
-        "lat": 50.09298565485293,
-        "lon": 14.453347220812443
-      }
-    }
-  ]
+    "driverPositions": [
+        {
+            "timestamp": "2023-12-04T18:00:00Z",
+            "driverId": "4381b73d-be1d-4d7d-bf7c-cdde5292c1b9",
+            "position": {
+                "lat": 50.09298565485293,
+                "lon": 14.453347220812443
+            }
+        }
+    ]
 }
 ```
 
@@ -1801,7 +1801,7 @@ curl https://papi.staging.mydaytrip.net/partners/v3/trip/tracking/bookingId \
 
 ```json
 {
-  "driverPositions": []
+    "driverPositions": []
 }
 ```
 
@@ -1809,30 +1809,30 @@ curl https://papi.staging.mydaytrip.net/partners/v3/trip/tracking/bookingId \
 
 ```json
 {
-  "driverPositions": [
-    {
-      "timestamp": "2023-12-04T18:00:00Z",
-      "driverId": "4381b73d-be1d-4d7d-bf7c-cdde5292c1b9",
-      "position": {
-        "lat": 50.09298565485293,
-        "lon": 14.453347220812443
-      }
-    },
-    {
-      "timestamp": "2023-12-04T18:01:00Z",
-      "driverId": "52443e97-dd86-477a-927a-8fc9fa786797",
-      "position": {
-        "lat": 50.08213692331847,
-        "lon": 14.433944045117011
-      }
-    }
-  ]
+    "driverPositions": [
+        {
+            "timestamp": "2023-12-04T18:00:00Z",
+            "driverId": "4381b73d-be1d-4d7d-bf7c-cdde5292c1b9",
+            "position": {
+                "lat": 50.09298565485293,
+                "lon": 14.453347220812443
+            }
+        },
+        {
+            "timestamp": "2023-12-04T18:01:00Z",
+            "driverId": "52443e97-dd86-477a-927a-8fc9fa786797",
+            "position": {
+                "lat": 50.08213692331847,
+                "lon": 14.433944045117011
+            }
+        }
+    ]
 }
 ```
 
-### URL path
+### Endpoint Details
 
-`/partners/v3/trip/tracking/bookingId`
+`GET /partners/v3/trip/tracking/bookingId`
 
 Replace `bookingId` with the id of the booking you want to track.
 
@@ -1856,9 +1856,9 @@ This endpoint allows you to retrieve the information about driver(s) and vehicle
 
 Proposed frequency of calling this endpoint depending on the time before the departure time:
 
-- the first check is ideal to do 48 hours before the departure;
-- in the period 48-24 hours before the departure, it is recommended to check the assigned drivers every 4 hours;
-- in the last 24 hours before the departure, it is recommended to check the assigned drivers every hour.
+-   the first check is ideal to do 48 hours before the departure;
+-   in the period 48-24 hours before the departure, it is recommended to check the assigned drivers every 4 hours;
+-   in the last 24 hours before the departure, it is recommended to check the assigned drivers every hour.
 
 > To get drivers currently assigned to a trip
 
@@ -1881,19 +1881,19 @@ curl https://papi.staging.mydaytrip.net/partners/v3/trip/drivers/bookingId \
 
 ```json
 {
-  "assignedDrivers": [
-    {
-      "driverId": "4381b73d-be1d-4d7d-bf7c-cdde5292c1b9",
-      "name": "John Doe",
-      "phoneNumber": "+1 628 201 9501",
-      "profilePhoto": "link to image of driver's profile photo",
-      "vehicle": {
-        "title": "Mercedes-Benz E-class",
-        "color": "Black",
-        "licensePlate": "XXXXXX"
-      }
-    }
-  ]
+    "assignedDrivers": [
+        {
+            "driverId": "4381b73d-be1d-4d7d-bf7c-cdde5292c1b9",
+            "name": "John Doe",
+            "phoneNumber": "+1 628 201 9501",
+            "profilePhoto": "link to image of driver's profile photo",
+            "vehicle": {
+                "title": "Mercedes-Benz E-class",
+                "color": "Black",
+                "licensePlate": "XXXXXX"
+            }
+        }
+    ]
 }
 ```
 
@@ -1901,7 +1901,7 @@ curl https://papi.staging.mydaytrip.net/partners/v3/trip/drivers/bookingId \
 
 ```json
 {
-  "assignedDrivers": []
+    "assignedDrivers": []
 }
 ```
 
@@ -1909,33 +1909,33 @@ curl https://papi.staging.mydaytrip.net/partners/v3/trip/drivers/bookingId \
 
 ```json
 {
-  "assignedDrivers": [
-    {
-      "driverId": "4381b73d-be1d-4d7d-bf7c-cdde5292c1b9",
-      "name": "John Doe",
-      "phoneNumber": "+1 628 201 9501",
-      "profilePhoto": "link to driver's profile photo image",
-      "vehicle": {
-        "title": "Mercedes-Benz E-class",
-        "color": "Black",
-        "licensePlate": "XXXXXX"
-      }
-    },
-    {
-      "driverId": "52443e97-dd86-477a-927a-8fc9fa786797",
-      "name": "Jack Smith",
-      "phoneNumber": "+1 628 201 9501",
-      "vehicle": {
-        "title": "BMW 5 Series"
-      }
-    }
-  ]
+    "assignedDrivers": [
+        {
+            "driverId": "4381b73d-be1d-4d7d-bf7c-cdde5292c1b9",
+            "name": "John Doe",
+            "phoneNumber": "+1 628 201 9501",
+            "profilePhoto": "link to driver's profile photo image",
+            "vehicle": {
+                "title": "Mercedes-Benz E-class",
+                "color": "Black",
+                "licensePlate": "XXXXXX"
+            }
+        },
+        {
+            "driverId": "52443e97-dd86-477a-927a-8fc9fa786797",
+            "name": "Jack Smith",
+            "phoneNumber": "+1 628 201 9501",
+            "vehicle": {
+                "title": "BMW 5 Series"
+            }
+        }
+    ]
 }
 ```
 
-### URL path
+### Endpoint Details
 
-`/partners/v3/trip/drivers/bookingId`
+`GET /partners/v3/trip/drivers/bookingId`
 
 Replace `bookingId` with the id of the booking you want to retrieve drivers and vehicles for.
 
@@ -1953,11 +1953,11 @@ Replace `bookingId` with the id of the booking you want to retrieve drivers and 
 | 403         | Forbidden request - trying to retrieve drivers for a booking owned by someone else. |
 | 404         | Booking not found.                                                                  |
 
-# Entities
+## Trip API Entities
 
 Below is a documentation of all object entities returned by the Daytrip API endpoints.
 
-## TripOption
+### TripOption
 
 | Property                | Type                                                     | Description                                                                                                                                                              |
 | ----------------------- | -------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -1979,38 +1979,38 @@ Below is a documentation of all object entities returned by the Daytrip API endp
 | cancellationPolicy      | one of [CancellationPolicyType](#cancellationpolicytype) | Cancellation policy for this trip option. Optional. Populated only for shared trips.                                                                                     |
 | expiresAt               | string                                                   | UTC timestamp of when this offer expires. After this time it is no longer possible to book it, you need to make a new search. Optional. Populated only for shared trips. |
 
-## Location
+### Location
 
-| Property         | Type                                   | Description |
-| ---------------- | -------------------------------------- | ----------- |
-| lat              | number                                 | Latitude in degrees. |
-| lon              | number                                 | Longitude in degrees. |
-| time             | string                                 | UTC timestamp of the departure or arrival time. Optional. For pickup only in case of the private trip. Always present for shared trips. |
-| interval         | object - [TimeInterval](#timeinterval) | Estimated departure or arrival interval. Optional, for shared trips only. |
+| Property         | Type                                   | Description                                                                                                                                                    |
+| ---------------- | -------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| lat              | number                                 | Latitude in degrees.                                                                                                                                           |
+| lon              | number                                 | Longitude in degrees.                                                                                                                                          |
+| time             | string                                 | UTC timestamp of the departure or arrival time. Optional. For pickup only in case of the private trip. Always present for shared trips.                        |
+| interval         | object - [TimeInterval](#timeinterval) | Estimated departure or arrival interval. Optional, for shared trips only.                                                                                      |
 | timezone         | string                                 | IANA timezone matching the location. Presents if `time` or `interval` are present. Can be used to convert UTC timestamps from `time`/`interval` to local time. |
-| description      | string                                 | Description of the pickup or dropoff. Optional. |
-| address          | string                                 | Address of the pickup or dropoff. Optional. |
-| image            | string                                 | Link to an image of the position. Optional. |
-| meetAndGreet     | boolean                                | Specifies if meet and greet is provided for this pickup. Optional, for pickup only. |
-| state            | string                                 | Represents a state of the location: `original` - customer provided; or `adjusted` - differs from the pickup or dropoff requested by the customer. |
-| adjustmentReason | string                                 | Reason for the adjustment of the pickup or dropoff. Optional. Possible values: `restricted_area`, `airport_pickup`. |
-| immutable        | boolean                                | Specifies if the pickup or dropoff position can be changed. If `true` then the position is predefined and cannot be changed. |
+| description      | string                                 | Description of the pickup or dropoff. Optional.                                                                                                                |
+| address          | string                                 | Address of the pickup or dropoff. Optional.                                                                                                                    |
+| image            | string                                 | Link to an image of the position. Optional.                                                                                                                    |
+| meetAndGreet     | boolean                                | Specifies if meet and greet is provided for this pickup. Optional, for pickup only.                                                                            |
+| state            | string                                 | Represents a state of the location: `original` - customer provided; or `adjusted` - differs from the pickup or dropoff requested by the customer.              |
+| adjustmentReason | string                                 | Reason for the adjustment of the pickup or dropoff. Optional. Possible values: `restricted_area`, `airport_pickup`.                                            |
+| immutable        | boolean                                | Specifies if the pickup or dropoff position can be changed. If `true` then the position is predefined and cannot be changed.                                   |
 
-## TimeInterval
+### TimeInterval
 
 | Property | Type   | Description                                 |
 | -------- | ------ | ------------------------------------------- |
 | earliest | string | UTC timestamp of the start of the interval. |
 | latest   | string | UTC timestamp of the end of the interval.   |
 
-## Pricing
+### Pricing
 
 | Property          | Type   | Description                                                    |
 | ----------------- | ------ | -------------------------------------------------------------- |
 | totalPrice        | number | Total price of this option based on requested passenger count. |
 | pricePerPassenger | number | Price per passenger. Optional, for shared options only.        |
 
-## Vehicle
+### Vehicle
 
 | Property         | Type    | Description                                                                                                           |
 | ---------------- | ------- | --------------------------------------------------------------------------------------------------------------------- |
@@ -2020,7 +2020,7 @@ Below is a documentation of all object entities returned by the Daytrip API endp
 | modelDescription | string  | Models that the vehicle is similar to.                                                                                |
 | image            | string  | Link to an illustrative image of the vehicle type. Not an image of the exact vehicle that will be used for this trip. |
 
-## Luggage
+### Luggage
 
 | Property              | Type    | Description                                                                                                    |
 | --------------------- | ------- | -------------------------------------------------------------------------------------------------------------- |
@@ -2029,7 +2029,7 @@ Below is a documentation of all object entities returned by the Daytrip API endp
 | maxCarryonsPerPerson  | integer | Maximum amount of carry-on luggage that one passenger can bring on this trip. Optional, for shared trips only. |
 | maxSuitcasesPerPerson | integer | Maximum amount of suitcases that one passenger can bring on this trip. Optional, for shared trips only.        |
 
-## ChildSeatType
+### ChildSeatType
 
 | Property           | Type    | Description                                                                       |
 | ------------------ | ------- | --------------------------------------------------------------------------------- |
@@ -2042,7 +2042,7 @@ Below is a documentation of all object entities returned by the Daytrip API endp
 | weightInKilosFrom  | integer | Minimum weight in kilograms of a child that this seat type is suitable for.       |
 | weightInKilosTo    | integer | Maximum weight in kilograms of a child that this seat type is suitable for.       |
 
-## Stop
+### Stop
 
 | Property          | Type                         | Description                                                                                                                                            |
 | ----------------- | ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -2058,13 +2058,13 @@ Below is a documentation of all object entities returned by the Daytrip API endp
 | timezone          | string                       | IANA timezone matching the location of the stop.                                                                                                       |
 | country           | object - [Country](#country) | Details about the country where the stop is located.                                                                                                   |
 
-## Country
+### Country
 
 | Property    | Type   | Description                     |
 | ----------- | ------ | ------------------------------- |
 | englishName | string | Name of the country in English. |
 
-## PassengerDetail
+### PassengerDetail
 
 | Property      | Type    | Description                                                                                                                                                                           |
 | ------------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -2076,7 +2076,7 @@ Below is a documentation of all object entities returned by the Daytrip API endp
 | birthday      | integer | Birthday of the passenger - required for the lead passenger. UNIX epoch timestamp in seconds.                                                                                         |
 | childSeatType | string  | Requested child seat type for a passenger of type "Child". Must match one of offered child seat types from [availableChildSeatTypes](#tripoption) of the trip option you are booking. |
 
-## MeetingPosition
+### MeetingPosition
 
 | Property     | Type   | Description                                 |
 | ------------ | ------ | ------------------------------------------- |
@@ -2087,7 +2087,7 @@ Below is a documentation of all object entities returned by the Daytrip API endp
 | address      | string | Address of the position. Optional.          |
 | image        | string | Link to an image of the position. Optional. |
 
-## DropOffPosition
+### DropOffPosition
 
 | Property    | Type   | Description                                 |
 | ----------- | ------ | ------------------------------------------- |
@@ -2097,7 +2097,7 @@ Below is a documentation of all object entities returned by the Daytrip API endp
 | address     | string | Address of the position. Optional.          |
 | image       | string | Link to an image of the position. Optional. |
 
-## DriverPosition
+### DriverPosition
 
 | Property  | Type                           | Description                                                                                                                                                                                                           |
 | --------- | ------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -2105,14 +2105,14 @@ Below is a documentation of all object entities returned by the Daytrip API endp
 | driverId  | string                         | Unique id of the driver. To distinguish the drivers for trips with multiple drivers. Use the [/drivers](#drivers-endpoint) endpoint to retrieve the details about the drivers and vehicles and match them by this id. |
 | position  | object - [Position](#position) | Last reported position of the driver.                                                                                                                                                                                 |
 
-## Position
+### Position
 
 | Property | Type   | Description           |
 | -------- | ------ | --------------------- |
 | lat      | number | Latitude in degrees.  |
 | lon      | number | Longitude in degrees. |
 
-## Driver
+### Driver
 
 | Property     | Type                                       | Description                                                                 |
 | ------------ | ------------------------------------------ | --------------------------------------------------------------------------- |
@@ -2122,7 +2122,7 @@ Below is a documentation of all object entities returned by the Daytrip API endp
 | profilePhoto | string                                     | Optional. Link to driver's profile photo if available.                      |
 | vehicle      | object - [DriversVehicle](#driversvehicle) | Information about driver's vehicle.                                         |
 
-## DriversVehicle
+### DriversVehicle
 
 | Property     | Type   | Description                                      |
 | ------------ | ------ | ------------------------------------------------ |
@@ -2130,7 +2130,7 @@ Below is a documentation of all object entities returned by the Daytrip API endp
 | color        | string | Optional. Color of the vehicle if known.         |
 | licensePlate | string | Optional. Licence plate of the vehicle if known. |
 
-## CancellationPolicyType
+### CancellationPolicyType
 
 | Property      | Type   | Description                                        |
 | ------------- | ------ | -------------------------------------------------- |
