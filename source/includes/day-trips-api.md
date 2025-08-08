@@ -531,7 +531,7 @@ curl -X POST "https://papi.staging.mydaytrip.net/partners/v1/daytrips/cancel" \
 {
     "bookingId": "CB1027",
     "cancelledAt": "2025-05-18T10:25:00Z",
-    "penalty": 100, // if less than 24hours before departure, otherwise 0
+    "penalty": 100,
     "currency":"EUR"
 }
 ```
@@ -552,7 +552,7 @@ curl -X POST "https://papi.staging.mydaytrip.net/partners/v1/daytrips/cancel" \
 | ----------- | ------ | --------------------------------------------------------- |
 | bookingId   | string | The ID of the booking that was cancelled.                 |
 | cancelledAt | string | The timestamp of when the booking was cancelled.          |
-| penalty | number | The amount that should be payed if late cancellation is made. |
+| penalty | number | The amount that should be payed in case of cancellation: the full price, if cancelled in less that 24 hours before departure; otherwise 0. |
 | currency | string | The currency of the penalty amount.                          |
 
 ### Error Status Codes
