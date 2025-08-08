@@ -531,7 +531,7 @@ curl -X POST "https://papi.staging.mydaytrip.net/partners/v1/daytrips/cancel" \
 {
     "bookingId": "CB1027",
     "cancelledAt": "2025-05-18T10:25:00Z",
-    "penalty": 100,
+    "penalty": 199,
     "currency":"EUR"
 }
 ```
