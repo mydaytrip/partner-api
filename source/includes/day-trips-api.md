@@ -512,7 +512,7 @@ curl -X POST "https://papi.staging.mydaytrip.net/partners/v1/daytrips/book" \
 ## Cancel Booking
 
 This endpoint cancels an existing day trip booking, if permitted by cancellation rules.
-Current cutoff for cancellations is 24 hours before the trip departure time.
+If cancellation is in less than 24hours full amount is charged, otherwise it's 0.
 
 > To cancel a booking with reference "CB1027":
 
@@ -530,8 +530,9 @@ curl -X POST "https://papi.staging.mydaytrip.net/partners/v1/daytrips/cancel" \
 ```json
 {
     "bookingId": "CB1027",
-    "status": "cancelled",
-    "cancelledAt": "2025-05-18T10:25:00Z"
+    "cancelledAt": "2025-05-18T10:25:00Z",
+    "penalty": 100, // if less than 24hours before departure, otherwise 0
+    "currency":"EUR"
 }
 ```
 
@@ -550,8 +551,9 @@ curl -X POST "https://papi.staging.mydaytrip.net/partners/v1/daytrips/cancel" \
 | Property    | Type   | Description                                               |
 | ----------- | ------ | --------------------------------------------------------- |
 | bookingId   | string | The ID of the booking that was cancelled.                 |
-| status      | string | The new status of the booking, which will be `cancelled`. |
 | cancelledAt | string | The timestamp of when the booking was cancelled.          |
+| penalty | number | The amount that should be payed if late cancellation is made. |
+| currency | string | The currency of the penalty amount.                          |
 
 ### Error Status Codes
 
