@@ -512,7 +512,7 @@ curl -X POST "https://papi.staging.mydaytrip.net/partners/v1/daytrips/book" \
 ## Cancel Booking
 
 This endpoint cancels an existing day trip booking, if permitted by cancellation rules.
-If cancellation is in less than 24hours full amount is charged, otherwise it's 0.
+If cancellation is in less than 24 hours before the departure time, the full amount is charged; otherwise, it's 0.
 
 > To cancel a booking with reference "CB1027":
 
