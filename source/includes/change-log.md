@@ -1,5 +1,6 @@
 # Change Log
 
+-   **2025-11-18**: Added Hourly Ride API endpoints documentation.
 -   **2025-08-01**: Added Day Trips API endpoints documentation.
 -   **2025-07-16**: Updated base endpoint addresses with the new domain name.
 -   **2025-06-03**: Added support for meeting positions in private trips.

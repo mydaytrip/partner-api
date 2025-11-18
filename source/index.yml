@@ -11,6 +11,7 @@ includes:
     - debugging
     - trip-api
     - day-trips-api
+    - hourly-ride-api
     - faq
     - change-log
 
