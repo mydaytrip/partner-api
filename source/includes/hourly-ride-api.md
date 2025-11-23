@@ -1,6 +1,6 @@
 # Hourly Ride API
 
-An hourly ride is a time-based rental service where passengers rent a driver with a vehicle for a specified duration, starting and ending at the same location. Each search will return multiple hourly ride options that can differ by vehicle type. The service includes number of kms included in travel per hour rented.
+An hourly ride is a time-based rental service where passengers rent a driver with a vehicle for a specified duration, starting and ending at the same location. Each search will return multiple hourly ride options that can differ by vehicle type. The service includes number of kilometers included in travel per hour rented.
 
 ## Flows
 
@@ -34,7 +34,7 @@ This endpoint returns all available hourly ride options based on the specified p
 > To search for an hourly ride in Prague for 3 passengers for 6 hours, use this call:
 
 ```bash
-curl "https://papi.staging.mydaytrip.net/partners/v1/hourly-rides/search?originLatitude=50.10&originLongitude=14.2559&departureTime=1766227088&hoursRented=6&passengersCount=3&childrenCount=1" \
+curl "https://papi.staging.mydaytrip.net/partners/v1/hourly-rides/search?originType=iata&origin=PRG&departureTime=1769855400&hoursRented=4&passengersCount=3&childrenCount=1" \
   -H "x-api-key: your_api_key"
 ```
 
@@ -46,10 +46,10 @@ curl "https://papi.staging.mydaytrip.net/partners/v1/hourly-rides/search?originL
 
 ```
 
-> To search for an hourly ride from Prague Airport for 3 passengers for 4 hours, use this call:
+> To search for an hourly ride from Dubrovnik Old Town for 10 passengers for 6 hours, use this call:
 
 ```bash
-curl "https://papi.staging.mydaytrip.net/partners/v1/hourly-rides/search?originType=iata&origin=PRG&departureTime=1766227088&hoursRented=4&passengersCount=3&childrenCount=1" \
+curl "https://papi.staging.mydaytrip.net/partners/v1/hourly-rides/search?originLatitude=42.639859&originLongitude=18.109776&departureTime=1769855400&hoursRented=6&passengersCount=3&childrenCount=1" \
   -H "x-api-key: your_api_key"
 ```
 
@@ -66,8 +66,7 @@ curl "https://papi.staging.mydaytrip.net/partners/v1/hourly-rides/search?originT
 ```json
 {
     "searchId": "f0e34a1b-2b3d-4747-b426-292633b615b4",
-    "expiresAt": "2022-12-04T18:00:00Z",
-    "passengersCount": 3,
+    "passengersCount": 10,
     "childrenCount": 1,
     "options": [
         {
@@ -77,10 +76,30 @@ curl "https://papi.staging.mydaytrip.net/partners/v1/hourly-rides/search?originT
             "hoursRented": 6,
             "includedKilometers": 120,
             "pricing": {
-                "totalPrice": 260,
+                "totalPrice": 385,
                 "currency": "EUR"
             },
+            "pickUp": {
+                "lat": 42.6420632,
+                "lon": 18.1131754,
+                "time": "2026-01-31T10:30:00Z",
+                "timezone": "Europe/Zagreb",
+                "description": "Ploce Gate, Ul. Frana Supila 2",
+                "meetAndGreet": false,
+                "immutable": true,
+                "state": "adjusted",
+                "adjustmentReason": "restricted_area",
+                "address": "Vrata od Ploča, Ul. Vrata od Ploča, 20000, Dubrovnik, Croatia",
+                "image": "https://daytrip.imgix.net/management/dubrovnik.png?w=480&q=50"
+            },
             "vehicles": [
+                {
+                    "type": "Van",
+                    "maxPassengers": 7,
+                    "description": "Van comparable to a VW Transporter, up to 7 passengers with luggage.",
+                    "modelDescription": "VW Transporter or similar",
+                    "image": "https://daytrip.imgix.net/site/van-vw.png"
+                },
                 {
                     "type": "Sedan",
                     "maxPassengers": 3,
@@ -90,8 +109,8 @@ curl "https://papi.staging.mydaytrip.net/partners/v1/hourly-rides/search?originT
                 }
             ],
             "luggage": {
-                "maxTotalCarryons": 3,
-                "maxTotalSuitcases": 3
+                "maxTotalCarryons": 10,
+                "maxTotalSuitcases": 10
             },
             "availableChildSeatTypes": [
                 {
@@ -136,75 +155,7 @@ curl "https://papi.staging.mydaytrip.net/partners/v1/hourly-rides/search?originT
                 }
             ],
             "cancellationPolicy": "Flexible",
-            "expiresAt": "2022-12-04T18:00:00Z"
-        },
-        {
-            "id": "b071e9f8-54d9-44be-bb5f-feae5aafd771",
-            "type": "Private",
-            "englishSpeakingDriver": true,
-            "hoursRented": 6,
-            "includedKilometers": 120,
-            "pricing": {
-                "totalPrice": 320,
-                "currency": "EUR"
-            },
-            "vehicles": [
-                {
-                    "type": "MPV",
-                    "maxPassengers": 4,
-                    "description": "Compact MPV comparable to a Volkswagen Touran, up to 4 passengers with luggage.",
-                    "modelDescription": "VW Touran or similar",
-                    "image": "https://daytrip.imgix.net/site/mpv.png"
-                }
-            ],
-            "luggage": {
-                "maxTotalCarryons": 4,
-                "maxTotalSuitcases": 4
-            },
-            "availableChildSeatTypes": [
-                {
-                    "childSeatType": "RearFacing",
-                    "description": "Rear-facing infant seat",
-                    "ageFrom": 0,
-                    "ageTo": 1,
-                    "weightInPoundsFrom": 0,
-                    "weightInPoundsTo": 26,
-                    "weightInKilosFrom": 0,
-                    "weightInKilosTo": 10
-                },
-                {
-                    "childSeatType": "ForwardFacing",
-                    "description": "Forward-facing w/harness",
-                    "ageFrom": 1,
-                    "ageTo": 4,
-                    "weightInPoundsFrom": 18,
-                    "weightInPoundsTo": 36,
-                    "weightInKilosFrom": 8,
-                    "weightInKilosTo": 16
-                },
-                {
-                    "childSeatType": "BoosterSeat",
-                    "description": "Booster seat with high back",
-                    "ageFrom": 4,
-                    "ageTo": 6,
-                    "weightInPoundsFrom": 30,
-                    "weightInPoundsTo": 50,
-                    "weightInKilosFrom": 14,
-                    "weightInKilosTo": 23
-                },
-                {
-                    "childSeatType": "Booster",
-                    "description": "Backless booster",
-                    "ageFrom": 6,
-                    "ageTo": 12,
-                    "weightInPoundsFrom": 44,
-                    "weightInPoundsTo": 72,
-                    "weightInKilosFrom": 20,
-                    "weightInKilosTo": 33
-                }
-            ],
-            "cancellationPolicy": "Flexible",
-            "expiresAt": "2022-12-04T18:00:00Z"
+            "expiresAt": "2025-11-23T18:00:00Z"
         }
     ]
 }
@@ -225,8 +176,7 @@ curl "https://papi.staging.mydaytrip.net/partners/v1/hourly-rides/search?originT
 | departureTime   | integer | Departure time as a UNIX epoch timestamp in seconds. This timestamp should be calculated from the local departure time and converted to UTC.                               |
 | hoursRented     | integer | Duration in hours (1-24). Required. The service includes 20 km of travel per hour.                                                                                         |
 | passengersCount | integer | Total number of passengers to transport (adults and children). Must be between 1 and 7.                                                                                    |
-| childrenCount   | integer | Optional. Specifies the number of children in the group.                                                                                                                   |
-|                 |
+| childrenCount   | integer | Optional. Specifies the number of children in the group.                                                                                                                    |
 
 **Note**: Meeting positions are automatically included in results. When the requested address is in an area that vehicles cannot access directly (e.g., restricted zones, pedestrian areas), the API will return the nearest accessible meeting point with relevant details.
 
@@ -525,13 +475,14 @@ Represents an available hourly ride option.
 
 | Property                | Type                            | Description                                                           |
 | ----------------------- | ------------------------------- | --------------------------------------------------------------------- |
-| id                      | string                          | Unique option identifier.                                             |
+| id                      | string                          | Unique option identifier.                                              |
 | type                    | string                          | Always "Private" for hourly rides.                                    |
 | englishSpeakingDriver   | boolean                         | Whether the driver speaks English.                                    |
 | hoursRented             | integer                         | Duration in hours (1-24).                                             |
 | includedKilometers      | integer                         | Total kilometers included (hoursRented × 20).                         |
 | pricing                 | [Pricing](#pricing)             | Price information.                                                    |
-| vehicle                 | [Vehicle](#vehicle)             | Vehicle information.                                                  |
+| pickUp                  | object - [Location](#location)  | Details about the pickup point.                                       |
+| vehicles                | list of [Vehicle](#vehicle)     | Vehicles information.                                                 |
 | luggage                 | [Luggage](#luggage)             | Luggage capacity information.                                         |
 | availableChildSeatTypes | list of [ChildSeat](#childseat) | Available child seat types for this option.                           |
 | cancellationPolicy      | string                          | Cancellation policy: "Flexible", "SuperFlexible", or "NonRefundable". |
