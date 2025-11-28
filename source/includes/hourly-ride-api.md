@@ -407,15 +407,13 @@ Same as [Book endpoint response](#response-body-1).
 
 This endpoint cancels an existing hourly ride booking. The refund amount depends on the cancellation policy and how far in advance the cancellation is made.
 
-> To cancel a booking, use this call:
+> To cancel a hourly ride booking, use this call:
 
 ```bash
-curl -X POST "https://papi.staging.mydaytrip.net/partners/v1/hourly-rides/cancel/a1b2c3d4-e5f6-7890-abcd-ef1234567890" \
-  -H "x-api-key: your_api_key" \
+curl -d '{ "bookingId": "a1b2c3d4-e5f6-7890-abcd-ef1234567890" }' \
   -H "Content-Type: application/json" \
-  -d '{
-    "reason": "Customer request"
-}'
+  -H "x-api-key: your_api_key" \
+  -X POST "https://papi.staging.mydaytrip.net/partners/v1/hourly-rides/cancel"
 ```
 
 ```javascript
@@ -426,46 +424,41 @@ curl -X POST "https://papi.staging.mydaytrip.net/partners/v1/hourly-rides/cancel
 
 ```
 
-> The above call returns a JSON structured like this:
+> Example response with the penalty amount for the cancellation:
 
 ```json
 {
-    "bookingId": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-    "bookingReference": "DT-ABC123",
-    "cancelledAt": "2022-11-14T09:00:00Z",
-    "refund": {
-        "amount": 260,
-        "currency": "EUR"
-    }
+    "penalty": 0,
+    "currency": "EUR"
 }
 ```
 
 ### Endpoint Details
 
-`POST /partners/v1/hourly-rides/cancel/:bookingId`
+`POST /partners/v1/hourly-rides/cancel`
 
-### Path Parameters
+### Request body
 
-| Parameter | Type   | Description             |
-| --------- | ------ | ----------------------- |
-| bookingId | string | Required. Booking UUID. |
+| Property  | Type   | Description                                                                        |
+| --------- | ------ | ---------------------------------------------------------------------------------- |
+| bookingId | string | Id of the booking to cancel. Taken from [/book](#book-endpoint) endpoint response. |
 
 ### Response body
 
-| Property         | Type                      | Description                               |
-| ---------------- | ------------------------- | ----------------------------------------- |
-| bookingId        | string                    | Booking UUID.                             |
-| bookingReference | string                    | Human-readable booking reference.         |
-| cancelledAt      | string                    | Cancellation timestamp (ISO 8601 format). |
-| refund           | [RefundInfo](#refundinfo) | Refund information.                       |
+| Property | Type   | Description                                                                                                     |
+| -------- | ------ | --------------------------------------------------------------------------------------------------------------- |
+| penalty  | number | Amount of money that will be deducted from the refund. If the penalty is 0, the cancellation is free of charge. |
+| currency | string | Currency of the penalty amount.                                                                                 |
 
 ### Error status codes
 
-| Status code | Description                             |
-| ----------- | --------------------------------------- |
-| 401         | API key missing or invalid.             |
-| 403         | Booking belongs to a different partner. |
-| 404         | Booking not found.                      |
+| Status code | Description                                                                                        |
+| ----------- | -------------------------------------------------------------------------------------------------- |
+| 400         | Invalid request - bookingId missing or not a valid json.                                           |
+| 401         | API key missing or invalid.                                                                        |
+| 403         | Forbidden request - trying to cancel a booking owned by someone else or the departure is too soon. |
+| 404         | Booking not found.                                                                                 |
+| 409         | Booking has already been cancelled.                                                                |
 
 ## Data Types
 
