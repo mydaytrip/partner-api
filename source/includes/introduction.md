@@ -6,9 +6,9 @@ We make traveling between cities easy. With Daytrip, you can offer your clients 
 
 ## Partner API
 
-Our public API consist of two main parts: the Trip API allows you to search and book private point-to-point transfers, while the Day Trips API allow you to order our pre‑planned excursions with a fixed itinerary
+Our public API consist of three main parts: the Trip API allows you to search and book private point-to-point transfers, the Hourly Ride API allows you to book time-based vehicle rentals with a driver, and the Day Trips API allow you to order our pre‑planned excursions with a fixed itinerary.
 
-The Trip API and Day Trips API are organized around REST. Our API accepts JSON-encoded request bodies, returns JSON-encoded responses, and uses standard HTTP response codes and verbs.
+The Trip API, Hourly Ride API, and Day Trips API are organized around REST. Our API accepts JSON-encoded request bodies, returns JSON-encoded responses, and uses standard HTTP response codes and verbs.
 
 ### What can our TRIP API do?
 
@@ -22,6 +22,14 @@ The Trip API and Day Trips API are organized around REST. Our API accepts JSON-e
 - Cancel trips directly over the API with no penalty up to 24 hours before the departure.
 - Return details about booked trips, including the assigned driver and vehicle.
 - Return live driver position for trips that are being tracked by the driver.
+
+### What can our Hourly Ride API do?
+
+- Search for hourly ride options by pickup location, duration, and passenger count.
+- Return multiple vehicle options for time-based rentals with included kilometers.
+- Book hourly rides with driver and vehicle for specified durations.
+- Retrieve booking details including pickup information and pricing.
+- Cancel bookings with flexible cancellation policy.
 
 ### What can our Day Trips API do?
 
