@@ -29,7 +29,7 @@ If you want to change departure time, duration, or any other booking details, yo
 
 ## Search endpoint
 
-This endpoint returns all available hourly ride options based on the specified pickup location, departure time, duration, and passenger count. The pickup location can be provided either as geographic coordinates or as an IATA airport code. Geographic coordinates should be specified as latitude and longitude in decimal degrees format, for example: `39.753657`, `-117.610215`. The departure time should represent a local time converted to UTC and supplied as a UNIX epoch timestamp in seconds (e.g., 1679463169).
+This endpoint returns all available hourly ride options based on the specified pickup location, departure time, duration, and passenger count. The pickup location can be provided either as geographic coordinates or as an IATA airport code. Geographic coordinates should be specified as latitude and longitude in decimal degrees format, for example: `39.753657`, `-117.610215`. The departure time must be provided as a UNIX epoch timestamp in seconds (e.g., 1679463169), calculated from the local departure time and converted to UTC. Response times will be in ISO 8601 format.
 
 > To search for an hourly ride in Prague for 3 passengers for 6 hours, use this call:
 
@@ -637,12 +637,10 @@ Refund information after cancellation.
 
 ## Cancellation Policy
 
-All hourly rides follow the same cancellation policy regardless of the pricing type returned in the search results:
+All hourly rides follow the same cancellation policy:
 
--   **100% refundable** when cancelled more than 24 hours before departure
--   **No refund** when cancelled within 24 hours of departure
-
-**Note**: Unlike shared trips, hourly rides (private trips) have a uniform cancellation policy. The pricing type field returned in search results (Flexible, SuperFlexible, NonRefundable) does not affect the cancellation terms for hourly rides - all hourly rides use the 24-hour cutoff.
+- **100% refundable** when cancelled more than 24 hours before departure
+- **No refund** when cancelled within 24 hours of departure
 
 ## Business Rules
 
