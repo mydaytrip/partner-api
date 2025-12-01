@@ -12,23 +12,23 @@ The Trip API and Day Trips API are organized around REST. Our API accepts JSON-e
 
 ### What can our TRIP API do?
 
--   Return quotes for point to point transfers ranging from short airport transfers to long trips between countries.
--   Return quotes for shared transfers between predefined routes.
--   Offer sightseeing stops on selected routes (including visuals and descriptions so you can display them on your website).
--   Provide predefined pickup and drop-off locations for areas with restricted vehicle access.
--   Offer multiple vehicle options to accommodate larger groups of passengers.
--   Book trips directly over the API.
--   Update trips directly over the API.
--   Cancel trips directly over the API with no penalty up to 24 hours before the departure.
--   Return details about booked trips, including the assigned driver and vehicle.
--   Return live driver position for trips that are being tracked by the driver.
+- Return quotes for point to point transfers ranging from short airport transfers to long trips between countries.
+- Return quotes for shared transfers between predefined routes.
+- Offer sightseeing stops on selected routes (including visuals and descriptions so you can display them on your website).
+- Provide predefined pickup and drop-off locations for areas with restricted vehicle access.
+- Offer multiple vehicle options to accommodate larger groups of passengers.
+- Book trips directly over the API.
+- Update trips directly over the API.
+- Cancel trips directly over the API with no penalty up to 24 hours before the departure.
+- Return details about booked trips, including the assigned driver and vehicle.
+- Return live driver position for trips that are being tracked by the driver.
 
 ### What can our Day Trips API do?
 
--   Search for available day trips by location or coordinates.
--   Retrieve detailed information about specific day trips, including itineraries and pricing.
--   Create bookings for day trips on behalf of customers.
--   Update or cancel existing day trip bookings.
+- Search for available day trips by location or coordinates.
+- Retrieve detailed information about specific day trips, including itineraries and pricing.
+- Create bookings for day trips on behalf of customers.
+- Update or cancel existing day trip bookings.
 
 ## Contacts
 
