@@ -10,8 +10,8 @@ includes:
     - errors
     - debugging
     - trip-api
-    - day-trips-api
     - hourly-ride-api
+    - day-trips-api
     - faq
     - change-log
 
