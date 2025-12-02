@@ -38,7 +38,7 @@
             <p>The Trip API, Hourly Ride API, and Day Trips API are organized around REST. Our API accepts JSON-encoded request bodies, returns JSON-encoded responses, and uses standard HTTP response codes and verbs.</p>
             <h3 id="what-can-our-trip-api-do">What can our TRIP API do?</h3>
             <ul>
-               <li>Return quotes for point to point transfers ranging from short airport transfers to long trips between countries.</li>
+               <li>Return quotes for point-to-point transfers ranging from short airport transfers to long trips between countries.</li>
                <li>Return quotes for shared transfers between predefined routes.</li>
                <li>Offer sightseeing stops on selected routes (including visuals and descriptions so you can display them on your website).</li>
                <li>Provide predefined pickup and drop-off locations for areas with restricted vehicle access.</li>
@@ -66,9 +66,9 @@
             </ul>
             <h2 id="contacts">Contacts</h2>
             <h3 id="onboarding">Onboarding</h3>
-            <p>If you want to integrate with our API, contact us at <a href="mailto:&#x70;&#x61;&#x72;&#x74;&#110;&#x65;&#x72;&#115;&#x40;&#100;&#97;&#121;&#x74;&#x72;&#x69;&#112;&#x2e;&#x63;&#111;&#109;">&#x70;&#x61;&#x72;&#x74;&#110;&#x65;&#x72;&#115;&#x40;&#100;&#97;&#121;&#x74;&#x72;&#x69;&#112;&#x2e;&#x63;&#111;&#109;</a> to get a partner account and an API key.</p>
+            <p>If you want to integrate with our API, contact us at <a href="mailto:&#112;&#x61;&#114;&#116;&#x6e;&#x65;&#114;&#x73;&#x40;&#x64;&#97;&#121;&#x74;&#114;&#105;&#x70;&#46;&#x63;&#111;&#109;">&#112;&#x61;&#114;&#116;&#x6e;&#x65;&#114;&#x73;&#x40;&#x64;&#97;&#121;&#x74;&#114;&#105;&#x70;&#46;&#x63;&#111;&#109;</a> to get a partner account and an API key.</p>
             <h3 id="customer-support-emergency">Customer support emergency</h3>
-            <p>To solve problems with bookings created via the API you can contact <a href="mailto:&#100;&#x61;&#121;&#116;&#x72;&#x69;&#112;&#x40;&#100;&#x61;&#121;&#116;&#x72;&#x69;&#x70;&#46;&#x63;&#111;&#x6d;">&#100;&#x61;&#121;&#116;&#x72;&#x69;&#112;&#x40;&#100;&#x61;&#121;&#116;&#x72;&#x69;&#x70;&#46;&#x63;&#111;&#x6d;</a> or call <a href="tel:+442033181119">+44 20 3318 1119</a> or <a href="tel:+16282019501">+1 628 201 9501</a>.</p>
+            <p>To solve problems with bookings created via the API you can contact <a href="mailto:&#x64;&#97;&#x79;&#x74;&#114;&#x69;&#x70;&#x40;&#100;&#x61;&#x79;&#x74;&#x72;&#105;&#112;&#46;&#x63;&#111;&#109;">&#x64;&#97;&#x79;&#x74;&#114;&#x69;&#x70;&#x40;&#100;&#x61;&#x79;&#x74;&#x72;&#105;&#112;&#46;&#x63;&#111;&#109;</a> or call <a href="tel:+442033181119">+44 20 3318 1119</a> or <a href="tel:+16282019501">+1 628 201 9501</a>.</p>
             <h1 id="environments">Environments</h1>
             <p>Daytrip offers a sandbox environment where you can test your integration with the API without creating real bookings. All the code examples provided in this documentation are using this sandbox environment. Each environment requires a different API key. When your integration is ready and tested against the sandbox environment, you can request an API key for the production environment.</p>
             <h2 id="urls">URLs</h2>
@@ -218,7 +218,7 @@
                <li><code>optional</code> - call <a href="#details-endpoint">/details</a> endpoint to get trip and booking details</li>
                <li>call <a href="#update-endpoint">/update</a> endpoint to update the booking details</li>
             </ol>
-            <p>Disclaimer: in the last 24 hours before the departure the <a href="#update-endpoint">/update</a> endpoint will no longer accept updates. For updates in the last 24 hours please contact our customer support at <a href="mailto:&#x64;&#97;&#121;&#116;&#x72;&#x69;&#112;&#64;&#109;&#121;&#100;&#x61;&#121;&#116;&#x72;&#x69;&#112;&#x2e;&#x63;&#x6f;&#x6d;">&#x64;&#97;&#121;&#116;&#x72;&#x69;&#112;&#64;&#109;&#121;&#100;&#x61;&#121;&#116;&#x72;&#x69;&#112;&#x2e;&#x63;&#x6f;&#x6d;</a> or call <a href="tel:+442033181119">+44 20 3318 1119</a>.</p>
+            <p>Disclaimer: in the last 24 hours before the departure the <a href="#update-endpoint">/update</a> endpoint will no longer accept updates. For updates in the last 24 hours please contact our customer support at <a href="mailto:&#100;&#x61;&#121;&#x74;&#114;&#105;&#x70;&#x40;&#x6d;&#121;&#100;&#97;&#x79;&#116;&#114;&#105;&#x70;&#x2e;&#x63;&#111;&#x6d;">&#100;&#x61;&#121;&#x74;&#114;&#105;&#x70;&#x40;&#x6d;&#121;&#100;&#97;&#x79;&#116;&#114;&#105;&#x70;&#x2e;&#x63;&#111;&#x6d;</a> or call <a href="tel:+442033181119">+44 20 3318 1119</a>.</p>
             <h2 id="search-endpoint">Search endpoint</h2>
             <p>This endpoint returns all available trip options based on the specified origin, destination, departure time, and passenger count. The origin and destination can be provided either as geographic coordinates or as IATA airport codes. Geographic coordinates should be specified as latitude and longitude in decimal degrees format, for example: <code>39.753657</code>, <code>-117.610215</code>. The departure time must be supplied as a UNIX epoch timestamp in seconds (e.g., 1679463169).</p>
             <blockquote>
@@ -2154,7 +2154,7 @@
             <p><code>POST /partners/v3/trip/update</code></p>
             <h3 id="request-body-3">Request body</h3>
             <p>All properties except <code>bookingId</code> are optional. When a property is not included in the request it won&#39;t be updated and it will keep it&#39;s previous value. If you want to remove a property value like <code>customerNote</code> then send an empty string <code>&quot;&quot;</code> as the value. If you want to make changes to any passenger you need to provide full <code>passengerDetails</code> array - it&#39;s not possible to send only details of the passenger you want to update.</p>
-            <p>Disclaimer: in the last 24 hours before the departure the <a href="#update-endpoint">/update</a> endpoint will no longer accept updates. For updates in the last 24 hours please contact our customer support at <a href="mailto:&#100;&#x61;&#x79;&#116;&#x72;&#x69;&#112;&#x40;&#x6d;&#121;&#x64;&#x61;&#121;&#x74;&#x72;&#105;&#112;&#46;&#99;&#111;&#x6d;">&#100;&#x61;&#x79;&#116;&#x72;&#x69;&#112;&#x40;&#x6d;&#121;&#x64;&#x61;&#121;&#x74;&#x72;&#105;&#112;&#46;&#99;&#111;&#x6d;</a> or call <a href="tel:+442033181119">+44 20 3318 1119</a>.</p>
+            <p>Disclaimer: in the last 24 hours before the departure the <a href="#update-endpoint">/update</a> endpoint will no longer accept updates. For updates in the last 24 hours please contact our customer support at <a href="mailto:&#100;&#x61;&#121;&#116;&#x72;&#x69;&#112;&#x40;&#x6d;&#121;&#100;&#97;&#x79;&#116;&#x72;&#105;&#x70;&#x2e;&#99;&#111;&#x6d;">&#100;&#x61;&#121;&#116;&#x72;&#x69;&#112;&#x40;&#x6d;&#121;&#100;&#97;&#x79;&#116;&#x72;&#105;&#x70;&#x2e;&#99;&#111;&#x6d;</a> or call <a href="tel:+442033181119">+44 20 3318 1119</a>.</p>
             <table>
                <thead>
                   <tr>
@@ -2540,7 +2540,7 @@
                   </tr>
                </tbody>
             </table>
-            <h2 id="trip-api-entities">Trip API Entities</h2>
+            <h2 id="trip-api-data-types">Trip API Data Types</h2>
             <p>Below is a documentation of all object entities returned by the Daytrip API endpoints.</p>
             <h3 id="tripoption">TripOption</h3>
             <table>
@@ -3252,12 +3252,12 @@
             <blockquote>
                <p>To search for an hourly ride in Prague for 3 passengers for 6 hours, use this call:</p>
             </blockquote>
-            <pre class="highlight bash"><code>curl <span class="hljs-string">&quot;https://papi.staging.mydaytrip.net/partners/v1/hourly-rides/search?originType=iata&amp;origin=PRG&amp;departureTime=1769855400&amp;hoursRented=4&amp;passengersCount=3&amp;childrenCount=1&quot;</span> \
+            <pre class="highlight bash"><code>curl <span class="hljs-string">&quot;https://papi.staging.mydaytrip.net/partners/v1/hourly-rides/search?originType=iata&amp;origin=PRG&amp;departureTime=1769855400&amp;hoursRented=6&amp;passengersCount=3&amp;childrenCount=1&quot;</span> \
   -H <span class="hljs-string">&quot;x-api-key: your_api_key&quot;</span></code></pre><pre class="highlight javascript"><code></code></pre><pre class="highlight python"><code></code></pre>
             <blockquote>
                <p>To search for an hourly ride from Dubrovnik Old Town for 10 passengers for 6 hours, use this call:</p>
             </blockquote>
-            <pre class="highlight bash"><code>curl <span class="hljs-string">&quot;https://papi.staging.mydaytrip.net/partners/v1/hourly-rides/search?originLatitude=42.639859&amp;originLongitude=18.109776&amp;departureTime=1769855400&amp;hoursRented=6&amp;passengersCount=3&amp;childrenCount=1&quot;</span> \
+            <pre class="highlight bash"><code>curl <span class="hljs-string">&quot;https://papi.staging.mydaytrip.net/partners/v1/hourly-rides/search?originLatitude=42.639859&amp;originLongitude=18.109776&amp;departureTime=1769855400&amp;hoursRented=6&amp;passengersCount=10&amp;childrenCount=1&quot;</span> \
   -H <span class="hljs-string">&quot;x-api-key: your_api_key&quot;</span></code></pre><pre class="highlight javascript"><code></code></pre><pre class="highlight python"><code></code></pre>
             <blockquote>
                <p>The above call returns a JSON structured like this:</p>
@@ -3397,12 +3397,12 @@
                   <tr>
                      <td>hoursRented</td>
                      <td>integer</td>
-                     <td>Duration in hours (1-24). Required. The service includes 20 km of travel per hour.</td>
+                     <td>Duration of the rental in hours.</td>
                   </tr>
                   <tr>
                      <td>passengersCount</td>
                      <td>integer</td>
-                     <td>Total number of passengers to transport (adults and children). Must be between 1 and 7.</td>
+                     <td>Total number of passengers to transport (adults and children).</td>
                   </tr>
                   <tr>
                      <td>childrenCount</td>
@@ -3920,7 +3920,7 @@
                   </tr>
                </tbody>
             </table>
-            <h2 id="data-types">Data Types</h2>
+            <h2 id="hourly-ride-api-data-types">Hourly Ride API Data Types</h2>
             <h3 id="hourlyrideoption">HourlyRideOption</h3>
             <p>Represents an available hourly ride option returned from search.</p>
             <table>
@@ -3950,12 +3950,12 @@
                   <tr>
                      <td>hoursRented</td>
                      <td>integer</td>
-                     <td>Duration in hours (1-24).</td>
+                     <td>Duration in hours.</td>
                   </tr>
                   <tr>
                      <td>includedKilometers</td>
                      <td>integer</td>
-                     <td>Total kilometers included (hoursRented × 20).</td>
+                     <td>Total kilometers included.</td>
                   </tr>
                   <tr>
                      <td>pricing</td>
@@ -4161,14 +4161,6 @@
                   </tr>
                </tbody>
             </table>
-            <p><strong>Note on Vehicle Types</strong>: Hourly rides support 4 vehicle types:</p>
-            <ul>
-               <li><strong>Sedan</strong> (VehicleType.Sedan = 0): Standard sedan, up to 3 passengers</li>
-               <li><strong>MPV</strong> (VehicleType.Mpv = 1): Compact MPV, up to 4 passengers</li>
-               <li><strong>Van</strong> (VehicleType.Van = 2): Van, up to 7 passengers</li>
-               <li><strong>LuxurySedan</strong> (VehicleType.LuxurySedan = 3): Luxury sedan, up to 2 passengers (priced at 1.35× Sedan price)</li>
-            </ul>
-            <p>Lite vehicle types (SedanLite, MpvLite, VanLite) and Shuttle are not supported for hourly rides.</p>
             <h3 id="luggage">Luggage</h3>
             <p>Luggage capacity information.</p>
             <table>
@@ -4321,50 +4313,6 @@
             <ul>
                <li><strong>100% refundable</strong> when cancelled more than 24 hours before departure</li>
                <li><strong>No refund</strong> when cancelled within 24 hours of departure</li>
-            </ul>
-            <h2 id="business-rules">Business Rules</h2>
-            <h3 id="duration-and-distance">Duration and Distance</h3>
-            <ul>
-               <li><strong>Minimum duration</strong>: 1 hour (configured via <code>MIN_DURATION_HOURS_BOOKING</code>)</li>
-               <li><strong>Maximum duration</strong>: 24 hours (configured via <code>MAX_DURATION_HOURS_BOOKING</code>)</li>
-               <li><strong>Included distance</strong>: 20 km per hour rented by default (configured via <code>HOURLY_DRIVER_LIMIT_KMS_PER_HOUR</code> environment variable)<ul>
-                     <li>Example: 6 hours = 6 × 20 = 120 km included</li>
-                  </ul>
-               </li>
-               <li><strong>Minimum charge</strong>: Always charged for at least 4 hours (even if booking less)<ul>
-                     <li>This is applied during pricing calculation, not validation</li>
-                  </ul>
-               </li>
-            </ul>
-            <h3 id="booking-and-cancellation-cutoff">Booking and Cancellation Cutoff</h3>
-            <ul>
-               <li>Bookings must be made at least <strong>2 hours</strong> before the departure time</li>
-               <li>Cancellations within <strong>24 hours</strong> of departure will result in no refund (100% penalty)</li>
-               <li>Cancellations more than <strong>24 hours</strong> before departure receive a full refund (0% penalty)</li>
-            </ul>
-            <h3 id="address-handling">Address Handling</h3>
-            <ul>
-               <li>During search, if the pickup location is in a restricted area (e.g., pedestrian zone), a meeting position with address and description is included in the response</li>
-               <li>The resolved address is stored with the booking and included in book and details responses</li>
-               <li>In API responses, the address appears nested within the <code>pickUp</code> object (e.g., <code>pickUp.address</code>)</li>
-               <li>Partners cannot specify custom pickup coordinates or addresses during booking - the system uses the coordinates from the search option</li>
-            </ul>
-            <h3 id="pricing-1">Pricing</h3>
-            <ul>
-               <li>Prices are calculated based on:<ul>
-                     <li>Driver hourly rate and waiting rate</li>
-                     <li>Vehicle amortization and fuel costs</li>
-                     <li>Regional pricing multipliers</li>
-                     <li>Minimum 4-hour charge</li>
-                  </ul>
-               </li>
-               <li><strong>LuxurySedan</strong> pricing: Sedan price × 1.35</li>
-               <li>Prices are always rounded up to the nearest whole currency unit</li>
-            </ul>
-            <h3 id="supported-regions">Supported Regions</h3>
-            <ul>
-               <li>Service is only available in specific pricing areas</li>
-               <li>Searches outside service areas will return a 404 error</li>
             </ul>
             <h1 id="day-trips-api">Day Trips API</h1>
             <p>Day trips combine comfortable door‑to‑door transportation with guided sightseeing. Each product is a pre‑planned excursion with a fixed itinerary. Customers can discover available day trips by country or by geographic coordinates, inspect the full itinerary, and then book the trip for a specific departure time. Unlike the point‑to‑point trips from the Trip API, Day Trip products cannot be customized with additional stops or different routes – the itinerary and sightseeing stops are predefined.</p>
@@ -5438,7 +5386,7 @@
                   </tr>
                </tbody>
             </table>
-            <h2 id="day-trips-api-entities">Day Trips API Entities</h2>
+            <h2 id="day-trips-api-data-types">Day Trips API Data Types</h2>
             <h3 id="daytripbooking">DayTripBooking</h3>
             <table>
                <thead>
@@ -5814,7 +5762,7 @@
             <p>You can send up to 2000 requests per minute.</p>
             <h1 id="change-log">Change Log</h1>
             <ul>
-               <li><strong>2025-11-18</strong>: Added Hourly Ride API endpoints documentation.</li>
+               <li><strong>2025-12-02</strong>: Added Hourly Ride API endpoints documentation.</li>
                <li><strong>2025-08-01</strong>: Added Day Trips API endpoints documentation.</li>
                <li><strong>2025-07-16</strong>: Updated base endpoint addresses with the new domain name.</li>
                <li><strong>2025-06-03</strong>: Added support for meeting positions in private trips.</li>
