@@ -579,15 +579,6 @@ Vehicle information.
 | modelDescription | string  | Example model (e.g., "VW Passat or similar").          |
 | image            | string  | URL to vehicle image.                                  |
 
-**Note on Vehicle Types**: Hourly rides support 4 vehicle types:
-
-- **Sedan** (VehicleType.Sedan = 0): Standard sedan, up to 3 passengers
-- **MPV** (VehicleType.Mpv = 1): Compact MPV, up to 4 passengers
-- **Van** (VehicleType.Van = 2): Van, up to 7 passengers
-- **LuxurySedan** (VehicleType.LuxurySedan = 3): Luxury sedan, up to 2 passengers (priced at 1.35× Sedan price)
-
-Lite vehicle types (SedanLite, MpvLite, VanLite) and Shuttle are not supported for hourly rides.
-
 ### Luggage
 
 Luggage capacity information.
@@ -641,42 +632,3 @@ All hourly rides follow the same cancellation policy:
 
 - **100% refundable** when cancelled more than 24 hours before departure
 - **No refund** when cancelled within 24 hours of departure
-
-## Business Rules
-
-### Duration and Distance
-
-- **Minimum duration**: 1 hour (configured via `MIN_DURATION_HOURS_BOOKING`)
-- **Maximum duration**: 24 hours (configured via `MAX_DURATION_HOURS_BOOKING`)
-- **Included distance**: 20 km per hour rented by default (configured via `HOURLY_DRIVER_LIMIT_KMS_PER_HOUR` environment variable)
-  - Example: 6 hours = 6 × 20 = 120 km included
-- **Minimum charge**: Always charged for at least 4 hours (even if booking less)
-  - This is applied during pricing calculation, not validation
-
-### Booking and Cancellation Cutoff
-
-- Bookings must be made at least **2 hours** before the departure time
-- Cancellations within **24 hours** of departure will result in no refund (100% penalty)
-- Cancellations more than **24 hours** before departure receive a full refund (0% penalty)
-
-### Address Handling
-
-- During search, if the pickup location is in a restricted area (e.g., pedestrian zone), a meeting position with address and description is included in the response
-- The resolved address is stored with the booking and included in book and details responses
-- In API responses, the address appears nested within the `pickUp` object (e.g., `pickUp.address`)
-- Partners cannot specify custom pickup coordinates or addresses during booking - the system uses the coordinates from the search option
-
-### Pricing
-
-- Prices are calculated based on:
-  - Driver hourly rate and waiting rate
-  - Vehicle amortization and fuel costs
-  - Regional pricing multipliers
-  - Minimum 4-hour charge
-- **LuxurySedan** pricing: Sedan price × 1.35
-- Prices are always rounded up to the nearest whole currency unit
-
-### Supported Regions
-
-- Service is only available in specific pricing areas
-- Searches outside service areas will return a 404 error
