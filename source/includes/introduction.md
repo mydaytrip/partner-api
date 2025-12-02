@@ -12,7 +12,7 @@ The Trip API, Hourly Ride API, and Day Trips API are organized around REST. Our 
 
 ### What can our TRIP API do?
 
-- Return quotes for point to point transfers ranging from short airport transfers to long trips between countries.
+- Return quotes for point-to-point transfers ranging from short airport transfers to long trips between countries.
 - Return quotes for shared transfers between predefined routes.
 - Offer sightseeing stops on selected routes (including visuals and descriptions so you can display them on your website).
 - Provide predefined pickup and drop-off locations for areas with restricted vehicle access.
