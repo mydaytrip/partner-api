@@ -167,16 +167,16 @@ curl "https://papi.staging.mydaytrip.net/partners/v1/hourly-rides/search?originL
 
 ### Query Parameters
 
-| Parameter       | Type    | Description                                                                                                                                                                |
-| --------------- | ------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Parameter       | Type    | Description |
+| --------------- | ------- | ----------- |
 | originType      | string  | Specifies whether the origin is provided as geo-coordinates or as an airport code. Possible values: `coordinates`, `iata`. If omitted, the default value is `coordinates`. |
-| originLatitude  | number  | Pickup location latitude in degrees. Required if `originType` is set to `coordinates` or omitted.                                                                          |
-| originLongitude | number  | Pickup location longitude in degrees. Required if `originType` is set to `coordinates` or omitted.                                                                         |
-| origin          | string  | IATA airport code of the pickup airport. Required if `originType` is set to `iata`.                                                                                        |
-| departureTime   | integer | Departure time as a UNIX epoch timestamp in seconds. This timestamp should be calculated from the local departure time and converted to UTC.                               |
-| hoursRented     | integer | Duration in hours (1-24). Required. The service includes 20 km of travel per hour.                                                                                         |
-| passengersCount | integer | Total number of passengers to transport (adults and children). Must be between 1 and 7.                                                                                    |
-| childrenCount   | integer | Optional. Specifies the number of children in the group.                                                                                                                   |
+| originLatitude  | number  | Pickup location latitude in degrees. Required if `originType` is set to `coordinates` or omitted. |
+| originLongitude | number  | Pickup location longitude in degrees. Required if `originType` is set to `coordinates` or omitted. |
+| origin          | string  | IATA airport code of the pickup airport. Required if `originType` is set to `iata`. |
+| departureTime   | integer | Departure time as a UNIX epoch timestamp in seconds. This timestamp should be calculated from the local departure time and converted to UTC. |
+| hoursRented     | integer | Duration in hours. Required. |
+| passengersCount | integer | Total number of passengers to transport (adults and children). |
+| childrenCount   | integer | Optional. Specifies the number of children in the group. |
 
 **Note**: Meeting positions are automatically included in results. When the requested address is in an area that vehicles cannot access directly (e.g., restricted zones, pedestrian areas), the API will return the nearest accessible meeting point with relevant details.
 
