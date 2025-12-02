@@ -174,7 +174,7 @@ curl "https://papi.staging.mydaytrip.net/partners/v1/hourly-rides/search?originL
 | originLongitude | number  | Pickup location longitude in degrees. Required if `originType` is set to `coordinates` or omitted. |
 | origin          | string  | IATA airport code of the pickup airport. Required if `originType` is set to `iata`. |
 | departureTime   | integer | Departure time as a UNIX epoch timestamp in seconds. This timestamp should be calculated from the local departure time and converted to UTC. |
-| hoursRented     | integer | Duration in hours. Required. |
+| hoursRented     | integer | Duration of the rental in hours. |
 | passengersCount | integer | Total number of passengers to transport (adults and children). |
 | childrenCount   | integer | Optional. Specifies the number of children in the group. |
 
