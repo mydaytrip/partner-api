@@ -10,43 +10,43 @@ Trip API can be used to search for trip options, customizing an option with stop
 
 A typical simple flow without stop customization would look like this:
 
-1. call [/search](#search-endpoint) endpoint to get possible options
-2. call [/book](#book-endpoint) endpoint to book the chosen option
-3. `optional` - call [/details](#details-endpoint) endpoint to get trip and booking details
-4. `optional` - call [/drivers](#drivers-endpoint) endpoint to get information about driver(s) and vehicle(s) assigned to the trip
-5. `optional` - call [/tracking](#tracking-endpoint) endpoint to track the position of the driver(s) assigned to the trip
+1. call [/search](#trip-search) endpoint to get possible options
+2. call [/book](#trip-book) endpoint to book the chosen option
+3. `optional` - call [/details](#trip-details) endpoint to get trip and booking details
+4. `optional` - call [/drivers](#trip-drivers) endpoint to get information about driver(s) and vehicle(s) assigned to the trip
+5. `optional` - call [/tracking](#trip-tracking) endpoint to track the position of the driver(s) assigned to the trip
 
 ### Trip with a stop
 
 A flow with adding stops would look like this:
 
-1. call [/search](#search-endpoint) endpoint to get possible options
-2. call [/customize](#customize-endpoint) endpoint to add stops to the chosen option
-3. call [/book](#book-endpoint) endpoint to book the customized option
-4. `optional` - call [/details](#details-endpoint) endpoint to get trip and booking details
+1. call [/search](#trip-search) endpoint to get possible options
+2. call [/customize](#trip-customize) endpoint to add stops to the chosen option
+3. call [/book](#trip-book) endpoint to book the customized option
+4. `optional` - call [/details](#trip-details) endpoint to get trip and booking details
 
 ### Cancelling a trip
 
 A flow to book a trip, get details about it and then cancel it would look like this:
 
-1. call [/search](#search-endpoint) endpoint to get possible options
-2. call [/book](#book-endpoint) endpoint to book the chosen option
-3. `optional` - call [/details](#details-endpoint) endpoint to get trip and booking details
-4. call [/cancel](#cancel-endpoint) endpoint to cancel the booking
-5. `optional` - call [/details](#details-endpoint) endpoint to get trip and booking details (status should be "Cancelled")
+1. call [/search](#trip-search) endpoint to get possible options
+2. call [/book](#trip-book) endpoint to book the chosen option
+3. `optional` - call [/details](#trip-details) endpoint to get trip and booking details
+4. call [/cancel](#trip-cancel) endpoint to cancel the booking
+5. `optional` - call [/details](#trip-details) endpoint to get trip and booking details (status should be "Cancelled")
 
 ### Updating a trip
 
-If you want to change departure time or add/remove stops you need to cancel the booking and create it again as it can affect the price. For small adjustments like changing passenger phone number, email, child seat type, pickup and dropoff address notes (within the scope of original search coordinates), customer note or flight number you can use the [/update](#update-endpoint) endpoint:
+If you want to change departure time or add/remove stops you need to cancel the booking and create it again as it can affect the price. For small adjustments like changing passenger phone number, email, child seat type, pickup and dropoff address notes (within the scope of original search coordinates), customer note or flight number you can use the [/update](#trip-update) endpoint:
 
-1. call [/search](#search-endpoint) endpoint to get possible options
-2. call [/book](#book-endpoint) endpoint to book the chosen option
-3. `optional` - call [/details](#details-endpoint) endpoint to get trip and booking details
-4. call [/update](#update-endpoint) endpoint to update the booking details
+1. call [/search](#trip-search) endpoint to get possible options
+2. call [/book](#trip-book) endpoint to book the chosen option
+3. `optional` - call [/details](#trip-details) endpoint to get trip and booking details
+4. call [/update](#trip-update) endpoint to update the booking details
 
-Disclaimer: in the last 24 hours before the departure the [/update](#update-endpoint) endpoint will no longer accept updates. For updates in the last 24 hours please contact our customer support at <daytrip@mydaytrip.com> or call [+44 20 3318 1119](tel:+442033181119).
+Disclaimer: in the last 24 hours before the departure the [/update](#trip-update) endpoint will no longer accept updates. For updates in the last 24 hours please contact our customer support at <daytrip@mydaytrip.com> or call [+44 20 3318 1119](tel:+442033181119).
 
-## Search endpoint
+## Trip Search
 
 This endpoint returns all available trip options based on the specified origin, destination, departure time, and passenger count. The origin and destination can be provided either as geographic coordinates or as IATA airport codes. Geographic coordinates should be specified as latitude and longitude in decimal degrees format, for example: `39.753657`, `-117.610215`. The departure time must be supplied as a UNIX epoch timestamp in seconds (e.g., 1679463169).
 
@@ -795,7 +795,7 @@ curl "https://papi.staging.mydaytrip.net/partners/v3/trip/search?originLatitude=
 | 401         | API key missing or invalid.                                                                             |
 | 404         | No trip options found for given request.                                                                |
 
-## Customize endpoint
+## Trip Customize
 
 This endpoint is used to customize a trip option returned by the Search endpoint. The result is a new trip option with a new id that can be booked or customized again. The format of the response body is the same as for the Search endpoint. Currently the only supported customization operation is selection of stops for private trips. Selected stops will appear in `includedStops` of the returned option. In case of repeated calls, previously selected stops will be replaced, so if you selected one stop and want to change it to two stops, you need to send both stops in `selectedStops`. `totalPrice` and `travelTimeMinutes` will be automatically updated to reflect the selected stops.
 
@@ -952,7 +952,7 @@ curl -d '{
 
 | Property      | Type           | Description                                                                                                                            |
 | ------------- | -------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
-| optionId      | string         | Id of the option you want to customize. Taken from [/search](#search-endpoint) or [/customize](#customize-endpoint) endpoint response. |
+| optionId      | string         | Id of the option you want to customize. Taken from [/search](#trip-search) or [/customize](#trip-customize) endpoint response. |
 | selectedStops | list of string | List of ids of stops to include in the trip. Will replace currently included stops.                                                    |
 
 ### Response body
@@ -969,7 +969,7 @@ Same format as for the [Search endpoint](#search)
 | 404         | Trip option not found or expired. Stop not found.                                            |
 | 409         | Trip option has already been booked.                                                         |
 
-## Book endpoint
+## Trip Book
 
 This endpoint is used to book a trip option. Any trip option from Search or Customize endpoint response can be booked if the search results have not expired yet (see `expiresAt` property). You need to send id of the chosen option and passenger details to this endpoint. The result is a booking id that can be used to cancel the booking if not too close to departure.
 
@@ -1226,11 +1226,11 @@ curl -d '{
 
 | Property           | Type                                        | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
 | ------------------ | ------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| optionId           | string                                      | Id of the option you want to book. Taken from [/search](#search-endpoint) or [/customize](#customize-endpoint) endpoint response.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
-| departureTime      | integer                                     | Optional. Departure time as a UNIX epoch timestamp in seconds to use instead of the `departureTime` provided to the [/search](#search-endpoint). You can only move departure time less than 24 hours into the past or into the future compared to the original `departureTime`, otherwise the booking will be rejected (403 HTTP status code). Also if the new price after changing the departure time would be different, booking will also get rejected. Such price change should be extremely rare but your integration should be ready for it if you are sending different `departureTime`. Note that UNIX timestamps are UTC so you need to convert from local time to UTC when calculating it. Change of the departure time is applicable only for the private trip. |
+| optionId           | string                                      | Id of the option you want to book. Taken from [/search](#trip-search) or [/customize](#trip-customize) endpoint response.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| departureTime      | integer                                     | Optional. Departure time as a UNIX epoch timestamp in seconds to use instead of the `departureTime` provided to the [/search](#trip-search). You can only move departure time less than 24 hours into the past or into the future compared to the original `departureTime`, otherwise the booking will be rejected (403 HTTP status code). Also if the new price after changing the departure time would be different, booking will also get rejected. Such price change should be extremely rare but your integration should be ready for it if you are sending different `departureTime`. Note that UNIX timestamps are UTC so you need to convert from local time to UTC when calculating it. Change of the departure time is applicable only for the private trip. |
 | departureTimeLocal | integer                                     | Optional. The same as `departureTime` but the local departure time is not converted to UTC. If `departureTime` is specified, this parameter cannot be sent, and vice versa.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
-| pickUpAddressNote  | string                                      | Pickup address or a note describing the pickup point. Optional, but should be provided if available at the booking time; otherwise, it should be provided via the [/update](#update-endpoint) endpoint. Applicable only for the private trip. It will be ignored if the selected trip option already has a predefined meeting position that cannot be changed (immutable), i.e. the meeting position outside of a restricted area.                                                                                                                                                                                                                                                                                                                                         |
-| dropOffAddressNote | string                                      | Dropoff address or a note describing the dropoff point. Optional, but should be provided if available at the booking time; otherwise, it should be provided via the [/update](#update-endpoint) endpoint. Applicable only for the private trip. It will be ignored if the selected trip option already has a predefined meeting position that cannot be changed (immutable), i.e. the meeting position outside of a restricted area.                                                                                                                                                                                                                                                                                                                                       |
+| pickUpAddressNote  | string                                      | Pickup address or a note describing the pickup point. Optional, but should be provided if available at the booking time; otherwise, it should be provided via the [/update](#trip-update) endpoint. Applicable only for the private trip. It will be ignored if the selected trip option already has a predefined meeting position that cannot be changed (immutable), i.e. the meeting position outside of a restricted area.                                                                                                                                                                                                                                                                                                                                         |
+| dropOffAddressNote | string                                      | Dropoff address or a note describing the dropoff point. Optional, but should be provided if available at the booking time; otherwise, it should be provided via the [/update](#trip-update) endpoint. Applicable only for the private trip. It will be ignored if the selected trip option already has a predefined meeting position that cannot be changed (immutable), i.e. the meeting position outside of a restricted area.                                                                                                                                                                                                                                                                                                                                       |
 | customerNote       | string                                      | Optional note for the driver not related to pickup or dropoff. Applicable only for the private trip.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
 | flightNumber       | string                                      | Optional flight number in case this is an airport pickup. Applicable only for the private trip.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
 | passengerDetails   | list of [PassengerDetail](#passengerdetail) | List of passengers that will go on this trip. For trips with "Private" type the number of passengers must be below or equal to `maxPassengers` of the `vehicle` in the trip option. For trips with "Shared" type the number of passengers must match the `passengersCount` query parameter from the Search endpoint. There must always be exactly one passenger of type "Lead" with contact details filled. For passenger of type "Child" you must specify a child seat of proper type offered in the trip option's [availableChildSeatTypes](#tripoption). For older children that do not need any child seat use `Adult` passenger type.                                                                                                                                 |
@@ -1259,7 +1259,7 @@ curl -d '{
 | 404         | Trip option not found or expired.                                                                                                                                         |
 | 409         | Trip option has already been booked. Price changed, please make a new search.                                                                                             |
 
-## Cancel endpoint
+## Trip Cancel
 
 This endpoint is used to cancel a booked trip. For private trips only trips that have departure more than 24 hours in the future can be cancelled - this threshold is a subject to change. The shared trips can be cancelled at any time before departure, and compensated according to the selected [cancellation policy](#cancellationpolicytype).
 
@@ -1297,7 +1297,7 @@ curl -d '{ "bookingId": "cb102778-a3d7-426e-8d18-6bd6b296f283" }' \
 
 | Property  | Type   | Description                                                                        |
 | --------- | ------ | ---------------------------------------------------------------------------------- |
-| bookingId | string | Id of the booking to cancel. Taken from [/book](#book-endpoint) endpoint response. |
+| bookingId | string | Id of the booking to cancel. Taken from [/book](#trip-book) endpoint response. |
 
 ### Response body
 
@@ -1316,7 +1316,7 @@ curl -d '{ "bookingId": "cb102778-a3d7-426e-8d18-6bd6b296f283" }' \
 | 404         | Booking not found.                                                                                 |
 | 409         | Booking has already been cancelled.                                                                |
 
-## Details endpoint
+## Trip Details
 
 This endpoint returns details of a booked trip. It provides the status of the booking, information about the trip option and the data that were provided when booking the trip.
 
@@ -1556,7 +1556,7 @@ Replace `bookingId`/`externalId` with the id of the booking you want to retrieve
 | ------------------ | -------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | bookingId          | string                                       | Unique id of the booking.                                                                                                                                             |
 | bookingReference   | string                                       | Short booking reference that can be shared with the customer in order for him to be able to contact Daytrip customer support easily.                                  |
-| externalId         | string                                       | Optional. If you sent the `externalId` parameter to the [/book](#book-endpoint) endpoint it will be returned here.                                                    |
+| externalId         | string                                       | Optional. If you sent the `externalId` parameter to the [/book](#trip-book) endpoint it will be returned here.                                                    |
 | status             | string                                       | Booking status. "Confirmed" or "Cancelled".                                                                                                                           |
 | createdAt          | string                                       | UTC timestamp of when this booking was created.                                                                                                                       |
 | cancelledAt        | string                                       | UTC timestamp of when this booking was cancelled. Optional.                                                                                                           |
@@ -1582,9 +1582,9 @@ Replace `bookingId`/`externalId` with the id of the booking you want to retrieve
 | 403         | Forbidden request - trying to get details of a booking owned by someone else. |
 | 404         | Booking not found.                                                            |
 
-## Update endpoint
+## Trip Update
 
-This endpoint is used to update minor details of an existing booking. If you want to change departure time or add/remove stops you need to cancel the booking and create it again as it can affect the price. The response of the endpoint are the details of the updated booking, in the same format as the [/details](#details-endpoint) endpoint.
+This endpoint is used to update minor details of an existing booking. If you want to change departure time or add/remove stops you need to cancel the booking and create it again as it can affect the price. The response of the endpoint are the details of the updated booking, in the same format as the [/details](#trip-details) endpoint.
 
 > To update passenger details and customer note of a booked trip, use the following call:
 
@@ -1718,11 +1718,11 @@ curl -d '{
 
 All properties except `bookingId` are optional. When a property is not included in the request it won't be updated and it will keep it's previous value. If you want to remove a property value like `customerNote` then send an empty string `""` as the value. If you want to make changes to any passenger you need to provide full `passengerDetails` array - it's not possible to send only details of the passenger you want to update.
 
-Disclaimer: in the last 24 hours before the departure the [/update](#update-endpoint) endpoint will no longer accept updates. For updates in the last 24 hours please contact our customer support at <daytrip@mydaytrip.com> or call [+44 20 3318 1119](tel:+442033181119).
+Disclaimer: in the last 24 hours before the departure the [/update](#trip-update) endpoint will no longer accept updates. For updates in the last 24 hours please contact our customer support at <daytrip@mydaytrip.com> or call [+44 20 3318 1119](tel:+442033181119).
 
 | Property           | Type                                        | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
 | ------------------ | ------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| bookingId          | string                                      | Id of the booking to cancel. Taken from [/book](#book-endpoint) endpoint response.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| bookingId          | string                                      | Id of the booking to cancel. Taken from [/book](#trip-book) endpoint response.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
 | pickUpAddressNote  | string                                      | Pickup address or a note describing the pickup point. Optional, but should be provided if it was not provided at the booking time. Applicable only for the private trip. It will be ignored if the selected trip option already has a predefined meeting position that cannot be changed (immutable), i.e. the meeting position outside of a restricted area.                                                                                                                                                                                                                                                                                        |
 | dropOffAddressNote | string                                      | Dropoff address or a note describing the dropoff point. Optional, but should be provided if it was not provided at the booking time. Applicable only for the private trip. It will be ignored if the selected trip option already has a predefined meeting position that cannot be changed (immutable), i.e. the meeting position outside of a restricted area.                                                                                                                                                                                                                                                                                      |
 | customerNote       | string                                      | Optional note for the driver not related to pickup or dropoff.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
@@ -1735,7 +1735,7 @@ Disclaimer: in the last 24 hours before the departure the [/update](#update-endp
 | ------------------ | -------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
 | bookingId          | string                                       | Unique id of the booking.                                                                                                            |
 | bookingReference   | string                                       | Short booking reference that can be shared with the customer in order for him to be able to contact Daytrip customer support easily. |
-| externalId         | string                                       | Optional. If you sent the `externalId` parameter to the [/book](#book-endpoint) endpoint it will be returned here.                   |
+| externalId         | string                                       | Optional. If you sent the `externalId` parameter to the [/book](#trip-book) endpoint it will be returned here.                   |
 | status             | string                                       | Booking status. "Confirmed" or "Cancelled".                                                                                          |
 | createdAt          | string                                       | UTC timestamp of when this booking was created.                                                                                      |
 | cancelledAt        | string                                       | UTC timestamp of when this booking was cancelled. Optional.                                                                          |
@@ -1763,9 +1763,9 @@ Disclaimer: in the last 24 hours before the departure the [/update](#update-endp
 | 404         | Booking not found.                                                                                                                                                        |
 | 409         | Trying to update a cancelled booking.                                                                                                                                     |
 
-## Tracking endpoint
+## Trip Tracking
 
-This endpoint allows you to retrieve the latest position of driver(s) assigned to the trip. Not every trip is guaranteed to have driver tracking. Use the [/drivers](#drivers-endpoint) endpoint to retrieve the details about the drivers and the vehicles. That information can be cached and does not need to be retrieved with every tracking request.
+This endpoint allows you to retrieve the latest position of driver(s) assigned to the trip. Not every trip is guaranteed to have driver tracking. Use the [/drivers](#trip-drivers) endpoint to retrieve the details about the drivers and the vehicles. That information can be cached and does not need to be retrieved with every tracking request.
 
 > To get driver position(s) of a trip currently in progress, use the following call:
 
@@ -1854,9 +1854,9 @@ Replace `bookingId` with the id of the booking you want to track.
 | 403         | Forbidden request - trying to track a booking owned by someone else. |
 | 404         | Booking not found.                                                   |
 
-## Drivers endpoint
+## Trip Drivers
 
-This endpoint allows you to retrieve the information about driver(s) and vehicle(s) currently assigned to the trip. The assigned driver might change so it is recommended to pass this information to the customer only few days before the trip and give him an update if the response of this endpoint changes. The `driverId` returned by this endpoint is the same as the `driverId` returned by the [/tracking](#tracking-endpoint) endpoint and can be used to identify which driver is at which position in case of trips with multiple drivers.
+This endpoint allows you to retrieve the information about driver(s) and vehicle(s) currently assigned to the trip. The assigned driver might change so it is recommended to pass this information to the customer only few days before the trip and give him an update if the response of this endpoint changes. The `driverId` returned by this endpoint is the same as the `driverId` returned by the [/tracking](#trip-tracking) endpoint and can be used to identify which driver is at which position in case of trips with multiple drivers.
 
 Proposed frequency of calling this endpoint depending on the time before the departure time:
 
@@ -2106,7 +2106,7 @@ Below is a documentation of all object entities returned by the Daytrip API endp
 | Property  | Type                           | Description                                                                                                                                                                                                           |
 | --------- | ------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | timestamp | string                         | UTC timestamp of when this position was reported by the driver.                                                                                                                                                       |
-| driverId  | string                         | Unique id of the driver. To distinguish the drivers for trips with multiple drivers. Use the [/drivers](#drivers-endpoint) endpoint to retrieve the details about the drivers and vehicles and match them by this id. |
+| driverId  | string                         | Unique id of the driver. To distinguish the drivers for trips with multiple drivers. Use the [/drivers](#trip-drivers) endpoint to retrieve the details about the drivers and vehicles and match them by this id. |
 | position  | object - [Position](#position) | Last reported position of the driver.                                                                                                                                                                                 |
 
 ### Position

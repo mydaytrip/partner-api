@@ -10,24 +10,24 @@ Hourly Ride API can be used to search for hourly ride options and then book the 
 
 A typical flow would look like this:
 
-1. call [/search](#search-endpoint) endpoint to get possible options
-2. call [/book](#book-endpoint) endpoint to book the chosen option
-3. `optional` - call [/details](#details-endpoint) endpoint to get hourly ride and booking details
+1. call [/search](#hourly-ride-search) endpoint to get possible options
+2. call [/book](#hourly-ride-book) endpoint to book the chosen option
+3. `optional` - call [/details](#hourly-ride-details) endpoint to get hourly ride and booking details
 
 ### Cancelling an hourly ride
 
 A flow to book an hourly ride, get details about it and then cancel it would look like this:
 
-1. call [/search](#search-endpoint) endpoint to get possible options
-2. call [/book](#book-endpoint) endpoint to book the chosen option
-3. `optional` - call [/details](#details-endpoint) endpoint to get hourly ride and booking details
-4. call [/cancel](#cancel-endpoint) endpoint to cancel the booking
+1. call [/search](#hourly-ride-search) endpoint to get possible options
+2. call [/book](#hourly-ride-book) endpoint to book the chosen option
+3. `optional` - call [/details](#hourly-ride-details) endpoint to get hourly ride and booking details
+4. call [/cancel](#hourly-ride-cancel) endpoint to cancel the booking
 
 ### Changing an hourly ride
 
 If you want to change departure time, duration, or any other booking details, you need to cancel the existing booking and create a new one as changes can affect the price.
 
-## Search endpoint
+## Hourly Ride Search
 
 This endpoint returns all available hourly ride options based on the specified pickup location, departure time, duration, and passenger count. The pickup location can be provided either as geographic coordinates or as an IATA airport code. Geographic coordinates should be specified as latitude and longitude in decimal degrees format, for example: `39.753657`, `-117.610215`. The departure time must be provided as a UNIX epoch timestamp in seconds (e.g., 1679463169), calculated from the local departure time and converted to UTC. Response times will be in ISO 8601 format.
 
@@ -196,7 +196,7 @@ curl "https://papi.staging.mydaytrip.net/partners/v1/hourly-rides/search?originL
 | 400         | Invalid request - missing mandatory query parameter, parameter has wrong type or wrong passenger count. |
 | 401         | API key missing or invalid.                                                                             |
 
-## Book endpoint
+## Hourly Ride Book
 
 This endpoint creates a booking for the selected hourly ride option. The booking must include lead passenger details and can optionally include additional adult and child passenger details with required child seats.
 
@@ -316,7 +316,7 @@ curl -X POST "https://papi.staging.mydaytrip.net/partners/v1/hourly-rides/book" 
 | 404         | Option not found or expired.                                      |
 | 409         | Option no longer available or already booked.                     |
 
-## Details endpoint
+## Hourly Ride Details
 
 This endpoint retrieves full details of an existing hourly ride booking, including booking status, passenger information, and pricing details.
 
@@ -433,7 +433,7 @@ curl "https://papi.staging.mydaytrip.net/partners/v1/hourly-rides/details/a1b2c3
 | 401         | API key missing or invalid. |
 | 404         | Booking not found.          |
 
-## Cancel endpoint
+## Hourly Ride Cancel
 
 This endpoint cancels an existing hourly ride booking. The refund amount depends on the cancellation policy and how far in advance the cancellation is made.
 
@@ -471,7 +471,7 @@ curl -d '{ "bookingId": "a1b2c3d4-e5f6-7890-abcd-ef1234567890" }' \
 
 | Property  | Type   | Description                                                                        |
 | --------- | ------ | ---------------------------------------------------------------------------------- |
-| bookingId | string | Id of the booking to cancel. Taken from [/book](#book-endpoint) endpoint response. |
+| bookingId | string | Id of the booking to cancel. Taken from [/book](#hourly-ride-book) endpoint response. |
 
 ### Response body
 
