@@ -247,7 +247,7 @@ curl -X POST "https://papi.staging.mydaytrip.net/partners/v1/hourly-rides/book" 
 ```json
 {
     "bookingId": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-    "bookingReference": "DT-ABC123",
+    "bookingReference": "DTABC123",
     "departureTimeUtc": "2022-12-05T18:00:00Z",
     "originTimezone": "Europe/Prague",
     "meetAndGreet": false,
@@ -301,7 +301,7 @@ curl -X POST "https://papi.staging.mydaytrip.net/partners/v1/hourly-rides/book" 
 | Property         | Type                                          | Description                                                   |
 | ---------------- | --------------------------------------------- | ------------------------------------------------------------- |
 | bookingId        | string                                        | Unique booking identifier.                                    |
-| bookingReference | string                                        | Human-readable booking reference (e.g., "DT-ABC123").         |
+| bookingReference | string                                        | Human-readable booking reference (e.g., "DTABC123").         |
 | departureTimeUtc | string                                        | Departure time in UTC (ISO 8601 format).                      |
 | originTimezone   | string                                        | IANA timezone of the pickup location (e.g., "Europe/Prague"). |
 | meetAndGreet     | boolean                                       | Whether meet and greet service is included.                   |
@@ -340,7 +340,7 @@ curl "https://papi.staging.mydaytrip.net/partners/v1/hourly-rides/details/a1b2c3
 ```json
 {
     "bookingId": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-    "bookingReference": "DT-ABC123",
+    "bookingReference": "DTABC123",
     "externalId": "partner-booking-123",
     "status": "Confirmed",
     "createdAt": "2025-01-01T10:00:00Z",
@@ -399,23 +399,6 @@ curl "https://papi.staging.mydaytrip.net/partners/v1/hourly-rides/details/a1b2c3
 }
 ```
 
-> Example response for a cancelled booking:
-
-```json
-{
-    "bookingId": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-    "bookingReference": "DT-ABC123",
-    "status": "Cancelled",
-    "createdAt": "2025-01-01T10:00:00Z",
-    "cancelledAt": "2025-01-02T15:30:00Z",
-    "departureTimeUtc": "2025-01-15T18:00:00Z",
-    "originTimezone": "Europe/Prague",
-    "meetAndGreet": false,
-    "passengerDetails": [...],
-    "hourlyRide": {...}
-}
-```
-
 ### Endpoint Details
 
 `GET /partners/v1/hourly-rides/details/:bookingId`
@@ -431,7 +414,7 @@ curl "https://papi.staging.mydaytrip.net/partners/v1/hourly-rides/details/a1b2c3
 | Property         | Type                                          | Description                                                             |
 | ---------------- | --------------------------------------------- | ----------------------------------------------------------------------- |
 | bookingId        | string                                        | Unique booking identifier.                                              |
-| bookingReference | string                                        | Human-readable booking reference (e.g., "DT-ABC123").                   |
+| bookingReference | string                                        | Human-readable booking reference (e.g., "DTABC123").                   |
 | externalId       | string                                        | Optional. Your internal booking reference ID (if provided during book). |
 | status           | string                                        | Booking status: "Confirmed" or "Cancelled".                             |
 | createdAt        | string                                        | When the booking was created (ISO 8601 format).                         |
