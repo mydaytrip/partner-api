@@ -15,7 +15,7 @@ importers:
         specifier: ~5.1
         version: 5.1.2
       fancy-log:
-        specifier: ^2.0.0
+        specifier: ~2.0.0
         version: 2.0.0
       fuse.js:
         specifier: ~6.6
