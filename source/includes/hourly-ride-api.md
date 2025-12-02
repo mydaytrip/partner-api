@@ -34,7 +34,7 @@ This endpoint returns all available hourly ride options based on the specified p
 > To search for an hourly ride in Prague for 3 passengers for 6 hours, use this call:
 
 ```bash
-curl "https://papi.staging.mydaytrip.net/partners/v1/hourly-rides/search?originType=iata&origin=PRG&departureTime=1769855400&hoursRented=4&passengersCount=3&childrenCount=1" \
+curl "https://papi.staging.mydaytrip.net/partners/v1/hourly-rides/search?originType=iata&origin=PRG&departureTime=1769855400&hoursRented=6&passengersCount=3&childrenCount=1" \
   -H "x-api-key: your_api_key"
 ```
 
@@ -49,7 +49,7 @@ curl "https://papi.staging.mydaytrip.net/partners/v1/hourly-rides/search?originT
 > To search for an hourly ride from Dubrovnik Old Town for 10 passengers for 6 hours, use this call:
 
 ```bash
-curl "https://papi.staging.mydaytrip.net/partners/v1/hourly-rides/search?originLatitude=42.639859&originLongitude=18.109776&departureTime=1769855400&hoursRented=6&passengersCount=3&childrenCount=1" \
+curl "https://papi.staging.mydaytrip.net/partners/v1/hourly-rides/search?originLatitude=42.639859&originLongitude=18.109776&departureTime=1769855400&hoursRented=6&passengersCount=10&childrenCount=1" \
   -H "x-api-key: your_api_key"
 ```
 
@@ -507,26 +507,26 @@ curl -d '{ "bookingId": "a1b2c3d4-e5f6-7890-abcd-ef1234567890" }' \
 | 404         | Booking not found.                                                                                 |
 | 409         | Booking has already been cancelled.                                                                |
 
-## Data Types
+## Hourly Ride API Data Types
 
 ### HourlyRideOption
 
 Represents an available hourly ride option returned from search.
 
-| Property                | Type                            | Description                                                           |
-| ----------------------- | ------------------------------- | --------------------------------------------------------------------- |
-| id                      | string                          | Unique option identifier.                                             |
-| type                    | string                          | Always "Private" for hourly rides.                                    |
-| englishSpeakingDriver   | boolean                         | Whether the driver speaks English.                                    |
-| hoursRented             | integer                         | Duration in hours (1-24).                                             |
-| includedKilometers      | integer                         | Total kilometers included (hoursRented × 20).                         |
-| pricing                 | [Pricing](#pricing)             | Price information.                                                    |
-| pickUp                  | [TripLocation](#triplocation)   | Details about the pickup point.                                       |
-| vehicles                | list of [Vehicle](#vehicle)     | Vehicles information.                                                 |
-| luggage                 | [Luggage](#luggage)             | Luggage capacity information.                                         |
-| availableChildSeatTypes | list of [ChildSeat](#childseat) | Available child seat types for this option.                           |
+| Property                | Type                            | Description |
+| ----------------------- | ------------------------------- | ----------- |
+| id                      | string                          | Unique option identifier. |
+| type                    | string                          | Always "Private" for hourly rides. |
+| englishSpeakingDriver   | boolean                         | Whether the driver speaks English. |
+| hoursRented             | integer                         | Duration in hours. |
+| includedKilometers      | integer                         | Total kilometers included. |
+| pricing                 | [Pricing](#pricing)             | Price information. |
+| pickUp                  | [TripLocation](#triplocation)   | Details about the pickup point. |
+| vehicles                | list of [Vehicle](#vehicle)     | Vehicles information. |
+| luggage                 | [Luggage](#luggage)             | Luggage capacity information. |
+| availableChildSeatTypes | list of [ChildSeat](#childseat) | Available child seat types for this option. |
 | cancellationPolicy      | string                          | Cancellation policy: "Flexible", "SuperFlexible", or "NonRefundable". |
-| expiresAt               | string                          | When this option expires (ISO 8601 format).                           |
+| expiresAt               | string                          | When this option expires (ISO 8601 format). |
 
 ### BookedHourlyRideResponse
 

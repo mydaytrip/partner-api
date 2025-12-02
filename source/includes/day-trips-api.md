@@ -746,7 +746,7 @@ All fields are optional except for `bookingId`. Only include the fields you wish
 | 422         | Update not allowed due to business rules (e.g., too close to departure). |
 | 500         | Internal service or pricing failure.                                     |
 
-## Day Trips API Entities
+## Day Trips API Data Types
 
 ### DayTripBooking
 
