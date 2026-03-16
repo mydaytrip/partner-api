@@ -86,6 +86,7 @@ curl "https://papi.staging.mydaytrip.net/partners/v1/hourly-rides/search?originL
                 "timezone": "Europe/Zagreb",
                 "description": "Ploce Gate, Ul. Frana Supila 2",
                 "meetAndGreet": false,
+                "pickupInstructions": "Your driver will be waiting for you at the entrance of the address provided, please be ready 10 minutes prior to the pick up time",
                 "immutable": true,
                 "state": "adjusted",
                 "adjustmentReason": "restricted_area",
@@ -167,16 +168,16 @@ curl "https://papi.staging.mydaytrip.net/partners/v1/hourly-rides/search?originL
 
 ### Query Parameters
 
-| Parameter       | Type    | Description |
-| --------------- | ------- | ----------- |
+| Parameter       | Type    | Description                                                                                                                                                                |
+| --------------- | ------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | originType      | string  | Specifies whether the origin is provided as geo-coordinates or as an airport code. Possible values: `coordinates`, `iata`. If omitted, the default value is `coordinates`. |
-| originLatitude  | number  | Pickup location latitude in degrees. Required if `originType` is set to `coordinates` or omitted. |
-| originLongitude | number  | Pickup location longitude in degrees. Required if `originType` is set to `coordinates` or omitted. |
-| origin          | string  | IATA airport code of the pickup airport. Required if `originType` is set to `iata`. |
-| departureTime   | integer | Departure time as a UNIX epoch timestamp in seconds. This timestamp should be calculated from the local departure time and converted to UTC. |
-| hoursRented     | integer | Duration of the rental in hours. |
-| passengersCount | integer | Total number of passengers to transport (adults and children). |
-| childrenCount   | integer | Optional. Specifies the number of children in the group. |
+| originLatitude  | number  | Pickup location latitude in degrees. Required if `originType` is set to `coordinates` or omitted.                                                                          |
+| originLongitude | number  | Pickup location longitude in degrees. Required if `originType` is set to `coordinates` or omitted.                                                                         |
+| origin          | string  | IATA airport code of the pickup airport. Required if `originType` is set to `iata`.                                                                                        |
+| departureTime   | integer | Departure time as a UNIX epoch timestamp in seconds. This timestamp should be calculated from the local departure time and converted to UTC.                               |
+| hoursRented     | integer | Duration of the rental in hours.                                                                                                                                           |
+| passengersCount | integer | Total number of passengers to transport (adults and children).                                                                                                             |
+| childrenCount   | integer | Optional. Specifies the number of children in the group.                                                                                                                   |
 
 **Note**: Meeting positions are automatically included in results. When the requested address is in an area that vehicles cannot access directly (e.g., restricted zones, pedestrian areas), the API will return the nearest accessible meeting point with relevant details.
 
@@ -250,7 +251,6 @@ curl -X POST "https://papi.staging.mydaytrip.net/partners/v1/hourly-rides/book" 
     "bookingReference": "DTABC123",
     "departureTimeUtc": "2022-12-05T18:00:00Z",
     "originTimezone": "Europe/Prague",
-    "meetAndGreet": false,
     "hourlyRide": {
         "hoursRented": 6,
         "includedKilometers": 120,
@@ -261,6 +261,7 @@ curl -X POST "https://papi.staging.mydaytrip.net/partners/v1/hourly-rides/book" 
             "time": "2022-12-05T18:00:00Z",
             "timezone": "Europe/Prague",
             "meetAndGreet": false,
+            "pickupInstructions": "Your driver will be waiting for you at the entrance of the address provided, please be ready 10 minutes prior to the pick up time",
             "immutable": true,
             "state": "adjusted"
         },
@@ -301,10 +302,9 @@ curl -X POST "https://papi.staging.mydaytrip.net/partners/v1/hourly-rides/book" 
 | Property         | Type                                          | Description                                                   |
 | ---------------- | --------------------------------------------- | ------------------------------------------------------------- |
 | bookingId        | string                                        | Unique booking identifier.                                    |
-| bookingReference | string                                        | Human-readable booking reference (e.g., "DTABC123").         |
+| bookingReference | string                                        | Human-readable booking reference (e.g., "DTABC123").          |
 | departureTimeUtc | string                                        | Departure time in UTC (ISO 8601 format).                      |
 | originTimezone   | string                                        | IANA timezone of the pickup location (e.g., "Europe/Prague"). |
-| meetAndGreet     | boolean                                       | Whether meet and greet service is included.                   |
 | hourlyRide       | [BookedHourlyRide](#bookedhourlyrideresponse) | Details of the booked hourly ride.                            |
 
 ### Error status codes
@@ -346,7 +346,6 @@ curl "https://papi.staging.mydaytrip.net/partners/v1/hourly-rides/details/a1b2c3
     "createdAt": "2025-01-01T10:00:00Z",
     "departureTimeUtc": "2025-01-15T18:00:00Z",
     "originTimezone": "Europe/Prague",
-    "meetAndGreet": false,
     "customerNote": "Please call upon arrival",
     "passengerDetails": [
         {
@@ -379,6 +378,7 @@ curl "https://papi.staging.mydaytrip.net/partners/v1/hourly-rides/details/a1b2c3
             "time": "2025-01-15T18:00:00Z",
             "timezone": "Europe/Prague",
             "meetAndGreet": false,
+            "pickupInstructions": "Your driver will be waiting for you at the entrance of the address provided, please be ready 10 minutes prior to the pick up time",
             "immutable": true,
             "state": "adjusted"
         },
@@ -414,14 +414,13 @@ curl "https://papi.staging.mydaytrip.net/partners/v1/hourly-rides/details/a1b2c3
 | Property         | Type                                          | Description                                                             |
 | ---------------- | --------------------------------------------- | ----------------------------------------------------------------------- |
 | bookingId        | string                                        | Unique booking identifier.                                              |
-| bookingReference | string                                        | Human-readable booking reference (e.g., "DTABC123").                   |
+| bookingReference | string                                        | Human-readable booking reference (e.g., "DTABC123").                    |
 | externalId       | string                                        | Optional. Your internal booking reference ID (if provided during book). |
 | status           | string                                        | Booking status: "Confirmed" or "Cancelled".                             |
 | createdAt        | string                                        | When the booking was created (ISO 8601 format).                         |
 | cancelledAt      | string                                        | Optional. When the booking was cancelled (ISO 8601 format).             |
 | departureTimeUtc | string                                        | Departure time in UTC (ISO 8601 format).                                |
 | originTimezone   | string                                        | IANA timezone of the pickup location (e.g., "Europe/Prague").           |
-| meetAndGreet     | boolean                                       | Whether meet and greet service is included.                             |
 | customerNote     | string                                        | Optional. General notes for the driver (if provided during book).       |
 | passengerDetails | list of [PassengerDetail](#passengerdetail)   | List of passenger details from the booking.                             |
 | hourlyRide       | [BookedHourlyRide](#bookedhourlyrideresponse) | Details of the booked hourly ride.                                      |
@@ -469,8 +468,8 @@ curl -d '{ "bookingId": "a1b2c3d4-e5f6-7890-abcd-ef1234567890" }' \
 
 ### Request body
 
-| Property  | Type   | Description                                                                        |
-| --------- | ------ | ---------------------------------------------------------------------------------- |
+| Property  | Type   | Description                                                                           |
+| --------- | ------ | ------------------------------------------------------------------------------------- |
 | bookingId | string | Id of the booking to cancel. Taken from [/book](#hourly-ride-book) endpoint response. |
 
 ### Response body
@@ -496,20 +495,20 @@ curl -d '{ "bookingId": "a1b2c3d4-e5f6-7890-abcd-ef1234567890" }' \
 
 Represents an available hourly ride option returned from search.
 
-| Property                | Type                            | Description |
-| ----------------------- | ------------------------------- | ----------- |
-| id                      | string                          | Unique option identifier. |
-| type                    | string                          | Always "Private" for hourly rides. |
-| englishSpeakingDriver   | boolean                         | Whether the driver speaks English. |
-| hoursRented             | integer                         | Duration in hours. |
-| includedKilometers      | integer                         | Total kilometers included. |
-| pricing                 | [Pricing](#pricing)             | Price information. |
-| pickUp                  | [TripLocation](#triplocation)   | Details about the pickup point. |
-| vehicles                | list of [Vehicle](#vehicle)     | Vehicles information. |
-| luggage                 | [Luggage](#luggage)             | Luggage capacity information. |
-| availableChildSeatTypes | list of [ChildSeat](#childseat) | Available child seat types for this option. |
+| Property                | Type                            | Description                                                           |
+| ----------------------- | ------------------------------- | --------------------------------------------------------------------- |
+| id                      | string                          | Unique option identifier.                                             |
+| type                    | string                          | Always "Private" for hourly rides.                                    |
+| englishSpeakingDriver   | boolean                         | Whether the driver speaks English.                                    |
+| hoursRented             | integer                         | Duration in hours.                                                    |
+| includedKilometers      | integer                         | Total kilometers included.                                            |
+| pricing                 | [Pricing](#pricing)             | Price information.                                                    |
+| pickUp                  | [TripLocation](#triplocation)   | Details about the pickup point.                                       |
+| vehicles                | list of [Vehicle](#vehicle)     | Vehicles information.                                                 |
+| luggage                 | [Luggage](#luggage)             | Luggage capacity information.                                         |
+| availableChildSeatTypes | list of [ChildSeat](#childseat) | Available child seat types for this option.                           |
 | cancellationPolicy      | string                          | Cancellation policy: "Flexible", "SuperFlexible", or "NonRefundable". |
-| expiresAt               | string                          | When this option expires (ISO 8601 format). |
+| expiresAt               | string                          | When this option expires (ISO 8601 format).                           |
 
 ### BookedHourlyRideResponse
 
@@ -527,19 +526,20 @@ Detailed information about a booked hourly ride (used in book and details respon
 
 Information about a pickup/dropoff location.
 
-| Property         | Type    | Description                                                                   |
-| ---------------- | ------- | ----------------------------------------------------------------------------- |
-| lat              | number  | Latitude in decimal degrees.                                                  |
-| lon              | number  | Longitude in decimal degrees.                                                 |
-| address          | string  | Formatted address string resolved from Google Location API.                   |
-| time             | string  | Pickup time (ISO 8601 format).                                                |
-| timezone         | string  | IANA timezone (e.g., "Europe/Prague").                                        |
-| meetAndGreet     | boolean | Whether meet and greet service is included.                                   |
-| state            | string  | Location state: "original" or "adjusted".                                     |
-| immutable        | boolean | Whether the location can be changed.                                          |
-| adjustmentReason | string  | Optional. Reason for location adjustment (e.g., "restricted_area").           |
-| description      | string  | Optional. Description of the meeting point (included in search response).     |
-| image            | string  | Optional. URL to an image of the meeting point (included in search response). |
+| Property           | Type    | Description                                                                   |
+| ------------------ | ------- | ----------------------------------------------------------------------------- |
+| lat                | number  | Latitude in decimal degrees.                                                  |
+| lon                | number  | Longitude in decimal degrees.                                                 |
+| address            | string  | Formatted address string resolved from Google Location API.                   |
+| time               | string  | Pickup time (ISO 8601 format).                                                |
+| timezone           | string  | IANA timezone (e.g., "Europe/Prague").                                        |
+| meetAndGreet       | boolean | Whether meet and greet service is included.                                   |
+| pickupInstructions | string  | Instructions for the passenger to find the driver at the pickup location.     |
+| state              | string  | Location state: "original" or "adjusted".                                     |
+| immutable          | boolean | Whether the location can be changed.                                          |
+| adjustmentReason   | string  | Optional. Reason for location adjustment (e.g., "restricted_area").           |
+| description        | string  | Optional. Description of the meeting point (included in search response).     |
+| image              | string  | Optional. URL to an image of the meeting point (included in search response). |
 
 ### Pricing
 
