@@ -625,10 +625,10 @@ curl "https://papi.staging.mydaytrip.net/partners/v3/trip/search?originType=iata
 }
 ```
 
-> To search for a private trip from Dubrovnik to Venice for 10 passengers, with multiple vehicle options and meeting positions:
+> To search for a private trip from Dubrovnik to Venice for 10 passengers, with multiple vehicle options:
 
 ```bash
-curl "https://papi.staging.mydaytrip.net/partners/v3/trip/search?originLatitude=42.639515&originLongitude=18.108064&destinationLatitude=45.434143&destinationLongitude=12.333497&departureTime=1766227088&includeShared=false&includeStops=false&passengersCount=10&includeMultipleVehicles=true&includeMeetingPositions=true" \
+curl "https://papi.staging.mydaytrip.net/partners/v3/trip/search?originLatitude=42.639515&originLongitude=18.108064&destinationLatitude=45.434143&destinationLongitude=12.333497&departureTime=1766227088&includeShared=false&includeStops=false&passengersCount=10&includeMultipleVehicles=true" \
   -H "x-api-key: your_api_key"
 ```
 
@@ -774,7 +774,7 @@ curl "https://papi.staging.mydaytrip.net/partners/v3/trip/search?originLatitude=
 | includeStops              | boolean | Optional. Defaults to `true`. When set to `false`, no stops will be included in the trip options.                                                                                                                                                                                                                     |
 | includeShared             | boolean | Optional. Defaults to `false`. When set to `true`, shared trip options will be included.                                                                                                                                                                                                                              |
 | includeNonEnglishSpeaking | boolean | Optional. Defaults to `true`. When set to `false`, no trip options with non-English-speaking drivers will be included.                                                                                                                                                                                                |
-| includeMeetingPositions   | boolean | **Deprecated.** Optional. Defaults to `true`. Meeting positions are now always included in the response when applicable, regardless of this parameter.                                                                                                                                                                |
+| includeMeetingPositions   | boolean | **Deprecated.** Optional. Ignored — meeting positions are always included in responses when applicable.                                                                                                                                                                                                               |
 | includeMultipleVehicles   | boolean | Optional. Defaults to `false`. When set to `true`, if single vehicle options cannot be found we will try to provide trip options with multiple vehicles.                                                                                                                                                              |
 
 ### Response body
