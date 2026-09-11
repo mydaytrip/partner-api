@@ -988,7 +988,7 @@ curl -d '{
       "lastName": "Doe",
       "phone": "+41555555555",
       "email": "client-email@example.com",
-      "birthday": 629424000
+      "over18": true
     },
     { "type": "Adult" },
     {
@@ -1232,7 +1232,7 @@ curl -d '{
 | dropOffAddressNote | string                                      | Dropoff address or a note describing the dropoff point. Optional, but should be provided if available at the booking time; otherwise, it should be provided via the [/update](#trip-update) endpoint. Applicable only for the private trip. It will be ignored if the selected trip option already has a predefined meeting position that cannot be changed (immutable), i.e. the meeting position outside of a restricted area.                                                                                                                                                                                                                                                                                                                                       |
 | customerNote       | string                                      | Optional note for the driver not related to pickup or dropoff. Applicable only for the private trip.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
 | flightNumber       | string                                      | Optional flight number in case this is an airport pickup. Applicable only for the private trip.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
-| passengerDetails   | list of [PassengerDetail](#passengerdetail) | List of passengers that will go on this trip. For trips with "Private" type the number of passengers must be below or equal to `maxPassengers` of the `vehicle` in the trip option. For trips with "Shared" type the number of passengers must match the `passengersCount` query parameter from the Search endpoint. There must always be exactly one passenger of type "Lead" with contact details filled. For passenger of type "Child" you must specify a child seat of proper type offered in the trip option's [availableChildSeatTypes](#tripoption). For older children that do not need any child seat use `Adult` passenger type.                                                                                                                             |
+| passengerDetails   | list of [PassengerDetail](#passengerdetail) | List of passengers that will go on this trip. For trips with "Private" type the number of passengers must be below or equal to `maxPassengers` of the `vehicle` in the trip option. For trips with "Shared" type the number of passengers must match the `passengersCount` query parameter from the Search endpoint. There must always be exactly one passenger of type "Lead" with contact details filled and adulthood confirmed via `over18: true` (or the deprecated `birthday`). For passenger of type "Child" you must specify a child seat of proper type offered in the trip option's [availableChildSeatTypes](#tripoption). For older children that do not need any child seat use `Adult` passenger type.                                                                                                                             |
 | externalId         | string                                      | Optional. You can send us the id of the booking in your system to help with communication when our support team needs to identify a booking and you are not able to provide our own `bookingReference`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
 
 ### Response body
@@ -1252,7 +1252,7 @@ curl -d '{
 
 | Status code | Description                                                                                                                                                               |
 | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 400         | Invalid request - missing mandatory property, property has wrong type, mismatch in passenger count, missing lead passenger, multiple lead passengers or not a valid json. |
+| 400         | Invalid request - missing mandatory property, property has wrong type, mismatch in passenger count, missing lead passenger, multiple lead passengers, lead passenger not confirmed as over 18 or not a valid json. |
 | 401         | API key missing or invalid.                                                                                                                                               |
 | 403         | Forbidden request - trying to book a trip option owned by someone else. Departure too soon. Departure time change not allowed.                                            |
 | 404         | Trip option not found or expired.                                                                                                                                         |
@@ -1379,7 +1379,8 @@ curl https://papi.staging.mydaytrip.net/partners/v3/trip/external/details/extern
             "lastName": "Doe",
             "phone": "+41555555555",
             "email": "client-email@example.com",
-            "birthday": 629424000
+            "birthday": 629424000,
+            "over18": true
         },
         {
             "type": "Adult"
@@ -1482,7 +1483,8 @@ curl https://papi.staging.mydaytrip.net/partners/v3/trip/external/details/extern
             "lastName": "Doe",
             "phone": "+41555555555",
             "email": "client-email@example.com",
-            "birthday": 629424000
+            "birthday": 629424000,
+            "over18": true
         },
         {
             "type": "Adult"
@@ -1598,7 +1600,7 @@ curl -d '{
       "lastName": "Doe",
       "phone": "+4166666666",
       "email": "client-email@example.com",
-      "birthday": 629424000
+      "over18": true
     },
     { "type": "Adult" },
     {
@@ -1644,7 +1646,8 @@ curl -d '{
             "lastName": "Doe",
             "phone": "+4166666666",
             "email": "client-email@example.com",
-            "birthday": 629424000
+            "birthday": 629424000,
+            "over18": true
         },
         {
             "type": "Adult"
@@ -1726,7 +1729,7 @@ Disclaimer: in the last 24 hours before the departure the [/update](#trip-update
 | dropOffAddressNote | string                                      | Dropoff address or a note describing the dropoff point. Optional, but should be provided if it was not provided at the booking time. Applicable only for the private trip. It will be ignored if the selected trip option already has a predefined meeting position that cannot be changed (immutable), i.e. the meeting position outside of a restricted area.                                                                                                                                                                                                                                                                                      |
 | customerNote       | string                                      | Optional note for the driver not related to pickup or dropoff.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
 | flightNumber       | string                                      | Optional flight number in case this is an airport pickup.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
-| passengerDetails   | list of [PassengerDetail](#passengerdetail) | Optional. List of passengers that will go on this trip. For trips with "Private" type the number of passengers must be below or equal to `maxPassengers` of the `vehicle` in the trip option. For trips with "Shared" type the number of passengers must match the `passengersCount` query parameter from the Search endpoint. There must always be exactly one passenger of type "Lead" with contact details filled. For passenger of type "Child" you must specify a child seat of proper type offered in the trip option's [availableChildSeatTypes](#tripoption). For older children that do not need any child seat use `Adult` passenger type. |
+| passengerDetails   | list of [PassengerDetail](#passengerdetail) | Optional. List of passengers that will go on this trip. For trips with "Private" type the number of passengers must be below or equal to `maxPassengers` of the `vehicle` in the trip option. For trips with "Shared" type the number of passengers must match the `passengersCount` query parameter from the Search endpoint. There must always be exactly one passenger of type "Lead" with contact details filled and adulthood confirmed via `over18: true` (or the deprecated `birthday`). For passenger of type "Child" you must specify a child seat of proper type offered in the trip option's [availableChildSeatTypes](#tripoption). For older children that do not need any child seat use `Adult` passenger type. |
 
 ### Response body
 
@@ -1756,7 +1759,7 @@ Disclaimer: in the last 24 hours before the departure the [/update](#trip-update
 
 | Status code | Description                                                                                                                                                               |
 | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 400         | Invalid request - missing mandatory property, property has wrong type, mismatch in passenger count, missing lead passenger, multiple lead passengers or not a valid json. |
+| 400         | Invalid request - missing mandatory property, property has wrong type, mismatch in passenger count, missing lead passenger, multiple lead passengers, lead passenger not confirmed as over 18 or not a valid json. |
 | 401         | API key missing or invalid.                                                                                                                                               |
 | 403         | Forbidden request - trying to update details of a booking owned by someone else or trying to update a trip in the last 24 hours before departure.                         |
 | 404         | Booking not found.                                                                                                                                                        |
@@ -2076,7 +2079,8 @@ Below is a documentation of all object entities returned by the Daytrip API endp
 | lastName      | string  | Last name of the passenger - required for the lead passenger.                                                                                                                         |
 | phone         | string  | Phone number of the passenger - required for the lead passenger. Include country prefix in the `+<country_code>` format.                                                              |
 | email         | string  | Email of the passenger - required for the lead passenger.                                                                                                                             |
-| birthday      | integer | Birthday of the passenger - required for the lead passenger. UNIX epoch timestamp in seconds.                                                                                         |
+| over18        | boolean | Confirmation that the lead passenger is 18 years old or older - required for the lead passenger unless the deprecated `birthday` is sent. Must be `true`; a booking with `over18: false` is rejected (400 HTTP status code). In responses it is always `true` for the lead passenger, as adulthood is validated at booking time.                                                                                                                  |
+| birthday      | integer | **Deprecated.** Use `over18` instead. Birthday of the lead passenger as a UNIX epoch timestamp in seconds. Still accepted and still required when `over18` is not sent, so existing integrations keep working. In responses this property is always returned for the lead passenger; for bookings made with `over18` it holds a placeholder date (1990-01-01) instead of a real birthday. |
 | childSeatType | string  | Requested child seat type for a passenger of type "Child". Must match one of offered child seat types from [availableChildSeatTypes](#tripoption) of the trip option you are booking. |
 
 ### MeetingPosition
