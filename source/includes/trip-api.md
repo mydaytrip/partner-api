@@ -1379,7 +1379,8 @@ curl https://papi.staging.mydaytrip.net/partners/v3/trip/external/details/extern
             "lastName": "Doe",
             "phone": "+41555555555",
             "email": "client-email@example.com",
-            "birthday": 629424000
+            "birthday": 629424000,
+            "over18": true
         },
         {
             "type": "Adult"
@@ -1482,7 +1483,8 @@ curl https://papi.staging.mydaytrip.net/partners/v3/trip/external/details/extern
             "lastName": "Doe",
             "phone": "+41555555555",
             "email": "client-email@example.com",
-            "birthday": 629424000
+            "birthday": 629424000,
+            "over18": true
         },
         {
             "type": "Adult"
@@ -1644,7 +1646,8 @@ curl -d '{
             "lastName": "Doe",
             "phone": "+4166666666",
             "email": "client-email@example.com",
-            "birthday": 629424000
+            "birthday": 629424000,
+            "over18": true
         },
         {
             "type": "Adult"
@@ -2076,7 +2079,7 @@ Below is a documentation of all object entities returned by the Daytrip API endp
 | lastName      | string  | Last name of the passenger - required for the lead passenger.                                                                                                                         |
 | phone         | string  | Phone number of the passenger - required for the lead passenger. Include country prefix in the `+<country_code>` format.                                                              |
 | email         | string  | Email of the passenger - required for the lead passenger.                                                                                                                             |
-| over18        | boolean | Confirmation that the lead passenger is 18 years old or older - required for the lead passenger unless the deprecated `birthday` is sent. Must be `true`; a booking with `over18: false` is rejected (400 HTTP status code). Request only.                                                                                                                                                                                                      |
+| over18        | boolean | Confirmation that the lead passenger is 18 years old or older - required for the lead passenger unless the deprecated `birthday` is sent. Must be `true`; a booking with `over18: false` is rejected (400 HTTP status code). In responses it is always `true` for the lead passenger, as adulthood is validated at booking time.                                                                                                                  |
 | birthday      | integer | **Deprecated.** Use `over18` instead. Birthday of the lead passenger as a UNIX epoch timestamp in seconds. Still accepted and still required when `over18` is not sent, so existing integrations keep working. In responses this property is always returned for the lead passenger; for bookings made with `over18` it holds a placeholder date (1990-01-01) instead of a real birthday. |
 | childSeatType | string  | Requested child seat type for a passenger of type "Child". Must match one of offered child seat types from [availableChildSeatTypes](#tripoption) of the trip option you are booking. |
 
