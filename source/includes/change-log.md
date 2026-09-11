@@ -1,5 +1,6 @@
 # Change Log
 
+- **2026-09-11**: Trip API: added `over18` to [PassengerDetail](#passengerdetail) as the way to confirm the lead passenger is an adult; `birthday` is deprecated and only required when `over18` is not sent.
 - **2025-12-02**: Added Hourly Ride API endpoints documentation.
 - **2025-08-01**: Added Day Trips API endpoints documentation.
 - **2025-07-16**: Updated base endpoint addresses with the new domain name.
