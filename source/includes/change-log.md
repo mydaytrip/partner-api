@@ -1,5 +1,6 @@
 # Change Log
 
+- **2026-10-06**: Added vehicle type `PremiumVan` to the Trip API and Hourly Ride API [Vehicle](#vehicle) object. The [Day Trips API](#daytripvehicle) returns the same vehicle as `premiumVan`.
 - **2026-09-11**: Trip API: added `over18` to [PassengerDetail](#passengerdetail) as the way to confirm the lead passenger is an adult; `birthday` is deprecated and only required when `over18` is not sent. Responses now include `over18: true` for the lead passenger, matching the Hourly Ride API.
 - **2025-12-02**: Added Hourly Ride API endpoints documentation.
 - **2025-08-01**: Added Day Trips API endpoints documentation.

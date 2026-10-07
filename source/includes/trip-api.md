@@ -2020,7 +2020,7 @@ Below is a documentation of all object entities returned by the Daytrip API endp
 
 | Property         | Type    | Description                                                                                                           |
 | ---------------- | ------- | --------------------------------------------------------------------------------------------------------------------- |
-| type             | string  | Type of vehicle. "Sedan", "MPV", "Van", "Luxury" or "Shuttle"                                                         |
+| type             | string  | Type of vehicle. "Sedan", "MPV", "Van", "PremiumVan", "Luxury" or "Shuttle"                                                         |
 | maxPassengers    | integer | Maximum number of passengers that can take a trip in this vehicle.                                                    |
 | description      | string  | Complete description of the vehicle type.                                                                             |
 | modelDescription | string  | Models that the vehicle is similar to.                                                                                |

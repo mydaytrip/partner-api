@@ -554,13 +554,13 @@ Price information.
 
 Vehicle information.
 
-| Property         | Type    | Description                                            |
-| ---------------- | ------- | ------------------------------------------------------ |
-| type             | string  | Vehicle type: "Sedan", "MPV", "Van", or "LuxurySedan". |
-| maxPassengers    | integer | Maximum number of passengers.                          |
-| description      | string  | Full vehicle description.                              |
-| modelDescription | string  | Example model (e.g., "VW Passat or similar").          |
-| image            | string  | URL to vehicle image.                                  |
+| Property         | Type    | Description                                                          |
+| ---------------- | ------- | -------------------------------------------------------------------- |
+| type             | string  | Vehicle type: "Sedan", "MPV", "Van", "PremiumVan", or "LuxurySedan". |
+| maxPassengers    | integer | Maximum number of passengers.                                        |
+| description      | string  | Full vehicle description.                                            |
+| modelDescription | string  | Example model (e.g., "VW Passat or similar").                        |
+| image            | string  | URL to vehicle image.                                                |
 
 ### Luggage
 
