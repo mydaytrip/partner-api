@@ -34,7 +34,7 @@ This endpoint returns a list of all available day trip departure locations withi
 > To get all day trip locations in the Czech Republic, use this call:
 
 ```bash
-curl "https://papi.staging.mydaytrip.net/partners/v1/daytrips/country/cz" \
+curl "https://papi-staging.dynamic-environment.mydaytrip.net/partners/v1/daytrips/country/cz" \
   -H "x-api-key: your_api_key"
 ```
 
@@ -124,7 +124,7 @@ This endpoint returns a list of available day trip packages departing from a spe
 > To get all day trips originating from Prague, use this call:
 
 ```bash
-curl "https://papi.staging.mydaytrip.net/partners/v1/daytrips/location/4cf0e7a4-8443-40c9-bbf3-bfe253a3c631" \
+curl "https://papi-staging.dynamic-environment.mydaytrip.net/partners/v1/daytrips/location/4cf0e7a4-8443-40c9-bbf3-bfe253a3c631" \
   -H "x-api-key: your_api_key"
 ```
 
@@ -266,7 +266,7 @@ This endpoint finds the nearest departure location to a user's coordinates and r
 > To search for day trips near a specific point in Prague:
 
 ```bash
-curl "https://papi.staging.mydaytrip.net/partners/v1/daytrips/search?lat=50.0755&lon=14.4378" \
+curl "https://papi-staging.dynamic-environment.mydaytrip.net/partners/v1/daytrips/search?lat=50.0755&lon=14.4378" \
   -H "x-api-key: your_api_key"
 ```
 
@@ -409,7 +409,7 @@ This endpoint creates a new booking for a selected day trip product. The minimum
 > To book a day trip for 3 adults and 1 child:
 
 ```bash
-curl -X POST "https://papi.staging.mydaytrip.net/partners/v1/daytrips/book" \
+curl -X POST "https://papi-staging.dynamic-environment.mydaytrip.net/partners/v1/daytrips/book" \
   -H "Content-Type: application/json" \
   -H "x-api-key: your_api_key" \
   -d '{
@@ -517,7 +517,7 @@ If cancellation is in less than 24 hours before the departure time, the full amo
 > To cancel a booking with reference "CB1027":
 
 ```bash
-curl -X POST "https://papi.staging.mydaytrip.net/partners/v1/daytrips/cancel" \
+curl -X POST "https://papi-staging.dynamic-environment.mydaytrip.net/partners/v1/daytrips/cancel" \
   -H "Content-Type: application/json" \
   -H "x-api-key: your_api_key" \
   -d '{
@@ -571,7 +571,7 @@ This endpoint retrieves the full, current details of a specific booking.
 > To get details for a specific booking:
 
 ```bash
-curl "https://papi.staging.mydaytrip.net/partners/v1/daytrips/details/123e4567-e89b-12d3-a456-426614174000" \
+curl "https://papi-staging.dynamic-environment.mydaytrip.net/partners/v1/daytrips/details/123e4567-e89b-12d3-a456-426614174000" \
   -H "x-api-key: your_api_key"
 ```
 
@@ -653,7 +653,7 @@ This endpoint modifies an existing booking, allowing changes to pickup time, loc
 > To update the passenger count and pickup location for a booking:
 
 ```bash
-curl -X POST "https://papi.staging.mydaytrip.net/partners/v1/daytrips/update" \
+curl -X POST "https://papi-staging.dynamic-environment.mydaytrip.net/partners/v1/daytrips/update" \
   -H "Content-Type: application/json" \
   -H "x-api-key: your_api_key" \
   -d '{

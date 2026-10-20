@@ -34,7 +34,7 @@ This endpoint returns all available hourly ride options based on the specified p
 > To search for an hourly ride in Prague for 3 passengers for 6 hours, use this call:
 
 ```bash
-curl "https://papi.staging.mydaytrip.net/partners/v1/hourly-rides/search?originType=iata&origin=PRG&departureTime=1769855400&hoursRented=6&passengersCount=3&childrenCount=1" \
+curl "https://papi-staging.dynamic-environment.mydaytrip.net/partners/v1/hourly-rides/search?originType=iata&origin=PRG&departureTime=1769855400&hoursRented=6&passengersCount=3&childrenCount=1" \
   -H "x-api-key: your_api_key"
 ```
 
@@ -49,7 +49,7 @@ curl "https://papi.staging.mydaytrip.net/partners/v1/hourly-rides/search?originT
 > To search for an hourly ride from Dubrovnik Old Town for 10 passengers for 6 hours, use this call:
 
 ```bash
-curl "https://papi.staging.mydaytrip.net/partners/v1/hourly-rides/search?originLatitude=42.639859&originLongitude=18.109776&departureTime=1769855400&hoursRented=6&passengersCount=10&childrenCount=1" \
+curl "https://papi-staging.dynamic-environment.mydaytrip.net/partners/v1/hourly-rides/search?originLatitude=42.639859&originLongitude=18.109776&departureTime=1769855400&hoursRented=6&passengersCount=10&childrenCount=1" \
   -H "x-api-key: your_api_key"
 ```
 
@@ -204,7 +204,7 @@ This endpoint creates a booking for the selected hourly ride option. The booking
 > To book an hourly ride option, use this call:
 
 ```bash
-curl -X POST "https://papi.staging.mydaytrip.net/partners/v1/hourly-rides/book" \
+curl -X POST "https://papi-staging.dynamic-environment.mydaytrip.net/partners/v1/hourly-rides/book" \
   -H "x-api-key: your_api_key" \
   -H "Content-Type: application/json" \
   -d '{
@@ -323,7 +323,7 @@ This endpoint retrieves full details of an existing hourly ride booking, includi
 > To get booking details, use this call:
 
 ```bash
-curl "https://papi.staging.mydaytrip.net/partners/v1/hourly-rides/details/a1b2c3d4-e5f6-7890-abcd-ef1234567890" \
+curl "https://papi-staging.dynamic-environment.mydaytrip.net/partners/v1/hourly-rides/details/a1b2c3d4-e5f6-7890-abcd-ef1234567890" \
   -H "x-api-key: your_api_key"
 ```
 
@@ -442,7 +442,7 @@ This endpoint cancels an existing hourly ride booking. The refund amount depends
 curl -d '{ "bookingId": "a1b2c3d4-e5f6-7890-abcd-ef1234567890" }' \
   -H "Content-Type: application/json" \
   -H "x-api-key: your_api_key" \
-  -X POST "https://papi.staging.mydaytrip.net/partners/v1/hourly-rides/cancel"
+  -X POST "https://papi-staging.dynamic-environment.mydaytrip.net/partners/v1/hourly-rides/cancel"
 ```
 
 ```javascript

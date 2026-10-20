@@ -53,7 +53,7 @@ This endpoint returns all available trip options based on the specified origin, 
 > To search for a private or shared trip from Prague to Vienna for 3 passengers, use this call:
 
 ```bash
-curl "https://papi.staging.mydaytrip.net/partners/v3/trip/search?originLatitude=50.10&originLongitude=14.2559&destinationLatitude=48.2082&destinationLongitude=16.3738&departureTime=1766227088&passengersCount=3&childrenCount=1&includeShared=true" \
+curl "https://papi-staging.dynamic-environment.mydaytrip.net/partners/v3/trip/search?originLatitude=50.10&originLongitude=14.2559&destinationLatitude=48.2082&destinationLongitude=16.3738&departureTime=1766227088&passengersCount=3&childrenCount=1&includeShared=true" \
   -H "x-api-key: your_api_key"
 ```
 
@@ -68,7 +68,7 @@ curl "https://papi.staging.mydaytrip.net/partners/v3/trip/search?originLatitude=
 > To search for a private or shared trip from Prague Airport to Vienna for 3 passengers, use this call:
 
 ```bash
-curl "https://papi.staging.mydaytrip.net/partners/v3/trip/search?originType=iata&origin=PRG&destinationType=coordinates&destinationLatitude=48.2082&destinationLongitude=16.3738&departureTime=1766227088&passengersCount=3&childrenCount=1&includeShared=true" \
+curl "https://papi-staging.dynamic-environment.mydaytrip.net/partners/v3/trip/search?originType=iata&origin=PRG&destinationType=coordinates&destinationLatitude=48.2082&destinationLongitude=16.3738&departureTime=1766227088&passengersCount=3&childrenCount=1&includeShared=true" \
   -H "x-api-key: your_api_key"
 ```
 
@@ -628,7 +628,7 @@ curl "https://papi.staging.mydaytrip.net/partners/v3/trip/search?originType=iata
 > To search for a private trip from Dubrovnik to Venice for 10 passengers, with multiple vehicle options:
 
 ```bash
-curl "https://papi.staging.mydaytrip.net/partners/v3/trip/search?originLatitude=42.639515&originLongitude=18.108064&destinationLatitude=45.434143&destinationLongitude=12.333497&departureTime=1766227088&includeShared=false&includeStops=false&passengersCount=10&includeMultipleVehicles=true" \
+curl "https://papi-staging.dynamic-environment.mydaytrip.net/partners/v3/trip/search?originLatitude=42.639515&originLongitude=18.108064&destinationLatitude=45.434143&destinationLongitude=12.333497&departureTime=1766227088&includeShared=false&includeStops=false&passengersCount=10&includeMultipleVehicles=true" \
   -H "x-api-key: your_api_key"
 ```
 
@@ -807,7 +807,7 @@ curl -d '{
 }' \
   -H "Content-Type: application/json" \
   -H "x-api-key: your_api_key" \
-  -X POST https://papi.staging.mydaytrip.net/partners/v3/trip/search/customize
+  -X POST https://papi-staging.dynamic-environment.mydaytrip.net/partners/v3/trip/search/customize
 ```
 
 ```javascript
@@ -999,7 +999,7 @@ curl -d '{
 }' \
   -H "Content-Type: application/json" \
   -H "x-api-key: your_api_key" \
-  -X POST https://papi.staging.mydaytrip.net/partners/v3/trip/book
+  -X POST https://papi-staging.dynamic-environment.mydaytrip.net/partners/v3/trip/book
 ```
 
 ```javascript
@@ -1268,7 +1268,7 @@ This endpoint is used to cancel a booked trip. For private trips only trips that
 curl -d '{ "bookingId": "cb102778-a3d7-426e-8d18-6bd6b296f283" }' \
   -H "Content-Type: application/json" \
   -H "x-api-key: your_api_key" \
-  -X POST https://papi.staging.mydaytrip.net/partners/v3/trip/cancel
+  -X POST https://papi-staging.dynamic-environment.mydaytrip.net/partners/v3/trip/cancel
 ```
 
 ```javascript
@@ -1324,7 +1324,7 @@ There are two versions of the endpoint: `/partners/v3/trip/details/boookingId` a
 > To get details of a booked trip by `bookingId`, use the following call:
 
 ```bash
-curl https://papi.staging.mydaytrip.net/partners/v3/trip/details/bookingId \
+curl https://papi-staging.dynamic-environment.mydaytrip.net/partners/v3/trip/details/bookingId \
   -H "x-api-key: your_api_key"
 ```
 
@@ -1341,7 +1341,7 @@ curl https://papi.staging.mydaytrip.net/partners/v3/trip/details/bookingId \
 > To get details of a booked trip by `externalId`, use the following call:
 
 ```bash
-curl https://papi.staging.mydaytrip.net/partners/v3/trip/external/details/externalId \
+curl https://papi-staging.dynamic-environment.mydaytrip.net/partners/v3/trip/external/details/externalId \
   -H "x-api-key: your_api_key"
 ```
 
@@ -1611,7 +1611,7 @@ curl -d '{
 }' \
   -H "Content-Type: application/json" \
   -H "x-api-key: your_api_key" \
-  -X POST https://papi.staging.mydaytrip.net/partners/v3/trip/update
+  -X POST https://papi-staging.dynamic-environment.mydaytrip.net/partners/v3/trip/update
 ```
 
 ```javascript
@@ -1772,7 +1772,7 @@ This endpoint allows you to retrieve the latest position of driver(s) assigned t
 > To get driver position(s) of a trip currently in progress, use the following call:
 
 ```bash
-curl https://papi.staging.mydaytrip.net/partners/v3/trip/tracking/bookingId \
+curl https://papi-staging.dynamic-environment.mydaytrip.net/partners/v3/trip/tracking/bookingId \
   -H "x-api-key: your_api_key"
 ```
 
@@ -1869,7 +1869,7 @@ Proposed frequency of calling this endpoint depending on the time before the dep
 > To get drivers currently assigned to a trip
 
 ```bash
-curl https://papi.staging.mydaytrip.net/partners/v3/trip/drivers/bookingId \
+curl https://papi-staging.dynamic-environment.mydaytrip.net/partners/v3/trip/drivers/bookingId \
   -H "x-api-key: your_api_key"
 ```
 
