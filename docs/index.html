@@ -82,7 +82,7 @@
                <tbody>
                   <tr>
                      <td>Sandbox</td>
-                     <td><a href="https://papi.staging.mydaytrip.net/partners/">https://papi.staging.mydaytrip.net/partners/</a></td>
+                     <td><a href="https://papi-staging.dynamic-environment.mydaytrip.net/partners/">https://papi-staging.dynamic-environment.mydaytrip.net/partners/</a></td>
                   </tr>
                   <tr>
                      <td>Production</td>
@@ -94,7 +94,7 @@
             <blockquote>
                <p>To authorize your requests, add the <code>x-api-key</code> header like this:</p>
             </blockquote>
-            <pre class="highlight bash"><code>curl <span class="hljs-string">&quot;https://papi.staging.mydaytrip.net/partners/v3/trip/search&quot;</span>
+            <pre class="highlight bash"><code>curl <span class="hljs-string">&quot;https://papi-staging.dynamic-environment.mydaytrip.net/partners/v3/trip/search&quot;</span>
   -H <span class="hljs-string">&quot;x-api-key: your-api-key&quot;</span></code></pre><pre class="highlight javascript"><code></code></pre><pre class="highlight python"><code></code></pre>
             <blockquote>
                <p>Make sure to replace <code>your-api-key</code> with your API key.</p>
@@ -224,12 +224,12 @@
             <blockquote>
                <p>To search for a private or shared trip from Prague to Vienna for 3 passengers, use this call:</p>
             </blockquote>
-            <pre class="highlight bash"><code>curl <span class="hljs-string">&quot;https://papi.staging.mydaytrip.net/partners/v3/trip/search?originLatitude=50.10&amp;originLongitude=14.2559&amp;destinationLatitude=48.2082&amp;destinationLongitude=16.3738&amp;departureTime=1766227088&amp;passengersCount=3&amp;childrenCount=1&amp;includeShared=true&quot;</span> \
+            <pre class="highlight bash"><code>curl <span class="hljs-string">&quot;https://papi-staging.dynamic-environment.mydaytrip.net/partners/v3/trip/search?originLatitude=50.10&amp;originLongitude=14.2559&amp;destinationLatitude=48.2082&amp;destinationLongitude=16.3738&amp;departureTime=1766227088&amp;passengersCount=3&amp;childrenCount=1&amp;includeShared=true&quot;</span> \
   -H <span class="hljs-string">&quot;x-api-key: your_api_key&quot;</span></code></pre><pre class="highlight javascript"><code></code></pre><pre class="highlight python"><code></code></pre>
             <blockquote>
                <p>To search for a private or shared trip from Prague Airport to Vienna for 3 passengers, use this call:</p>
             </blockquote>
-            <pre class="highlight bash"><code>curl <span class="hljs-string">&quot;https://papi.staging.mydaytrip.net/partners/v3/trip/search?originType=iata&amp;origin=PRG&amp;destinationType=coordinates&amp;destinationLatitude=48.2082&amp;destinationLongitude=16.3738&amp;departureTime=1766227088&amp;passengersCount=3&amp;childrenCount=1&amp;includeShared=true&quot;</span> \
+            <pre class="highlight bash"><code>curl <span class="hljs-string">&quot;https://papi-staging.dynamic-environment.mydaytrip.net/partners/v3/trip/search?originType=iata&amp;origin=PRG&amp;destinationType=coordinates&amp;destinationLatitude=48.2082&amp;destinationLongitude=16.3738&amp;departureTime=1766227088&amp;passengersCount=3&amp;childrenCount=1&amp;includeShared=true&quot;</span> \
   -H <span class="hljs-string">&quot;x-api-key: your_api_key&quot;</span></code></pre><pre class="highlight javascript"><code></code></pre><pre class="highlight python"><code></code></pre>
             <blockquote>
                <p>The above call returns a JSON structured like this:</p>
@@ -777,7 +777,7 @@
             <blockquote>
                <p>To search for a private trip from Dubrovnik to Venice for 10 passengers, with multiple vehicle options:</p>
             </blockquote>
-            <pre class="highlight bash"><code>curl <span class="hljs-string">&quot;https://papi.staging.mydaytrip.net/partners/v3/trip/search?originLatitude=42.639515&amp;originLongitude=18.108064&amp;destinationLatitude=45.434143&amp;destinationLongitude=12.333497&amp;departureTime=1766227088&amp;includeShared=false&amp;includeStops=false&amp;passengersCount=10&amp;includeMultipleVehicles=true&quot;</span> \
+            <pre class="highlight bash"><code>curl <span class="hljs-string">&quot;https://papi-staging.dynamic-environment.mydaytrip.net/partners/v3/trip/search?originLatitude=42.639515&amp;originLongitude=18.108064&amp;destinationLatitude=45.434143&amp;destinationLongitude=12.333497&amp;departureTime=1766227088&amp;includeShared=false&amp;includeStops=false&amp;passengersCount=10&amp;includeMultipleVehicles=true&quot;</span> \
   -H <span class="hljs-string">&quot;x-api-key: your_api_key&quot;</span></code></pre><pre class="highlight javascript"><code></code></pre><pre class="highlight python"><code></code></pre>
             <blockquote>
                <p>The above call returns a JSON structured like this:</p>
@@ -1054,7 +1054,7 @@
 }&#x27;</span> \
   -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
   -H <span class="hljs-string">&quot;x-api-key: your_api_key&quot;</span> \
-  -X POST https://papi.staging.mydaytrip.net/partners/v3/trip/search/customize</code></pre><pre class="highlight javascript"><code></code></pre><pre class="highlight python"><code></code></pre>
+  -X POST https://papi-staging.dynamic-environment.mydaytrip.net/partners/v3/trip/search/customize</code></pre><pre class="highlight javascript"><code></code></pre><pre class="highlight python"><code></code></pre>
             <blockquote>
                <p>The above call returns a JSON structured like this:</p>
             </blockquote>
@@ -1264,7 +1264,7 @@
 }&#x27;</span> \
   -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
   -H <span class="hljs-string">&quot;x-api-key: your_api_key&quot;</span> \
-  -X POST https://papi.staging.mydaytrip.net/partners/v3/trip/book</code></pre><pre class="highlight javascript"><code></code></pre><pre class="highlight python"><code></code></pre>
+  -X POST https://papi-staging.dynamic-environment.mydaytrip.net/partners/v3/trip/book</code></pre><pre class="highlight javascript"><code></code></pre><pre class="highlight python"><code></code></pre>
             <blockquote>
                <p>Example response without meeting and dropoff positions:</p>
             </blockquote>
@@ -1618,7 +1618,7 @@
             <pre class="highlight bash"><code>curl -d <span class="hljs-string">&#x27;{ &quot;bookingId&quot;: &quot;cb102778-a3d7-426e-8d18-6bd6b296f283&quot; }&#x27;</span> \
   -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
   -H <span class="hljs-string">&quot;x-api-key: your_api_key&quot;</span> \
-  -X POST https://papi.staging.mydaytrip.net/partners/v3/trip/cancel</code></pre><pre class="highlight javascript"><code></code></pre><pre class="highlight python"><code></code></pre>
+  -X POST https://papi-staging.dynamic-environment.mydaytrip.net/partners/v3/trip/cancel</code></pre><pre class="highlight javascript"><code></code></pre><pre class="highlight python"><code></code></pre>
             <blockquote>
                <p>Example response with the penalty amount for the cancellation:</p>
             </blockquote>
@@ -1704,7 +1704,7 @@
             <blockquote>
                <p>To get details of a booked trip by <code>bookingId</code>, use the following call:</p>
             </blockquote>
-            <pre class="highlight bash"><code>curl https://papi.staging.mydaytrip.net/partners/v3/trip/details/bookingId \
+            <pre class="highlight bash"><code>curl https://papi-staging.dynamic-environment.mydaytrip.net/partners/v3/trip/details/bookingId \
   -H <span class="hljs-string">&quot;x-api-key: your_api_key&quot;</span></code></pre><pre class="highlight javascript"><code></code></pre><pre class="highlight python"><code></code></pre>
             <blockquote>
                <p>Make sure to replace <code>bookingId</code> with the real booking id.</p>
@@ -1712,7 +1712,7 @@
             <blockquote>
                <p>To get details of a booked trip by <code>externalId</code>, use the following call:</p>
             </blockquote>
-            <pre class="highlight bash"><code>curl https://papi.staging.mydaytrip.net/partners/v3/trip/external/details/externalId \
+            <pre class="highlight bash"><code>curl https://papi-staging.dynamic-environment.mydaytrip.net/partners/v3/trip/external/details/externalId \
   -H <span class="hljs-string">&quot;x-api-key: your_api_key&quot;</span></code></pre><pre class="highlight javascript"><code></code></pre><pre class="highlight python"><code></code></pre>
             <blockquote>
                <p>Make sure to replace <code>externalId</code> with the real external id.</p>
@@ -2060,7 +2060,7 @@
 }&#x27;</span> \
   -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
   -H <span class="hljs-string">&quot;x-api-key: your_api_key&quot;</span> \
-  -X POST https://papi.staging.mydaytrip.net/partners/v3/trip/update</code></pre><pre class="highlight javascript"><code></code></pre><pre class="highlight python"><code></code></pre>
+  -X POST https://papi-staging.dynamic-environment.mydaytrip.net/partners/v3/trip/update</code></pre><pre class="highlight javascript"><code></code></pre><pre class="highlight python"><code></code></pre>
             <blockquote>
                <p>The above call returns a JSON structured like this:</p>
             </blockquote>
@@ -2338,7 +2338,7 @@
             <blockquote>
                <p>To get driver position(s) of a trip currently in progress, use the following call:</p>
             </blockquote>
-            <pre class="highlight bash"><code>curl https://papi.staging.mydaytrip.net/partners/v3/trip/tracking/bookingId \
+            <pre class="highlight bash"><code>curl https://papi-staging.dynamic-environment.mydaytrip.net/partners/v3/trip/tracking/bookingId \
   -H <span class="hljs-string">&quot;x-api-key: your_api_key&quot;</span></code></pre><pre class="highlight javascript"><code></code></pre><pre class="highlight python"><code></code></pre>
             <blockquote>
                <p>Make sure to replace <code>bookingId</code> with the real booking id.</p>
@@ -2441,7 +2441,7 @@
             <blockquote>
                <p>To get drivers currently assigned to a trip</p>
             </blockquote>
-            <pre class="highlight bash"><code>curl https://papi.staging.mydaytrip.net/partners/v3/trip/drivers/bookingId \
+            <pre class="highlight bash"><code>curl https://papi-staging.dynamic-environment.mydaytrip.net/partners/v3/trip/drivers/bookingId \
   -H <span class="hljs-string">&quot;x-api-key: your_api_key&quot;</span></code></pre><pre class="highlight javascript"><code></code></pre><pre class="highlight python"><code></code></pre>
             <blockquote>
                <p>Make sure to replace <code>bookingId</code> with the real booking id.</p>
@@ -3256,12 +3256,12 @@
             <blockquote>
                <p>To search for an hourly ride in Prague for 3 passengers for 6 hours, use this call:</p>
             </blockquote>
-            <pre class="highlight bash"><code>curl <span class="hljs-string">&quot;https://papi.staging.mydaytrip.net/partners/v1/hourly-rides/search?originType=iata&amp;origin=PRG&amp;departureTime=1769855400&amp;hoursRented=6&amp;passengersCount=3&amp;childrenCount=1&quot;</span> \
+            <pre class="highlight bash"><code>curl <span class="hljs-string">&quot;https://papi-staging.dynamic-environment.mydaytrip.net/partners/v1/hourly-rides/search?originType=iata&amp;origin=PRG&amp;departureTime=1769855400&amp;hoursRented=6&amp;passengersCount=3&amp;childrenCount=1&quot;</span> \
   -H <span class="hljs-string">&quot;x-api-key: your_api_key&quot;</span></code></pre><pre class="highlight javascript"><code></code></pre><pre class="highlight python"><code></code></pre>
             <blockquote>
                <p>To search for an hourly ride from Dubrovnik Old Town for 10 passengers for 6 hours, use this call:</p>
             </blockquote>
-            <pre class="highlight bash"><code>curl <span class="hljs-string">&quot;https://papi.staging.mydaytrip.net/partners/v1/hourly-rides/search?originLatitude=42.639859&amp;originLongitude=18.109776&amp;departureTime=1769855400&amp;hoursRented=6&amp;passengersCount=10&amp;childrenCount=1&quot;</span> \
+            <pre class="highlight bash"><code>curl <span class="hljs-string">&quot;https://papi-staging.dynamic-environment.mydaytrip.net/partners/v1/hourly-rides/search?originLatitude=42.639859&amp;originLongitude=18.109776&amp;departureTime=1769855400&amp;hoursRented=6&amp;passengersCount=10&amp;childrenCount=1&quot;</span> \
   -H <span class="hljs-string">&quot;x-api-key: your_api_key&quot;</span></code></pre><pre class="highlight javascript"><code></code></pre><pre class="highlight python"><code></code></pre>
             <blockquote>
                <p>The above call returns a JSON structured like this:</p>
@@ -3473,7 +3473,7 @@
             <blockquote>
                <p>To book an hourly ride option, use this call:</p>
             </blockquote>
-            <pre class="highlight bash"><code>curl -X POST <span class="hljs-string">&quot;https://papi.staging.mydaytrip.net/partners/v1/hourly-rides/book&quot;</span> \
+            <pre class="highlight bash"><code>curl -X POST <span class="hljs-string">&quot;https://papi-staging.dynamic-environment.mydaytrip.net/partners/v1/hourly-rides/book&quot;</span> \
   -H <span class="hljs-string">&quot;x-api-key: your_api_key&quot;</span> \
   -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
   -d <span class="hljs-string">&#x27;{
@@ -3643,7 +3643,7 @@
             <blockquote>
                <p>To get booking details, use this call:</p>
             </blockquote>
-            <pre class="highlight bash"><code>curl <span class="hljs-string">&quot;https://papi.staging.mydaytrip.net/partners/v1/hourly-rides/details/a1b2c3d4-e5f6-7890-abcd-ef1234567890&quot;</span> \
+            <pre class="highlight bash"><code>curl <span class="hljs-string">&quot;https://papi-staging.dynamic-environment.mydaytrip.net/partners/v1/hourly-rides/details/a1b2c3d4-e5f6-7890-abcd-ef1234567890&quot;</span> \
   -H <span class="hljs-string">&quot;x-api-key: your_api_key&quot;</span></code></pre><pre class="highlight javascript"><code></code></pre><pre class="highlight python"><code></code></pre>
             <blockquote>
                <p>The above call returns a JSON structured like this:</p>
@@ -3820,7 +3820,7 @@
             <pre class="highlight bash"><code>curl -d <span class="hljs-string">&#x27;{ &quot;bookingId&quot;: &quot;a1b2c3d4-e5f6-7890-abcd-ef1234567890&quot; }&#x27;</span> \
   -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
   -H <span class="hljs-string">&quot;x-api-key: your_api_key&quot;</span> \
-  -X POST <span class="hljs-string">&quot;https://papi.staging.mydaytrip.net/partners/v1/hourly-rides/cancel&quot;</span></code></pre><pre class="highlight javascript"><code></code></pre><pre class="highlight python"><code></code></pre>
+  -X POST <span class="hljs-string">&quot;https://papi-staging.dynamic-environment.mydaytrip.net/partners/v1/hourly-rides/cancel&quot;</span></code></pre><pre class="highlight javascript"><code></code></pre><pre class="highlight python"><code></code></pre>
             <blockquote>
                <p>Example response with the penalty amount for the cancellation:</p>
             </blockquote>
@@ -4326,7 +4326,7 @@
             <blockquote>
                <p>To get all day trip locations in the Czech Republic, use this call:</p>
             </blockquote>
-            <pre class="highlight bash"><code>curl <span class="hljs-string">&quot;https://papi.staging.mydaytrip.net/partners/v1/daytrips/country/cz&quot;</span> \
+            <pre class="highlight bash"><code>curl <span class="hljs-string">&quot;https://papi-staging.dynamic-environment.mydaytrip.net/partners/v1/daytrips/country/cz&quot;</span> \
   -H <span class="hljs-string">&quot;x-api-key: your_api_key&quot;</span></code></pre>
             <blockquote>
                <p>The above call returns a JSON object structured like this:</p>
@@ -4443,7 +4443,7 @@
             <blockquote>
                <p>To get all day trips originating from Prague, use this call:</p>
             </blockquote>
-            <pre class="highlight bash"><code>curl <span class="hljs-string">&quot;https://papi.staging.mydaytrip.net/partners/v1/daytrips/location/4cf0e7a4-8443-40c9-bbf3-bfe253a3c631&quot;</span> \
+            <pre class="highlight bash"><code>curl <span class="hljs-string">&quot;https://papi-staging.dynamic-environment.mydaytrip.net/partners/v1/daytrips/location/4cf0e7a4-8443-40c9-bbf3-bfe253a3c631&quot;</span> \
   -H <span class="hljs-string">&quot;x-api-key: your_api_key&quot;</span></code></pre>
             <blockquote>
                <p>The above call returns a JSON object structured like this:</p>
@@ -4615,7 +4615,7 @@
             <blockquote>
                <p>To search for day trips near a specific point in Prague:</p>
             </blockquote>
-            <pre class="highlight bash"><code>curl <span class="hljs-string">&quot;https://papi.staging.mydaytrip.net/partners/v1/daytrips/search?lat=50.0755&amp;lon=14.4378&quot;</span> \
+            <pre class="highlight bash"><code>curl <span class="hljs-string">&quot;https://papi-staging.dynamic-environment.mydaytrip.net/partners/v1/daytrips/search?lat=50.0755&amp;lon=14.4378&quot;</span> \
   -H <span class="hljs-string">&quot;x-api-key: your_api_key&quot;</span></code></pre>
             <blockquote>
                <p>The above call returns a JSON object structured like this:</p>
@@ -4792,7 +4792,7 @@
             <blockquote>
                <p>To book a day trip for 3 adults and 1 child:</p>
             </blockquote>
-            <pre class="highlight bash"><code>curl -X POST <span class="hljs-string">&quot;https://papi.staging.mydaytrip.net/partners/v1/daytrips/book&quot;</span> \
+            <pre class="highlight bash"><code>curl -X POST <span class="hljs-string">&quot;https://papi-staging.dynamic-environment.mydaytrip.net/partners/v1/daytrips/book&quot;</span> \
   -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
   -H <span class="hljs-string">&quot;x-api-key: your_api_key&quot;</span> \
   -d <span class="hljs-string">&#x27;{
@@ -4972,7 +4972,7 @@
             <blockquote>
                <p>To cancel a booking with reference &quot;CB1027&quot;:</p>
             </blockquote>
-            <pre class="highlight bash"><code>curl -X POST <span class="hljs-string">&quot;https://papi.staging.mydaytrip.net/partners/v1/daytrips/cancel&quot;</span> \
+            <pre class="highlight bash"><code>curl -X POST <span class="hljs-string">&quot;https://papi-staging.dynamic-environment.mydaytrip.net/partners/v1/daytrips/cancel&quot;</span> \
   -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
   -H <span class="hljs-string">&quot;x-api-key: your_api_key&quot;</span> \
   -d <span class="hljs-string">&#x27;{
@@ -5070,7 +5070,7 @@
             <blockquote>
                <p>To get details for a specific booking:</p>
             </blockquote>
-            <pre class="highlight bash"><code>curl <span class="hljs-string">&quot;https://papi.staging.mydaytrip.net/partners/v1/daytrips/details/123e4567-e89b-12d3-a456-426614174000&quot;</span> \
+            <pre class="highlight bash"><code>curl <span class="hljs-string">&quot;https://papi-staging.dynamic-environment.mydaytrip.net/partners/v1/daytrips/details/123e4567-e89b-12d3-a456-426614174000&quot;</span> \
   -H <span class="hljs-string">&quot;x-api-key: your_api_key&quot;</span></code></pre>
             <blockquote>
                <p>The above call returns a booking confirmation:</p>
@@ -5205,7 +5205,7 @@
             <blockquote>
                <p>To update the passenger count and pickup location for a booking:</p>
             </blockquote>
-            <pre class="highlight bash"><code>curl -X POST <span class="hljs-string">&quot;https://papi.staging.mydaytrip.net/partners/v1/daytrips/update&quot;</span> \
+            <pre class="highlight bash"><code>curl -X POST <span class="hljs-string">&quot;https://papi-staging.dynamic-environment.mydaytrip.net/partners/v1/daytrips/update&quot;</span> \
   -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
   -H <span class="hljs-string">&quot;x-api-key: your_api_key&quot;</span> \
   -d <span class="hljs-string">&#x27;{
