@@ -3,7 +3,7 @@
 To make changes:
 
 1. create a new branch
-2. update markdown files under `/source`
+2. update markdown files under `/source` (the reference lives in `/source/includes`; the guide for AI coding agents and `llms.txt` live in `/source/llm`, the page that presents the guide is `/source/includes/ai-agents.md` and are published unchanged)
 3. run `./release.sh`
 4. commit and push all changes and open a pull request
 5. after merging to the `main` branch changes will be autodeployed to [https://mydaytrip.github.io/partner-api/](https://mydaytrip.github.io/partner-api/)
