@@ -502,7 +502,7 @@ Represents an available hourly ride option returned from search.
 | vehicles                | list of [Vehicle](#vehicle)     | Vehicles information.                                                 |
 | luggage                 | [Luggage](#luggage)             | Luggage capacity information.                                         |
 | availableChildSeatTypes | list of [ChildSeat](#childseat) | Available child seat types for this option.                           |
-| cancellationPolicy      | string                          | Cancellation policy, one of [CancellationPolicyType](#cancellationpolicytype). |
+| cancellationPolicy      | string                          | Cancellation policy. Always "Flexible" for hourly rides: see [Cancellation Policy](#cancellation-policy). |
 | expiresAt               | string                          | When this option expires (ISO 8601 format).                           |
 
 ### BookedHourlyRideResponse
@@ -610,11 +610,3 @@ All hourly rides follow the same cancellation policy:
 
 - **100% refundable** when cancelled more than 24 hours before departure
 - **No refund** when cancelled within 24 hours of departure
-
-### CancellationPolicyType
-
-| Property      | Type   | Description                                        |
-| ------------- | ------ | -------------------------------------------------- |
-| NonRefundable | string | No refunds for cancellations.                      |
-| Flexible      | string | 100% refundable up to 24 hours before departure.   |
-| SuperFlexible | string | 100% refundable up to 15 minutes before departure. |
