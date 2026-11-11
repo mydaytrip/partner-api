@@ -507,7 +507,7 @@ curl -X POST "$BASE/trip/cancel" -H "x-api-key: $KEY" -H "Content-Type: applicat
 | 400 | The request is wrong: missing or mistyped field, passenger rules, both departure times, milliseconds. | Do not retry. Fix the request. Log `message`; it names the field. |
 | 401 | API key missing or invalid. | Do not retry. Configuration problem: alert your team. |
 | 403 | Not allowed: the option or booking belongs to another key, the departure is too close, or the key may not perform this action. | Do not retry. See the per-endpoint table. |
-| 404 | Option, booking or stop not found, or the option has expired. On search: an error, usually a wrong base URL or path. | Do not retry. On book or customize: search again. |
+| 404 | Option, booking or stop not found, or the option has expired. On search: an error, usually a wrong base URL or path. | Do not retry. On customize: search again. On book: follow the recovery procedure. |
 | 409 | Conflict with the current state: already booked, already cancelled, price changed. | Do not retry blindly. See the per-endpoint table. |
 | 429 | Rate limit. | Wait `Retry-After` seconds, then retry. |
 | 500, 503 | Daytrip-side failure. | Retry with exponential backoff, at most 3 attempts. For book, use the recovery procedure. |
@@ -520,13 +520,15 @@ Suggested client timeout: 30 seconds for search and book, which compute prices a
 
 Current `message` values are listed so you can log and display them. They can change; do not build control flow on them.
 
+For book, the actions in this table apply to a first attempt. After an attempt whose outcome you do not know, the recovery procedure below decides what to do: do not search again or book another option before it has.
+
 | Endpoint | Status | Current message | What it means and what to do |
 |---|---|---|---|
 | search | 400 | `Invalid passengers count` | Outside 1-7 (or 1-99 with multiple vehicles). Fix the input. |
 | search | 400 | `Invalid departure time` or a validation text | Both or neither departure time, or milliseconds. Fix the input. |
 | customize | 403 | `Trip option cannot be customized` | The option has no stops to add. Hide the stops UI for it. |
 | customize | 403 | `Forbidden` | The option was created with another API key. |
-| customize, book | 404 | `Trip option not found`, `Trip search has expired` | Unknown or expired option. Search again and show the new prices. |
+| customize, book | 404 | `Trip option not found`, `Trip search has expired` | Unknown or expired option. For customize, search again and show the new prices. For book, follow the recovery procedure: on a first attempt nothing was booked, so search again. |
 | customize | 404 | `Stop not found` | A stop id is not in the option's `possibleStops`, is repeated, or is already included. |
 | book, update | 400 | `Missing lead passenger`, `Multiple lead passengers` | Exactly one Lead is required. |
 | book, update | 400 | `Invalid passengers count`, `Invalid luggage count` | More travellers than the vehicle(s) can take. Offer a larger option. |
@@ -550,11 +552,12 @@ Before calling book, generate a unique `externalId` and save it with the `option
 
 1. Call `POST /trip/book`. Count the attempts you make for this `optionId`.
 2. **2xx:** save `bookingId` and `bookingReference`. Done.
-3. **400, 401, 403 or 404 on the first attempt:** the booking was not created. Do not retry. Report the failure.
-4. **Anything else:** 409, a timeout, a network error, 500, 502 or 503 on any attempt, and any answer other than 2xx on a retry. The booking may or may not exist. Call `GET /trip/external/details/{externalId}`.
+3. **429 on any attempt:** the request was rejected before it was processed, so it created nothing and does not count as an attempt. Wait `Retry-After` seconds and send it again.
+4. **400, 401, 403 or 404 on the first attempt:** the booking was not created. Do not retry. Report the failure.
+5. **Anything else:** 409, a timeout, a network error, 500, 502 or 503 on any attempt, and any answer other than 2xx or 429 on a retry. The booking may or may not exist. Call `GET /trip/external/details/{externalId}`.
    - **2xx and `trip.id` equals your `optionId` and `status` is `"Confirmed"`:** the booking exists. Save `bookingId` and `bookingReference` from it. Done.
    - **404, and you made one attempt, which answered 409:** nothing was booked under your `externalId`. The option cannot be booked any more (its price changed, or it was already booked). Search again and confirm the new price with the customer.
-   - **404, the last attempt timed out or answered 5xx, and you made fewer than 3 attempts:** retry the book call with the **same** `optionId` and `externalId` after a backoff (honour `Retry-After`), then continue from step 2. Step 3 no longer applies: it is for the first attempt only. A repeated book of the same option cannot create a second booking: it answers 409.
+   - **404, the last attempt timed out or answered 5xx, and you made fewer than 3 attempts:** retry the book call with the **same** `optionId` and `externalId` after a backoff (honour `Retry-After`), then continue from step 2. Step 4 no longer applies: it is for the first attempt only. A repeated book of the same option cannot create a second booking: it answers 409.
    - **404 in any other case:** a retry answered 4xx (409 included) after an attempt whose outcome you do not know, or the third attempt timed out or answered 5xx. The outcome is unknown, because an earlier attempt may have created the booking. Keep the order pending. Do not report a failure to the customer and do not book another option. Flag the order for manual review and contact Daytrip support with the `x-correlation-id` of each attempt.
    - **Anything else from the details call that is a definite answer** (2xx with a different `trip.id`, 2xx with `status: "Cancelled"`, or 403): your `externalId` is not unique or the state is not what you expect. Do not book again. Flag the order for manual review.
    - **The details call itself fails** (timeout, 429, 5xx): retry it with backoff. Do not tell the customer the booking failed until you have a definite answer; flag the order for manual review if you cannot get one.
