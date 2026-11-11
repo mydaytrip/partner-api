@@ -508,7 +508,7 @@ curl -X POST "$BASE/trip/cancel" -H "x-api-key: $KEY" -H "Content-Type: applicat
 | 502 | A service Daytrip depends on failed. Carries `Retry-After`. | Wait `Retry-After` seconds, then retry. For book, use the recovery procedure. |
 | timeout / network error | Outcome unknown. | Safe to retry GETs. For book, use the recovery procedure. |
 
-Suggested client timeout: 30 seconds for search and book, which compute prices and can be slow on long routes.
+Responses normally arrive within a few seconds. Set your client timeout comfortably above the response times you observe, and give book a longer timeout than search: a book call that times out on your side may still complete on Daytrip's side, which sends you into the recovery procedure below.
 
 ### By endpoint
 
@@ -557,7 +557,7 @@ Before calling book, generate a unique `externalId` and save it with the `option
    - **Anything else from the details call that is a definite answer** (2xx with a different `trip.id`, 2xx with `status: "Cancelled"`, or 403): your `externalId` is not unique or the state is not what you expect. Do not book again. Flag the order for manual review.
    - **The details call itself fails** (timeout, 429, 5xx): retry it with backoff. Do not tell the customer the booking failed until you have a definite answer; flag the order for manual review if you cannot get one.
 
-Never run two book calls for the same option at the same time.
+Never run two book calls for the same option at the same time. It happens more easily than it sounds: a customer double-clicks the Book button, or a retry starts while the first request is still in flight. Disable the button and lock on the `optionId` in your backend while a booking is in progress.
 
 ---
 
