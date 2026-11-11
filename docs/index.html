@@ -66,9 +66,9 @@
             <p>If you build your integration with an AI coding agent, see <a href="#ai-coding-agents">AI Coding Agents</a>.</p>
             <h2 id="contacts">Contacts</h2>
             <h3 id="onboarding">Onboarding</h3>
-            <p>If you want to integrate with our API, contact us at <a href="mailto:&#x70;&#97;&#x72;&#x74;&#110;&#101;&#x72;&#115;&#64;&#100;&#97;&#121;&#x74;&#x72;&#x69;&#x70;&#46;&#x63;&#x6f;&#109;">&#x70;&#97;&#x72;&#x74;&#110;&#101;&#x72;&#115;&#64;&#100;&#97;&#121;&#x74;&#x72;&#x69;&#x70;&#46;&#x63;&#x6f;&#109;</a> to get a partner account and an API key.</p>
+            <p>If you want to integrate with our API, contact us at <a href="mailto:&#x70;&#97;&#114;&#x74;&#110;&#x65;&#114;&#115;&#x40;&#100;&#97;&#121;&#116;&#114;&#105;&#x70;&#46;&#99;&#x6f;&#x6d;">&#x70;&#97;&#114;&#x74;&#110;&#x65;&#114;&#115;&#x40;&#100;&#97;&#121;&#116;&#114;&#105;&#x70;&#46;&#99;&#x6f;&#x6d;</a> to get a partner account and an API key.</p>
             <h3 id="customer-support-emergency">Customer support emergency</h3>
-            <p>To solve problems with bookings created via the API you can contact <a href="mailto:&#x64;&#97;&#121;&#x74;&#114;&#105;&#x70;&#x40;&#x64;&#97;&#121;&#116;&#x72;&#x69;&#112;&#x2e;&#x63;&#111;&#109;">&#x64;&#97;&#121;&#x74;&#114;&#105;&#x70;&#x40;&#x64;&#97;&#121;&#116;&#x72;&#x69;&#112;&#x2e;&#x63;&#111;&#109;</a> or call <a href="tel:+442033181119">+44 20 3318 1119</a> or <a href="tel:+16282019501">+1 628 201 9501</a>.</p>
+            <p>To solve problems with bookings created via the API you can contact <a href="mailto:&#100;&#97;&#121;&#x74;&#x72;&#x69;&#x70;&#x40;&#100;&#x61;&#x79;&#x74;&#114;&#105;&#x70;&#x2e;&#99;&#x6f;&#x6d;">&#100;&#97;&#121;&#x74;&#x72;&#x69;&#x70;&#x40;&#100;&#x61;&#x79;&#x74;&#114;&#105;&#x70;&#x2e;&#99;&#x6f;&#x6d;</a> or call <a href="tel:+442033181119">+44 20 3318 1119</a> or <a href="tel:+16282019501">+1 628 201 9501</a>.</p>
             <h1 id="ai-coding-agents">AI Coding Agents</h1>
             <p>If you build your integration with an AI coding agent such as Claude Code, give the agent the guide below instead of this reference. The guide is written for agents: it is one Markdown file, it needs no other page, and it states the rules that integrations most often get wrong.</p>
             <h2 id="trip-api-integration-guide">Trip API integration guide</h2>
@@ -206,7 +206,7 @@ https://mydaytrip.github.io/partner-api/trip-api-v3-agent-guide.md</code></pre>
             <p>If you are using correlation ids on your side as well, you can send us <code>x-correlation-id</code> header with your requests and we will use your own correlation id value.</p>
             <p><a href="https://microsoft.github.io/code-with-engineering-playbook/observability/correlation-id/">About correlation ids</a></p>
             <h1 id="trip-api">Trip API</h1>
-            <p>A trip is a representation of passenger transportation from point A to point B. Each search will usually return multiple trip options that can be booked. Options differ by vehicle type and by whether the driver speaks English. All options are private trips: pickup and dropoff points as well as departure time match the search request, except where a predefined meeting position applies. Private trips can also be customized by adding stops if available. Shared trips are no longer offered.</p>
+            <p>A trip is a representation of passenger transportation from point A to point B. Each search will usually return multiple trip options that can be booked. Options differ by vehicle type and by whether the driver speaks English. Pickup and dropoff points as well as departure time match the search request, except where a predefined meeting position applies. Trips can also be customized by adding stops if available.</p>
             <h2 id="flows">Flows</h2>
             <p>Trip API can be used to search for trip options, customizing an option with stops and then booking the option.</p>
             <h3 id="simple-trip">Simple trip</h3>
@@ -243,18 +243,18 @@ https://mydaytrip.github.io/partner-api/trip-api-v3-agent-guide.md</code></pre>
                <li><code>optional</code> - call <a href="#trip-details">/details</a> endpoint to get trip and booking details</li>
                <li>call <a href="#trip-update">/update</a> endpoint to update the booking details</li>
             </ol>
-            <p>Disclaimer: in the last 24 hours before the departure the <a href="#trip-update">/update</a> endpoint will no longer accept updates. For updates in the last 24 hours please contact our customer support at <a href="mailto:&#100;&#x61;&#x79;&#116;&#x72;&#x69;&#112;&#64;&#100;&#x61;&#121;&#116;&#x72;&#105;&#x70;&#x2e;&#99;&#111;&#x6d;">&#100;&#x61;&#x79;&#116;&#x72;&#x69;&#112;&#64;&#100;&#x61;&#121;&#116;&#x72;&#105;&#x70;&#x2e;&#99;&#111;&#x6d;</a> or call <a href="tel:+442033181119">+44 20 3318 1119</a>.</p>
+            <p>Disclaimer: in the last 24 hours before the departure the <a href="#trip-update">/update</a> endpoint will no longer accept updates. For updates in the last 24 hours please contact our customer support at <a href="mailto:&#100;&#x61;&#x79;&#x74;&#x72;&#105;&#112;&#x40;&#100;&#97;&#121;&#116;&#114;&#105;&#x70;&#46;&#x63;&#x6f;&#x6d;">&#100;&#x61;&#x79;&#x74;&#x72;&#105;&#112;&#x40;&#100;&#97;&#121;&#116;&#114;&#105;&#x70;&#46;&#x63;&#x6f;&#x6d;</a> or call <a href="tel:+442033181119">+44 20 3318 1119</a>.</p>
             <h2 id="trip-search">Trip Search</h2>
             <p>This endpoint returns all available trip options based on the specified origin, destination, departure time, and passenger count. The origin and destination can be provided either as geographic coordinates or as IATA airport codes. Geographic coordinates should be specified as latitude and longitude in decimal degrees format, for example: <code>39.753657</code>, <code>-117.610215</code>. The departure time must be supplied as a UNIX epoch timestamp in seconds (e.g., 1679463169).</p>
             <p>The examples use the departure time <code>1826353800</code> (2027-11-16T08:30:00Z). When you try them, use a departure time in the future: a search for a departure in the past or too close to now returns an empty list of options.</p>
             <p>The ids in the examples (<code>searchId</code>, the option <code>id</code>, <code>bookingId</code>) come from one run of the flow on the sandbox and no longer work. In your own requests use the ids from your own responses: the option <code>id</code> from your search, the new option <code>id</code> returned by <a href="#trip-customize">/customize</a>, and the <code>bookingId</code> returned by <a href="#trip-book">/book</a>. The examples follow that one booking in this order: search, customize, book, details, update, cancel. The details and update examples therefore show the booking as <code>Confirmed</code>, before it was cancelled.</p>
             <blockquote>
-               <p>To search for a private trip from Prague to Vienna for 3 passengers, use this call:</p>
+               <p>To search for a trip from Prague to Vienna for 3 passengers, use this call:</p>
             </blockquote>
             <pre class="highlight bash"><code>curl <span class="hljs-string">&quot;https://papi-staging.dynamic-environment.mydaytrip.net/partners/v3/trip/search?originLatitude=50.10&amp;originLongitude=14.2559&amp;destinationLatitude=48.2082&amp;destinationLongitude=16.3738&amp;departureTime=1826353800&amp;passengersCount=3&amp;childrenCount=1&quot;</span> \
   -H <span class="hljs-string">&quot;x-api-key: your_api_key&quot;</span></code></pre><pre class="highlight javascript"><code></code></pre><pre class="highlight python"><code></code></pre>
             <blockquote>
-               <p>To search for a private trip from Prague Airport to Vienna for 3 passengers, use this call:</p>
+               <p>To search for a trip from Prague Airport to Vienna for 3 passengers, use this call:</p>
             </blockquote>
             <pre class="highlight bash"><code>curl <span class="hljs-string">&quot;https://papi-staging.dynamic-environment.mydaytrip.net/partners/v3/trip/search?originType=iata&amp;origin=PRG&amp;destinationType=coordinates&amp;destinationLatitude=48.2082&amp;destinationLongitude=16.3738&amp;departureTime=1826353800&amp;passengersCount=3&amp;childrenCount=1&quot;</span> \
   -H <span class="hljs-string">&quot;x-api-key: your_api_key&quot;</span></code></pre><pre class="highlight javascript"><code></code></pre><pre class="highlight python"><code></code></pre>
@@ -687,7 +687,7 @@ https://mydaytrip.github.io/partner-api/trip-api-v3-agent-guide.md</code></pre>
     <span class="hljs-punctuation">]</span>
 <span class="hljs-punctuation">}</span></code></pre>
             <blockquote>
-               <p>To search for a private trip from Prague to Vienna for 10 passengers, with multiple vehicle options:</p>
+               <p>To search for a trip from Prague to Vienna for 10 passengers, with multiple vehicle options:</p>
             </blockquote>
             <pre class="highlight bash"><code>curl <span class="hljs-string">&quot;https://papi-staging.dynamic-environment.mydaytrip.net/partners/v3/trip/search?originLatitude=50.10&amp;originLongitude=14.2559&amp;destinationLatitude=48.2082&amp;destinationLongitude=16.3738&amp;departureTime=1826353800&amp;includeStops=false&amp;passengersCount=10&amp;includeMultipleVehicles=true&quot;</span> \
   -H <span class="hljs-string">&quot;x-api-key: your_api_key&quot;</span></code></pre><pre class="highlight javascript"><code></code></pre><pre class="highlight python"><code></code></pre>
@@ -870,11 +870,6 @@ https://mydaytrip.github.io/partner-api/trip-api-v3-agent-guide.md</code></pre>
                      <td>Optional. Defaults to <code>true</code>. When set to <code>false</code>, no stops will be included in the trip options.</td>
                   </tr>
                   <tr>
-                     <td>includeShared</td>
-                     <td>boolean</td>
-                     <td><strong>No effect.</strong> Shared trips are no longer offered. The parameter is accepted and ignored.</td>
-                  </tr>
-                  <tr>
                      <td>includeNonEnglishSpeaking</td>
                      <td>boolean</td>
                      <td>Optional. Defaults to <code>true</code>. When set to <code>false</code>, no trip options with non-English-speaking drivers will be included.</td>
@@ -950,9 +945,9 @@ https://mydaytrip.github.io/partner-api/trip-api-v3-agent-guide.md</code></pre>
                </tbody>
             </table>
             <h2 id="trip-customize">Trip Customize</h2>
-            <p>This endpoint is used to customize a trip option returned by the Search endpoint. The result is a new trip option with a new id that can be booked or customized again. The option you customized stays valid and can still be booked. The format of the response body is the same as for the Search endpoint, with the new option as the only item of <code>options</code>. Currently the only supported customization operation is selection of stops for private trips. The stops you send are added to the stops already included in the option you customize, and all of them appear in <code>includedStops</code> of the returned option. To change or reduce a selection, customize the original option from the Search endpoint again and send the complete list of stops you want: if you selected one stop and want two, send both stops in <code>selectedStops</code> with the id of the original option. To remove all stops, book the original option. <code>totalPrice</code> and <code>travelTimeMinutes</code> of the returned option reflect the selected stops. Always read the price from the returned option: it can differ slightly from the original price plus the prices of the stops.</p>
+            <p>This endpoint is used to customize a trip option returned by the Search endpoint. The result is a new trip option with a new id that can be booked or customized again. The option you customized stays valid and can still be booked. The format of the response body is the same as for the Search endpoint, with the new option as the only item of <code>options</code>. Currently the only supported customization operation is selection of stops. The stops you send are added to the stops already included in the option you customize, and all of them appear in <code>includedStops</code> of the returned option. To change or reduce a selection, customize the original option from the Search endpoint again and send the complete list of stops you want: if you selected one stop and want two, send both stops in <code>selectedStops</code> with the id of the original option. To remove all stops, book the original option. <code>totalPrice</code> and <code>travelTimeMinutes</code> of the returned option reflect the selected stops. Always read the price from the returned option: it can differ slightly from the original price plus the prices of the stops.</p>
             <blockquote>
-               <p>To add the Mikulov stop to the sedan vehicle type private trip option from the Search endpoint example above, use the following call:</p>
+               <p>To add the Mikulov stop to the sedan vehicle type trip option from the Search endpoint example above, use the following call:</p>
             </blockquote>
             <pre class="highlight bash"><code>curl -d <span class="hljs-string">&#x27;{
   &quot;optionId&quot;: &quot;d4cc185b-5861-41fe-a3bd-bef87a43b920&quot;,
@@ -1468,7 +1463,7 @@ https://mydaytrip.github.io/partner-api/trip-api-v3-agent-guide.md</code></pre>
                   <tr>
                      <td>departureTime</td>
                      <td>integer</td>
-                     <td>Optional. Departure time as a UNIX epoch timestamp in seconds to use instead of the <code>departureTime</code> provided to the <a href="#trip-search">/search</a>. You can only move departure time less than 24 hours into the past or into the future compared to the original <code>departureTime</code>, otherwise the booking will be rejected (403 HTTP status code). Also if the new price after changing the departure time would be different, booking will also get rejected. Such price change should be extremely rare but your integration should be ready for it if you are sending different <code>departureTime</code>. Note that UNIX timestamps are UTC so you need to convert from local time to UTC when calculating it. Change of the departure time is applicable only for the private trip.</td>
+                     <td>Optional. Departure time as a UNIX epoch timestamp in seconds to use instead of the <code>departureTime</code> provided to the <a href="#trip-search">/search</a>. You can only move departure time less than 24 hours into the past or into the future compared to the original <code>departureTime</code>, otherwise the booking will be rejected (403 HTTP status code). Also if the new price after changing the departure time would be different, booking will also get rejected. Such price change should be extremely rare but your integration should be ready for it if you are sending different <code>departureTime</code>. Note that UNIX timestamps are UTC so you need to convert from local time to UTC when calculating it.</td>
                   </tr>
                   <tr>
                      <td>departureTimeLocal</td>
@@ -1478,22 +1473,22 @@ https://mydaytrip.github.io/partner-api/trip-api-v3-agent-guide.md</code></pre>
                   <tr>
                      <td>pickUpAddressNote</td>
                      <td>string</td>
-                     <td>Pickup address or a note describing the pickup point. Optional, but should be provided if available at the booking time; otherwise, it should be provided via the <a href="#trip-update">/update</a> endpoint. Applicable only for the private trip. It will be ignored if the selected trip option already has a predefined meeting position that cannot be changed (immutable), i.e. the meeting position outside of a restricted area.</td>
+                     <td>Pickup address or a note describing the pickup point. Optional, but should be provided if available at the booking time; otherwise, it should be provided via the <a href="#trip-update">/update</a> endpoint. It will be ignored if the selected trip option already has a predefined meeting position that cannot be changed (immutable), i.e. the meeting position outside of a restricted area.</td>
                   </tr>
                   <tr>
                      <td>dropOffAddressNote</td>
                      <td>string</td>
-                     <td>Dropoff address or a note describing the dropoff point. Optional, but should be provided if available at the booking time; otherwise, it should be provided via the <a href="#trip-update">/update</a> endpoint. Applicable only for the private trip. It will be ignored if the selected trip option already has a predefined meeting position that cannot be changed (immutable), i.e. the meeting position outside of a restricted area.</td>
+                     <td>Dropoff address or a note describing the dropoff point. Optional, but should be provided if available at the booking time; otherwise, it should be provided via the <a href="#trip-update">/update</a> endpoint. It will be ignored if the selected trip option already has a predefined meeting position that cannot be changed (immutable), i.e. the meeting position outside of a restricted area.</td>
                   </tr>
                   <tr>
                      <td>customerNote</td>
                      <td>string</td>
-                     <td>Optional note for the driver not related to pickup or dropoff. Applicable only for the private trip. A note longer than 1024 characters is cut to that length. Send a flight number in <code>flightNumber</code>, not in the note.</td>
+                     <td>Optional note for the driver not related to pickup or dropoff. A note longer than 1024 characters is cut to that length. Send a flight number in <code>flightNumber</code>, not in the note.</td>
                   </tr>
                   <tr>
                      <td>flightNumber</td>
                      <td>string</td>
-                     <td>Optional flight number in case this is an airport pickup. Applicable only for the private trip. A flight number sent for a trip that ends at an airport is passed to the driver as a note and is not returned in <code>flightNumber</code> by the <a href="#trip-details">/details</a> endpoint.</td>
+                     <td>Optional flight number in case this is an airport pickup. A flight number sent for a trip that ends at an airport is passed to the driver as a note and is not returned in <code>flightNumber</code> by the <a href="#trip-details">/details</a> endpoint.</td>
                   </tr>
                   <tr>
                      <td>passengerDetails</td>
@@ -2048,12 +2043,12 @@ https://mydaytrip.github.io/partner-api/trip-api-v3-agent-guide.md</code></pre>
                   <tr>
                      <td>pickUpAddressNote</td>
                      <td>string</td>
-                     <td>Pickup address or a note describing the pickup point. Optional, but should be provided it it was unknown at the booking time. Applicable only for the private trip.</td>
+                     <td>Pickup address or a note describing the pickup point. Optional, but should be provided it it was unknown at the booking time.</td>
                   </tr>
                   <tr>
                      <td>dropOffAddressNote</td>
                      <td>string</td>
-                     <td>Dropoff address or a note describing the dropoff point. Optional, but should be provided it it was unknown at the booking time. Applicable only for the private trip.</td>
+                     <td>Dropoff address or a note describing the dropoff point. Optional, but should be provided it it was unknown at the booking time.</td>
                   </tr>
                   <tr>
                      <td>customerNote</td>
@@ -2307,7 +2302,7 @@ https://mydaytrip.github.io/partner-api/trip-api-v3-agent-guide.md</code></pre>
             <p><code>POST /partners/v3/trip/update</code></p>
             <h3 id="request-body-3">Request body</h3>
             <p>All properties except <code>bookingId</code> are optional, but the request must contain at least one of them with a non-empty value, otherwise it is rejected with the 400 HTTP status code. When a property is not included in the request it won&#39;t be updated and it will keep it&#39;s previous value. If you want to remove a property value like <code>customerNote</code> then send an empty string <code>&quot;&quot;</code> as the value, together with at least one other property that has a value (for example the unchanged <code>passengerDetails</code>). <code>flightNumber</code> can be changed but not removed. If you want to make changes to any passenger you need to provide full <code>passengerDetails</code> array - it&#39;s not possible to send only details of the passenger you want to update.</p>
-            <p>Disclaimer: in the last 24 hours before the departure the <a href="#trip-update">/update</a> endpoint will no longer accept updates. For updates in the last 24 hours please contact our customer support at <a href="mailto:&#x64;&#97;&#x79;&#116;&#x72;&#x69;&#112;&#x40;&#x64;&#x61;&#121;&#x74;&#x72;&#105;&#112;&#46;&#x63;&#111;&#109;">&#x64;&#97;&#x79;&#116;&#x72;&#x69;&#112;&#x40;&#x64;&#x61;&#121;&#x74;&#x72;&#105;&#112;&#46;&#x63;&#111;&#109;</a> or call <a href="tel:+442033181119">+44 20 3318 1119</a>.</p>
+            <p>Disclaimer: in the last 24 hours before the departure the <a href="#trip-update">/update</a> endpoint will no longer accept updates. For updates in the last 24 hours please contact our customer support at <a href="mailto:&#x64;&#x61;&#121;&#116;&#114;&#105;&#x70;&#x40;&#x64;&#x61;&#x79;&#x74;&#114;&#105;&#112;&#46;&#x63;&#111;&#x6d;">&#x64;&#x61;&#121;&#116;&#114;&#105;&#x70;&#x40;&#x64;&#x61;&#x79;&#x74;&#114;&#105;&#112;&#46;&#x63;&#111;&#x6d;</a> or call <a href="tel:+442033181119">+44 20 3318 1119</a>.</p>
             <table>
                <thead>
                   <tr>
@@ -2325,12 +2320,12 @@ https://mydaytrip.github.io/partner-api/trip-api-v3-agent-guide.md</code></pre>
                   <tr>
                      <td>pickUpAddressNote</td>
                      <td>string</td>
-                     <td>Pickup address or a note describing the pickup point. Optional, but should be provided if it was not provided at the booking time. Applicable only for the private trip. It will be ignored if the selected trip option already has a predefined meeting position that cannot be changed (immutable), i.e. the meeting position outside of a restricted area.</td>
+                     <td>Pickup address or a note describing the pickup point. Optional, but should be provided if it was not provided at the booking time. It will be ignored if the selected trip option already has a predefined meeting position that cannot be changed (immutable), i.e. the meeting position outside of a restricted area.</td>
                   </tr>
                   <tr>
                      <td>dropOffAddressNote</td>
                      <td>string</td>
-                     <td>Dropoff address or a note describing the dropoff point. Optional, but should be provided if it was not provided at the booking time. Applicable only for the private trip. It will be ignored if the selected trip option already has a predefined meeting position that cannot be changed (immutable), i.e. the meeting position outside of a restricted area.</td>
+                     <td>Dropoff address or a note describing the dropoff point. Optional, but should be provided if it was not provided at the booking time. It will be ignored if the selected trip option already has a predefined meeting position that cannot be changed (immutable), i.e. the meeting position outside of a restricted area.</td>
                   </tr>
                   <tr>
                      <td>customerNote</td>
@@ -2695,7 +2690,6 @@ https://mydaytrip.github.io/partner-api/trip-api-v3-agent-guide.md</code></pre>
             </table>
             <h2 id="trip-api-data-types">Trip API Data Types</h2>
             <p>Below is a documentation of all object entities returned by the Daytrip API endpoints.</p>
-            <p>Properties described as being for shared trips only are not returned at the moment, because shared trips are no longer offered.</p>
             <h3 id="tripoption">TripOption</h3>
             <table>
                <thead>
@@ -2714,7 +2708,7 @@ https://mydaytrip.github.io/partner-api/trip-api-v3-agent-guide.md</code></pre>
                   <tr>
                      <td>type</td>
                      <td>string</td>
-                     <td>Type of this option. Always &quot;Private&quot;: shared trips (&quot;Shared&quot;) are no longer offered.</td>
+                     <td>Type of this option. Always &quot;Private&quot;.</td>
                   </tr>
                   <tr>
                      <td>englishSpeakingDriver</td>
@@ -2762,11 +2756,6 @@ https://mydaytrip.github.io/partner-api/trip-api-v3-agent-guide.md</code></pre>
                      <td>Details about the luggage.</td>
                   </tr>
                   <tr>
-                     <td>seatsAvailable</td>
-                     <td>integer</td>
-                     <td>Number of available seats in the shared shuttle. Optional.</td>
-                  </tr>
-                  <tr>
                      <td>availableChildSeatTypes</td>
                      <td>list of <a href="#childseattype">ChildSeatType</a></td>
                      <td>List of available child seat types for this trip.</td>
@@ -2780,11 +2769,6 @@ https://mydaytrip.github.io/partner-api/trip-api-v3-agent-guide.md</code></pre>
                      <td>includedStops</td>
                      <td>list of <a href="#stop">Stop</a></td>
                      <td>Stops that are already included in this option.</td>
-                  </tr>
-                  <tr>
-                     <td>cancellationPolicy</td>
-                     <td>one of <a href="#cancellationpolicytype">CancellationPolicyType</a></td>
-                     <td>Cancellation policy for this trip option. Optional. Populated only for shared trips.</td>
                   </tr>
                   <tr>
                      <td>expiresAt</td>
@@ -2816,17 +2800,12 @@ https://mydaytrip.github.io/partner-api/trip-api-v3-agent-guide.md</code></pre>
                   <tr>
                      <td>time</td>
                      <td>string</td>
-                     <td>UTC timestamp of the departure or arrival time. Optional. For pickup only in case of the private trip. Always present for shared trips.</td>
-                  </tr>
-                  <tr>
-                     <td>interval</td>
-                     <td>object - <a href="#timeinterval">TimeInterval</a></td>
-                     <td>Estimated departure or arrival interval. Optional, for shared trips only.</td>
+                     <td>UTC timestamp of the departure time. Optional, for pickup only.</td>
                   </tr>
                   <tr>
                      <td>timezone</td>
                      <td>string</td>
-                     <td>IANA timezone matching the location. Presents if <code>time</code> or <code>interval</code> are present. Can be used to convert UTC timestamps from <code>time</code>/<code>interval</code> to local time.</td>
+                     <td>IANA timezone matching the location. Present if <code>time</code> is present. Can be used to convert the UTC timestamp from <code>time</code> to local time.</td>
                   </tr>
                   <tr>
                      <td>description</td>
@@ -2865,28 +2844,6 @@ https://mydaytrip.github.io/partner-api/trip-api-v3-agent-guide.md</code></pre>
                   </tr>
                </tbody>
             </table>
-            <h3 id="timeinterval">TimeInterval</h3>
-            <table>
-               <thead>
-                  <tr>
-                     <th>Property</th>
-                     <th>Type</th>
-                     <th>Description</th>
-                  </tr>
-               </thead>
-               <tbody>
-                  <tr>
-                     <td>earliest</td>
-                     <td>string</td>
-                     <td>UTC timestamp of the start of the interval.</td>
-                  </tr>
-                  <tr>
-                     <td>latest</td>
-                     <td>string</td>
-                     <td>UTC timestamp of the end of the interval.</td>
-                  </tr>
-               </tbody>
-            </table>
             <h3 id="pricing">Pricing</h3>
             <table>
                <thead>
@@ -2901,11 +2858,6 @@ https://mydaytrip.github.io/partner-api/trip-api-v3-agent-guide.md</code></pre>
                      <td>totalPrice</td>
                      <td>number</td>
                      <td>Total price of this option based on requested passenger count.</td>
-                  </tr>
-                  <tr>
-                     <td>pricePerPassenger</td>
-                     <td>number</td>
-                     <td>Price per passenger. Optional, for shared options only.</td>
                   </tr>
                </tbody>
             </table>
@@ -2922,7 +2874,7 @@ https://mydaytrip.github.io/partner-api/trip-api-v3-agent-guide.md</code></pre>
                   <tr>
                      <td>type</td>
                      <td>string</td>
-                     <td>Type of vehicle. &quot;Sedan&quot;, &quot;MPV&quot;, &quot;Van&quot;, &quot;PremiumVan&quot; or &quot;Luxury&quot;. &quot;Shuttle&quot; was used for shared trips only.</td>
+                     <td>Type of vehicle. &quot;Sedan&quot;, &quot;MPV&quot;, &quot;Van&quot;, &quot;PremiumVan&quot; or &quot;Luxury&quot;.</td>
                   </tr>
                   <tr>
                      <td>maxPassengers</td>
@@ -2965,16 +2917,6 @@ https://mydaytrip.github.io/partner-api/trip-api-v3-agent-guide.md</code></pre>
                      <td>maxTotalSuitcases</td>
                      <td>integer</td>
                      <td>Maximum amount of suitcases that passengers can bring on this trip.</td>
-                  </tr>
-                  <tr>
-                     <td>maxCarryonsPerPerson</td>
-                     <td>integer</td>
-                     <td>Maximum amount of carry-on luggage that one passenger can bring on this trip. Optional, for shared trips only.</td>
-                  </tr>
-                  <tr>
-                     <td>maxSuitcasesPerPerson</td>
-                     <td>integer</td>
-                     <td>Maximum amount of suitcases that one passenger can bring on this trip. Optional, for shared trips only.</td>
                   </tr>
                </tbody>
             </table>
@@ -3360,33 +3302,6 @@ https://mydaytrip.github.io/partner-api/trip-api-v3-agent-guide.md</code></pre>
                      <td>licensePlate</td>
                      <td>string</td>
                      <td>Optional. Licence plate of the vehicle if known.</td>
-                  </tr>
-               </tbody>
-            </table>
-            <h3 id="cancellationpolicytype">CancellationPolicyType</h3>
-            <table>
-               <thead>
-                  <tr>
-                     <th>Property</th>
-                     <th>Type</th>
-                     <th>Description</th>
-                  </tr>
-               </thead>
-               <tbody>
-                  <tr>
-                     <td>NonRefundable</td>
-                     <td>string</td>
-                     <td>No refunds for cancellations.</td>
-                  </tr>
-                  <tr>
-                     <td>Flexible</td>
-                     <td>string</td>
-                     <td>100% refundable up to 24 hours before departure.</td>
-                  </tr>
-                  <tr>
-                     <td>SuperFlexible</td>
-                     <td>string</td>
-                     <td>100% refundable up to 15 minutes before departure.</td>
                   </tr>
                </tbody>
             </table>
@@ -4120,7 +4035,7 @@ https://mydaytrip.github.io/partner-api/trip-api-v3-agent-guide.md</code></pre>
                   <tr>
                      <td>cancellationPolicy</td>
                      <td>string</td>
-                     <td>Cancellation policy: &quot;Flexible&quot;, &quot;SuperFlexible&quot;, or &quot;NonRefundable&quot;.</td>
+                     <td>Cancellation policy, one of <a href="#cancellationpolicytype">CancellationPolicyType</a>.</td>
                   </tr>
                   <tr>
                      <td>expiresAt</td>
@@ -4454,6 +4369,33 @@ https://mydaytrip.github.io/partner-api/trip-api-v3-agent-guide.md</code></pre>
                <li><strong>100% refundable</strong> when cancelled more than 24 hours before departure</li>
                <li><strong>No refund</strong> when cancelled within 24 hours of departure</li>
             </ul>
+            <h3 id="cancellationpolicytype">CancellationPolicyType</h3>
+            <table>
+               <thead>
+                  <tr>
+                     <th>Property</th>
+                     <th>Type</th>
+                     <th>Description</th>
+                  </tr>
+               </thead>
+               <tbody>
+                  <tr>
+                     <td>NonRefundable</td>
+                     <td>string</td>
+                     <td>No refunds for cancellations.</td>
+                  </tr>
+                  <tr>
+                     <td>Flexible</td>
+                     <td>string</td>
+                     <td>100% refundable up to 24 hours before departure.</td>
+                  </tr>
+                  <tr>
+                     <td>SuperFlexible</td>
+                     <td>string</td>
+                     <td>100% refundable up to 15 minutes before departure.</td>
+                  </tr>
+               </tbody>
+            </table>
             <h1 id="day-trips-api">Day Trips API</h1>
             <p>Day trips combine comfortable door‑to‑door transportation with guided sightseeing. Each product is a pre‑planned excursion with a fixed itinerary. Customers can discover available day trips by country or by geographic coordinates, inspect the full itinerary, and then book the trip for a specific departure time. Unlike the point‑to‑point trips from the Trip API, Day Trip products cannot be customized with additional stops or different routes – the itinerary and sightseeing stops are predefined.</p>
             <p>The Day Trips API allows partners to search, browse, and book curated day trip packages.</p>
@@ -5902,7 +5844,7 @@ https://mydaytrip.github.io/partner-api/trip-api-v3-agent-guide.md</code></pre>
             <p>You can send up to 2000 requests per minute to each endpoint. Requests over the limit are rejected with the 429 HTTP status code and a <code>Retry-After</code> header.</p>
             <h1 id="change-log">Change Log</h1>
             <ul>
-               <li><strong>2026-11-11</strong>: Trip API documentation corrected to match the API: shared trips are no longer offered and <code>includeShared</code> has no effect; the <a href="#trip-customize">/customize</a> endpoint adds the selected stops to the stops already included in the option; a search with no available trip returns an empty <code>options</code> list; rules for removing values with <a href="#trip-update">/update</a>; <code>expiresAt</code> of options; the 429 status code. Example requests and responses of the Trip API and the Hourly Ride search were replaced with ones that return data on the sandbox. Added the <a href="#ai-coding-agents">Trip API integration guide for AI coding agents</a>.</li>
+               <li><strong>2026-11-11</strong>: Trip API documentation corrected to match the API: shared trips are no longer offered, so they were removed from the documentation together with the <code>includeShared</code> parameter and the properties only they used; the <a href="#trip-customize">/customize</a> endpoint adds the selected stops to the stops already included in the option; a search with no available trip returns an empty <code>options</code> list; rules for removing values with <a href="#trip-update">/update</a>; <code>expiresAt</code> of options; the 429 status code. Example requests and responses of the Trip API and the Hourly Ride search were replaced with ones that return data on the sandbox. Added the <a href="#ai-coding-agents">Trip API integration guide for AI coding agents</a>.</li>
                <li><strong>2026-10-06</strong>: Added vehicle type <code>PremiumVan</code> to the Trip API and Hourly Ride API <a href="#vehicle">Vehicle</a> object. The <a href="#daytripvehicle">Day Trips API</a> returns the same vehicle as <code>premiumVan</code>.</li>
                <li><strong>2026-09-11</strong>: Trip API: added <code>over18</code> to <a href="#passengerdetail">PassengerDetail</a> as the way to confirm the lead passenger is an adult; <code>birthday</code> is deprecated and only required when <code>over18</code> is not sent. Responses now include <code>over18: true</code> for the lead passenger, matching the Hourly Ride API.</li>
                <li><strong>2025-12-02</strong>: Added Hourly Ride API endpoints documentation.</li>

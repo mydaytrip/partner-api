@@ -22,7 +22,7 @@ Hard rules. Each one prevents a bug that real integrations have shipped:
 8. **One option can be booked once.** To book the same trip again, search again.
 9. **After a timeout or a 5xx on booking, do not assume failure.** Follow the recovery procedure in section 7.
 10. **Branch on the HTTP status code.** `message` is for logs and for humans. Section 7 lists the current messages so you can show a useful text, but the recovery logic there never needs them.
-11. **Tolerate change.** Ignore unknown response fields. Treat `vehicle.type`, `type`, `status`, `adjustmentReason` and `cancellationPolicy` as open sets: an unknown value must not crash the client. Treat every field marked optional below as possibly absent.
+11. **Tolerate change.** Ignore unknown response fields. Treat `vehicle.type`, `type`, `status` and `adjustmentReason` as open sets: an unknown value must not crash the client. Treat every field marked optional below as possibly absent.
 12. **Prices are decimal numbers in the response `currency`**, not integers and not minor units (`260` means 260.00, and `259.5` is possible). The API takes no payment: you charge your customer, Daytrip invoices you.
 13. **There are no webhooks.** Read state with the details, drivers and tracking endpoints.
 
@@ -134,20 +134,16 @@ type TripOption = {
     travelTimeMinutes: number;         // includes the duration of included stops
     pickUp: TripLocation;
     dropOff: TripLocation;
-    pricing: { totalPrice: number; pricePerPassenger?: number };
+    pricing: { totalPrice: number };
     vehicle?: Vehicle;                 // present when the search was made WITHOUT includeMultipleVehicles=true
     vehicles?: Vehicle[];              // present when the search was made WITH includeMultipleVehicles=true
     luggage: {
         maxTotalCarryons: number;
         maxTotalSuitcases: number;
-        maxCarryonsPerPerson?: number;
-        maxSuitcasesPerPerson?: number;
     };
     availableChildSeatTypes: ChildSeatType[];
     possibleStops: Stop[];             // stops you can add with customize
     includedStops: Stop[];             // stops already in this option and in its totalPrice
-    seatsAvailable?: number;
-    cancellationPolicy?: string;       // "NonRefundable" | "Flexible" | "SuperFlexible"; usually absent
     expiresAt?: string;                // after this time the option cannot be booked
 };
 
@@ -155,8 +151,7 @@ type TripLocation = {
     lat: number;
     lon: number;
     time?: string;                     // pickup only: departure, UTC
-    interval?: { earliest: string; latest: string };
-    timezone?: string;                 // IANA zone, present when time or interval is present
+    timezone?: string;                 // IANA zone, present when time is present
     description?: string;              // name of the predefined point, when adjusted
     address?: string;
     image?: string;                    // photo URL of the predefined point
@@ -167,7 +162,7 @@ type TripLocation = {
 };
 
 type Vehicle = {
-    type: string;                      // today: "Sedan" | "MPV" | "Van" | "PremiumVan" | "Luxury" | "Shuttle"
+    type: string;                      // today: "Sedan" | "MPV" | "Van" | "PremiumVan" | "Luxury"
     maxPassengers: number;
     description: string;
     modelDescription: string;          // e.g. "VW Passat or similar"
@@ -368,7 +363,6 @@ When several validation rules fail, `message` holds all of them joined with `"; 
 - **`vehicle` or `vehicles` depends on how you searched**, not on the option. A search with `includeMultipleVehicles=true` returns `vehicles` (an array, also for single-vehicle options) and no `vehicle`. A search without it returns `vehicle` and no `vehicles`. The same holds for the `trip` object in book, details and update responses of that booking. Write one accessor that normalises both to an array.
 - **Capacity of an option** is the sum of `maxPassengers` over its vehicles.
 - **`englishSpeakingDriver: false`** options are cheaper, and usually offer no stops. Show the flag to the customer, or search with `includeNonEnglishSpeaking=false`.
-- **Shared (shuttle) trips** are not returned at present: every option has `type: "Private"`, and the `includeShared` query parameter has no effect. The fields `interval`, `pricePerPassenger`, `seatsAvailable`, `cancellationPolicy` and the per-person luggage limits belong to shared trips; keep them optional. If you see an option with a `type` you do not handle, leave it out.
 - **Child seats** are requested per child at booking. The four seat types in `availableChildSeatTypes` come with age and weight ranges you can show in your UI.
 
 ### Adjusted pickup and drop-off points
