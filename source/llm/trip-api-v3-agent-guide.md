@@ -49,7 +49,7 @@ Headers:
 | `x-correlation-id` | response, always | Log it with every call. Daytrip support needs it to trace a request. |
 | `Retry-After` | response, on 429 and 502 | Seconds to wait before retrying. |
 
-Rate limit: 2,000 requests per minute per API key, counted separately for each endpoint. Over the limit you get 429 with `Retry-After`. Responses also carry `X-RateLimit-Limit`, `X-RateLimit-Remaining` and `X-RateLimit-Reset`.
+Rate limit: 2,000 requests per minute per API key, counted separately for each endpoint. Over the limit you get 429 with `Retry-After`. Keep your own count of requests and stay under the limit. Do not pace requests by the `X-RateLimit-*` response headers: their values are not a reliable picture of what you have left.
 
 Success is any 2xx status: GET endpoints answer 200 and POST endpoints answer 201. Do not test for `=== 200`.
 
@@ -377,7 +377,7 @@ Some places cannot be reached by car or have a fixed meeting point (old towns, p
 
 ### Customize (stops)
 
-- Only options that list `possibleStops` can be customized. For any other option the call fails with 403 or 404. Hide the stops UI when `possibleStops` is empty.
+- Only options that list `possibleStops` have stops to add. Sending a stop id to an option without them fails with 403 or 404, so hide the stops UI when `possibleStops` is empty.
 - The result is a **new option with a new id**. Book that id. The original option stays valid and can still be booked or customized.
 - **The stops you send are added to the stops already included in the option you pass.** To get a predictable result, always customize the **original option from the search** (the one with empty `includedStops`) and send the **complete list** of stops you want:
   - change the selection: customize the original option again with the new full list;
@@ -392,7 +392,7 @@ Some places cannot be reached by car or have a fixed meeting point (old towns, p
 - **Several vehicles.** The number of non-child passengers (Lead plus Adults) must be at least the number of vehicles.
 - **Luggage** is not sent. One suitcase and one carry-on per passenger is assumed. Show `luggage.maxTotalSuitcases` and `maxTotalCarryons` to the customer when they choose a vehicle.
 - **Address notes.** Send `pickUpAddressNote` and `dropOffAddressNote` whenever you have them (hotel name, street and number, terminal). If you do not have them at booking time, send them later with update.
-- **Flight number.** Send it in `flightNumber` for airport pickups; it is used to follow the flight. If you send a flight number for a trip that *ends* at an airport, it is passed to the driver as a note and is **not** returned in `flightNumber` by the details endpoint. Do not treat that as a lost value.
+- **Flight number.** Send it in `flightNumber` for airport pickups; it is used to follow the flight. If you send a flight number for a trip that starts away from an airport and *ends* at one, it is passed to the driver as a note and is **not** returned in `flightNumber` by the details endpoint. Do not treat that as a lost value.
 - **Customer note.** Plain text for the driver. Daytrip may clean it: a flight number or template fragments found in the note can be moved out of it, so the note you read back can differ from the one you sent.
 - **Changing the departure time at booking** (`departureTime` / `departureTimeLocal` in the book request) is allowed only for a shift of less than 24 hours from the searched time, and can fail with 403 (too soon, or shift too large) or 409 (the price is different at the new time). Preferred: when the customer changes the time, run a new search and book the new option.
 - **Confirmation.** A successful booking is confirmed immediately. There is no pending state.
@@ -520,12 +520,13 @@ For book, the actions in this table apply to a first attempt. After an attempt w
 |---|---|---|---|
 | search | 400 | `Invalid passengers count` | Outside 1-7 (or 1-99 with multiple vehicles). Fix the input. |
 | search | 400 | `Invalid departure time` or a validation text | Both or neither departure time, or milliseconds. Fix the input. |
-| customize | 403 | `Trip option cannot be customized` | The option has no stops to add. Hide the stops UI for it. |
+| customize | 403 | `Trip option cannot be customized` | The option does not support stops: it is not on a route with predefined stops, and its `possibleStops` is empty. Hide the stops UI for it. |
 | customize | 403 | `Forbidden` | The option was created with another API key. |
 | customize, book | 404 | `Trip option not found`, `Trip search has expired` | Unknown or expired option. For customize, search again and show the new prices. For book, follow the recovery procedure: on a first attempt nothing was booked, so search again. |
 | customize | 404 | `Stop not found` | A stop id is not in the option's `possibleStops`, is repeated, or is already included. |
 | book, update | 400 | `Missing lead passenger`, `Multiple lead passengers` | Exactly one Lead is required. |
-| book, update | 400 | `Invalid passengers count`, `Invalid luggage count` | More travellers than the vehicle(s) can take. Offer a larger option. |
+| book, update | 400 | `Invalid passengers count` | More travellers than the vehicle(s) can take. Offer a larger option. |
+| book | 400 | `Invalid luggage count` | More luggage than the vehicle(s) can take. Offer a larger option. |
 | book | 400 | `At least one adult passenger is required per vehicle` | Fewer non-child passengers than vehicles. |
 | book | 403 | `Departure too soon` | The departure is now inside the minimum notice. Search again; the trip may no longer be available. |
 | book | 403 | `Departure time change not allowed` | The time sent on book is 24 hours or more from the searched time. Search again with the new time. |
@@ -551,7 +552,7 @@ Before calling book, generate a unique `externalId` and save it with the `option
 5. **Anything else:** 409, a timeout, a network error, 500, 502 or 503 on any attempt, and any answer other than 2xx or 429 on a retry. The booking may or may not exist. Call `GET /trip/external/details/{externalId}`.
    - **2xx and `trip.id` equals your `optionId` and `status` is `"Confirmed"`:** the booking exists. Save `bookingId` and `bookingReference` from it. Done.
    - **404, and you made one attempt, which answered 409:** nothing was booked under your `externalId`. The option cannot be booked any more (its price changed, or it was already booked). Search again and confirm the new price with the customer.
-   - **404, the last attempt timed out or answered 5xx, and you made fewer than 3 attempts:** retry the book call with the **same** `optionId` and `externalId` after a backoff (honour `Retry-After`), then continue from step 2. Step 4 no longer applies: it is for the first attempt only. A repeated book of the same option cannot create a second booking: it answers 409.
+   - **404, the last attempt timed out or answered 5xx, and you made fewer than 3 attempts:** the attempt may still be running on Daytrip's side. Wait until at least 60 seconds have passed since you sent it (and honour `Retry-After`), run the lookup once more, and only if it still answers 404 retry the book call with the **same** `optionId` and `externalId`, then continue from step 2. Step 4 no longer applies: it is for the first attempt only. Once the earlier attempt has finished, a repeated book of the same option answers 409. While it is still running, a second call can create a second booking, which is why you wait and look up first.
    - **404 in any other case:** a retry answered 4xx (409 included) after an attempt whose outcome you do not know, or the third attempt timed out or answered 5xx. The outcome is unknown, because an earlier attempt may have created the booking. Keep the order pending. Do not report a failure to the customer and do not book another option. Flag the order for manual review and contact Daytrip support with the `x-correlation-id` of each attempt.
    - **Anything else from the details call that is a definite answer** (2xx with a different `trip.id`, 2xx with `status: "Cancelled"`, or 403): your `externalId` is not unique or the state is not what you expect. Do not book again. Flag the order for manual review.
    - **The details call itself fails** (timeout, 429, 5xx): retry it with backoff. Do not tell the customer the booking failed until you have a definite answer; flag the order for manual review if you cannot get one.
@@ -580,7 +581,7 @@ Run these against the sandbox before requesting a production key. Use a departur
 6. `departureTime` and `departureTimeLocal` for the same wall-clock time give the same `pickUp.time`.
 7. Customize the original option with two stops; the new option has a new id, both stops in `includedStops`, a higher `totalPrice` and a longer `travelTimeMinutes`. Customize the original again with one stop; the result has exactly that one stop.
 8. Book with Lead + Adult + Child; store ids; details returns `status: "Confirmed"` and the same passengers.
-9. Book the same option again: 409. Your recovery procedure finds the existing booking by `externalId`.
+9. Book the same option again with the same `externalId`: 409. Your recovery procedure finds the existing booking by `externalId`.
 10. Book with `over18: false`, with a phone without `+`, and with two Leads: each is a 400 that your form validation would have caught first.
 11. Book with more passengers than the vehicle capacity: 400.
 12. Details by `externalId` returns the same booking as details by `bookingId`.
