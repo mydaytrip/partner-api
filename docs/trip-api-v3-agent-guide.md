@@ -361,7 +361,7 @@ When several validation rules fail, `message` holds all of them joined with `"; 
 
 ### Search
 
-- **No service is `200` with `options: []`.** This covers: no coverage between the two points, an unknown IATA code, coordinates `0,0`, a date on which the route is not sold, and a departure that is too soon. Show "not available" and let the user change the request. Do not retry. Treat a 404 on search the same way.
+- **No service is `200` with `options: []`.** This covers: no coverage between the two points, an unknown IATA code, coordinates `0,0`, a date on which the route is not sold, and a departure that is too soon. Show "not available" and let the user change the request. Do not retry. Only a 200 with empty `options` means no service: any other status on search, a 404 included, is an error to handle as in section 7.
 - **Lead time.** Trips cannot be booked at short notice. The minimum notice is set per route and vehicle type and is commonly between one and two days. Do not hard-code it: a search for a departure that is too soon simply returns no options (or fewer vehicle types).
 - **Passenger count.** 1 to 7 without `includeMultipleVehicles=true`, 1 to 99 with it. Outside the range is a 400. For groups above 7, search with `includeMultipleVehicles=true`.
 - **`vehicle` or `vehicles` depends on how you searched**, not on the option. A search with `includeMultipleVehicles=true` returns `vehicles` (an array, also for single-vehicle options) and no `vehicle`. A search without it returns `vehicle` and no `vehicles`. The same holds for the `trip` object in book, details and update responses of that booking. Write one accessor that normalises both to an array.
@@ -506,7 +506,7 @@ curl -X POST "$BASE/trip/cancel" -H "x-api-key: $KEY" -H "Content-Type: applicat
 | 400 | The request is wrong: missing or mistyped field, passenger rules, both departure times, milliseconds. | Do not retry. Fix the request. Log `message`; it names the field. |
 | 401 | API key missing or invalid. | Do not retry. Configuration problem: alert your team. |
 | 403 | Not allowed: the option or booking belongs to another key, the departure is too close, or the key may not perform this action. | Do not retry. See the per-endpoint table. |
-| 404 | Option, booking or stop not found, or the option has expired. On search: no service. | Do not retry. On book or customize: search again. |
+| 404 | Option, booking or stop not found, or the option has expired. On search: an error, usually a wrong base URL or path. | Do not retry. On book or customize: search again. |
 | 409 | Conflict with the current state: already booked, already cancelled, price changed. | Do not retry blindly. See the per-endpoint table. |
 | 429 | Rate limit. | Wait `Retry-After` seconds, then retry. |
 | 500, 503 | Daytrip-side failure. | Retry with exponential backoff, at most 3 attempts. For book, use the recovery procedure. |
@@ -547,14 +547,14 @@ Booking is the one call where "I do not know whether it worked" costs money: ret
 
 Before calling book, generate a unique `externalId` and save it with the `optionId` in your own database. Turn off automatic retries in your HTTP library for `POST /trip/book`: the steps below depend on knowing which attempt you are on.
 
-1. Call `POST /trip/book`.
+1. Call `POST /trip/book`. Count the attempts you make for this `optionId`.
 2. **2xx:** save `bookingId` and `bookingReference`. Done.
-3. **400, 401, 403, 404:** the booking was not created. Do not retry. Report the failure.
-4. **409, timeout, network error, 500, 502, 503:** the booking may or may not exist. Call `GET /trip/external/details/{externalId}`.
+3. **400, 401, 403 or 404 on the first attempt:** the booking was not created. Do not retry. Report the failure.
+4. **Anything else:** 409, a timeout, a network error, 500, 502 or 503 on any attempt, and any answer other than 2xx on a retry. The booking may or may not exist. Call `GET /trip/external/details/{externalId}`.
    - **2xx and `trip.id` equals your `optionId` and `status` is `"Confirmed"`:** the booking exists. Save `bookingId` and `bookingReference` from it. Done.
-   - **404, and the book call was your first attempt and answered 409:** nothing was booked under your `externalId`. The option cannot be booked any more (its price changed, or it was already booked). Search again and confirm the new price with the customer.
-   - **404, and the book call timed out or answered 5xx:** retry the book call with the **same** `optionId` and `externalId` after a backoff (honour `Retry-After`), at most 3 attempts in total, running step 4 after each attempt. A repeated book of the same option cannot create a second booking: it answers 409.
-   - **404, and a retry answered 409 after an earlier attempt with unknown outcome:** the earlier attempt may have created the booking. Do not book another option. Flag the order for manual review and contact Daytrip support with the `x-correlation-id` of each attempt.
+   - **404, and you made one attempt, which answered 409:** nothing was booked under your `externalId`. The option cannot be booked any more (its price changed, or it was already booked). Search again and confirm the new price with the customer.
+   - **404, the last attempt timed out or answered 5xx, and you made fewer than 3 attempts:** retry the book call with the **same** `optionId` and `externalId` after a backoff (honour `Retry-After`), then continue from step 2. Step 3 no longer applies: it is for the first attempt only. A repeated book of the same option cannot create a second booking: it answers 409.
+   - **404 in any other case:** a retry answered 4xx (409 included) after an attempt whose outcome you do not know, or the third attempt timed out or answered 5xx. The outcome is unknown, because an earlier attempt may have created the booking. Keep the order pending. Do not report a failure to the customer and do not book another option. Flag the order for manual review and contact Daytrip support with the `x-correlation-id` of each attempt.
    - **Anything else from the details call that is a definite answer** (2xx with a different `trip.id`, 2xx with `status: "Cancelled"`, or 403): your `externalId` is not unique or the state is not what you expect. Do not book again. Flag the order for manual review.
    - **The details call itself fails** (timeout, 429, 5xx): retry it with backoff. Do not tell the customer the booking failed until you have a definite answer; flag the order for manual review if you cannot get one.
 

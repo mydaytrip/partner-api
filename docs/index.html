@@ -64,12 +64,12 @@
                <li>Update or cancel existing day trip bookings.</li>
             </ul>
             <h3 id="integrating-with-an-ai-coding-agent">Integrating with an AI coding agent</h3>
-            <p>If you build your integration with an AI coding agent such as Claude Code, give it the <a href="trip-api-v3-agent-guide.md">Trip API integration guide for AI coding agents</a>. It is a single Markdown file with the rules, types, error handling and test checklist an agent needs to implement a correct Trip API client. An index for agents is published at <a href="llms.txt">llms.txt</a>.</p>
+            <p>If you build your integration with an AI coding agent such as Claude Code, give it the <a href="https://mydaytrip.github.io/partner-api/trip-api-v3-agent-guide.md">Trip API integration guide for AI coding agents</a>. It is a single Markdown file with the rules, types, error handling and test checklist an agent needs to implement a correct Trip API client. An index for agents is published at <a href="https://mydaytrip.github.io/partner-api/llms.txt">llms.txt</a>.</p>
             <h2 id="contacts">Contacts</h2>
             <h3 id="onboarding">Onboarding</h3>
-            <p>If you want to integrate with our API, contact us at <a href="mailto:&#112;&#x61;&#114;&#116;&#110;&#101;&#114;&#115;&#x40;&#x64;&#x61;&#121;&#x74;&#114;&#105;&#x70;&#46;&#x63;&#x6f;&#109;">&#112;&#x61;&#114;&#116;&#110;&#101;&#114;&#115;&#x40;&#x64;&#x61;&#121;&#x74;&#114;&#105;&#x70;&#46;&#x63;&#x6f;&#109;</a> to get a partner account and an API key.</p>
+            <p>If you want to integrate with our API, contact us at <a href="mailto:&#x70;&#97;&#x72;&#x74;&#x6e;&#x65;&#114;&#x73;&#64;&#x64;&#97;&#x79;&#x74;&#x72;&#105;&#x70;&#x2e;&#99;&#111;&#109;">&#x70;&#97;&#x72;&#x74;&#x6e;&#x65;&#114;&#x73;&#64;&#x64;&#97;&#x79;&#x74;&#x72;&#105;&#x70;&#x2e;&#99;&#111;&#109;</a> to get a partner account and an API key.</p>
             <h3 id="customer-support-emergency">Customer support emergency</h3>
-            <p>To solve problems with bookings created via the API you can contact <a href="mailto:&#x64;&#97;&#x79;&#x74;&#114;&#x69;&#x70;&#64;&#x64;&#97;&#x79;&#x74;&#114;&#105;&#112;&#x2e;&#x63;&#111;&#x6d;">&#x64;&#97;&#x79;&#x74;&#114;&#x69;&#x70;&#64;&#x64;&#97;&#x79;&#x74;&#114;&#105;&#112;&#x2e;&#x63;&#111;&#x6d;</a> or call <a href="tel:+442033181119">+44 20 3318 1119</a> or <a href="tel:+16282019501">+1 628 201 9501</a>.</p>
+            <p>To solve problems with bookings created via the API you can contact <a href="mailto:&#100;&#x61;&#121;&#x74;&#x72;&#105;&#x70;&#64;&#100;&#x61;&#121;&#x74;&#x72;&#105;&#x70;&#46;&#99;&#x6f;&#109;">&#100;&#x61;&#121;&#x74;&#x72;&#105;&#x70;&#64;&#100;&#x61;&#121;&#x74;&#x72;&#105;&#x70;&#46;&#99;&#x6f;&#109;</a> or call <a href="tel:+442033181119">+44 20 3318 1119</a> or <a href="tel:+16282019501">+1 628 201 9501</a>.</p>
             <h1 id="environments">Environments</h1>
             <p>Daytrip offers a sandbox environment where you can test your integration with the API without creating real bookings. All the code examples provided in this documentation are using this sandbox environment. Each environment requires a different API key. When your integration is ready and tested against the sandbox environment, you can request an API key for the production environment.</p>
             <h2 id="urls">URLs</h2>
@@ -127,7 +127,7 @@
                   </tr>
                   <tr>
                      <td>404</td>
-                     <td>Not Found - No trips found, trip option not found, booking not found, endpoint does not exist.</td>
+                     <td>Not Found - Trip option not found or expired, booking not found, stop not found, no day trip location found, endpoint does not exist. A Trip API search with no available trip is not an error: it returns 200 with an empty <code>options</code> list.</td>
                   </tr>
                   <tr>
                      <td>409</td>
@@ -223,7 +223,7 @@
                <li><code>optional</code> - call <a href="#trip-details">/details</a> endpoint to get trip and booking details</li>
                <li>call <a href="#trip-update">/update</a> endpoint to update the booking details</li>
             </ol>
-            <p>Disclaimer: in the last 24 hours before the departure the <a href="#trip-update">/update</a> endpoint will no longer accept updates. For updates in the last 24 hours please contact our customer support at <a href="mailto:&#x64;&#97;&#121;&#116;&#x72;&#105;&#112;&#64;&#100;&#x61;&#121;&#116;&#x72;&#105;&#x70;&#x2e;&#99;&#111;&#109;">&#x64;&#97;&#121;&#116;&#x72;&#105;&#112;&#64;&#100;&#x61;&#121;&#116;&#x72;&#105;&#x70;&#x2e;&#99;&#111;&#109;</a> or call <a href="tel:+442033181119">+44 20 3318 1119</a>.</p>
+            <p>Disclaimer: in the last 24 hours before the departure the <a href="#trip-update">/update</a> endpoint will no longer accept updates. For updates in the last 24 hours please contact our customer support at <a href="mailto:&#100;&#97;&#x79;&#116;&#x72;&#105;&#x70;&#x40;&#x64;&#97;&#x79;&#116;&#114;&#x69;&#112;&#x2e;&#99;&#x6f;&#x6d;">&#100;&#97;&#x79;&#116;&#x72;&#105;&#x70;&#x40;&#x64;&#97;&#x79;&#116;&#114;&#x69;&#112;&#x2e;&#99;&#x6f;&#x6d;</a> or call <a href="tel:+442033181119">+44 20 3318 1119</a>.</p>
             <h2 id="trip-search">Trip Search</h2>
             <p>This endpoint returns all available trip options based on the specified origin, destination, departure time, and passenger count. The origin and destination can be provided either as geographic coordinates or as IATA airport codes. Geographic coordinates should be specified as latitude and longitude in decimal degrees format, for example: <code>39.753657</code>, <code>-117.610215</code>. The departure time must be supplied as a UNIX epoch timestamp in seconds (e.g., 1679463169).</p>
             <blockquote>
@@ -1957,7 +1957,7 @@
             <p><code>POST /partners/v3/trip/update</code></p>
             <h3 id="request-body-3">Request body</h3>
             <p>All properties except <code>bookingId</code> are optional, but the request must contain at least one of them with a non-empty value, otherwise it is rejected with the 400 HTTP status code. When a property is not included in the request it won&#39;t be updated and it will keep it&#39;s previous value. If you want to remove a property value like <code>customerNote</code> then send an empty string <code>&quot;&quot;</code> as the value, together with at least one other property that has a value (for example the unchanged <code>passengerDetails</code>). <code>flightNumber</code> can be changed but not removed. If you want to make changes to any passenger you need to provide full <code>passengerDetails</code> array - it&#39;s not possible to send only details of the passenger you want to update.</p>
-            <p>Disclaimer: in the last 24 hours before the departure the <a href="#trip-update">/update</a> endpoint will no longer accept updates. For updates in the last 24 hours please contact our customer support at <a href="mailto:&#100;&#97;&#x79;&#x74;&#x72;&#105;&#x70;&#64;&#x64;&#x61;&#121;&#x74;&#x72;&#x69;&#112;&#x2e;&#x63;&#x6f;&#109;">&#100;&#97;&#x79;&#x74;&#x72;&#105;&#x70;&#64;&#x64;&#x61;&#121;&#x74;&#x72;&#x69;&#112;&#x2e;&#x63;&#x6f;&#109;</a> or call <a href="tel:+442033181119">+44 20 3318 1119</a>.</p>
+            <p>Disclaimer: in the last 24 hours before the departure the <a href="#trip-update">/update</a> endpoint will no longer accept updates. For updates in the last 24 hours please contact our customer support at <a href="mailto:&#x64;&#97;&#x79;&#x74;&#x72;&#x69;&#x70;&#64;&#x64;&#97;&#121;&#116;&#114;&#105;&#x70;&#46;&#x63;&#111;&#x6d;">&#x64;&#97;&#x79;&#x74;&#x72;&#x69;&#x70;&#64;&#x64;&#97;&#121;&#116;&#114;&#105;&#x70;&#46;&#x63;&#111;&#x6d;</a> or call <a href="tel:+442033181119">+44 20 3318 1119</a>.</p>
             <table>
                <thead>
                   <tr>
@@ -5557,7 +5557,7 @@
             <p>You can send up to 2000 requests per minute to each endpoint. Requests over the limit are rejected with the 429 HTTP status code and a <code>Retry-After</code> header.</p>
             <h1 id="change-log">Change Log</h1>
             <ul>
-               <li><strong>2026-11-11</strong>: Trip API documentation corrected to match the API: shared trips are no longer offered and <code>includeShared</code> has no effect; the <a href="#trip-customize">/customize</a> endpoint adds the selected stops to the stops already included in the option; a search with no available trip returns an empty <code>options</code> list; rules for removing values with <a href="#trip-update">/update</a>; <code>expiresAt</code> of options; the 429 status code. Added the <a href="trip-api-v3-agent-guide.md">Trip API integration guide for AI coding agents</a>.</li>
+               <li><strong>2026-11-11</strong>: Trip API documentation corrected to match the API: shared trips are no longer offered and <code>includeShared</code> has no effect; the <a href="#trip-customize">/customize</a> endpoint adds the selected stops to the stops already included in the option; a search with no available trip returns an empty <code>options</code> list; rules for removing values with <a href="#trip-update">/update</a>; <code>expiresAt</code> of options; the 429 status code. Added the <a href="https://mydaytrip.github.io/partner-api/trip-api-v3-agent-guide.md">Trip API integration guide for AI coding agents</a>.</li>
                <li><strong>2026-10-06</strong>: Added vehicle type <code>PremiumVan</code> to the Trip API and Hourly Ride API <a href="#vehicle">Vehicle</a> object. The <a href="#daytripvehicle">Day Trips API</a> returns the same vehicle as <code>premiumVan</code>.</li>
                <li><strong>2026-09-11</strong>: Trip API: added <code>over18</code> to <a href="#passengerdetail">PassengerDetail</a> as the way to confirm the lead passenger is an adult; <code>birthday</code> is deprecated and only required when <code>over18</code> is not sent. Responses now include <code>over18: true</code> for the lead passenger, matching the Hourly Ride API.</li>
                <li><strong>2025-12-02</strong>: Added Hourly Ride API endpoints documentation.</li>
