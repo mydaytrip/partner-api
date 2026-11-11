@@ -34,7 +34,7 @@ This endpoint returns all available hourly ride options based on the specified p
 > To search for an hourly ride in Prague for 3 passengers for 6 hours, use this call:
 
 ```bash
-curl "https://papi-staging.dynamic-environment.mydaytrip.net/partners/v1/hourly-rides/search?originType=iata&origin=PRG&departureTime=1769855400&hoursRented=6&passengersCount=3&childrenCount=1" \
+curl "https://papi-staging.dynamic-environment.mydaytrip.net/partners/v1/hourly-rides/search?originType=iata&origin=PRG&departureTime=1826353800&hoursRented=6&passengersCount=3&childrenCount=1" \
   -H "x-api-key: your_api_key"
 ```
 
@@ -46,10 +46,10 @@ curl "https://papi-staging.dynamic-environment.mydaytrip.net/partners/v1/hourly-
 
 ```
 
-> To search for an hourly ride from Dubrovnik Old Town for 10 passengers for 6 hours, use this call:
+> To search for an hourly ride from the centre of Prague for 10 passengers for 6 hours, use this call:
 
 ```bash
-curl "https://papi-staging.dynamic-environment.mydaytrip.net/partners/v1/hourly-rides/search?originLatitude=42.639859&originLongitude=18.109776&departureTime=1769855400&hoursRented=6&passengersCount=10&childrenCount=1" \
+curl "https://papi-staging.dynamic-environment.mydaytrip.net/partners/v1/hourly-rides/search?originLatitude=50.0755&originLongitude=14.4378&departureTime=1826353800&hoursRented=6&passengersCount=10&childrenCount=1" \
   -H "x-api-key: your_api_key"
 ```
 
@@ -65,33 +65,28 @@ curl "https://papi-staging.dynamic-environment.mydaytrip.net/partners/v1/hourly-
 
 ```json
 {
-    "searchId": "f0e34a1b-2b3d-4747-b426-292633b615b4",
+    "searchId": "d5577776-33df-477b-860b-8ed056b88fff",
     "passengersCount": 10,
     "childrenCount": 1,
     "options": [
         {
-            "id": "1d32109f-c2e2-44fe-b2cf-461ef3730541",
+            "id": "9407a248-a5a2-40bd-be80-7f51ae7c91d1",
             "type": "Private",
             "englishSpeakingDriver": true,
             "hoursRented": 6,
-            "includedKilometers": 120,
+            "includedKilometers": 240,
             "pricing": {
-                "totalPrice": 385,
+                "totalPrice": 368,
                 "currency": "EUR"
             },
             "pickUp": {
-                "lat": 42.6420632,
-                "lon": 18.1131754,
-                "time": "2026-01-31T10:30:00Z",
-                "timezone": "Europe/Zagreb",
-                "description": "Ploce Gate, Ul. Frana Supila 2",
-                "meetAndGreet": false,
-                "pickupInstructions": "Your driver will be waiting for you at the entrance of the address provided, please be ready 10 minutes prior to the pick up time",
+                "lat": 50.0755,
+                "lon": 14.4378,
+                "time": "2027-11-16T08:30:00Z",
+                "timezone": "Europe/Prague",
+                "meetAndGreet": true,
                 "immutable": true,
-                "state": "adjusted",
-                "adjustmentReason": "restricted_area",
-                "address": "Vrata od Ploča, Ul. Vrata od Ploča, 20000, Dubrovnik, Croatia",
-                "image": "https://daytrip.imgix.net/management/dubrovnik.png?w=480&q=50"
+                "state": "original"
             },
             "vehicles": [
                 {
@@ -99,14 +94,14 @@ curl "https://papi-staging.dynamic-environment.mydaytrip.net/partners/v1/hourly-
                     "maxPassengers": 7,
                     "description": "Van comparable to a VW Transporter, up to 7 passengers with luggage.",
                     "modelDescription": "VW Transporter or similar",
-                    "image": "https://daytrip.imgix.net/site/van-vw.png"
+                    "image": "https://images.daytrip.com/site/van-v3.png"
                 },
                 {
                     "type": "Sedan",
                     "maxPassengers": 3,
                     "description": "Sedan comparable to a Volkswagen Passat, up to 3 passengers with luggage.",
                     "modelDescription": "VW Passat or similar",
-                    "image": "https://daytrip.imgix.net/site/sedan.png"
+                    "image": "https://images.daytrip.com/sedan-v3.png"
                 }
             ],
             "luggage": {
@@ -126,7 +121,7 @@ curl "https://papi-staging.dynamic-environment.mydaytrip.net/partners/v1/hourly-
                 },
                 {
                     "childSeatType": "ForwardFacing",
-                    "description": "Forward-facing w/harness",
+                    "description": "Forward-facing with harness",
                     "ageFrom": 1,
                     "ageTo": 4,
                     "weightInPoundsFrom": 18,
@@ -156,7 +151,7 @@ curl "https://papi-staging.dynamic-environment.mydaytrip.net/partners/v1/hourly-
                 }
             ],
             "cancellationPolicy": "Flexible",
-            "expiresAt": "2025-11-23T18:00:00Z"
+            "expiresAt": "2026-11-11T15:58:41Z"
         }
     ]
 }

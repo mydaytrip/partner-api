@@ -37,9 +37,7 @@ The Trip API, Hourly Ride API, and Day Trips API are organized around REST. Our 
 - Create bookings for day trips on behalf of customers.
 - Update or cancel existing day trip bookings.
 
-### Integrating with an AI coding agent
-
-If you build your integration with an AI coding agent such as Claude Code, give it the [Trip API integration guide for AI coding agents](https://mydaytrip.github.io/partner-api/trip-api-v3-agent-guide.md). It is a single Markdown file with the rules, types, error handling and test checklist an agent needs to implement a correct Trip API client. An index for agents is published at [llms.txt](https://mydaytrip.github.io/partner-api/llms.txt).
+If you build your integration with an AI coding agent, see [AI Coding Agents](#ai-coding-agents).
 
 ## Contacts
 

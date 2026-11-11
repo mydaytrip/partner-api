@@ -50,10 +50,12 @@ Disclaimer: in the last 24 hours before the departure the [/update](#trip-update
 
 This endpoint returns all available trip options based on the specified origin, destination, departure time, and passenger count. The origin and destination can be provided either as geographic coordinates or as IATA airport codes. Geographic coordinates should be specified as latitude and longitude in decimal degrees format, for example: `39.753657`, `-117.610215`. The departure time must be supplied as a UNIX epoch timestamp in seconds (e.g., 1679463169).
 
+The examples use the departure time `1826353800` (2027-11-16T08:30:00Z). When you try them, use a departure time in the future: a search for a departure in the past or too close to now returns an empty list of options.
+
 > To search for a private trip from Prague to Vienna for 3 passengers, use this call:
 
 ```bash
-curl "https://papi-staging.dynamic-environment.mydaytrip.net/partners/v3/trip/search?originLatitude=50.10&originLongitude=14.2559&destinationLatitude=48.2082&destinationLongitude=16.3738&departureTime=1766227088&passengersCount=3&childrenCount=1" \
+curl "https://papi-staging.dynamic-environment.mydaytrip.net/partners/v3/trip/search?originLatitude=50.10&originLongitude=14.2559&destinationLatitude=48.2082&destinationLongitude=16.3738&departureTime=1826353800&passengersCount=3&childrenCount=1" \
   -H "x-api-key: your_api_key"
 ```
 
@@ -68,7 +70,7 @@ curl "https://papi-staging.dynamic-environment.mydaytrip.net/partners/v3/trip/se
 > To search for a private trip from Prague Airport to Vienna for 3 passengers, use this call:
 
 ```bash
-curl "https://papi-staging.dynamic-environment.mydaytrip.net/partners/v3/trip/search?originType=iata&origin=PRG&destinationType=coordinates&destinationLatitude=48.2082&destinationLongitude=16.3738&departureTime=1766227088&passengersCount=3&childrenCount=1" \
+curl "https://papi-staging.dynamic-environment.mydaytrip.net/partners/v3/trip/search?originType=iata&origin=PRG&destinationType=coordinates&destinationLatitude=48.2082&destinationLongitude=16.3738&departureTime=1826353800&passengersCount=3&childrenCount=1" \
   -H "x-api-key: your_api_key"
 ```
 
@@ -84,157 +86,48 @@ curl "https://papi-staging.dynamic-environment.mydaytrip.net/partners/v3/trip/se
 
 ```json
 {
-    "searchId": "f0e34a1b-2b3d-4747-b426-292633b615b4",
-    "expiresAt": "2022-12-04T18:00:00Z",
+    "searchId": "535a2b0e-27ab-48ff-b83d-6df051c3fada",
+    "expiresAt": "2026-11-11T15:57:00Z",
     "passengersCount": 3,
     "currency": "EUR",
     "options": [
         {
-            "id": "1d32109f-c2e2-44fe-b2cf-461ef3730541",
-            "type": "Private",
-            "englishSpeakingDriver": true,
-            "distanceKm": 334,
-            "travelTimeMinutes": 208,
-            "pickUp": {
-                "lat": 50.1,
-                "lon": 14.25,
-                "time": "2022-12-05T18:00:00Z",
-                "timezone": "Europe/Prague",
-                "meetAndGreet": true,
-                "state": "original",
-                "immutable": false
-            },
-            "dropOff": {
-                "lat": 48.2,
-                "lon": 16.37,
-                "state": "original",
-                "immutable": false
-            },
-            "pricing": {
-                "totalPrice": 260
-            },
-            "vehicle": {
-                "type": "Sedan",
-                "maxPassengers": 3,
-                "description": "Sedan comparable to a Volkswagen Passat, up to 3 passengers with luggage.",
-                "modelDescription": "VW Passat or similar",
-                "image": "https://daytrip.imgix.net/site/sedan.png"
-            },
-            "luggage": {
-                "maxTotalCarryons": 3,
-                "maxTotalSuitcases": 3
-            },
-            "availableChildSeatTypes": [
-                {
-                    "childSeatType": "RearFacing",
-                    "description": "Rear-facing infant seat",
-                    "ageFrom": 0,
-                    "ageTo": 1,
-                    "weightInPoundsFrom": 0,
-                    "weightInPoundsTo": 26,
-                    "weightInKilosFrom": 0,
-                    "weightInKilosTo": 10
-                },
-                {
-                    "childSeatType": "ForwardFacing",
-                    "description": "Forward-facing w/harness",
-                    "ageFrom": 1,
-                    "ageTo": 4,
-                    "weightInPoundsFrom": 18,
-                    "weightInPoundsTo": 36,
-                    "weightInKilosFrom": 8,
-                    "weightInKilosTo": 16
-                },
-                {
-                    "childSeatType": "BoosterSeat",
-                    "description": "Booster seat with high back",
-                    "ageFrom": 4,
-                    "ageTo": 6,
-                    "weightInPoundsFrom": 30,
-                    "weightInPoundsTo": 50,
-                    "weightInKilosFrom": 14,
-                    "weightInKilosTo": 23
-                },
-                {
-                    "childSeatType": "Booster",
-                    "description": "Backless booster",
-                    "ageFrom": 6,
-                    "ageTo": 12,
-                    "weightInPoundsFrom": 44,
-                    "weightInPoundsTo": 72,
-                    "weightInKilosFrom": 20,
-                    "weightInKilosTo": 33
-                }
-            ],
-            "possibleStops": [
-                {
-                    "id": "d280ce2a-6224-4d95-af17-a250f81b97dd",
-                    "price": 31,
-                    "name": "Lednice Chateau and Park",
-                    "image": "https://daytrip.imgix.net/lednice-chateau-and-park4.jpg",
-                    "title": "Vacation like a King",
-                    "perex": "This UNESCO-listed chateau and sprawling park was the Lichtenstein's holiday home - exactly the kind of extravagance you'd expect from a dynasty with their own country. ",
-                    "description": "The Liechtensteins really came into the money with the fortunes seized from Czech noblemen after their victory at the Battle of White Mountain in 1620, and Lednice was one of the presents they bought themselves. In the mid-19th century the baroque manor was given a complete makeover in the 'Windsor Gothic' style, leaving it as we see it today: a shameless flaunting of fabulous wealth, a slap in the face to anyone foolish enough to think that the French Revolution had ended high-living in Europe. The surrounding English landscape park, the largest in the country, is an incomparable swath of green, sprinkled with Romantic follies. There's also a monumental greenhouse open all year round, overflowing with exotic growths gathered by an army of botanists across the Americas. The greenhouse's exoticism is echoed by the charming minaret, constructed at the turn of the 18th century, bringing a whiff of Morocco to Moravia.\nFor more info: www.zamek-lednice.com",
-                    "durationInMinutes": 60,
-                    "order": 1,
-                    "timezone": "Europe/Prague",
-                    "country": {
-                        "englishName": "Czech Republic"
-                    }
-                },
-                {
-                    "id": "4ee58c0c-4e56-46ef-bd22-406a1bc60e1c",
-                    "price": 28,
-                    "name": "Mikulov",
-                    "image": "https://daytrip.imgix.net/510.jpg",
-                    "title": "The Heart of Czech Wine Country",
-                    "perex": "A town with a history as deep and flavourful as its wine, Mikulov provides a perfect combination of relaxation and exploration.",
-                    "description": "Often favoured by visitors with a more active approach to life, Mikulov has much to offer. Surrounded by idyllic countryside, crisscrossed by bicycle paths and marked hiking trails, and the nearby Nové Mlýny lakes, there is something for everyone to enjoy. After all that fresh air, a glass of wine will be more than welcome, and fortunately, Mikulov is the centre for Czech wine making. Due to a high concentration of limestone in the local soil, wine from this region has a unique character and distinct taste. If you like your wine with a side-serving of history, Mikulov Castle dates from the 1730s, and the Dietrichstein Tomb is the final resting place of a Bohemian noble family. Mikulov is also significant for its strong Jewish history. In the early 1800s Mikulov's Jewish Quarter was the largest in Moravia with half the town's inhabitants being of Jewish faith.",
-                    "durationInMinutes": 60,
-                    "order": 2,
-                    "timezone": "Europe/Prague",
-                    "country": {
-                        "englishName": "Czech Republic"
-                    }
-                }
-            ],
-            "expiresAt": "2022-12-04T18:00:00Z"
-        },
-        {
-            "id": "054ee064-d4dd-492f-9d0a-5251a7f791c2",
+            "id": "cde0e4be-1d41-416d-92ab-aef9c67c169e",
             "type": "Private",
             "englishSpeakingDriver": false,
-            "distanceKm": 334,
-            "travelTimeMinutes": 208,
+            "distanceKm": 338,
+            "travelTimeMinutes": 214,
             "pickUp": {
                 "lat": 50.1,
-                "lon": 14.25,
-                "time": "2022-12-05T18:00:00Z",
+                "lon": 14.2559,
+                "time": "2027-11-16T08:30:00Z",
                 "timezone": "Europe/Prague",
-                "meetAndGreet": true,
-                "state": "original",
-                "immutable": false
+                "meetAndGreet": false,
+                "immutable": false,
+                "state": "original"
             },
             "dropOff": {
-                "lat": 48.2,
-                "lon": 16.37,
-                "state": "original",
-                "immutable": false
+                "lat": 48.2082,
+                "lon": 16.3738,
+                "immutable": false,
+                "state": "original"
             },
             "pricing": {
-                "totalPrice": 240
+                "totalPrice": 171
             },
             "vehicle": {
                 "type": "Sedan",
                 "maxPassengers": 3,
                 "description": "Sedan comparable to a Volkswagen Passat, up to 3 passengers with luggage.",
                 "modelDescription": "VW Passat or similar",
-                "image": "https://daytrip.imgix.net/site/sedan.png"
+                "image": "https://images.daytrip.com/site/sedan-lite.png"
             },
             "luggage": {
                 "maxTotalCarryons": 3,
                 "maxTotalSuitcases": 3
             },
+            "possibleStops": [],
+            "includedStops": [],
             "availableChildSeatTypes": [
                 {
                     "childSeatType": "RearFacing",
@@ -248,7 +141,7 @@ curl "https://papi-staging.dynamic-environment.mydaytrip.net/partners/v3/trip/se
                 },
                 {
                     "childSeatType": "ForwardFacing",
-                    "description": "Forward-facing w/harness",
+                    "description": "Forward-facing with harness",
                     "ageFrom": 1,
                     "ageTo": 4,
                     "weightInPoundsFrom": 18,
@@ -277,75 +170,76 @@ curl "https://papi-staging.dynamic-environment.mydaytrip.net/partners/v3/trip/se
                     "weightInKilosTo": 33
                 }
             ],
-            "possibleStops": [
-                {
-                    "id": "d280ce2a-6224-4d95-af17-a250f81b97dd",
-                    "price": 31,
-                    "name": "Lednice Chateau and Park",
-                    "image": "https://daytrip.imgix.net/lednice-chateau-and-park4.jpg",
-                    "title": "Vacation like a King",
-                    "perex": "This UNESCO-listed chateau and sprawling park was the Lichtenstein's holiday home - exactly the kind of extravagance you'd expect from a dynasty with their own country. ",
-                    "description": "The Liechtensteins really came into the money with the fortunes seized from Czech noblemen after their victory at the Battle of White Mountain in 1620, and Lednice was one of the presents they bought themselves. In the mid-19th century the baroque manor was given a complete makeover in the 'Windsor Gothic' style, leaving it as we see it today: a shameless flaunting of fabulous wealth, a slap in the face to anyone foolish enough to think that the French Revolution had ended high-living in Europe. The surrounding English landscape park, the largest in the country, is an incomparable swath of green, sprinkled with Romantic follies. There's also a monumental greenhouse open all year round, overflowing with exotic growths gathered by an army of botanists across the Americas. The greenhouse's exoticism is echoed by the charming minaret, constructed at the turn of the 18th century, bringing a whiff of Morocco to Moravia.\nFor more info: www.zamek-lednice.com",
-                    "durationInMinutes": 60,
-                    "order": 1,
-                    "timezone": "Europe/Prague",
-                    "country": {
-                        "englishName": "Czech Republic"
-                    }
-                },
-                {
-                    "id": "4ee58c0c-4e56-46ef-bd22-406a1bc60e1c",
-                    "price": 28,
-                    "name": "Mikulov",
-                    "image": "https://daytrip.imgix.net/510.jpg",
-                    "title": "The Heart of Czech Wine Country",
-                    "perex": "A town with a history as deep and flavourful as its wine, Mikulov provides a perfect combination of relaxation and exploration.",
-                    "description": "Often favoured by visitors with a more active approach to life, Mikulov has much to offer. Surrounded by idyllic countryside, crisscrossed by bicycle paths and marked hiking trails, and the nearby Nové Mlýny lakes, there is something for everyone to enjoy. After all that fresh air, a glass of wine will be more than welcome, and fortunately, Mikulov is the centre for Czech wine making. Due to a high concentration of limestone in the local soil, wine from this region has a unique character and distinct taste. If you like your wine with a side-serving of history, Mikulov Castle dates from the 1730s, and the Dietrichstein Tomb is the final resting place of a Bohemian noble family. Mikulov is also significant for its strong Jewish history. In the early 1800s Mikulov's Jewish Quarter was the largest in Moravia with half the town's inhabitants being of Jewish faith.",
-                    "durationInMinutes": 60,
-                    "order": 2,
-                    "timezone": "Europe/Prague",
-                    "country": {
-                        "englishName": "Czech Republic"
-                    }
-                }
-            ],
-            "expiresAt": "2022-12-04T18:00:00Z"
+            "expiresAt": "2026-11-11T15:57:00Z"
         },
         {
-            "id": "b071e9f8-54d9-44be-bb5f-feae5aafd771",
+            "id": "9df0b6c4-8bd9-47b6-91e1-73940da32b16",
             "type": "Private",
             "englishSpeakingDriver": true,
-            "distanceKm": 334,
-            "travelTimeMinutes": 208,
+            "distanceKm": 338,
+            "travelTimeMinutes": 214,
             "pickUp": {
                 "lat": 50.1,
-                "lon": 14.25,
-                "time": "2022-12-05T18:00:00Z",
+                "lon": 14.2559,
+                "time": "2027-11-16T08:30:00Z",
                 "timezone": "Europe/Prague",
                 "meetAndGreet": true,
-                "state": "original",
-                "immutable": false
+                "immutable": false,
+                "state": "original"
             },
             "dropOff": {
-                "lat": 48.2,
-                "lon": 16.37,
-                "state": "original",
-                "immutable": false
+                "lat": 48.2082,
+                "lon": 16.3738,
+                "immutable": false,
+                "state": "original"
             },
             "pricing": {
-                "totalPrice": 320
+                "totalPrice": 413
             },
             "vehicle": {
                 "type": "MPV",
                 "maxPassengers": 4,
                 "description": "Compact MPV comparable to a Volkswagen Touran, up to 4 passengers with luggage.",
                 "modelDescription": "VW Touran or similar",
-                "image": "https://daytrip.imgix.net/site/mpv.png"
+                "image": "https://images.daytrip.com/site/mpv.png"
             },
             "luggage": {
                 "maxTotalCarryons": 4,
                 "maxTotalSuitcases": 4
             },
+            "possibleStops": [
+                {
+                    "id": "359be11a-9284-48b0-8ea1-03f99d63805a",
+                    "price": 28,
+                    "name": "Sazava monastery",
+                    "image": "https://images.daytrip.com/366.jpg",
+                    "title": "An Abbey Fit for a Saint",
+                    "perex": "Founded in 1032, Sázava Monastery is a former Benedictine abbey that has endured much struggle and strife throughout its long history.",
+                    "description": "Declared a national cultural monument in 1962, Sázava Monastery is one of the oldest and best preserved monasteries in all of Bohemia. During its early years, Sázava was seen as a cultural bridge between the eastern and western branches of the church due its use of the Old Slavonic, the first written Slavic language. However this came to an abrupt end in 1097, when the Pope forbade Slavic liturgies during religious ceremonies and Slavic monks were banished from the monastery. During the 15th century Hussite War Sázava was burnt down, then remodeled in the Baroque style in the 17th century before finally being abolished in the 19th century and rebuilt as a Pseudo-Renaissance chateau. Nowadays Sázava has been returned to its original aesthetic and acts as a cultural centre for the traditions of Old Slavonic and a museum of historical artefacts from the region.",
+                    "durationInMinutes": 60,
+                    "order": 1,
+                    "timezone": "Europe/Prague",
+                    "country": {
+                        "englishName": "Czech Republic"
+                    }
+                },
+                {
+                    "id": "4ee58c0c-4e56-46ef-bd22-406a1bc60e1c",
+                    "price": 25,
+                    "name": "Mikulov",
+                    "image": "https://images.daytrip.com/510.jpg",
+                    "title": "The Heart of Czech Wine Country",
+                    "perex": "A town with a history as deep and flavourful as its wine, Mikulov provides a perfect combination of relaxation and exploration.",
+                    "description": "Often favoured by visitors with a more active approach to life, Mikulov has much to offer. Surrounded by idyllic countryside, crisscrossed by bicycle paths and marked hiking trails, and the nearby Nové Mlýny lakes, there is something for everyone to enjoy. After all that fresh air, a glass of wine will be more than welcome, and fortunately, Mikulov is the centre for Czech wine making. Due to a high concentration of limestone in the local soil, wine from this region has a unique character and distinct taste. If you like your wine with a side-serving of history, Mikulov Castle dates from the 1730s, and the Dietrichstein Tomb is the final resting place of a Bohemian noble family. Mikulov is also significant for its strong Jewish history. In the early 1800s Mikulov's Jewish Quarter was the largest in Moravia with half the town's inhabitants being of Jewish faith.",
+                    "durationInMinutes": 60,
+                    "order": 5,
+                    "timezone": "Europe/Prague",
+                    "country": {
+                        "englishName": "Czech Republic"
+                    }
+                }
+            ],
+            "includedStops": [],
             "availableChildSeatTypes": [
                 {
                     "childSeatType": "RearFacing",
@@ -359,7 +253,7 @@ curl "https://papi-staging.dynamic-environment.mydaytrip.net/partners/v3/trip/se
                 },
                 {
                     "childSeatType": "ForwardFacing",
-                    "description": "Forward-facing w/harness",
+                    "description": "Forward-facing with harness",
                     "ageFrom": 1,
                     "ageTo": 4,
                     "weightInPoundsFrom": 18,
@@ -388,15 +282,52 @@ curl "https://papi-staging.dynamic-environment.mydaytrip.net/partners/v3/trip/se
                     "weightInKilosTo": 33
                 }
             ],
+            "expiresAt": "2026-11-11T15:57:00Z"
+        },
+        {
+            "id": "398747ba-29b5-46b1-aece-6b6ce158e94b",
+            "type": "Private",
+            "englishSpeakingDriver": true,
+            "distanceKm": 338,
+            "travelTimeMinutes": 214,
+            "pickUp": {
+                "lat": 50.1,
+                "lon": 14.2559,
+                "time": "2027-11-16T08:30:00Z",
+                "timezone": "Europe/Prague",
+                "meetAndGreet": true,
+                "immutable": false,
+                "state": "original"
+            },
+            "dropOff": {
+                "lat": 48.2082,
+                "lon": 16.3738,
+                "immutable": false,
+                "state": "original"
+            },
+            "pricing": {
+                "totalPrice": 487
+            },
+            "vehicle": {
+                "type": "Van",
+                "maxPassengers": 7,
+                "description": "Van comparable to a VW Transporter, up to 7 passengers with luggage.",
+                "modelDescription": "VW Transporter or similar",
+                "image": "https://images.daytrip.com/site/van-v3.png"
+            },
+            "luggage": {
+                "maxTotalCarryons": 7,
+                "maxTotalSuitcases": 7
+            },
             "possibleStops": [
                 {
-                    "id": "d280ce2a-6224-4d95-af17-a250f81b97dd",
+                    "id": "359be11a-9284-48b0-8ea1-03f99d63805a",
                     "price": 31,
-                    "name": "Lednice Chateau and Park",
-                    "image": "https://daytrip.imgix.net/lednice-chateau-and-park4.jpg",
-                    "title": "Vacation like a King",
-                    "perex": "This UNESCO-listed chateau and sprawling park was the Lichtenstein's holiday home - exactly the kind of extravagance you'd expect from a dynasty with their own country. ",
-                    "description": "The Liechtensteins really came into the money with the fortunes seized from Czech noblemen after their victory at the Battle of White Mountain in 1620, and Lednice was one of the presents they bought themselves. In the mid-19th century the baroque manor was given a complete makeover in the 'Windsor Gothic' style, leaving it as we see it today: a shameless flaunting of fabulous wealth, a slap in the face to anyone foolish enough to think that the French Revolution had ended high-living in Europe. The surrounding English landscape park, the largest in the country, is an incomparable swath of green, sprinkled with Romantic follies. There's also a monumental greenhouse open all year round, overflowing with exotic growths gathered by an army of botanists across the Americas. The greenhouse's exoticism is echoed by the charming minaret, constructed at the turn of the 18th century, bringing a whiff of Morocco to Moravia.\nFor more info: www.zamek-lednice.com",
+                    "name": "Sazava monastery",
+                    "image": "https://images.daytrip.com/366.jpg",
+                    "title": "An Abbey Fit for a Saint",
+                    "perex": "Founded in 1032, Sázava Monastery is a former Benedictine abbey that has endured much struggle and strife throughout its long history.",
+                    "description": "Declared a national cultural monument in 1962, Sázava Monastery is one of the oldest and best preserved monasteries in all of Bohemia. During its early years, Sázava was seen as a cultural bridge between the eastern and western branches of the church due its use of the Old Slavonic, the first written Slavic language. However this came to an abrupt end in 1097, when the Pope forbade Slavic liturgies during religious ceremonies and Slavic monks were banished from the monastery. During the 15th century Hussite War Sázava was burnt down, then remodeled in the Baroque style in the 17th century before finally being abolished in the 19th century and rebuilt as a Pseudo-Renaissance chateau. Nowadays Sázava has been returned to its original aesthetic and acts as a cultural centre for the traditions of Old Slavonic and a museum of historical artefacts from the region.",
                     "durationInMinutes": 60,
                     "order": 1,
                     "timezone": "Europe/Prague",
@@ -406,30 +337,185 @@ curl "https://papi-staging.dynamic-environment.mydaytrip.net/partners/v3/trip/se
                 },
                 {
                     "id": "4ee58c0c-4e56-46ef-bd22-406a1bc60e1c",
-                    "price": 28,
+                    "price": 25,
                     "name": "Mikulov",
-                    "image": "https://daytrip.imgix.net/510.jpg",
+                    "image": "https://images.daytrip.com/510.jpg",
                     "title": "The Heart of Czech Wine Country",
                     "perex": "A town with a history as deep and flavourful as its wine, Mikulov provides a perfect combination of relaxation and exploration.",
                     "description": "Often favoured by visitors with a more active approach to life, Mikulov has much to offer. Surrounded by idyllic countryside, crisscrossed by bicycle paths and marked hiking trails, and the nearby Nové Mlýny lakes, there is something for everyone to enjoy. After all that fresh air, a glass of wine will be more than welcome, and fortunately, Mikulov is the centre for Czech wine making. Due to a high concentration of limestone in the local soil, wine from this region has a unique character and distinct taste. If you like your wine with a side-serving of history, Mikulov Castle dates from the 1730s, and the Dietrichstein Tomb is the final resting place of a Bohemian noble family. Mikulov is also significant for its strong Jewish history. In the early 1800s Mikulov's Jewish Quarter was the largest in Moravia with half the town's inhabitants being of Jewish faith.",
                     "durationInMinutes": 60,
-                    "order": 2,
+                    "order": 5,
                     "timezone": "Europe/Prague",
                     "country": {
                         "englishName": "Czech Republic"
                     }
                 }
             ],
-            "expiresAt": "2022-12-04T18:00:00Z"
+            "includedStops": [],
+            "availableChildSeatTypes": [
+                {
+                    "childSeatType": "RearFacing",
+                    "description": "Rear-facing infant seat",
+                    "ageFrom": 0,
+                    "ageTo": 1,
+                    "weightInPoundsFrom": 0,
+                    "weightInPoundsTo": 26,
+                    "weightInKilosFrom": 0,
+                    "weightInKilosTo": 10
+                },
+                {
+                    "childSeatType": "ForwardFacing",
+                    "description": "Forward-facing with harness",
+                    "ageFrom": 1,
+                    "ageTo": 4,
+                    "weightInPoundsFrom": 18,
+                    "weightInPoundsTo": 36,
+                    "weightInKilosFrom": 8,
+                    "weightInKilosTo": 16
+                },
+                {
+                    "childSeatType": "BoosterSeat",
+                    "description": "Booster seat with high back",
+                    "ageFrom": 4,
+                    "ageTo": 6,
+                    "weightInPoundsFrom": 30,
+                    "weightInPoundsTo": 50,
+                    "weightInKilosFrom": 14,
+                    "weightInKilosTo": 23
+                },
+                {
+                    "childSeatType": "Booster",
+                    "description": "Backless booster",
+                    "ageFrom": 6,
+                    "ageTo": 12,
+                    "weightInPoundsFrom": 44,
+                    "weightInPoundsTo": 72,
+                    "weightInKilosFrom": 20,
+                    "weightInKilosTo": 33
+                }
+            ],
+            "expiresAt": "2026-11-11T15:57:00Z"
+        },
+        {
+            "id": "d4cc185b-5861-41fe-a3bd-bef87a43b920",
+            "type": "Private",
+            "englishSpeakingDriver": true,
+            "distanceKm": 338,
+            "travelTimeMinutes": 214,
+            "pickUp": {
+                "lat": 50.1,
+                "lon": 14.2559,
+                "time": "2027-11-16T08:30:00Z",
+                "timezone": "Europe/Prague",
+                "meetAndGreet": true,
+                "immutable": false,
+                "state": "original"
+            },
+            "dropOff": {
+                "lat": 48.2082,
+                "lon": 16.3738,
+                "immutable": false,
+                "state": "original"
+            },
+            "pricing": {
+                "totalPrice": 261
+            },
+            "vehicle": {
+                "type": "Sedan",
+                "maxPassengers": 3,
+                "description": "Sedan comparable to a Volkswagen Passat, up to 3 passengers with luggage.",
+                "modelDescription": "VW Passat or similar",
+                "image": "https://images.daytrip.com/sedan-v3.png"
+            },
+            "luggage": {
+                "maxTotalCarryons": 3,
+                "maxTotalSuitcases": 3
+            },
+            "possibleStops": [
+                {
+                    "id": "359be11a-9284-48b0-8ea1-03f99d63805a",
+                    "price": 24,
+                    "name": "Sazava monastery",
+                    "image": "https://images.daytrip.com/366.jpg",
+                    "title": "An Abbey Fit for a Saint",
+                    "perex": "Founded in 1032, Sázava Monastery is a former Benedictine abbey that has endured much struggle and strife throughout its long history.",
+                    "description": "Declared a national cultural monument in 1962, Sázava Monastery is one of the oldest and best preserved monasteries in all of Bohemia. During its early years, Sázava was seen as a cultural bridge between the eastern and western branches of the church due its use of the Old Slavonic, the first written Slavic language. However this came to an abrupt end in 1097, when the Pope forbade Slavic liturgies during religious ceremonies and Slavic monks were banished from the monastery. During the 15th century Hussite War Sázava was burnt down, then remodeled in the Baroque style in the 17th century before finally being abolished in the 19th century and rebuilt as a Pseudo-Renaissance chateau. Nowadays Sázava has been returned to its original aesthetic and acts as a cultural centre for the traditions of Old Slavonic and a museum of historical artefacts from the region.",
+                    "durationInMinutes": 60,
+                    "order": 1,
+                    "timezone": "Europe/Prague",
+                    "country": {
+                        "englishName": "Czech Republic"
+                    }
+                },
+                {
+                    "id": "4ee58c0c-4e56-46ef-bd22-406a1bc60e1c",
+                    "price": 20,
+                    "name": "Mikulov",
+                    "image": "https://images.daytrip.com/510.jpg",
+                    "title": "The Heart of Czech Wine Country",
+                    "perex": "A town with a history as deep and flavourful as its wine, Mikulov provides a perfect combination of relaxation and exploration.",
+                    "description": "Often favoured by visitors with a more active approach to life, Mikulov has much to offer. Surrounded by idyllic countryside, crisscrossed by bicycle paths and marked hiking trails, and the nearby Nové Mlýny lakes, there is something for everyone to enjoy. After all that fresh air, a glass of wine will be more than welcome, and fortunately, Mikulov is the centre for Czech wine making. Due to a high concentration of limestone in the local soil, wine from this region has a unique character and distinct taste. If you like your wine with a side-serving of history, Mikulov Castle dates from the 1730s, and the Dietrichstein Tomb is the final resting place of a Bohemian noble family. Mikulov is also significant for its strong Jewish history. In the early 1800s Mikulov's Jewish Quarter was the largest in Moravia with half the town's inhabitants being of Jewish faith.",
+                    "durationInMinutes": 60,
+                    "order": 5,
+                    "timezone": "Europe/Prague",
+                    "country": {
+                        "englishName": "Czech Republic"
+                    }
+                }
+            ],
+            "includedStops": [],
+            "availableChildSeatTypes": [
+                {
+                    "childSeatType": "RearFacing",
+                    "description": "Rear-facing infant seat",
+                    "ageFrom": 0,
+                    "ageTo": 1,
+                    "weightInPoundsFrom": 0,
+                    "weightInPoundsTo": 26,
+                    "weightInKilosFrom": 0,
+                    "weightInKilosTo": 10
+                },
+                {
+                    "childSeatType": "ForwardFacing",
+                    "description": "Forward-facing with harness",
+                    "ageFrom": 1,
+                    "ageTo": 4,
+                    "weightInPoundsFrom": 18,
+                    "weightInPoundsTo": 36,
+                    "weightInKilosFrom": 8,
+                    "weightInKilosTo": 16
+                },
+                {
+                    "childSeatType": "BoosterSeat",
+                    "description": "Booster seat with high back",
+                    "ageFrom": 4,
+                    "ageTo": 6,
+                    "weightInPoundsFrom": 30,
+                    "weightInPoundsTo": 50,
+                    "weightInKilosFrom": 14,
+                    "weightInKilosTo": 23
+                },
+                {
+                    "childSeatType": "Booster",
+                    "description": "Backless booster",
+                    "ageFrom": 6,
+                    "ageTo": 12,
+                    "weightInPoundsFrom": 44,
+                    "weightInPoundsTo": 72,
+                    "weightInKilosFrom": 20,
+                    "weightInKilosTo": 33
+                }
+            ],
+            "expiresAt": "2026-11-11T15:57:00Z"
         }
     ]
 }
 ```
 
-> To search for a private trip from Dubrovnik to Venice for 10 passengers, with multiple vehicle options:
+> To search for a private trip from Prague to Vienna for 10 passengers, with multiple vehicle options:
 
 ```bash
-curl "https://papi-staging.dynamic-environment.mydaytrip.net/partners/v3/trip/search?originLatitude=42.639515&originLongitude=18.108064&destinationLatitude=45.434143&destinationLongitude=12.333497&departureTime=1766227088&includeStops=false&passengersCount=10&includeMultipleVehicles=true" \
+curl "https://papi-staging.dynamic-environment.mydaytrip.net/partners/v3/trip/search?originLatitude=50.10&originLongitude=14.2559&destinationLatitude=48.2082&destinationLongitude=16.3738&departureTime=1826353800&includeStops=false&passengersCount=10&includeMultipleVehicles=true" \
   -H "x-api-key: your_api_key"
 ```
 
@@ -445,42 +531,34 @@ curl "https://papi-staging.dynamic-environment.mydaytrip.net/partners/v3/trip/se
 
 ```json
 {
-    "searchId": "f41dc34f-5218-46b1-8e46-1de8ccc5f5c3",
-    "expiresAt": "2025-05-27T05:53:46Z",
+    "searchId": "bcb4d9cb-4701-4db8-a664-857e89803c2a",
+    "expiresAt": "2026-11-11T15:57:01Z",
     "passengersCount": 10,
     "currency": "EUR",
     "options": [
         {
-            "id": "68646974-023a-4f9c-8358-869c7ab8db3d",
+            "id": "e9147b41-2031-4c35-8b44-0efb3197944b",
             "type": "Private",
             "englishSpeakingDriver": true,
-            "distanceKm": 833,
-            "travelTimeMinutes": 536,
+            "distanceKm": 338,
+            "travelTimeMinutes": 214,
             "pickUp": {
-                "lat": 42.6420418,
-                "lon": 18.11293,
-                "time": "2025-12-20T10:38:08Z",
-                "timezone": "Europe/Zagreb",
-                "description": "Ploce Gate, Ul. Frana Supila 2",
-                "address": "Vrata od Ploča, Ul. Vrata od Ploča, 20000, Dubrovnik, Croatia",
-                "image": "https://daytrip.imgix.net/meeting-point-3.png",
-                "meetAndGreet": false,
-                "state": "adjusted",
-                "adjustmentReason": "restricted_area",
-                "immutable": true
+                "lat": 50.1,
+                "lon": 14.2559,
+                "time": "2027-11-16T08:30:00Z",
+                "timezone": "Europe/Prague",
+                "meetAndGreet": true,
+                "immutable": false,
+                "state": "original"
             },
             "dropOff": {
-                "lat": 45.43731978047655,
-                "lon": 12.3191409718277,
-                "description": "Piazzale Roma",
-                "address": "Piazzale Roma, Venice, Metropolitan City of Venice, Italy",
-                "image": "https://daytrip.imgix.net/meeting-point-4.png",
-                "state": "adjusted",
-                "adjustmentReason": "restricted_area",
-                "immutable": true
+                "lat": 48.2082,
+                "lon": 16.3738,
+                "immutable": false,
+                "state": "original"
             },
             "pricing": {
-                "totalPrice": 2131
+                "totalPrice": 748
             },
             "vehicles": [
                 {
@@ -488,14 +566,14 @@ curl "https://papi-staging.dynamic-environment.mydaytrip.net/partners/v3/trip/se
                     "maxPassengers": 7,
                     "description": "Van comparable to a VW Transporter, up to 7 passengers with luggage.",
                     "modelDescription": "VW Transporter or similar",
-                    "image": "https://daytrip.imgix.net/site/van-vw.png"
+                    "image": "https://images.daytrip.com/site/van-v3.png"
                 },
                 {
                     "type": "Sedan",
                     "maxPassengers": 3,
                     "description": "Sedan comparable to a Volkswagen Passat, up to 3 passengers with luggage.",
                     "modelDescription": "VW Passat or similar",
-                    "image": "https://daytrip.imgix.net/site/sedan.png"
+                    "image": "https://images.daytrip.com/sedan-v3.png"
                 }
             ],
             "luggage": {
@@ -517,7 +595,7 @@ curl "https://papi-staging.dynamic-environment.mydaytrip.net/partners/v3/trip/se
                 },
                 {
                     "childSeatType": "ForwardFacing",
-                    "description": "Forward-facing w/harness",
+                    "description": "Forward-facing with harness",
                     "ageFrom": 1,
                     "ageTo": 4,
                     "weightInPoundsFrom": 18,
@@ -546,7 +624,7 @@ curl "https://papi-staging.dynamic-environment.mydaytrip.net/partners/v3/trip/se
                     "weightInKilosTo": 33
                 }
             ],
-            "expiresAt": "2025-05-27T05:53:46Z"
+            "expiresAt": "2026-11-11T15:57:01Z"
         }
     ]
 }
@@ -607,8 +685,10 @@ This endpoint is used to customize a trip option returned by the Search endpoint
 
 ```bash
 curl -d '{
-  "optionId": "1d32109f-c2e2-44fe-b2cf-461ef3730541",
-  "selectedStops": ["4ee58c0c-4e56-46ef-bd22-406a1bc60e1c"]
+  "optionId": "d4cc185b-5861-41fe-a3bd-bef87a43b920",
+  "selectedStops": [
+    "4ee58c0c-4e56-46ef-bd22-406a1bc60e1c"
+  ]
 }' \
   -H "Content-Type: application/json" \
   -H "x-api-key: your_api_key" \
@@ -627,46 +707,95 @@ curl -d '{
 
 ```json
 {
-    "searchId": "f0e34a1b-2b3d-4747-b426-292633b615b4",
-    "expiresAt": "2022-12-04T18:00:00Z",
+    "searchId": "535a2b0e-27ab-48ff-b83d-6df051c3fada",
+    "expiresAt": "2026-11-11T15:57:00Z",
     "passengersCount": 3,
     "currency": "EUR",
     "options": [
         {
-            "id": "519314e3-cd92-41e0-85b6-c652c345e9d0",
+            "id": "ea0b7beb-550a-4150-91de-4ef08b43caa1",
             "type": "Private",
             "englishSpeakingDriver": true,
-            "distanceKm": 334,
-            "travelTimeMinutes": 268,
+            "distanceKm": 338,
+            "travelTimeMinutes": 274,
             "pickUp": {
                 "lat": 50.1,
-                "lon": 14.25,
-                "time": "2022-12-05T18:00:00Z",
+                "lon": 14.2559,
+                "time": "2027-11-16T08:30:00Z",
                 "timezone": "Europe/Prague",
                 "meetAndGreet": true,
-                "state": "original",
-                "immutable": false
+                "immutable": false,
+                "state": "original"
             },
             "dropOff": {
-                "lat": 48.2,
-                "lon": 16.37,
-                "state": "original",
-                "immutable": false
+                "lat": 48.2082,
+                "lon": 16.3738,
+                "immutable": false,
+                "state": "original"
             },
             "pricing": {
-                "totalPrice": 288
+                "totalPrice": 281
             },
             "vehicle": {
                 "type": "Sedan",
                 "maxPassengers": 3,
                 "description": "Sedan comparable to a Volkswagen Passat, up to 3 passengers with luggage.",
                 "modelDescription": "VW Passat or similar",
-                "image": "https://daytrip.imgix.net/site/sedan.png"
+                "image": "https://images.daytrip.com/sedan-v3.png"
             },
             "luggage": {
                 "maxTotalCarryons": 3,
                 "maxTotalSuitcases": 3
             },
+            "possibleStops": [
+                {
+                    "id": "359be11a-9284-48b0-8ea1-03f99d63805a",
+                    "price": 24,
+                    "name": "Sazava monastery",
+                    "image": "https://images.daytrip.com/366.jpg",
+                    "title": "An Abbey Fit for a Saint",
+                    "perex": "Founded in 1032, Sázava Monastery is a former Benedictine abbey that has endured much struggle and strife throughout its long history.",
+                    "description": "Declared a national cultural monument in 1962, Sázava Monastery is one of the oldest and best preserved monasteries in all of Bohemia. During its early years, Sázava was seen as a cultural bridge between the eastern and western branches of the church due its use of the Old Slavonic, the first written Slavic language. However this came to an abrupt end in 1097, when the Pope forbade Slavic liturgies during religious ceremonies and Slavic monks were banished from the monastery. During the 15th century Hussite War Sázava was burnt down, then remodeled in the Baroque style in the 17th century before finally being abolished in the 19th century and rebuilt as a Pseudo-Renaissance chateau. Nowadays Sázava has been returned to its original aesthetic and acts as a cultural centre for the traditions of Old Slavonic and a museum of historical artefacts from the region.",
+                    "durationInMinutes": 60,
+                    "order": 1,
+                    "timezone": "Europe/Prague",
+                    "country": {
+                        "englishName": "Czech Republic"
+                    }
+                },
+                {
+                    "id": "6073e7ce-74e1-4aa9-88db-850e1e2822e3",
+                    "price": 37,
+                    "name": "Kutna Hora",
+                    "image": "https://images.daytrip.com/kutna-hora1.jpg",
+                    "title": "Medieval silver-mining boom town",
+                    "perex": "Some cities, as 'Starship' sang, are built on rock 'n' roll but Kutná Hora was built on silver, a more durable substance, and almost as profitable.",
+                    "description": "Its extensive deposits lured a flood of settlers in the Thirteenth Century and by its end the town was the seat of the Czech national mint and financial centre of the country. Today, its wealth lies in a thousand years worth of architectural heritage which, unlike Prague's, can be savoured without the pressure of crowds. A daunting prospect perhaps but Kutná Hora's attractions can be found as much in small-scale detail as in the large-scale magnificence of the Fourteenth Century Cathedral of St. Barbara. Stroll along the immaculately-preserved medieval street Ruthardka, or marvel at the Stone Fountain sitting like a giant sandstone crown amid burgher houses.  One or two of the larger-scale items shouldn't be missed however. The Bone Church, or Ossuary, is one such, a Cistercian chapel representing a medieval revolution in interior design: bones and nothing but the bones of the dead, from 'noughts and crosses' floor to chandeliered ceiling.",
+                    "durationInMinutes": 90,
+                    "order": 2,
+                    "timezone": "Europe/Prague",
+                    "country": {
+                        "englishName": "Czech Republic"
+                    }
+                }
+            ],
+            "includedStops": [
+                {
+                    "id": "4ee58c0c-4e56-46ef-bd22-406a1bc60e1c",
+                    "price": 20,
+                    "name": "Mikulov",
+                    "image": "https://images.daytrip.com/510.jpg",
+                    "title": "The Heart of Czech Wine Country",
+                    "perex": "A town with a history as deep and flavourful as its wine, Mikulov provides a perfect combination of relaxation and exploration.",
+                    "description": "Often favoured by visitors with a more active approach to life, Mikulov has much to offer. Surrounded by idyllic countryside, crisscrossed by bicycle paths and marked hiking trails, and the nearby Nové Mlýny lakes, there is something for everyone to enjoy. After all that fresh air, a glass of wine will be more than welcome, and fortunately, Mikulov is the centre for Czech wine making. Due to a high concentration of limestone in the local soil, wine from this region has a unique character and distinct taste. If you like your wine with a side-serving of history, Mikulov Castle dates from the 1730s, and the Dietrichstein Tomb is the final resting place of a Bohemian noble family. Mikulov is also significant for its strong Jewish history. In the early 1800s Mikulov's Jewish Quarter was the largest in Moravia with half the town's inhabitants being of Jewish faith.",
+                    "durationInMinutes": 60,
+                    "order": 1,
+                    "timezone": "Europe/Prague",
+                    "country": {
+                        "englishName": "Czech Republic"
+                    }
+                }
+            ],
             "availableChildSeatTypes": [
                 {
                     "childSeatType": "RearFacing",
@@ -680,7 +809,7 @@ curl -d '{
                 },
                 {
                     "childSeatType": "ForwardFacing",
-                    "description": "Forward-facing w/harness",
+                    "description": "Forward-facing with harness",
                     "ageFrom": 1,
                     "ageTo": 4,
                     "weightInPoundsFrom": 18,
@@ -709,40 +838,7 @@ curl -d '{
                     "weightInKilosTo": 33
                 }
             ],
-            "includedStops": [
-                {
-                    "id": "4ee58c0c-4e56-46ef-bd22-406a1bc60e1c",
-                    "price": 28,
-                    "name": "Mikulov",
-                    "image": "https://daytrip.imgix.net/510.jpg",
-                    "title": "The Heart of Czech Wine Country",
-                    "perex": "A town with a history as deep and flavourful as its wine, Mikulov provides a perfect combination of relaxation and exploration.",
-                    "description": "Often favoured by visitors with a more active approach to life, Mikulov has much to offer. Surrounded by idyllic countryside, crisscrossed by bicycle paths and marked hiking trails, and the nearby Nové Mlýny lakes, there is something for everyone to enjoy. After all that fresh air, a glass of wine will be more than welcome, and fortunately, Mikulov is the centre for Czech wine making. Due to a high concentration of limestone in the local soil, wine from this region has a unique character and distinct taste. If you like your wine with a side-serving of history, Mikulov Castle dates from the 1730s, and the Dietrichstein Tomb is the final resting place of a Bohemian noble family. Mikulov is also significant for its strong Jewish history. In the early 1800s Mikulov's Jewish Quarter was the largest in Moravia with half the town's inhabitants being of Jewish faith.",
-                    "durationInMinutes": 60,
-                    "order": 2,
-                    "timezone": "Europe/Prague",
-                    "country": {
-                        "englishName": "Czech Republic"
-                    }
-                }
-            ],
-            "possibleStops": [
-                {
-                    "id": "d280ce2a-6224-4d95-af17-a250f81b97dd",
-                    "price": 31,
-                    "name": "Lednice Chateau and Park",
-                    "image": "https://daytrip.imgix.net/lednice-chateau-and-park4.jpg",
-                    "title": "Vacation like a King",
-                    "perex": "This UNESCO-listed chateau and sprawling park was the Lichtenstein's holiday home - exactly the kind of extravagance you'd expect from a dynasty with their own country. ",
-                    "description": "The Liechtensteins really came into the money with the fortunes seized from Czech noblemen after their victory at the Battle of White Mountain in 1620, and Lednice was one of the presents they bought themselves. In the mid-19th century the baroque manor was given a complete makeover in the 'Windsor Gothic' style, leaving it as we see it today: a shameless flaunting of fabulous wealth, a slap in the face to anyone foolish enough to think that the French Revolution had ended high-living in Europe. The surrounding English landscape park, the largest in the country, is an incomparable swath of green, sprinkled with Romantic follies. There's also a monumental greenhouse open all year round, overflowing with exotic growths gathered by an army of botanists across the Americas. The greenhouse's exoticism is echoed by the charming minaret, constructed at the turn of the 18th century, bringing a whiff of Morocco to Moravia.\nFor more info: www.zamek-lednice.com",
-                    "durationInMinutes": 60,
-                    "order": 1,
-                    "timezone": "Europe/Prague",
-                    "country": {
-                        "englishName": "Czech Republic"
-                    }
-                }
-            ]
+            "expiresAt": "2026-11-11T15:57:00Z"
         }
     ]
 }
@@ -780,7 +876,8 @@ This endpoint is used to book a trip option. Any trip option from Search or Cust
 
 ```bash
 curl -d '{
-  "optionId": "f0e34a1b-2b3d-4747-b426-292633b615b4",
+  "optionId": "ea0b7beb-550a-4150-91de-4ef08b43caa1",
+  "externalId": "acme-6e67740c-7bb8-4e3f-ba8e-f76094eabc57",
   "pickUpAddressNote": "Havel airport",
   "dropOffAddressNote": "Vienna central square",
   "customerNote": "We will stand next to the entrance",
@@ -794,7 +891,9 @@ curl -d '{
       "email": "client-email@example.com",
       "over18": true
     },
-    { "type": "Adult" },
+    {
+      "type": "Adult"
+    },
     {
       "type": "Child",
       "childSeatType": "Booster"
@@ -818,46 +917,104 @@ curl -d '{
 
 ```json
 {
-    "bookingId": "cb102778-a3d7-426e-8d18-6bd6b296f283",
-    "bookingReference": "CB1027",
-    "departureTimeUtc": "2022-12-05T18:00:00Z",
+    "bookingId": "3eec7e10-af42-4017-8331-a0f363e655a4",
+    "bookingReference": "S46UGM73",
+    "departureTimeUtc": "2027-11-16T08:30:00Z",
     "originTimezone": "Europe/Prague",
     "meetAndGreet": true,
     "trip": {
-        "id": "f0e34a1b-2b3d-4747-b426-292633b615b4",
+        "id": "ea0b7beb-550a-4150-91de-4ef08b43caa1",
         "type": "Private",
         "englishSpeakingDriver": true,
-        "distanceKm": 334,
-        "travelTimeMinutes": 268,
+        "distanceKm": 338,
+        "travelTimeMinutes": 274,
         "pickUp": {
             "lat": 50.1,
-            "lon": 14.25,
-            "time": "2022-12-05T18:00:00Z",
+            "lon": 14.2559,
+            "time": "2027-11-16T08:30:00Z",
             "timezone": "Europe/Prague",
+            "description": null,
             "meetAndGreet": true,
+            "immutable": false,
             "state": "original",
-            "immutable": false
+            "adjustmentReason": null,
+            "address": null,
+            "image": null
         },
         "dropOff": {
-            "lat": 48.2,
-            "lon": 16.37,
+            "lat": 48.2082,
+            "lon": 16.3738,
+            "description": null,
+            "meetAndGreet": null,
+            "immutable": false,
             "state": "original",
-            "immutable": false
+            "adjustmentReason": null,
+            "address": null,
+            "image": null
         },
         "pricing": {
-            "totalPrice": 288
+            "totalPrice": 281
         },
         "vehicle": {
             "type": "Sedan",
             "maxPassengers": 3,
             "description": "Sedan comparable to a Volkswagen Passat, up to 3 passengers with luggage.",
             "modelDescription": "VW Passat or similar",
-            "image": "https://daytrip.imgix.net/site/sedan.png"
+            "image": "https://images.daytrip.com/sedan-v3.png"
         },
         "luggage": {
             "maxTotalCarryons": 3,
             "maxTotalSuitcases": 3
         },
+        "possibleStops": [
+            {
+                "id": "359be11a-9284-48b0-8ea1-03f99d63805a",
+                "price": 24,
+                "name": "Sazava monastery",
+                "image": "https://images.daytrip.com/366.jpg",
+                "title": "An Abbey Fit for a Saint",
+                "perex": "Founded in 1032, Sázava Monastery is a former Benedictine abbey that has endured much struggle and strife throughout its long history.",
+                "description": "Declared a national cultural monument in 1962, Sázava Monastery is one of the oldest and best preserved monasteries in all of Bohemia. During its early years, Sázava was seen as a cultural bridge between the eastern and western branches of the church due its use of the Old Slavonic, the first written Slavic language. However this came to an abrupt end in 1097, when the Pope forbade Slavic liturgies during religious ceremonies and Slavic monks were banished from the monastery. During the 15th century Hussite War Sázava was burnt down, then remodeled in the Baroque style in the 17th century before finally being abolished in the 19th century and rebuilt as a Pseudo-Renaissance chateau. Nowadays Sázava has been returned to its original aesthetic and acts as a cultural centre for the traditions of Old Slavonic and a museum of historical artefacts from the region.",
+                "durationInMinutes": 60,
+                "order": 1,
+                "timezone": "Europe/Prague",
+                "country": {
+                    "englishName": "Czech Republic"
+                }
+            },
+            {
+                "id": "6073e7ce-74e1-4aa9-88db-850e1e2822e3",
+                "price": 37,
+                "name": "Kutna Hora",
+                "image": "https://images.daytrip.com/kutna-hora1.jpg",
+                "title": "Medieval silver-mining boom town",
+                "perex": "Some cities, as 'Starship' sang, are built on rock 'n' roll but Kutná Hora was built on silver, a more durable substance, and almost as profitable.",
+                "description": "Its extensive deposits lured a flood of settlers in the Thirteenth Century and by its end the town was the seat of the Czech national mint and financial centre of the country. Today, its wealth lies in a thousand years worth of architectural heritage which, unlike Prague's, can be savoured without the pressure of crowds. A daunting prospect perhaps but Kutná Hora's attractions can be found as much in small-scale detail as in the large-scale magnificence of the Fourteenth Century Cathedral of St. Barbara. Stroll along the immaculately-preserved medieval street Ruthardka, or marvel at the Stone Fountain sitting like a giant sandstone crown amid burgher houses.  One or two of the larger-scale items shouldn't be missed however. The Bone Church, or Ossuary, is one such, a Cistercian chapel representing a medieval revolution in interior design: bones and nothing but the bones of the dead, from 'noughts and crosses' floor to chandeliered ceiling.",
+                "durationInMinutes": 90,
+                "order": 2,
+                "timezone": "Europe/Prague",
+                "country": {
+                    "englishName": "Czech Republic"
+                }
+            }
+        ],
+        "includedStops": [
+            {
+                "id": "4ee58c0c-4e56-46ef-bd22-406a1bc60e1c",
+                "price": 20,
+                "name": "Mikulov",
+                "image": "https://images.daytrip.com/510.jpg",
+                "title": "The Heart of Czech Wine Country",
+                "perex": "A town with a history as deep and flavourful as its wine, Mikulov provides a perfect combination of relaxation and exploration.",
+                "description": "Often favoured by visitors with a more active approach to life, Mikulov has much to offer. Surrounded by idyllic countryside, crisscrossed by bicycle paths and marked hiking trails, and the nearby Nové Mlýny lakes, there is something for everyone to enjoy. After all that fresh air, a glass of wine will be more than welcome, and fortunately, Mikulov is the centre for Czech wine making. Due to a high concentration of limestone in the local soil, wine from this region has a unique character and distinct taste. If you like your wine with a side-serving of history, Mikulov Castle dates from the 1730s, and the Dietrichstein Tomb is the final resting place of a Bohemian noble family. Mikulov is also significant for its strong Jewish history. In the early 1800s Mikulov's Jewish Quarter was the largest in Moravia with half the town's inhabitants being of Jewish faith.",
+                "durationInMinutes": 60,
+                "order": 1,
+                "timezone": "Europe/Prague",
+                "country": {
+                    "englishName": "Czech Republic"
+                }
+            }
+        ],
         "availableChildSeatTypes": [
             {
                 "childSeatType": "RearFacing",
@@ -871,7 +1028,7 @@ curl -d '{
             },
             {
                 "childSeatType": "ForwardFacing",
-                "description": "Forward-facing w/harness",
+                "description": "Forward-facing with harness",
                 "ageFrom": 1,
                 "ageTo": 4,
                 "weightInPoundsFrom": 18,
@@ -900,8 +1057,7 @@ curl -d '{
                 "weightInKilosTo": 33
             }
         ],
-        "includedStops": [],
-        "possibleStops": []
+        "expiresAt": "2026-11-11T15:57:00Z"
     }
 }
 ```
@@ -1069,7 +1225,7 @@ This endpoint is used to cancel a booked trip. Only trips that have departure mo
 > To cancel a booked trip, use the following call:
 
 ```bash
-curl -d '{ "bookingId": "cb102778-a3d7-426e-8d18-6bd6b296f283" }' \
+curl -d '{"bookingId":"3eec7e10-af42-4017-8331-a0f363e655a4"}' \
   -H "Content-Type: application/json" \
   -H "x-api-key: your_api_key" \
   -X POST https://papi-staging.dynamic-environment.mydaytrip.net/partners/v3/trip/cancel
@@ -1163,13 +1319,14 @@ curl https://papi-staging.dynamic-environment.mydaytrip.net/partners/v3/trip/ext
 
 ```json
 {
-    "bookingId": "cb102786-f663-47d7-9635-7ef61a51bf29",
-    "bookingReference": "CB1027",
+    "bookingId": "3eec7e10-af42-4017-8331-a0f363e655a4",
+    "bookingReference": "S46UGM73",
+    "externalId": "acme-6e67740c-7bb8-4e3f-ba8e-f76094eabc57",
     "status": "Confirmed",
-    "createdAt": "2022-12-05T18:00:00Z",
+    "createdAt": "2026-11-11T14:57:03Z",
     "passengersCount": 3,
     "currency": "EUR",
-    "departureTimeUtc": "2022-12-05T18:00:00Z",
+    "departureTimeUtc": "2027-11-16T08:30:00Z",
     "originTimezone": "Europe/Prague",
     "meetAndGreet": true,
     "pickUpAddressNote": "Havel airport",
@@ -1181,9 +1338,9 @@ curl https://papi-staging.dynamic-environment.mydaytrip.net/partners/v3/trip/ext
             "type": "Lead",
             "firstName": "John",
             "lastName": "Doe",
-            "phone": "+41555555555",
             "email": "client-email@example.com",
-            "birthday": 629424000,
+            "phone": "+41555555555",
+            "birthday": 631152000,
             "over18": true
         },
         {
@@ -1195,56 +1352,141 @@ curl https://papi-staging.dynamic-environment.mydaytrip.net/partners/v3/trip/ext
         }
     ],
     "trip": {
+        "id": "ea0b7beb-550a-4150-91de-4ef08b43caa1",
         "type": "Private",
         "englishSpeakingDriver": true,
-        "distanceKm": 334,
-        "travelTimeMinutes": 268,
+        "distanceKm": 338,
+        "travelTimeMinutes": 274,
         "pickUp": {
             "lat": 50.1,
-            "lon": 14.25,
-            "time": "2022-12-05T18:00:00Z",
+            "lon": 14.2559,
+            "time": "2027-11-16T08:30:00Z",
             "timezone": "Europe/Prague",
+            "description": null,
             "meetAndGreet": true,
+            "immutable": false,
             "state": "original",
-            "immutable": false
+            "adjustmentReason": null,
+            "address": null,
+            "image": null
         },
         "dropOff": {
-            "lat": 48.2,
-            "lon": 16.37,
+            "lat": 48.2082,
+            "lon": 16.3738,
+            "description": null,
+            "meetAndGreet": null,
+            "immutable": false,
             "state": "original",
-            "immutable": false
+            "adjustmentReason": null,
+            "address": null,
+            "image": null
         },
         "pricing": {
-            "totalPrice": 288
+            "totalPrice": 281
         },
         "vehicle": {
             "type": "Sedan",
             "maxPassengers": 3,
             "description": "Sedan comparable to a Volkswagen Passat, up to 3 passengers with luggage.",
             "modelDescription": "VW Passat or similar",
-            "image": "https://daytrip.imgix.net/site/sedan.png"
+            "image": "https://images.daytrip.com/sedan-v3.png"
         },
         "luggage": {
             "maxTotalCarryons": 3,
             "maxTotalSuitcases": 3
         },
-        "includedStops": [
+        "possibleStops": [
             {
-                "id": "4ee58c0c-4e56-46ef-bd22-406a1bc60e1c",
-                "price": 28,
-                "name": "Mikulov",
-                "image": "https://daytrip.imgix.net/510.jpg",
-                "title": "The Heart of Czech Wine Country",
-                "perex": "A town with a history as deep and flavourful as its wine, Mikulov provides a perfect combination of relaxation and exploration.",
-                "description": "Often favoured by visitors with a more active approach to life, Mikulov has much to offer. Surrounded by idyllic countryside, crisscrossed by bicycle paths and marked hiking trails, and the nearby Nové Mlýny lakes, there is something for everyone to enjoy. After all that fresh air, a glass of wine will be more than welcome, and fortunately, Mikulov is the centre for Czech wine making. Due to a high concentration of limestone in the local soil, wine from this region has a unique character and distinct taste. If you like your wine with a side-serving of history, Mikulov Castle dates from the 1730s, and the Dietrichstein Tomb is the final resting place of a Bohemian noble family. Mikulov is also significant for its strong Jewish history. In the early 1800s Mikulov's Jewish Quarter was the largest in Moravia with half the town's inhabitants being of Jewish faith.",
+                "id": "359be11a-9284-48b0-8ea1-03f99d63805a",
+                "price": 24,
+                "name": "Sazava monastery",
+                "image": "https://images.daytrip.com/366.jpg",
+                "title": "An Abbey Fit for a Saint",
+                "perex": "Founded in 1032, Sázava Monastery is a former Benedictine abbey that has endured much struggle and strife throughout its long history.",
+                "description": "Declared a national cultural monument in 1962, Sázava Monastery is one of the oldest and best preserved monasteries in all of Bohemia. During its early years, Sázava was seen as a cultural bridge between the eastern and western branches of the church due its use of the Old Slavonic, the first written Slavic language. However this came to an abrupt end in 1097, when the Pope forbade Slavic liturgies during religious ceremonies and Slavic monks were banished from the monastery. During the 15th century Hussite War Sázava was burnt down, then remodeled in the Baroque style in the 17th century before finally being abolished in the 19th century and rebuilt as a Pseudo-Renaissance chateau. Nowadays Sázava has been returned to its original aesthetic and acts as a cultural centre for the traditions of Old Slavonic and a museum of historical artefacts from the region.",
                 "durationInMinutes": 60,
+                "order": 1,
+                "timezone": "Europe/Prague",
+                "country": {
+                    "englishName": "Czech Republic"
+                }
+            },
+            {
+                "id": "6073e7ce-74e1-4aa9-88db-850e1e2822e3",
+                "price": 37,
+                "name": "Kutna Hora",
+                "image": "https://images.daytrip.com/kutna-hora1.jpg",
+                "title": "Medieval silver-mining boom town",
+                "perex": "Some cities, as 'Starship' sang, are built on rock 'n' roll but Kutná Hora was built on silver, a more durable substance, and almost as profitable.",
+                "description": "Its extensive deposits lured a flood of settlers in the Thirteenth Century and by its end the town was the seat of the Czech national mint and financial centre of the country. Today, its wealth lies in a thousand years worth of architectural heritage which, unlike Prague's, can be savoured without the pressure of crowds. A daunting prospect perhaps but Kutná Hora's attractions can be found as much in small-scale detail as in the large-scale magnificence of the Fourteenth Century Cathedral of St. Barbara. Stroll along the immaculately-preserved medieval street Ruthardka, or marvel at the Stone Fountain sitting like a giant sandstone crown amid burgher houses.  One or two of the larger-scale items shouldn't be missed however. The Bone Church, or Ossuary, is one such, a Cistercian chapel representing a medieval revolution in interior design: bones and nothing but the bones of the dead, from 'noughts and crosses' floor to chandeliered ceiling.",
+                "durationInMinutes": 90,
                 "order": 2,
                 "timezone": "Europe/Prague",
                 "country": {
                     "englishName": "Czech Republic"
                 }
             }
-        ]
+        ],
+        "includedStops": [
+            {
+                "id": "4ee58c0c-4e56-46ef-bd22-406a1bc60e1c",
+                "price": 20,
+                "name": "Mikulov",
+                "image": "https://images.daytrip.com/510.jpg",
+                "title": "The Heart of Czech Wine Country",
+                "perex": "A town with a history as deep and flavourful as its wine, Mikulov provides a perfect combination of relaxation and exploration.",
+                "description": "Often favoured by visitors with a more active approach to life, Mikulov has much to offer. Surrounded by idyllic countryside, crisscrossed by bicycle paths and marked hiking trails, and the nearby Nové Mlýny lakes, there is something for everyone to enjoy. After all that fresh air, a glass of wine will be more than welcome, and fortunately, Mikulov is the centre for Czech wine making. Due to a high concentration of limestone in the local soil, wine from this region has a unique character and distinct taste. If you like your wine with a side-serving of history, Mikulov Castle dates from the 1730s, and the Dietrichstein Tomb is the final resting place of a Bohemian noble family. Mikulov is also significant for its strong Jewish history. In the early 1800s Mikulov's Jewish Quarter was the largest in Moravia with half the town's inhabitants being of Jewish faith.",
+                "durationInMinutes": 60,
+                "order": 1,
+                "timezone": "Europe/Prague",
+                "country": {
+                    "englishName": "Czech Republic"
+                }
+            }
+        ],
+        "availableChildSeatTypes": [
+            {
+                "childSeatType": "RearFacing",
+                "description": "Rear-facing infant seat",
+                "ageFrom": 0,
+                "ageTo": 1,
+                "weightInPoundsFrom": 0,
+                "weightInPoundsTo": 26,
+                "weightInKilosFrom": 0,
+                "weightInKilosTo": 10
+            },
+            {
+                "childSeatType": "ForwardFacing",
+                "description": "Forward-facing with harness",
+                "ageFrom": 1,
+                "ageTo": 4,
+                "weightInPoundsFrom": 18,
+                "weightInPoundsTo": 36,
+                "weightInKilosFrom": 8,
+                "weightInKilosTo": 16
+            },
+            {
+                "childSeatType": "BoosterSeat",
+                "description": "Booster seat with high back",
+                "ageFrom": 4,
+                "ageTo": 6,
+                "weightInPoundsFrom": 30,
+                "weightInPoundsTo": 50,
+                "weightInKilosFrom": 14,
+                "weightInKilosTo": 23
+            },
+            {
+                "childSeatType": "Booster",
+                "description": "Backless booster",
+                "ageFrom": 6,
+                "ageTo": 12,
+                "weightInPoundsFrom": 44,
+                "weightInPoundsTo": 72,
+                "weightInKilosFrom": 20,
+                "weightInKilosTo": 33
+            }
+        ],
+        "expiresAt": "2026-11-11T15:57:00Z"
     }
 }
 ```
@@ -1395,7 +1637,7 @@ This endpoint is used to update minor details of an existing booking. If you wan
 
 ```bash
 curl -d '{
-  "bookingId": "cb102778-a3d7-426e-8d18-6bd6b296f283",
+  "bookingId": "3eec7e10-af42-4017-8331-a0f363e655a4",
   "customerNote": "We will wait inside the Airport building",
   "passengerDetails": [
     {
@@ -1406,7 +1648,9 @@ curl -d '{
       "email": "client-email@example.com",
       "over18": true
     },
-    { "type": "Adult" },
+    {
+      "type": "Adult"
+    },
     {
       "type": "Child",
       "childSeatType": "BoosterSeat"
@@ -1430,13 +1674,14 @@ curl -d '{
 
 ```json
 {
-    "bookingId": "cb102786-f663-47d7-9635-7ef61a51bf29",
-    "bookingReference": "CB1027",
+    "bookingId": "3eec7e10-af42-4017-8331-a0f363e655a4",
+    "bookingReference": "S46UGM73",
+    "externalId": "acme-6e67740c-7bb8-4e3f-ba8e-f76094eabc57",
     "status": "Confirmed",
-    "createdAt": "2022-12-05T18:00:00Z",
+    "createdAt": "2026-11-11T14:57:03Z",
     "passengersCount": 3,
     "currency": "EUR",
-    "departureTimeUtc": "2022-12-05T18:00:00Z",
+    "departureTimeUtc": "2027-11-16T08:30:00Z",
     "originTimezone": "Europe/Prague",
     "meetAndGreet": true,
     "pickUpAddressNote": "Havel airport",
@@ -1448,9 +1693,9 @@ curl -d '{
             "type": "Lead",
             "firstName": "John",
             "lastName": "Doe",
-            "phone": "+4166666666",
             "email": "client-email@example.com",
-            "birthday": 629424000,
+            "phone": "+4166666666",
+            "birthday": 631152000,
             "over18": true
         },
         {
@@ -1462,56 +1707,141 @@ curl -d '{
         }
     ],
     "trip": {
+        "id": "ea0b7beb-550a-4150-91de-4ef08b43caa1",
         "type": "Private",
         "englishSpeakingDriver": true,
-        "distanceKm": 334,
-        "travelTimeMinutes": 268,
+        "distanceKm": 338,
+        "travelTimeMinutes": 274,
         "pickUp": {
             "lat": 50.1,
-            "lon": 14.25,
-            "time": "2022-12-05T18:00:00Z",
+            "lon": 14.2559,
+            "time": "2027-11-16T08:30:00Z",
             "timezone": "Europe/Prague",
+            "description": null,
             "meetAndGreet": true,
+            "immutable": false,
             "state": "original",
-            "immutable": false
+            "adjustmentReason": null,
+            "address": null,
+            "image": null
         },
         "dropOff": {
-            "lat": 48.2,
-            "lon": 16.37,
+            "lat": 48.2082,
+            "lon": 16.3738,
+            "description": null,
+            "meetAndGreet": null,
+            "immutable": false,
             "state": "original",
-            "immutable": false
+            "adjustmentReason": null,
+            "address": null,
+            "image": null
         },
         "pricing": {
-            "totalPrice": 288
+            "totalPrice": 281
         },
         "vehicle": {
             "type": "Sedan",
             "maxPassengers": 3,
             "description": "Sedan comparable to a Volkswagen Passat, up to 3 passengers with luggage.",
             "modelDescription": "VW Passat or similar",
-            "image": "https://daytrip.imgix.net/site/sedan.png"
+            "image": "https://images.daytrip.com/sedan-v3.png"
         },
         "luggage": {
             "maxTotalCarryons": 3,
             "maxTotalSuitcases": 3
         },
-        "includedStops": [
+        "possibleStops": [
             {
-                "id": "4ee58c0c-4e56-46ef-bd22-406a1bc60e1c",
-                "price": 28,
-                "name": "Mikulov",
-                "image": "https://daytrip.imgix.net/510.jpg",
-                "title": "The Heart of Czech Wine Country",
-                "perex": "A town with a history as deep and flavourful as its wine, Mikulov provides a perfect combination of relaxation and exploration.",
-                "description": "Often favoured by visitors with a more active approach to life, Mikulov has much to offer. Surrounded by idyllic countryside, crisscrossed by bicycle paths and marked hiking trails, and the nearby Nové Mlýny lakes, there is something for everyone to enjoy. After all that fresh air, a glass of wine will be more than welcome, and fortunately, Mikulov is the centre for Czech wine making. Due to a high concentration of limestone in the local soil, wine from this region has a unique character and distinct taste. If you like your wine with a side-serving of history, Mikulov Castle dates from the 1730s, and the Dietrichstein Tomb is the final resting place of a Bohemian noble family. Mikulov is also significant for its strong Jewish history. In the early 1800s Mikulov's Jewish Quarter was the largest in Moravia with half the town's inhabitants being of Jewish faith.",
+                "id": "359be11a-9284-48b0-8ea1-03f99d63805a",
+                "price": 24,
+                "name": "Sazava monastery",
+                "image": "https://images.daytrip.com/366.jpg",
+                "title": "An Abbey Fit for a Saint",
+                "perex": "Founded in 1032, Sázava Monastery is a former Benedictine abbey that has endured much struggle and strife throughout its long history.",
+                "description": "Declared a national cultural monument in 1962, Sázava Monastery is one of the oldest and best preserved monasteries in all of Bohemia. During its early years, Sázava was seen as a cultural bridge between the eastern and western branches of the church due its use of the Old Slavonic, the first written Slavic language. However this came to an abrupt end in 1097, when the Pope forbade Slavic liturgies during religious ceremonies and Slavic monks were banished from the monastery. During the 15th century Hussite War Sázava was burnt down, then remodeled in the Baroque style in the 17th century before finally being abolished in the 19th century and rebuilt as a Pseudo-Renaissance chateau. Nowadays Sázava has been returned to its original aesthetic and acts as a cultural centre for the traditions of Old Slavonic and a museum of historical artefacts from the region.",
                 "durationInMinutes": 60,
+                "order": 1,
+                "timezone": "Europe/Prague",
+                "country": {
+                    "englishName": "Czech Republic"
+                }
+            },
+            {
+                "id": "6073e7ce-74e1-4aa9-88db-850e1e2822e3",
+                "price": 37,
+                "name": "Kutna Hora",
+                "image": "https://images.daytrip.com/kutna-hora1.jpg",
+                "title": "Medieval silver-mining boom town",
+                "perex": "Some cities, as 'Starship' sang, are built on rock 'n' roll but Kutná Hora was built on silver, a more durable substance, and almost as profitable.",
+                "description": "Its extensive deposits lured a flood of settlers in the Thirteenth Century and by its end the town was the seat of the Czech national mint and financial centre of the country. Today, its wealth lies in a thousand years worth of architectural heritage which, unlike Prague's, can be savoured without the pressure of crowds. A daunting prospect perhaps but Kutná Hora's attractions can be found as much in small-scale detail as in the large-scale magnificence of the Fourteenth Century Cathedral of St. Barbara. Stroll along the immaculately-preserved medieval street Ruthardka, or marvel at the Stone Fountain sitting like a giant sandstone crown amid burgher houses.  One or two of the larger-scale items shouldn't be missed however. The Bone Church, or Ossuary, is one such, a Cistercian chapel representing a medieval revolution in interior design: bones and nothing but the bones of the dead, from 'noughts and crosses' floor to chandeliered ceiling.",
+                "durationInMinutes": 90,
                 "order": 2,
                 "timezone": "Europe/Prague",
                 "country": {
                     "englishName": "Czech Republic"
                 }
             }
-        ]
+        ],
+        "includedStops": [
+            {
+                "id": "4ee58c0c-4e56-46ef-bd22-406a1bc60e1c",
+                "price": 20,
+                "name": "Mikulov",
+                "image": "https://images.daytrip.com/510.jpg",
+                "title": "The Heart of Czech Wine Country",
+                "perex": "A town with a history as deep and flavourful as its wine, Mikulov provides a perfect combination of relaxation and exploration.",
+                "description": "Often favoured by visitors with a more active approach to life, Mikulov has much to offer. Surrounded by idyllic countryside, crisscrossed by bicycle paths and marked hiking trails, and the nearby Nové Mlýny lakes, there is something for everyone to enjoy. After all that fresh air, a glass of wine will be more than welcome, and fortunately, Mikulov is the centre for Czech wine making. Due to a high concentration of limestone in the local soil, wine from this region has a unique character and distinct taste. If you like your wine with a side-serving of history, Mikulov Castle dates from the 1730s, and the Dietrichstein Tomb is the final resting place of a Bohemian noble family. Mikulov is also significant for its strong Jewish history. In the early 1800s Mikulov's Jewish Quarter was the largest in Moravia with half the town's inhabitants being of Jewish faith.",
+                "durationInMinutes": 60,
+                "order": 1,
+                "timezone": "Europe/Prague",
+                "country": {
+                    "englishName": "Czech Republic"
+                }
+            }
+        ],
+        "availableChildSeatTypes": [
+            {
+                "childSeatType": "RearFacing",
+                "description": "Rear-facing infant seat",
+                "ageFrom": 0,
+                "ageTo": 1,
+                "weightInPoundsFrom": 0,
+                "weightInPoundsTo": 26,
+                "weightInKilosFrom": 0,
+                "weightInKilosTo": 10
+            },
+            {
+                "childSeatType": "ForwardFacing",
+                "description": "Forward-facing with harness",
+                "ageFrom": 1,
+                "ageTo": 4,
+                "weightInPoundsFrom": 18,
+                "weightInPoundsTo": 36,
+                "weightInKilosFrom": 8,
+                "weightInKilosTo": 16
+            },
+            {
+                "childSeatType": "BoosterSeat",
+                "description": "Booster seat with high back",
+                "ageFrom": 4,
+                "ageTo": 6,
+                "weightInPoundsFrom": 30,
+                "weightInPoundsTo": 50,
+                "weightInKilosFrom": 14,
+                "weightInKilosTo": 23
+            },
+            {
+                "childSeatType": "Booster",
+                "description": "Backless booster",
+                "ageFrom": 6,
+                "ageTo": 12,
+                "weightInPoundsFrom": 44,
+                "weightInPoundsTo": 72,
+                "weightInKilosFrom": 20,
+                "weightInKilosTo": 33
+            }
+        ],
+        "expiresAt": "2026-11-11T15:57:00Z"
     }
 }
 ```

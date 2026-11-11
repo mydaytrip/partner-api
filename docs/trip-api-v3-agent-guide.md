@@ -37,7 +37,7 @@ Deliver, at minimum: a typed client with one method per endpoint, the error mapp
 | Base URL | `https://papi-staging.dynamic-environment.mydaytrip.net/partners/v3` | `https://papi.mydaytrip.com/partners/v3` |
 | API key | sandbox key | production key (issued after the sandbox integration is tested) |
 
-Keys are per environment. Make the base URL and the key configuration, not constants. Sandbox bookings are not real trips.
+Keys are per environment. Make the base URL and the key configuration, not constants. Sandbox bookings are not real trips. The sandbox covers fewer areas than production, and its options expire sooner (currently after 1 hour, against 12 hours in production).
 
 Headers:
 
@@ -51,7 +51,7 @@ Headers:
 
 Rate limit: 2,000 requests per minute per API key, counted separately for each endpoint. Over the limit you get 429 with `Retry-After`. Responses also carry `X-RateLimit-Limit`, `X-RateLimit-Remaining` and `X-RateLimit-Reset`.
 
-Success is any 2xx status. Do not test for `=== 200`.
+Success is any 2xx status: GET endpoints answer 200 and POST endpoints answer 201. Do not test for `=== 200`.
 
 ---
 
@@ -362,6 +362,7 @@ When several validation rules fail, `message` holds all of them joined with `"; 
 ### Search
 
 - **No service is `200` with `options: []`.** This covers: no coverage between the two points, an unknown IATA code, coordinates `0,0`, a date on which the route is not sold, and a departure that is too soon. Show "not available" and let the user change the request. Do not retry. Only a 200 with empty `options` means no service: any other status on search, a 404 included, is an error to handle as in section 7.
+- **Closed areas.** Some places are closed to bookings through the API altogether, for example a few pedestrian old towns. A search that starts or ends there returns no options. Moving the point just outside the area can return options.
 - **Lead time.** Trips cannot be booked at short notice. The minimum notice is set per route and vehicle type and is commonly between one and two days. Do not hard-code it: a search for a departure that is too soon simply returns no options (or fewer vehicle types).
 - **Passenger count.** 1 to 7 without `includeMultipleVehicles=true`, 1 to 99 with it. Outside the range is a 400. For groups above 7, search with `includeMultipleVehicles=true`.
 - **`vehicle` or `vehicles` depends on how you searched**, not on the option. A search with `includeMultipleVehicles=true` returns `vehicles` (an array, also for single-vehicle options) and no `vehicle`. A search without it returns `vehicle` and no `vehicles`. The same holds for the `trip` object in book, details and update responses of that booking. Write one accessor that normalises both to an array.
@@ -589,7 +590,7 @@ Run these against the sandbox before requesting a production key. Use a departur
 13. Update the flight number and address notes; the response shows them. Update with only `bookingId`: 400.
 14. Cancel: `penalty` is 0, details then shows `status: "Cancelled"` and `cancelledAt`. Cancel again: 409, handled as success.
 15. Drivers and tracking on a fresh booking return empty arrays without error.
-16. Search a route whose pickup is in a pedestrian zone (the public documentation uses Dubrovnik old town, `42.639515, 18.108064`, to Venice, `45.434143, 12.333497`; ask Daytrip for a sandbox example if that returns an unadjusted pickup): `pickUp.state` is `adjusted`, your UI shows the adjusted point, and after booking `meetingPosition.instructions` is shown to the customer.
+16. Search from an airport by IATA code on a route where the pickup point is adjusted (on the sandbox: `originType=iata&origin=PRG` to the centre of Prague, `50.0755, 14.4378`): `pickUp.state` is `adjusted` with `adjustmentReason: "airport_pickup"`, your UI shows the adjusted point, and after booking you show `meetingPosition.instructions` to the customer when the response has it.
 17. A request without the API key returns 401 and your client reports a configuration error rather than "no results".
 18. Every call logs the response `x-correlation-id`.
 

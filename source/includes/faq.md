@@ -6,7 +6,7 @@ A single vehicle takes 1-7 passengers, depending on the vehicle type. For larger
 
 ## After receiving trip options, how much time do I have to book one of them?
 
-Each Trip API option has its own `expiresAt` timestamp, currently 12 hours after the search. Always read it from the option instead of assuming a fixed period. An option can also stop being bookable earlier, when its price changes due to increased demand or when the departure gets too close. In such case you will need to repeat the search.
+Each Trip API option has its own `expiresAt` timestamp, currently 12 hours after the search in production and 1 hour on the sandbox. Always read it from the option instead of assuming a fixed period. An option can also stop being bookable earlier, when its price changes due to increased demand or when the departure gets too close. In such case you will need to repeat the search.
 
 ## Can I cancel a booking created via the API?
 
