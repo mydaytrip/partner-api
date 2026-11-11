@@ -552,7 +552,7 @@ Before calling book, generate a unique `externalId` and save it with the `option
 
 1. Call `POST /trip/book`. Count the attempts you make for this `optionId`.
 2. **2xx:** save `bookingId` and `bookingReference`. Done.
-3. **429 on any attempt:** the request was rejected before it was processed, so it created nothing and does not count as an attempt. Wait `Retry-After` seconds and send it again.
+3. **429 on any attempt:** the request was rejected before it was processed, so it created nothing and does not count as an attempt. Wait `Retry-After` seconds and send it again, at most 5 times in a row. If the answer is still 429 after that, stop retrying. When no earlier attempt has an unknown outcome, nothing was booked: report that booking is temporarily unavailable. Otherwise keep the order pending and flag it for manual review.
 4. **400, 401, 403 or 404 on the first attempt:** the booking was not created. Do not retry. Report the failure.
 5. **Anything else:** 409, a timeout, a network error, 500, 502 or 503 on any attempt, and any answer other than 2xx or 429 on a retry. The booking may or may not exist. Call `GET /trip/external/details/{externalId}`.
    - **2xx and `trip.id` equals your `optionId` and `status` is `"Confirmed"`:** the booking exists. Save `bookingId` and `bookingReference` from it. Done.

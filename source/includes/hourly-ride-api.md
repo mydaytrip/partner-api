@@ -196,7 +196,7 @@ curl "https://papi-staging.dynamic-environment.mydaytrip.net/partners/v1/hourly-
 
 This endpoint creates a booking for the selected hourly ride option. The booking must include lead passenger details and can optionally include additional adult and child passenger details with required child seats.
 
-> To book an hourly ride option, use this call:
+> To book an hourly ride option, use this call. Replace `optionId` with the id of an unexpired option from your own search response:
 
 ```bash
 curl -X POST "https://papi-staging.dynamic-environment.mydaytrip.net/partners/v1/hourly-rides/book" \

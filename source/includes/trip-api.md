@@ -52,6 +52,8 @@ This endpoint returns all available trip options based on the specified origin, 
 
 The examples use the departure time `1826353800` (2027-11-16T08:30:00Z). When you try them, use a departure time in the future: a search for a departure in the past or too close to now returns an empty list of options.
 
+The ids in the examples (`searchId`, the option `id`, `bookingId`) come from one run of the flow on the sandbox and no longer work. In your own requests use the ids from your own responses: the option `id` from your search, the new option `id` returned by [/customize](#trip-customize), and the `bookingId` returned by [/book](#trip-book). The examples follow that one booking in this order: search, customize, book, details, update, cancel. The details and update examples therefore show the booking as `Confirmed`, before it was cancelled.
+
 > To search for a private trip from Prague to Vienna for 3 passengers, use this call:
 
 ```bash
