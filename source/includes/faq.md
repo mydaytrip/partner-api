@@ -2,11 +2,11 @@
 
 ## For how many passengers can I book a trip?
 
-On most routes we offer trips for 1-7 passengers. On some routes we offer trips for up to 10 passengers. If you need to book a trip for more passengers please create multiple bookings.
+A single vehicle takes 1-7 passengers, depending on the vehicle type. For larger groups, search with `includeMultipleVehicles=true`: the search then accepts up to 99 passengers and returns options made of several vehicles where available.
 
 ## After receiving trip options, how much time do I have to book one of them?
 
-Options are valid for up to 7 days or until the price changes due to increased demand. In such case you will need to repeat the search.
+Each Trip API option has its own `expiresAt` timestamp, currently 12 hours after the search. Always read it from the option instead of assuming a fixed period. An option can also stop being bookable earlier, when its price changes due to increased demand or when the departure gets too close. In such case you will need to repeat the search.
 
 ## Can I cancel a booking created via the API?
 
@@ -18,8 +18,8 @@ No, once a booking is created by calling our API, it is confirmed and guaranteed
 
 ## Does the Daytrip API handle payments?
 
-No, the Daytrip API does not handle payments. You are responsible for collecting online payments from the customers. You are also responsible for any currency conversion for display purposes (currently the API will return prices in EUR or USD based on the country of the trip). Your company will be invoiced by Daytrip for the trips you book with us.
+No, the Daytrip API does not handle payments. You are responsible for collecting online payments from the customers. You are also responsible for any currency conversion for display purposes (the API returns prices in the currency stated in the `currency` property of each response: EUR or USD based on the country of the trip, unless another currency was agreed for your account). Your company will be invoiced by Daytrip for the trips you book with us.
 
 ## Is the amount of requests for the Daytrip API limited?
 
-You can send up to 2000 requests per minute.
+You can send up to 2000 requests per minute to each endpoint. Requests over the limit are rejected with the 429 HTTP status code and a `Retry-After` header.

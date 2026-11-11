@@ -39,7 +39,6 @@
             <h3 id="what-can-our-trip-api-do">What can our TRIP API do?</h3>
             <ul>
                <li>Return quotes for point-to-point transfers ranging from short airport transfers to long trips between countries.</li>
-               <li>Return quotes for shared transfers between predefined routes.</li>
                <li>Offer sightseeing stops on selected routes (including visuals and descriptions so you can display them on your website).</li>
                <li>Provide predefined pickup and drop-off locations for areas with restricted vehicle access.</li>
                <li>Offer multiple vehicle options to accommodate larger groups of passengers.</li>
@@ -64,11 +63,13 @@
                <li>Create bookings for day trips on behalf of customers.</li>
                <li>Update or cancel existing day trip bookings.</li>
             </ul>
+            <h3 id="integrating-with-an-ai-coding-agent">Integrating with an AI coding agent</h3>
+            <p>If you build your integration with an AI coding agent such as Claude Code, give it the <a href="trip-api-v3-agent-guide.md">Trip API integration guide for AI coding agents</a>. It is a single Markdown file with the rules, types, error handling and test checklist an agent needs to implement a correct Trip API client. An index for agents is published at <a href="llms.txt">llms.txt</a>.</p>
             <h2 id="contacts">Contacts</h2>
             <h3 id="onboarding">Onboarding</h3>
-            <p>If you want to integrate with our API, contact us at <a href="mailto:&#112;&#x61;&#114;&#x74;&#x6e;&#101;&#114;&#x73;&#64;&#100;&#97;&#x79;&#116;&#x72;&#x69;&#x70;&#46;&#99;&#111;&#109;">&#112;&#x61;&#114;&#x74;&#x6e;&#101;&#114;&#x73;&#64;&#100;&#97;&#x79;&#116;&#x72;&#x69;&#x70;&#46;&#99;&#111;&#109;</a> to get a partner account and an API key.</p>
+            <p>If you want to integrate with our API, contact us at <a href="mailto:&#112;&#x61;&#114;&#116;&#110;&#101;&#114;&#115;&#x40;&#x64;&#x61;&#121;&#x74;&#114;&#105;&#x70;&#46;&#x63;&#x6f;&#109;">&#112;&#x61;&#114;&#116;&#110;&#101;&#114;&#115;&#x40;&#x64;&#x61;&#121;&#x74;&#114;&#105;&#x70;&#46;&#x63;&#x6f;&#109;</a> to get a partner account and an API key.</p>
             <h3 id="customer-support-emergency">Customer support emergency</h3>
-            <p>To solve problems with bookings created via the API you can contact <a href="mailto:&#x64;&#x61;&#121;&#x74;&#x72;&#105;&#x70;&#x40;&#x64;&#97;&#x79;&#x74;&#114;&#105;&#112;&#46;&#x63;&#x6f;&#x6d;">&#x64;&#x61;&#121;&#x74;&#x72;&#105;&#x70;&#x40;&#x64;&#97;&#x79;&#x74;&#114;&#105;&#112;&#46;&#x63;&#x6f;&#x6d;</a> or call <a href="tel:+442033181119">+44 20 3318 1119</a> or <a href="tel:+16282019501">+1 628 201 9501</a>.</p>
+            <p>To solve problems with bookings created via the API you can contact <a href="mailto:&#x64;&#97;&#x79;&#x74;&#114;&#x69;&#x70;&#64;&#x64;&#97;&#x79;&#x74;&#114;&#105;&#112;&#x2e;&#x63;&#111;&#x6d;">&#x64;&#97;&#x79;&#x74;&#114;&#x69;&#x70;&#64;&#x64;&#97;&#x79;&#x74;&#114;&#105;&#112;&#x2e;&#x63;&#111;&#x6d;</a> or call <a href="tel:+442033181119">+44 20 3318 1119</a> or <a href="tel:+16282019501">+1 628 201 9501</a>.</p>
             <h1 id="environments">Environments</h1>
             <p>Daytrip offers a sandbox environment where you can test your integration with the API without creating real bookings. All the code examples provided in this documentation are using this sandbox environment. Each environment requires a different API key. When your integration is ready and tested against the sandbox environment, you can request an API key for the production environment.</p>
             <h2 id="urls">URLs</h2>
@@ -130,7 +131,11 @@
                   </tr>
                   <tr>
                      <td>409</td>
-                     <td>Conflict - Trip option already booked, trip option already cancelled.</td>
+                     <td>Conflict - Trip option already booked, booking already cancelled, price changed since the search.</td>
+                  </tr>
+                  <tr>
+                     <td>429</td>
+                     <td>Too Many Requests - The rate limit was exceeded. Wait for the number of seconds given in the <code>Retry-After</code> response header, then retry.</td>
                   </tr>
                   <tr>
                      <td>500</td>
@@ -138,7 +143,7 @@
                   </tr>
                   <tr>
                      <td>502</td>
-                     <td>Bad Gateway - We had a problem with an external service. Please retry your request.</td>
+                     <td>Bad Gateway - We had a problem with an external service. Wait for the number of seconds given in the <code>Retry-After</code> response header, then retry.</td>
                   </tr>
                   <tr>
                      <td>503</td>
@@ -172,7 +177,7 @@
                   <tr>
                      <td>message</td>
                      <td>string</td>
-                     <td>Informative message about the reason of this error. Error handling logic should not use this property, it should be used for debugging purposes only.</td>
+                     <td>Informative message about the reason of this error. When several validation rules fail, their messages are joined with <code>; </code>. Error handling logic should not use this property, it should be used for debugging purposes only.</td>
                   </tr>
                </tbody>
             </table>
@@ -181,7 +186,7 @@
             <p>If you are using correlation ids on your side as well, you can send us <code>x-correlation-id</code> header with your requests and we will use your own correlation id value.</p>
             <p><a href="https://microsoft.github.io/code-with-engineering-playbook/observability/correlation-id/">About correlation ids</a></p>
             <h1 id="trip-api">Trip API</h1>
-            <p>A trip is a representation of passenger transportation from point A to point B. Each search will usually return multiple trip options that can be booked. Options can differ by vehicle type or by being private or shared with other travelers. Shared trips have predefined pickup and dropoff points and departure times. For private trips pickup and dropoff points as well as departure time are matching the search request. Private trips can also be customized by adding stops if available.</p>
+            <p>A trip is a representation of passenger transportation from point A to point B. Each search will usually return multiple trip options that can be booked. Options differ by vehicle type and by whether the driver speaks English. All options are private trips: pickup and dropoff points as well as departure time match the search request, except where a predefined meeting position applies. Private trips can also be customized by adding stops if available. Shared trips are no longer offered.</p>
             <h2 id="flows">Flows</h2>
             <p>Trip API can be used to search for trip options, customizing an option with stops and then booking the option.</p>
             <h3 id="simple-trip">Simple trip</h3>
@@ -218,18 +223,18 @@
                <li><code>optional</code> - call <a href="#trip-details">/details</a> endpoint to get trip and booking details</li>
                <li>call <a href="#trip-update">/update</a> endpoint to update the booking details</li>
             </ol>
-            <p>Disclaimer: in the last 24 hours before the departure the <a href="#trip-update">/update</a> endpoint will no longer accept updates. For updates in the last 24 hours please contact our customer support at <a href="mailto:&#x64;&#97;&#121;&#116;&#114;&#105;&#x70;&#x40;&#109;&#121;&#100;&#97;&#121;&#x74;&#x72;&#x69;&#112;&#46;&#99;&#x6f;&#109;">&#x64;&#97;&#121;&#116;&#114;&#105;&#x70;&#x40;&#109;&#121;&#100;&#97;&#121;&#x74;&#x72;&#x69;&#112;&#46;&#99;&#x6f;&#109;</a> or call <a href="tel:+442033181119">+44 20 3318 1119</a>.</p>
+            <p>Disclaimer: in the last 24 hours before the departure the <a href="#trip-update">/update</a> endpoint will no longer accept updates. For updates in the last 24 hours please contact our customer support at <a href="mailto:&#x64;&#97;&#121;&#116;&#x72;&#105;&#112;&#64;&#100;&#x61;&#121;&#116;&#x72;&#105;&#x70;&#x2e;&#99;&#111;&#109;">&#x64;&#97;&#121;&#116;&#x72;&#105;&#112;&#64;&#100;&#x61;&#121;&#116;&#x72;&#105;&#x70;&#x2e;&#99;&#111;&#109;</a> or call <a href="tel:+442033181119">+44 20 3318 1119</a>.</p>
             <h2 id="trip-search">Trip Search</h2>
             <p>This endpoint returns all available trip options based on the specified origin, destination, departure time, and passenger count. The origin and destination can be provided either as geographic coordinates or as IATA airport codes. Geographic coordinates should be specified as latitude and longitude in decimal degrees format, for example: <code>39.753657</code>, <code>-117.610215</code>. The departure time must be supplied as a UNIX epoch timestamp in seconds (e.g., 1679463169).</p>
             <blockquote>
-               <p>To search for a private or shared trip from Prague to Vienna for 3 passengers, use this call:</p>
+               <p>To search for a private trip from Prague to Vienna for 3 passengers, use this call:</p>
             </blockquote>
-            <pre class="highlight bash"><code>curl <span class="hljs-string">&quot;https://papi-staging.dynamic-environment.mydaytrip.net/partners/v3/trip/search?originLatitude=50.10&amp;originLongitude=14.2559&amp;destinationLatitude=48.2082&amp;destinationLongitude=16.3738&amp;departureTime=1766227088&amp;passengersCount=3&amp;childrenCount=1&amp;includeShared=true&quot;</span> \
+            <pre class="highlight bash"><code>curl <span class="hljs-string">&quot;https://papi-staging.dynamic-environment.mydaytrip.net/partners/v3/trip/search?originLatitude=50.10&amp;originLongitude=14.2559&amp;destinationLatitude=48.2082&amp;destinationLongitude=16.3738&amp;departureTime=1766227088&amp;passengersCount=3&amp;childrenCount=1&quot;</span> \
   -H <span class="hljs-string">&quot;x-api-key: your_api_key&quot;</span></code></pre><pre class="highlight javascript"><code></code></pre><pre class="highlight python"><code></code></pre>
             <blockquote>
-               <p>To search for a private or shared trip from Prague Airport to Vienna for 3 passengers, use this call:</p>
+               <p>To search for a private trip from Prague Airport to Vienna for 3 passengers, use this call:</p>
             </blockquote>
-            <pre class="highlight bash"><code>curl <span class="hljs-string">&quot;https://papi-staging.dynamic-environment.mydaytrip.net/partners/v3/trip/search?originType=iata&amp;origin=PRG&amp;destinationType=coordinates&amp;destinationLatitude=48.2082&amp;destinationLongitude=16.3738&amp;departureTime=1766227088&amp;passengersCount=3&amp;childrenCount=1&amp;includeShared=true&quot;</span> \
+            <pre class="highlight bash"><code>curl <span class="hljs-string">&quot;https://papi-staging.dynamic-environment.mydaytrip.net/partners/v3/trip/search?originType=iata&amp;origin=PRG&amp;destinationType=coordinates&amp;destinationLatitude=48.2082&amp;destinationLongitude=16.3738&amp;departureTime=1766227088&amp;passengersCount=3&amp;childrenCount=1&quot;</span> \
   -H <span class="hljs-string">&quot;x-api-key: your_api_key&quot;</span></code></pre><pre class="highlight javascript"><code></code></pre><pre class="highlight python"><code></code></pre>
             <blockquote>
                <p>The above call returns a JSON structured like this:</p>
@@ -572,212 +577,13 @@
                 <span class="hljs-punctuation">}</span>
             <span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
             <span class="hljs-attr">&quot;expiresAt&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;2022-12-04T18:00:00Z&quot;</span>
-        <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
-        <span class="hljs-punctuation">{</span>
-            <span class="hljs-attr">&quot;id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;282a8a94-2a18-42f6-9af6-c53b13d007cb&quot;</span><span class="hljs-punctuation">,</span>
-            <span class="hljs-attr">&quot;type&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Shared&quot;</span><span class="hljs-punctuation">,</span>
-            <span class="hljs-attr">&quot;englishSpeakingDriver&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span><span class="hljs-punctuation">,</span>
-            <span class="hljs-attr">&quot;distanceKm&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">350</span><span class="hljs-punctuation">,</span>
-            <span class="hljs-attr">&quot;travelTimeMinutes&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">235</span><span class="hljs-punctuation">,</span>
-            <span class="hljs-attr">&quot;pickUp&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
-                <span class="hljs-attr">&quot;lat&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">50.12</span><span class="hljs-punctuation">,</span>
-                <span class="hljs-attr">&quot;lon&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">14.27</span><span class="hljs-punctuation">,</span>
-                <span class="hljs-attr">&quot;time&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;2022-12-05T19:00:00Z&quot;</span><span class="hljs-punctuation">,</span>
-                <span class="hljs-attr">&quot;interval&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
-                    <span class="hljs-attr">&quot;earliest&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;2022-12-05T19:00:00Z&quot;</span><span class="hljs-punctuation">,</span>
-                    <span class="hljs-attr">&quot;latest&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;2022-12-05T19:10:00Z&quot;</span>
-                <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
-                <span class="hljs-attr">&quot;timezone&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Europe/Prague&quot;</span><span class="hljs-punctuation">,</span>
-                <span class="hljs-attr">&quot;description&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;In front of the hotel Europa&quot;</span><span class="hljs-punctuation">,</span>
-                <span class="hljs-attr">&quot;address&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Evropska 1540/41, Prague, Czechia&quot;</span><span class="hljs-punctuation">,</span>
-                <span class="hljs-attr">&quot;meetAndGreet&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">false</span></span><span class="hljs-punctuation">,</span>
-                <span class="hljs-attr">&quot;state&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;adjusted&quot;</span><span class="hljs-punctuation">,</span>
-                <span class="hljs-attr">&quot;immutable&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span>
-            <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
-            <span class="hljs-attr">&quot;dropOff&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
-                <span class="hljs-attr">&quot;lat&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">48.21</span><span class="hljs-punctuation">,</span>
-                <span class="hljs-attr">&quot;lon&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">16.36</span><span class="hljs-punctuation">,</span>
-                <span class="hljs-attr">&quot;time&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;2022-12-05T22:55:00Z&quot;</span><span class="hljs-punctuation">,</span>
-                <span class="hljs-attr">&quot;interval&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
-                    <span class="hljs-attr">&quot;earliest&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;2022-12-05T22:40:00Z&quot;</span><span class="hljs-punctuation">,</span>
-                    <span class="hljs-attr">&quot;latest&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;2022-12-05T22:55:00Z&quot;</span>
-                <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
-                <span class="hljs-attr">&quot;timezone&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Europe/Vienna&quot;</span><span class="hljs-punctuation">,</span>
-                <span class="hljs-attr">&quot;description&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Next to the railway station&quot;</span><span class="hljs-punctuation">,</span>
-                <span class="hljs-attr">&quot;address&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Bahnhofplatz, 1010 Wien, Austria&quot;</span><span class="hljs-punctuation">,</span>
-                <span class="hljs-attr">&quot;state&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;adjusted&quot;</span><span class="hljs-punctuation">,</span>
-                <span class="hljs-attr">&quot;immutable&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span>
-            <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
-            <span class="hljs-attr">&quot;pricing&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
-                <span class="hljs-attr">&quot;pricePerPassenger&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">180</span><span class="hljs-punctuation">,</span>
-                <span class="hljs-attr">&quot;totalPrice&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">360</span>
-            <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
-            <span class="hljs-attr">&quot;vehicle&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
-                <span class="hljs-attr">&quot;type&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Shuttle&quot;</span><span class="hljs-punctuation">,</span>
-                <span class="hljs-attr">&quot;maxPassengers&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">10</span><span class="hljs-punctuation">,</span>
-                <span class="hljs-attr">&quot;description&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Shuttle comparable to a Mercedes-Benz Vito, up to 10 passengers with luggage.&quot;</span><span class="hljs-punctuation">,</span>
-                <span class="hljs-attr">&quot;modelDescription&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Mercedes-Benz Vito or similar&quot;</span><span class="hljs-punctuation">,</span>
-                <span class="hljs-attr">&quot;image&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;https://daytrip.imgix.net/site/shuttle.png&quot;</span>
-            <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
-            <span class="hljs-attr">&quot;luggage&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
-                <span class="hljs-attr">&quot;maxCarryonsPerPerson&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">1</span><span class="hljs-punctuation">,</span>
-                <span class="hljs-attr">&quot;maxSuitcasesPerPerson&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">1</span><span class="hljs-punctuation">,</span>
-                <span class="hljs-attr">&quot;maxTotalCarryons&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">2</span><span class="hljs-punctuation">,</span>
-                <span class="hljs-attr">&quot;maxTotalSuitcases&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">2</span>
-            <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
-            <span class="hljs-attr">&quot;seatsAvailable&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">8</span><span class="hljs-punctuation">,</span>
-            <span class="hljs-attr">&quot;availableChildSeatTypes&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
-                <span class="hljs-punctuation">{</span>
-                    <span class="hljs-attr">&quot;childSeatType&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;RearFacing&quot;</span><span class="hljs-punctuation">,</span>
-                    <span class="hljs-attr">&quot;description&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Rear-facing infant seat&quot;</span><span class="hljs-punctuation">,</span>
-                    <span class="hljs-attr">&quot;ageFrom&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">0</span><span class="hljs-punctuation">,</span>
-                    <span class="hljs-attr">&quot;ageTo&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">1</span><span class="hljs-punctuation">,</span>
-                    <span class="hljs-attr">&quot;weightInPoundsFrom&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">0</span><span class="hljs-punctuation">,</span>
-                    <span class="hljs-attr">&quot;weightInPoundsTo&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">26</span><span class="hljs-punctuation">,</span>
-                    <span class="hljs-attr">&quot;weightInKilosFrom&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">0</span><span class="hljs-punctuation">,</span>
-                    <span class="hljs-attr">&quot;weightInKilosTo&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">10</span>
-                <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
-                <span class="hljs-punctuation">{</span>
-                    <span class="hljs-attr">&quot;childSeatType&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;ForwardFacing&quot;</span><span class="hljs-punctuation">,</span>
-                    <span class="hljs-attr">&quot;description&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Forward-facing w/harness&quot;</span><span class="hljs-punctuation">,</span>
-                    <span class="hljs-attr">&quot;ageFrom&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">1</span><span class="hljs-punctuation">,</span>
-                    <span class="hljs-attr">&quot;ageTo&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">4</span><span class="hljs-punctuation">,</span>
-                    <span class="hljs-attr">&quot;weightInPoundsFrom&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">18</span><span class="hljs-punctuation">,</span>
-                    <span class="hljs-attr">&quot;weightInPoundsTo&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">36</span><span class="hljs-punctuation">,</span>
-                    <span class="hljs-attr">&quot;weightInKilosFrom&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">8</span><span class="hljs-punctuation">,</span>
-                    <span class="hljs-attr">&quot;weightInKilosTo&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">16</span>
-                <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
-                <span class="hljs-punctuation">{</span>
-                    <span class="hljs-attr">&quot;childSeatType&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;BoosterSeat&quot;</span><span class="hljs-punctuation">,</span>
-                    <span class="hljs-attr">&quot;description&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Booster seat with high back&quot;</span><span class="hljs-punctuation">,</span>
-                    <span class="hljs-attr">&quot;ageFrom&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">4</span><span class="hljs-punctuation">,</span>
-                    <span class="hljs-attr">&quot;ageTo&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">6</span><span class="hljs-punctuation">,</span>
-                    <span class="hljs-attr">&quot;weightInPoundsFrom&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">30</span><span class="hljs-punctuation">,</span>
-                    <span class="hljs-attr">&quot;weightInPoundsTo&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">50</span><span class="hljs-punctuation">,</span>
-                    <span class="hljs-attr">&quot;weightInKilosFrom&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">14</span><span class="hljs-punctuation">,</span>
-                    <span class="hljs-attr">&quot;weightInKilosTo&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">23</span>
-                <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
-                <span class="hljs-punctuation">{</span>
-                    <span class="hljs-attr">&quot;childSeatType&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Booster&quot;</span><span class="hljs-punctuation">,</span>
-                    <span class="hljs-attr">&quot;description&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Backless booster&quot;</span><span class="hljs-punctuation">,</span>
-                    <span class="hljs-attr">&quot;ageFrom&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">6</span><span class="hljs-punctuation">,</span>
-                    <span class="hljs-attr">&quot;ageTo&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">12</span><span class="hljs-punctuation">,</span>
-                    <span class="hljs-attr">&quot;weightInPoundsFrom&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">44</span><span class="hljs-punctuation">,</span>
-                    <span class="hljs-attr">&quot;weightInPoundsTo&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">72</span><span class="hljs-punctuation">,</span>
-                    <span class="hljs-attr">&quot;weightInKilosFrom&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">20</span><span class="hljs-punctuation">,</span>
-                    <span class="hljs-attr">&quot;weightInKilosTo&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">33</span>
-                <span class="hljs-punctuation">}</span>
-            <span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
-            <span class="hljs-attr">&quot;possibleStops&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
-            <span class="hljs-attr">&quot;cancellationPolicy&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Flexible&quot;</span><span class="hljs-punctuation">,</span>
-            <span class="hljs-attr">&quot;expiresAt&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;2022-12-04T15:00:00Z&quot;</span>
-        <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
-        <span class="hljs-punctuation">{</span>
-            <span class="hljs-attr">&quot;id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;4b137906-008a-49cf-b248-e3827b3a3175&quot;</span><span class="hljs-punctuation">,</span>
-            <span class="hljs-attr">&quot;type&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Shared&quot;</span><span class="hljs-punctuation">,</span>
-            <span class="hljs-attr">&quot;englishSpeakingDriver&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">false</span></span><span class="hljs-punctuation">,</span>
-            <span class="hljs-attr">&quot;distanceKm&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">350</span><span class="hljs-punctuation">,</span>
-            <span class="hljs-attr">&quot;travelTimeMinutes&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">235</span><span class="hljs-punctuation">,</span>
-            <span class="hljs-attr">&quot;pickUp&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
-                <span class="hljs-attr">&quot;lat&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">50.12</span><span class="hljs-punctuation">,</span>
-                <span class="hljs-attr">&quot;lon&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">14.27</span><span class="hljs-punctuation">,</span>
-                <span class="hljs-attr">&quot;time&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;2022-12-05T20:00:00Z&quot;</span><span class="hljs-punctuation">,</span>
-                <span class="hljs-attr">&quot;interval&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
-                    <span class="hljs-attr">&quot;earliest&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;2022-12-05T20:00:00Z&quot;</span><span class="hljs-punctuation">,</span>
-                    <span class="hljs-attr">&quot;latest&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;2022-12-05T20:10:00Z&quot;</span>
-                <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
-                <span class="hljs-attr">&quot;timezone&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Europe/Prague&quot;</span><span class="hljs-punctuation">,</span>
-                <span class="hljs-attr">&quot;description&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;In front of the hotel Europa&quot;</span><span class="hljs-punctuation">,</span>
-                <span class="hljs-attr">&quot;address&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Evropska 1540/41, Prague, Czechia&quot;</span><span class="hljs-punctuation">,</span>
-                <span class="hljs-attr">&quot;meetAndGreet&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">false</span></span><span class="hljs-punctuation">,</span>
-                <span class="hljs-attr">&quot;state&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;adjusted&quot;</span><span class="hljs-punctuation">,</span>
-                <span class="hljs-attr">&quot;immutable&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span>
-            <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
-            <span class="hljs-attr">&quot;dropOff&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
-                <span class="hljs-attr">&quot;lat&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">48.21</span><span class="hljs-punctuation">,</span>
-                <span class="hljs-attr">&quot;lon&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">16.36</span><span class="hljs-punctuation">,</span>
-                <span class="hljs-attr">&quot;time&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;2022-12-05T23:55:00Z&quot;</span><span class="hljs-punctuation">,</span>
-                <span class="hljs-attr">&quot;interval&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
-                    <span class="hljs-attr">&quot;earliest&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;2022-12-05T23:40:00Z&quot;</span><span class="hljs-punctuation">,</span>
-                    <span class="hljs-attr">&quot;latest&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;2022-12-05T23:55:00Z&quot;</span>
-                <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
-                <span class="hljs-attr">&quot;timezone&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Europe/Vienna&quot;</span><span class="hljs-punctuation">,</span>
-                <span class="hljs-attr">&quot;description&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Next to the railway station&quot;</span><span class="hljs-punctuation">,</span>
-                <span class="hljs-attr">&quot;address&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Bahnhofplatz, 1010 Wien, Austria&quot;</span><span class="hljs-punctuation">,</span>
-                <span class="hljs-attr">&quot;state&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;adjusted&quot;</span><span class="hljs-punctuation">,</span>
-                <span class="hljs-attr">&quot;immutable&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span>
-            <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
-            <span class="hljs-attr">&quot;pricing&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
-                <span class="hljs-attr">&quot;pricePerPassenger&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">190</span><span class="hljs-punctuation">,</span>
-                <span class="hljs-attr">&quot;totalPrice&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">380</span>
-            <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
-            <span class="hljs-attr">&quot;vehicle&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
-                <span class="hljs-attr">&quot;type&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Shuttle&quot;</span><span class="hljs-punctuation">,</span>
-                <span class="hljs-attr">&quot;maxPassengers&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">10</span><span class="hljs-punctuation">,</span>
-                <span class="hljs-attr">&quot;description&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Shuttle comparable to a Mercedes-Benz Vito, up to 10 passengers with luggage.&quot;</span><span class="hljs-punctuation">,</span>
-                <span class="hljs-attr">&quot;modelDescription&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Mercedes-Benz Vito or similar&quot;</span><span class="hljs-punctuation">,</span>
-                <span class="hljs-attr">&quot;image&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;https://daytrip.imgix.net/site/shuttle.png&quot;</span>
-            <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
-            <span class="hljs-attr">&quot;luggage&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
-                <span class="hljs-attr">&quot;maxCarryonsPerPerson&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">1</span><span class="hljs-punctuation">,</span>
-                <span class="hljs-attr">&quot;maxSuitcasesPerPerson&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">1</span><span class="hljs-punctuation">,</span>
-                <span class="hljs-attr">&quot;maxTotalCarryons&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">2</span><span class="hljs-punctuation">,</span>
-                <span class="hljs-attr">&quot;maxTotalSuitcases&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">2</span>
-            <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
-            <span class="hljs-attr">&quot;seatsAvailable&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">5</span><span class="hljs-punctuation">,</span>
-            <span class="hljs-attr">&quot;availableChildSeatTypes&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
-                <span class="hljs-punctuation">{</span>
-                    <span class="hljs-attr">&quot;childSeatType&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;RearFacing&quot;</span><span class="hljs-punctuation">,</span>
-                    <span class="hljs-attr">&quot;description&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Rear-facing infant seat&quot;</span><span class="hljs-punctuation">,</span>
-                    <span class="hljs-attr">&quot;ageFrom&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">0</span><span class="hljs-punctuation">,</span>
-                    <span class="hljs-attr">&quot;ageTo&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">1</span><span class="hljs-punctuation">,</span>
-                    <span class="hljs-attr">&quot;weightInPoundsFrom&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">0</span><span class="hljs-punctuation">,</span>
-                    <span class="hljs-attr">&quot;weightInPoundsTo&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">26</span><span class="hljs-punctuation">,</span>
-                    <span class="hljs-attr">&quot;weightInKilosFrom&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">0</span><span class="hljs-punctuation">,</span>
-                    <span class="hljs-attr">&quot;weightInKilosTo&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">10</span>
-                <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
-                <span class="hljs-punctuation">{</span>
-                    <span class="hljs-attr">&quot;childSeatType&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;ForwardFacing&quot;</span><span class="hljs-punctuation">,</span>
-                    <span class="hljs-attr">&quot;description&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Forward-facing w/harness&quot;</span><span class="hljs-punctuation">,</span>
-                    <span class="hljs-attr">&quot;ageFrom&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">1</span><span class="hljs-punctuation">,</span>
-                    <span class="hljs-attr">&quot;ageTo&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">4</span><span class="hljs-punctuation">,</span>
-                    <span class="hljs-attr">&quot;weightInPoundsFrom&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">18</span><span class="hljs-punctuation">,</span>
-                    <span class="hljs-attr">&quot;weightInPoundsTo&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">36</span><span class="hljs-punctuation">,</span>
-                    <span class="hljs-attr">&quot;weightInKilosFrom&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">8</span><span class="hljs-punctuation">,</span>
-                    <span class="hljs-attr">&quot;weightInKilosTo&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">16</span>
-                <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
-                <span class="hljs-punctuation">{</span>
-                    <span class="hljs-attr">&quot;childSeatType&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;BoosterSeat&quot;</span><span class="hljs-punctuation">,</span>
-                    <span class="hljs-attr">&quot;description&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Booster seat with high back&quot;</span><span class="hljs-punctuation">,</span>
-                    <span class="hljs-attr">&quot;ageFrom&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">4</span><span class="hljs-punctuation">,</span>
-                    <span class="hljs-attr">&quot;ageTo&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">6</span><span class="hljs-punctuation">,</span>
-                    <span class="hljs-attr">&quot;weightInPoundsFrom&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">30</span><span class="hljs-punctuation">,</span>
-                    <span class="hljs-attr">&quot;weightInPoundsTo&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">50</span><span class="hljs-punctuation">,</span>
-                    <span class="hljs-attr">&quot;weightInKilosFrom&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">14</span><span class="hljs-punctuation">,</span>
-                    <span class="hljs-attr">&quot;weightInKilosTo&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">23</span>
-                <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
-                <span class="hljs-punctuation">{</span>
-                    <span class="hljs-attr">&quot;childSeatType&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Booster&quot;</span><span class="hljs-punctuation">,</span>
-                    <span class="hljs-attr">&quot;description&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Backless booster&quot;</span><span class="hljs-punctuation">,</span>
-                    <span class="hljs-attr">&quot;ageFrom&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">6</span><span class="hljs-punctuation">,</span>
-                    <span class="hljs-attr">&quot;ageTo&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">12</span><span class="hljs-punctuation">,</span>
-                    <span class="hljs-attr">&quot;weightInPoundsFrom&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">44</span><span class="hljs-punctuation">,</span>
-                    <span class="hljs-attr">&quot;weightInPoundsTo&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">72</span><span class="hljs-punctuation">,</span>
-                    <span class="hljs-attr">&quot;weightInKilosFrom&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">20</span><span class="hljs-punctuation">,</span>
-                    <span class="hljs-attr">&quot;weightInKilosTo&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">33</span>
-                <span class="hljs-punctuation">}</span>
-            <span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
-            <span class="hljs-attr">&quot;possibleStops&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
-            <span class="hljs-attr">&quot;includedStops&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
-            <span class="hljs-attr">&quot;cancellationPolicy&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Flexible&quot;</span><span class="hljs-punctuation">,</span>
-            <span class="hljs-attr">&quot;expiresAt&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;2022-12-04T15:00:00Z&quot;</span>
         <span class="hljs-punctuation">}</span>
     <span class="hljs-punctuation">]</span>
 <span class="hljs-punctuation">}</span></code></pre>
             <blockquote>
                <p>To search for a private trip from Dubrovnik to Venice for 10 passengers, with multiple vehicle options:</p>
             </blockquote>
-            <pre class="highlight bash"><code>curl <span class="hljs-string">&quot;https://papi-staging.dynamic-environment.mydaytrip.net/partners/v3/trip/search?originLatitude=42.639515&amp;originLongitude=18.108064&amp;destinationLatitude=45.434143&amp;destinationLongitude=12.333497&amp;departureTime=1766227088&amp;includeShared=false&amp;includeStops=false&amp;passengersCount=10&amp;includeMultipleVehicles=true&quot;</span> \
+            <pre class="highlight bash"><code>curl <span class="hljs-string">&quot;https://papi-staging.dynamic-environment.mydaytrip.net/partners/v3/trip/search?originLatitude=42.639515&amp;originLongitude=18.108064&amp;destinationLatitude=45.434143&amp;destinationLongitude=12.333497&amp;departureTime=1766227088&amp;includeStops=false&amp;passengersCount=10&amp;includeMultipleVehicles=true&quot;</span> \
   -H <span class="hljs-string">&quot;x-api-key: your_api_key&quot;</span></code></pre><pre class="highlight javascript"><code></code></pre><pre class="highlight python"><code></code></pre>
             <blockquote>
                <p>The above call returns a JSON structured like this:</p>
@@ -958,7 +764,7 @@
                   <tr>
                      <td>childrenCount</td>
                      <td>integer</td>
-                     <td>Optional. Specifies the number of children in the group. Required for shared trip options.</td>
+                     <td>Optional. Specifies the number of children in the group. Children are already counted in <code>passengersCount</code>.</td>
                   </tr>
                   <tr>
                      <td>includeStops</td>
@@ -968,7 +774,7 @@
                   <tr>
                      <td>includeShared</td>
                      <td>boolean</td>
-                     <td>Optional. Defaults to <code>false</code>. When set to <code>true</code>, shared trip options will be included.</td>
+                     <td><strong>No effect.</strong> Shared trips are no longer offered. The parameter is accepted and ignored.</td>
                   </tr>
                   <tr>
                      <td>includeNonEnglishSpeaking</td>
@@ -987,6 +793,7 @@
                   </tr>
                </tbody>
             </table>
+            <p>Boolean parameters must be sent as the literal <code>true</code> or <code>false</code>. Any other value, such as <code>1</code> or <code>yes</code>, is read as <code>false</code>.</p>
             <h3 id="response-body">Response body</h3>
             <table>
                <thead>
@@ -1024,6 +831,7 @@
                   </tr>
                </tbody>
             </table>
+            <p>When no trip can be offered for the request, the endpoint answers with HTTP status 200 and an empty <code>options</code> list. This happens when the origin or destination is outside the served area, when the airport code is not known, or when the departure is too soon or on a date the trip is not sold. The other properties of such a response carry no information and should be ignored.</p>
             <h3 id="error-status-codes">Error status codes</h3>
             <table>
                <thead>
@@ -1044,7 +852,7 @@
                </tbody>
             </table>
             <h2 id="trip-customize">Trip Customize</h2>
-            <p>This endpoint is used to customize a trip option returned by the Search endpoint. The result is a new trip option with a new id that can be booked or customized again. The format of the response body is the same as for the Search endpoint. Currently the only supported customization operation is selection of stops for private trips. Selected stops will appear in <code>includedStops</code> of the returned option. In case of repeated calls, previously selected stops will be replaced, so if you selected one stop and want to change it to two stops, you need to send both stops in <code>selectedStops</code>. <code>totalPrice</code> and <code>travelTimeMinutes</code> will be automatically updated to reflect the selected stops.</p>
+            <p>This endpoint is used to customize a trip option returned by the Search endpoint. The result is a new trip option with a new id that can be booked or customized again. The option you customized stays valid and can still be booked. The format of the response body is the same as for the Search endpoint, with the new option as the only item of <code>options</code>. Currently the only supported customization operation is selection of stops for private trips. The stops you send are added to the stops already included in the option you customize, and all of them appear in <code>includedStops</code> of the returned option. To change or reduce a selection, customize the original option from the Search endpoint again and send the complete list of stops you want: if you selected one stop and want two, send both stops in <code>selectedStops</code> with the id of the original option. To remove all stops, book the original option. <code>totalPrice</code> and <code>travelTimeMinutes</code> of the returned option reflect the selected stops. Always read the price from the returned option: it can differ slightly from the original price plus the prices of the stops.</p>
             <blockquote>
                <p>To add the Mikulov stop to the sedan vehicle type private trip option from the Search endpoint example above, use the following call:</p>
             </blockquote>
@@ -1198,7 +1006,7 @@
                   <tr>
                      <td>selectedStops</td>
                      <td>list of string</td>
-                     <td>List of ids of stops to include in the trip. Will replace currently included stops.</td>
+                     <td>List of ids of stops to add to the trip. Each id must be one of the <code>possibleStops</code> of the option you are customizing.</td>
                   </tr>
                </tbody>
             </table>
@@ -1223,15 +1031,11 @@
                   </tr>
                   <tr>
                      <td>403</td>
-                     <td>Forbidden request - trying to customize a trip option owned by someone else.</td>
+                     <td>Forbidden request - trying to customize a trip option owned by someone else, or the option cannot be customized.</td>
                   </tr>
                   <tr>
                      <td>404</td>
-                     <td>Trip option not found or expired. Stop not found.</td>
-                  </tr>
-                  <tr>
-                     <td>409</td>
-                     <td>Trip option has already been booked.</td>
+                     <td>Trip option not found or expired. Stop not found: an id in <code>selectedStops</code> is not among the <code>possibleStops</code> of the option, or is sent twice.</td>
                   </tr>
                </tbody>
             </table>
@@ -1508,22 +1312,22 @@
                   <tr>
                      <td>customerNote</td>
                      <td>string</td>
-                     <td>Optional note for the driver not related to pickup or dropoff. Applicable only for the private trip.</td>
+                     <td>Optional note for the driver not related to pickup or dropoff. Applicable only for the private trip. A note longer than 1024 characters is cut to that length. Send a flight number in <code>flightNumber</code>, not in the note.</td>
                   </tr>
                   <tr>
                      <td>flightNumber</td>
                      <td>string</td>
-                     <td>Optional flight number in case this is an airport pickup. Applicable only for the private trip.</td>
+                     <td>Optional flight number in case this is an airport pickup. Applicable only for the private trip. A flight number sent for a trip that ends at an airport is passed to the driver as a note and is not returned in <code>flightNumber</code> by the <a href="#trip-details">/details</a> endpoint.</td>
                   </tr>
                   <tr>
                      <td>passengerDetails</td>
                      <td>list of <a href="#passengerdetail">PassengerDetail</a></td>
-                     <td>List of passengers that will go on this trip. For trips with &quot;Private&quot; type the number of passengers must be below or equal to <code>maxPassengers</code> of the <code>vehicle</code> in the trip option. For trips with &quot;Shared&quot; type the number of passengers must match the <code>passengersCount</code> query parameter from the Search endpoint. There must always be exactly one passenger of type &quot;Lead&quot; with contact details filled and adulthood confirmed via <code>over18: true</code> (or the deprecated <code>birthday</code>). For passenger of type &quot;Child&quot; you must specify a child seat of proper type offered in the trip option&#39;s <a href="#tripoption">availableChildSeatTypes</a>. For older children that do not need any child seat use <code>Adult</code> passenger type.</td>
+                     <td>List of passengers that will go on this trip. The number of passengers must be below or equal to <code>maxPassengers</code> of the <code>vehicle</code> in the trip option, or to the sum of <code>maxPassengers</code> of its <code>vehicles</code>. For an option with several vehicles there must be at least one passenger of type &quot;Lead&quot; or &quot;Adult&quot; per vehicle. There must always be exactly one passenger of type &quot;Lead&quot; with contact details filled and adulthood confirmed via <code>over18: true</code> (or the deprecated <code>birthday</code>). For passenger of type &quot;Child&quot; you must specify a child seat of proper type offered in the trip option&#39;s <a href="#tripoption">availableChildSeatTypes</a>. For older children that do not need any child seat use <code>Adult</code> passenger type.</td>
                   </tr>
                   <tr>
                      <td>externalId</td>
                      <td>string</td>
-                     <td>Optional. You can send us the id of the booking in your system to help with communication when our support team needs to identify a booking and you are not able to provide our own <code>bookingReference</code>.</td>
+                     <td>Optional. You can send us the id of the booking in your system to help with communication when our support team needs to identify a booking and you are not able to provide our own <code>bookingReference</code>. Use a value that is unique for each booking: it can be used to retrieve the booking later.</td>
                   </tr>
                </tbody>
             </table>
@@ -1590,7 +1394,7 @@
                <tbody>
                   <tr>
                      <td>400</td>
-                     <td>Invalid request - missing mandatory property, property has wrong type, mismatch in passenger count, missing lead passenger, multiple lead passengers, lead passenger not confirmed as over 18 or not a valid json.</td>
+                     <td>Invalid request - missing mandatory property, property has wrong type, mismatch in passenger count, missing lead passenger, multiple lead passengers, lead passenger not confirmed as over 18, fewer adult passengers than vehicles or not a valid json.</td>
                   </tr>
                   <tr>
                      <td>401</td>
@@ -1611,7 +1415,7 @@
                </tbody>
             </table>
             <h2 id="trip-cancel">Trip Cancel</h2>
-            <p>This endpoint is used to cancel a booked trip. For private trips only trips that have departure more than 24 hours in the future can be cancelled - this threshold is a subject to change. The shared trips can be cancelled at any time before departure, and compensated according to the selected <a href="#cancellationpolicytype">cancellation policy</a>.</p>
+            <p>This endpoint is used to cancel a booked trip. Only trips that have departure more than 24 hours in the future can be cancelled - this threshold is a subject to change. Such a cancellation is free of charge. A later cancellation is refused with the 403 HTTP status code and the booking stays confirmed; in that case please contact our customer support.</p>
             <blockquote>
                <p>To cancel a booked trip, use the following call:</p>
             </blockquote>
@@ -1700,7 +1504,7 @@
             </table>
             <h2 id="trip-details">Trip Details</h2>
             <p>This endpoint returns details of a booked trip. It provides the status of the booking, information about the trip option and the data that were provided when booking the trip.</p>
-            <p>There are two versions of the endpoint: <code>/partners/v3/trip/details/boookingId</code> and <code>/partners/v3/trip/external/details/externalId</code>. The second version can be used to retrieve trip details by the <code>externalId</code> you provided when creating the booking. The response of both versions of the endpoint is exactly the same.</p>
+            <p>There are two versions of the endpoint: <code>/partners/v3/trip/details/bookingId</code> and <code>/partners/v3/trip/external/details/externalId</code>. The second version can be used to retrieve trip details by the <code>externalId</code> you provided when creating the booking. If several bookings were created with the same <code>externalId</code>, the most recent one is returned. The response of both versions of the endpoint is exactly the same.</p>
             <blockquote>
                <p>To get details of a booked trip by <code>bookingId</code>, use the following call:</p>
             </blockquote>
@@ -2152,8 +1956,8 @@
             <h3 id="endpoint-details-5">Endpoint Details</h3>
             <p><code>POST /partners/v3/trip/update</code></p>
             <h3 id="request-body-3">Request body</h3>
-            <p>All properties except <code>bookingId</code> are optional. When a property is not included in the request it won&#39;t be updated and it will keep it&#39;s previous value. If you want to remove a property value like <code>customerNote</code> then send an empty string <code>&quot;&quot;</code> as the value. If you want to make changes to any passenger you need to provide full <code>passengerDetails</code> array - it&#39;s not possible to send only details of the passenger you want to update.</p>
-            <p>Disclaimer: in the last 24 hours before the departure the <a href="#trip-update">/update</a> endpoint will no longer accept updates. For updates in the last 24 hours please contact our customer support at <a href="mailto:&#100;&#x61;&#x79;&#116;&#114;&#x69;&#x70;&#x40;&#x6d;&#121;&#x64;&#x61;&#121;&#116;&#114;&#105;&#x70;&#x2e;&#99;&#111;&#x6d;">&#100;&#x61;&#x79;&#116;&#114;&#x69;&#x70;&#x40;&#x6d;&#121;&#x64;&#x61;&#121;&#116;&#114;&#105;&#x70;&#x2e;&#99;&#111;&#x6d;</a> or call <a href="tel:+442033181119">+44 20 3318 1119</a>.</p>
+            <p>All properties except <code>bookingId</code> are optional, but the request must contain at least one of them with a non-empty value, otherwise it is rejected with the 400 HTTP status code. When a property is not included in the request it won&#39;t be updated and it will keep it&#39;s previous value. If you want to remove a property value like <code>customerNote</code> then send an empty string <code>&quot;&quot;</code> as the value, together with at least one other property that has a value (for example the unchanged <code>passengerDetails</code>). <code>flightNumber</code> can be changed but not removed. If you want to make changes to any passenger you need to provide full <code>passengerDetails</code> array - it&#39;s not possible to send only details of the passenger you want to update.</p>
+            <p>Disclaimer: in the last 24 hours before the departure the <a href="#trip-update">/update</a> endpoint will no longer accept updates. For updates in the last 24 hours please contact our customer support at <a href="mailto:&#100;&#97;&#x79;&#x74;&#x72;&#105;&#x70;&#64;&#x64;&#x61;&#121;&#x74;&#x72;&#x69;&#112;&#x2e;&#x63;&#x6f;&#109;">&#100;&#97;&#x79;&#x74;&#x72;&#105;&#x70;&#64;&#x64;&#x61;&#121;&#x74;&#x72;&#x69;&#112;&#x2e;&#x63;&#x6f;&#109;</a> or call <a href="tel:+442033181119">+44 20 3318 1119</a>.</p>
             <table>
                <thead>
                   <tr>
@@ -2166,7 +1970,7 @@
                   <tr>
                      <td>bookingId</td>
                      <td>string</td>
-                     <td>Id of the booking to cancel. Taken from <a href="#trip-book">/book</a> endpoint response.</td>
+                     <td>Id of the booking to update. Taken from <a href="#trip-book">/book</a> endpoint response.</td>
                   </tr>
                   <tr>
                      <td>pickUpAddressNote</td>
@@ -2181,17 +1985,17 @@
                   <tr>
                      <td>customerNote</td>
                      <td>string</td>
-                     <td>Optional note for the driver not related to pickup or dropoff.</td>
+                     <td>Optional note for the driver not related to pickup or dropoff. A note longer than 1024 characters is cut to that length.</td>
                   </tr>
                   <tr>
                      <td>flightNumber</td>
                      <td>string</td>
-                     <td>Optional flight number in case this is an airport pickup.</td>
+                     <td>Optional flight number in case this is an airport pickup. A flight number sent for a trip that ends at an airport is passed to the driver as a note and is not returned in <code>flightNumber</code>.</td>
                   </tr>
                   <tr>
                      <td>passengerDetails</td>
                      <td>list of <a href="#passengerdetail">PassengerDetail</a></td>
-                     <td>Optional. List of passengers that will go on this trip. For trips with &quot;Private&quot; type the number of passengers must be below or equal to <code>maxPassengers</code> of the <code>vehicle</code> in the trip option. For trips with &quot;Shared&quot; type the number of passengers must match the <code>passengersCount</code> query parameter from the Search endpoint. There must always be exactly one passenger of type &quot;Lead&quot; with contact details filled and adulthood confirmed via <code>over18: true</code> (or the deprecated <code>birthday</code>). For passenger of type &quot;Child&quot; you must specify a child seat of proper type offered in the trip option&#39;s <a href="#tripoption">availableChildSeatTypes</a>. For older children that do not need any child seat use <code>Adult</code> passenger type.</td>
+                     <td>Optional. List of passengers that will go on this trip. The number of passengers must be below or equal to <code>maxPassengers</code> of the <code>vehicle</code> in the trip option, or to the sum of <code>maxPassengers</code> of its <code>vehicles</code>. There must always be exactly one passenger of type &quot;Lead&quot; with contact details filled and adulthood confirmed via <code>over18: true</code> (or the deprecated <code>birthday</code>). For passenger of type &quot;Child&quot; you must specify a child seat of proper type offered in the trip option&#39;s <a href="#tripoption">availableChildSeatTypes</a>. For older children that do not need any child seat use <code>Adult</code> passenger type.</td>
                   </tr>
                </tbody>
             </table>
@@ -2313,7 +2117,7 @@
                <tbody>
                   <tr>
                      <td>400</td>
-                     <td>Invalid request - missing mandatory property, property has wrong type, mismatch in passenger count, missing lead passenger, multiple lead passengers, lead passenger not confirmed as over 18 or not a valid json.</td>
+                     <td>Invalid request - missing mandatory property, nothing to update, property has wrong type, mismatch in passenger count, missing lead passenger, multiple lead passengers, lead passenger not confirmed as over 18 or not a valid json.</td>
                   </tr>
                   <tr>
                      <td>401</td>
@@ -2541,6 +2345,7 @@
             </table>
             <h2 id="trip-api-data-types">Trip API Data Types</h2>
             <p>Below is a documentation of all object entities returned by the Daytrip API endpoints.</p>
+            <p>Properties described as being for shared trips only are not returned at the moment, because shared trips are no longer offered.</p>
             <h3 id="tripoption">TripOption</h3>
             <table>
                <thead>
@@ -2559,7 +2364,7 @@
                   <tr>
                      <td>type</td>
                      <td>string</td>
-                     <td>Type of this option. &quot;Private&quot; or &quot;Shared&quot; (predefined shuttle trips).</td>
+                     <td>Type of this option. Always &quot;Private&quot;: shared trips (&quot;Shared&quot;) are no longer offered.</td>
                   </tr>
                   <tr>
                      <td>englishSpeakingDriver</td>
@@ -2767,7 +2572,7 @@
                   <tr>
                      <td>type</td>
                      <td>string</td>
-                     <td>Type of vehicle. &quot;Sedan&quot;, &quot;MPV&quot;, &quot;Van&quot;, &quot;PremiumVan&quot;, &quot;Luxury&quot; or &quot;Shuttle&quot;</td>
+                     <td>Type of vehicle. &quot;Sedan&quot;, &quot;MPV&quot;, &quot;Van&quot;, &quot;PremiumVan&quot; or &quot;Luxury&quot;. &quot;Shuttle&quot; was used for shared trips only.</td>
                   </tr>
                   <tr>
                      <td>maxPassengers</td>
@@ -2987,7 +2792,7 @@
                   <tr>
                      <td>phone</td>
                      <td>string</td>
-                     <td>Phone number of the passenger - required for the lead passenger. Include country prefix in the <code>+&lt;country_code&gt;</code> format.</td>
+                     <td>Phone number of the passenger - required for the lead passenger. Include country prefix in the <code>+&lt;country_code&gt;</code> format. It must start with <code>+</code> and be 8 to 20 characters long.</td>
                   </tr>
                   <tr>
                      <td>email</td>
@@ -3024,22 +2829,22 @@
                   <tr>
                      <td>lat</td>
                      <td>number</td>
-                     <td>Latitude in degrees.</td>
+                     <td>Latitude in degrees. Optional.</td>
                   </tr>
                   <tr>
                      <td>lon</td>
                      <td>number</td>
-                     <td>Longitude in degrees.</td>
+                     <td>Longitude in degrees. Optional.</td>
                   </tr>
                   <tr>
                      <td>description</td>
                      <td>string</td>
-                     <td>Description of the position.</td>
+                     <td>Description of the position. Optional.</td>
                   </tr>
                   <tr>
                      <td>instructions</td>
                      <td>string</td>
-                     <td>Meeting instructions for the customer.</td>
+                     <td>Meeting instructions for the customer. When there is no predefined meeting position, this can be the only property of the object.</td>
                   </tr>
                   <tr>
                      <td>address</td>
@@ -3077,6 +2882,11 @@
                      <td>description</td>
                      <td>string</td>
                      <td>Description of the position.</td>
+                  </tr>
+                  <tr>
+                     <td>instructions</td>
+                     <td>string</td>
+                     <td>Dropoff instructions for the customer. Can be an empty string.</td>
                   </tr>
                   <tr>
                      <td>address</td>
@@ -5734,19 +5544,20 @@
             </table>
             <h1 id="frequently-asked-questions">Frequently asked questions</h1>
             <h2 id="for-how-many-passengers-can-i-book-a-trip">For how many passengers can I book a trip?</h2>
-            <p>On most routes we offer trips for 1-7 passengers. On some routes we offer trips for up to 10 passengers. If you need to book a trip for more passengers please create multiple bookings.</p>
+            <p>A single vehicle takes 1-7 passengers, depending on the vehicle type. For larger groups, search with <code>includeMultipleVehicles=true</code>: the search then accepts up to 99 passengers and returns options made of several vehicles where available.</p>
             <h2 id="after-receiving-trip-options-how-much-time-do-i-have-to-book-one-of-them">After receiving trip options, how much time do I have to book one of them?</h2>
-            <p>Options are valid for up to 7 days or until the price changes due to increased demand. In such case you will need to repeat the search.</p>
+            <p>Each Trip API option has its own <code>expiresAt</code> timestamp, currently 12 hours after the search. Always read it from the option instead of assuming a fixed period. An option can also stop being bookable earlier, when its price changes due to increased demand or when the departure gets too close. In such case you will need to repeat the search.</p>
             <h2 id="can-i-cancel-a-booking-created-via-the-api">Can I cancel a booking created via the API?</h2>
             <p>Yes, you can cancel a booking if it&#39;s departure is more than 24 hours in the future - this threshold is a subject to change.</p>
             <h2 id="once-a-booking-is-created-can-it-be-cancelled-or-changed-by-daytrip">Once a booking is created, can it be cancelled or changed by Daytrip?</h2>
             <p>No, once a booking is created by calling our API, it is confirmed and guaranteed by Daytrip to be fulfilled. You do not need to subscribe to any booking status changes.</p>
             <h2 id="does-the-daytrip-api-handle-payments">Does the Daytrip API handle payments?</h2>
-            <p>No, the Daytrip API does not handle payments. You are responsible for collecting online payments from the customers. You are also responsible for any currency conversion for display purposes (currently the API will return prices in EUR or USD based on the country of the trip). Your company will be invoiced by Daytrip for the trips you book with us.</p>
+            <p>No, the Daytrip API does not handle payments. You are responsible for collecting online payments from the customers. You are also responsible for any currency conversion for display purposes (the API returns prices in the currency stated in the <code>currency</code> property of each response: EUR or USD based on the country of the trip, unless another currency was agreed for your account). Your company will be invoiced by Daytrip for the trips you book with us.</p>
             <h2 id="is-the-amount-of-requests-for-the-daytrip-api-limited">Is the amount of requests for the Daytrip API limited?</h2>
-            <p>You can send up to 2000 requests per minute.</p>
+            <p>You can send up to 2000 requests per minute to each endpoint. Requests over the limit are rejected with the 429 HTTP status code and a <code>Retry-After</code> header.</p>
             <h1 id="change-log">Change Log</h1>
             <ul>
+               <li><strong>2026-11-11</strong>: Trip API documentation corrected to match the API: shared trips are no longer offered and <code>includeShared</code> has no effect; the <a href="#trip-customize">/customize</a> endpoint adds the selected stops to the stops already included in the option; a search with no available trip returns an empty <code>options</code> list; rules for removing values with <a href="#trip-update">/update</a>; <code>expiresAt</code> of options; the 429 status code. Added the <a href="trip-api-v3-agent-guide.md">Trip API integration guide for AI coding agents</a>.</li>
                <li><strong>2026-10-06</strong>: Added vehicle type <code>PremiumVan</code> to the Trip API and Hourly Ride API <a href="#vehicle">Vehicle</a> object. The <a href="#daytripvehicle">Day Trips API</a> returns the same vehicle as <code>premiumVan</code>.</li>
                <li><strong>2026-09-11</strong>: Trip API: added <code>over18</code> to <a href="#passengerdetail">PassengerDetail</a> as the way to confirm the lead passenger is an adult; <code>birthday</code> is deprecated and only required when <code>over18</code> is not sent. Responses now include <code>over18: true</code> for the lead passenger, matching the Hourly Ride API.</li>
                <li><strong>2025-12-02</strong>: Added Hourly Ride API endpoints documentation.</li>

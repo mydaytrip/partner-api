@@ -1,6 +1,6 @@
 # Trip API
 
-A trip is a representation of passenger transportation from point A to point B. Each search will usually return multiple trip options that can be booked. Options can differ by vehicle type or by being private or shared with other travelers. Shared trips have predefined pickup and dropoff points and departure times. For private trips pickup and dropoff points as well as departure time are matching the search request. Private trips can also be customized by adding stops if available.
+A trip is a representation of passenger transportation from point A to point B. Each search will usually return multiple trip options that can be booked. Options differ by vehicle type and by whether the driver speaks English. All options are private trips: pickup and dropoff points as well as departure time match the search request, except where a predefined meeting position applies. Private trips can also be customized by adding stops if available. Shared trips are no longer offered.
 
 ## Flows
 
@@ -44,16 +44,16 @@ If you want to change departure time or add/remove stops you need to cancel the 
 3. `optional` - call [/details](#trip-details) endpoint to get trip and booking details
 4. call [/update](#trip-update) endpoint to update the booking details
 
-Disclaimer: in the last 24 hours before the departure the [/update](#trip-update) endpoint will no longer accept updates. For updates in the last 24 hours please contact our customer support at <daytrip@mydaytrip.com> or call [+44 20 3318 1119](tel:+442033181119).
+Disclaimer: in the last 24 hours before the departure the [/update](#trip-update) endpoint will no longer accept updates. For updates in the last 24 hours please contact our customer support at <daytrip@daytrip.com> or call [+44 20 3318 1119](tel:+442033181119).
 
 ## Trip Search
 
 This endpoint returns all available trip options based on the specified origin, destination, departure time, and passenger count. The origin and destination can be provided either as geographic coordinates or as IATA airport codes. Geographic coordinates should be specified as latitude and longitude in decimal degrees format, for example: `39.753657`, `-117.610215`. The departure time must be supplied as a UNIX epoch timestamp in seconds (e.g., 1679463169).
 
-> To search for a private or shared trip from Prague to Vienna for 3 passengers, use this call:
+> To search for a private trip from Prague to Vienna for 3 passengers, use this call:
 
 ```bash
-curl "https://papi-staging.dynamic-environment.mydaytrip.net/partners/v3/trip/search?originLatitude=50.10&originLongitude=14.2559&destinationLatitude=48.2082&destinationLongitude=16.3738&departureTime=1766227088&passengersCount=3&childrenCount=1&includeShared=true" \
+curl "https://papi-staging.dynamic-environment.mydaytrip.net/partners/v3/trip/search?originLatitude=50.10&originLongitude=14.2559&destinationLatitude=48.2082&destinationLongitude=16.3738&departureTime=1766227088&passengersCount=3&childrenCount=1" \
   -H "x-api-key: your_api_key"
 ```
 
@@ -65,10 +65,10 @@ curl "https://papi-staging.dynamic-environment.mydaytrip.net/partners/v3/trip/se
 
 ```
 
-> To search for a private or shared trip from Prague Airport to Vienna for 3 passengers, use this call:
+> To search for a private trip from Prague Airport to Vienna for 3 passengers, use this call:
 
 ```bash
-curl "https://papi-staging.dynamic-environment.mydaytrip.net/partners/v3/trip/search?originType=iata&origin=PRG&destinationType=coordinates&destinationLatitude=48.2082&destinationLongitude=16.3738&departureTime=1766227088&passengersCount=3&childrenCount=1&includeShared=true" \
+curl "https://papi-staging.dynamic-environment.mydaytrip.net/partners/v3/trip/search?originType=iata&origin=PRG&destinationType=coordinates&destinationLatitude=48.2082&destinationLongitude=16.3738&departureTime=1766227088&passengersCount=3&childrenCount=1" \
   -H "x-api-key: your_api_key"
 ```
 
@@ -421,205 +421,6 @@ curl "https://papi-staging.dynamic-environment.mydaytrip.net/partners/v3/trip/se
                 }
             ],
             "expiresAt": "2022-12-04T18:00:00Z"
-        },
-        {
-            "id": "282a8a94-2a18-42f6-9af6-c53b13d007cb",
-            "type": "Shared",
-            "englishSpeakingDriver": true,
-            "distanceKm": 350,
-            "travelTimeMinutes": 235,
-            "pickUp": {
-                "lat": 50.12,
-                "lon": 14.27,
-                "time": "2022-12-05T19:00:00Z",
-                "interval": {
-                    "earliest": "2022-12-05T19:00:00Z",
-                    "latest": "2022-12-05T19:10:00Z"
-                },
-                "timezone": "Europe/Prague",
-                "description": "In front of the hotel Europa",
-                "address": "Evropska 1540/41, Prague, Czechia",
-                "meetAndGreet": false,
-                "state": "adjusted",
-                "immutable": true
-            },
-            "dropOff": {
-                "lat": 48.21,
-                "lon": 16.36,
-                "time": "2022-12-05T22:55:00Z",
-                "interval": {
-                    "earliest": "2022-12-05T22:40:00Z",
-                    "latest": "2022-12-05T22:55:00Z"
-                },
-                "timezone": "Europe/Vienna",
-                "description": "Next to the railway station",
-                "address": "Bahnhofplatz, 1010 Wien, Austria",
-                "state": "adjusted",
-                "immutable": true
-            },
-            "pricing": {
-                "pricePerPassenger": 180,
-                "totalPrice": 360
-            },
-            "vehicle": {
-                "type": "Shuttle",
-                "maxPassengers": 10,
-                "description": "Shuttle comparable to a Mercedes-Benz Vito, up to 10 passengers with luggage.",
-                "modelDescription": "Mercedes-Benz Vito or similar",
-                "image": "https://daytrip.imgix.net/site/shuttle.png"
-            },
-            "luggage": {
-                "maxCarryonsPerPerson": 1,
-                "maxSuitcasesPerPerson": 1,
-                "maxTotalCarryons": 2,
-                "maxTotalSuitcases": 2
-            },
-            "seatsAvailable": 8,
-            "availableChildSeatTypes": [
-                {
-                    "childSeatType": "RearFacing",
-                    "description": "Rear-facing infant seat",
-                    "ageFrom": 0,
-                    "ageTo": 1,
-                    "weightInPoundsFrom": 0,
-                    "weightInPoundsTo": 26,
-                    "weightInKilosFrom": 0,
-                    "weightInKilosTo": 10
-                },
-                {
-                    "childSeatType": "ForwardFacing",
-                    "description": "Forward-facing w/harness",
-                    "ageFrom": 1,
-                    "ageTo": 4,
-                    "weightInPoundsFrom": 18,
-                    "weightInPoundsTo": 36,
-                    "weightInKilosFrom": 8,
-                    "weightInKilosTo": 16
-                },
-                {
-                    "childSeatType": "BoosterSeat",
-                    "description": "Booster seat with high back",
-                    "ageFrom": 4,
-                    "ageTo": 6,
-                    "weightInPoundsFrom": 30,
-                    "weightInPoundsTo": 50,
-                    "weightInKilosFrom": 14,
-                    "weightInKilosTo": 23
-                },
-                {
-                    "childSeatType": "Booster",
-                    "description": "Backless booster",
-                    "ageFrom": 6,
-                    "ageTo": 12,
-                    "weightInPoundsFrom": 44,
-                    "weightInPoundsTo": 72,
-                    "weightInKilosFrom": 20,
-                    "weightInKilosTo": 33
-                }
-            ],
-            "possibleStops": [],
-            "cancellationPolicy": "Flexible",
-            "expiresAt": "2022-12-04T15:00:00Z"
-        },
-        {
-            "id": "4b137906-008a-49cf-b248-e3827b3a3175",
-            "type": "Shared",
-            "englishSpeakingDriver": false,
-            "distanceKm": 350,
-            "travelTimeMinutes": 235,
-            "pickUp": {
-                "lat": 50.12,
-                "lon": 14.27,
-                "time": "2022-12-05T20:00:00Z",
-                "interval": {
-                    "earliest": "2022-12-05T20:00:00Z",
-                    "latest": "2022-12-05T20:10:00Z"
-                },
-                "timezone": "Europe/Prague",
-                "description": "In front of the hotel Europa",
-                "address": "Evropska 1540/41, Prague, Czechia",
-                "meetAndGreet": false,
-                "state": "adjusted",
-                "immutable": true
-            },
-            "dropOff": {
-                "lat": 48.21,
-                "lon": 16.36,
-                "time": "2022-12-05T23:55:00Z",
-                "interval": {
-                    "earliest": "2022-12-05T23:40:00Z",
-                    "latest": "2022-12-05T23:55:00Z"
-                },
-                "timezone": "Europe/Vienna",
-                "description": "Next to the railway station",
-                "address": "Bahnhofplatz, 1010 Wien, Austria",
-                "state": "adjusted",
-                "immutable": true
-            },
-            "pricing": {
-                "pricePerPassenger": 190,
-                "totalPrice": 380
-            },
-            "vehicle": {
-                "type": "Shuttle",
-                "maxPassengers": 10,
-                "description": "Shuttle comparable to a Mercedes-Benz Vito, up to 10 passengers with luggage.",
-                "modelDescription": "Mercedes-Benz Vito or similar",
-                "image": "https://daytrip.imgix.net/site/shuttle.png"
-            },
-            "luggage": {
-                "maxCarryonsPerPerson": 1,
-                "maxSuitcasesPerPerson": 1,
-                "maxTotalCarryons": 2,
-                "maxTotalSuitcases": 2
-            },
-            "seatsAvailable": 5,
-            "availableChildSeatTypes": [
-                {
-                    "childSeatType": "RearFacing",
-                    "description": "Rear-facing infant seat",
-                    "ageFrom": 0,
-                    "ageTo": 1,
-                    "weightInPoundsFrom": 0,
-                    "weightInPoundsTo": 26,
-                    "weightInKilosFrom": 0,
-                    "weightInKilosTo": 10
-                },
-                {
-                    "childSeatType": "ForwardFacing",
-                    "description": "Forward-facing w/harness",
-                    "ageFrom": 1,
-                    "ageTo": 4,
-                    "weightInPoundsFrom": 18,
-                    "weightInPoundsTo": 36,
-                    "weightInKilosFrom": 8,
-                    "weightInKilosTo": 16
-                },
-                {
-                    "childSeatType": "BoosterSeat",
-                    "description": "Booster seat with high back",
-                    "ageFrom": 4,
-                    "ageTo": 6,
-                    "weightInPoundsFrom": 30,
-                    "weightInPoundsTo": 50,
-                    "weightInKilosFrom": 14,
-                    "weightInKilosTo": 23
-                },
-                {
-                    "childSeatType": "Booster",
-                    "description": "Backless booster",
-                    "ageFrom": 6,
-                    "ageTo": 12,
-                    "weightInPoundsFrom": 44,
-                    "weightInPoundsTo": 72,
-                    "weightInKilosFrom": 20,
-                    "weightInKilosTo": 33
-                }
-            ],
-            "possibleStops": [],
-            "includedStops": [],
-            "cancellationPolicy": "Flexible",
-            "expiresAt": "2022-12-04T15:00:00Z"
         }
     ]
 }
@@ -628,7 +429,7 @@ curl "https://papi-staging.dynamic-environment.mydaytrip.net/partners/v3/trip/se
 > To search for a private trip from Dubrovnik to Venice for 10 passengers, with multiple vehicle options:
 
 ```bash
-curl "https://papi-staging.dynamic-environment.mydaytrip.net/partners/v3/trip/search?originLatitude=42.639515&originLongitude=18.108064&destinationLatitude=45.434143&destinationLongitude=12.333497&departureTime=1766227088&includeShared=false&includeStops=false&passengersCount=10&includeMultipleVehicles=true" \
+curl "https://papi-staging.dynamic-environment.mydaytrip.net/partners/v3/trip/search?originLatitude=42.639515&originLongitude=18.108064&destinationLatitude=45.434143&destinationLongitude=12.333497&departureTime=1766227088&includeStops=false&passengersCount=10&includeMultipleVehicles=true" \
   -H "x-api-key: your_api_key"
 ```
 
@@ -770,12 +571,14 @@ curl "https://papi-staging.dynamic-environment.mydaytrip.net/partners/v3/trip/se
 | departureTime             | integer | Departure time as a UNIX epoch timestamp in seconds. This timestamp should be calculated from the local departure time and converted to UTC. It can be omitted, if `departureTimeLocal` is provided.                                                                                                                  |
 | departureTimeLocal        | integer | Departure time as a UNIX epoch timestamp in seconds. This parameter can be used, when the origin timezone is unknown and conversion to UTC cannot be done. In this case the departure time can be sent as a local time converted to the Unix epoch. This parameter is not required, when `departureTime` is provided. |
 | passengersCount           | integer | Total number of passengers to transport (adults and children). Must be between 1 and 7 if `includeMultipleVehicles` is set to `false` or not provided. In case that `includeMultipleVehicles` is set to `true` this parameter must be between 1 and 99.                                                               |
-| childrenCount             | integer | Optional. Specifies the number of children in the group. Required for shared trip options.                                                                                                                                                                                                                            |
+| childrenCount             | integer | Optional. Specifies the number of children in the group. Children are already counted in `passengersCount`.                                                                                                                                                                                                           |
 | includeStops              | boolean | Optional. Defaults to `true`. When set to `false`, no stops will be included in the trip options.                                                                                                                                                                                                                     |
-| includeShared             | boolean | Optional. Defaults to `false`. When set to `true`, shared trip options will be included.                                                                                                                                                                                                                              |
+| includeShared             | boolean | **No effect.** Shared trips are no longer offered. The parameter is accepted and ignored.                                                                                                                                                                                                                             |
 | includeNonEnglishSpeaking | boolean | Optional. Defaults to `true`. When set to `false`, no trip options with non-English-speaking drivers will be included.                                                                                                                                                                                                |
 | includeMeetingPositions   | boolean | **Deprecated.** Optional. Ignored — meeting positions are always included in responses when applicable.                                                                                                                                                                                                               |
 | includeMultipleVehicles   | boolean | Optional. Defaults to `false`. When set to `true`, if single vehicle options cannot be found we will try to provide trip options with multiple vehicles.                                                                                                                                                              |
+
+Boolean parameters must be sent as the literal `true` or `false`. Any other value, such as `1` or `yes`, is read as `false`.
 
 ### Response body
 
@@ -787,6 +590,8 @@ curl "https://papi-staging.dynamic-environment.mydaytrip.net/partners/v3/trip/se
 | currency        | string                            | Currency used for all prices in this response.                               |
 | options         | list of [TripOption](#tripoption) | List of options for this trip.                                               |
 
+When no trip can be offered for the request, the endpoint answers with HTTP status 200 and an empty `options` list. This happens when the origin or destination is outside the served area, when the airport code is not known, or when the departure is too soon or on a date the trip is not sold. The other properties of such a response carry no information and should be ignored.
+
 ### Error status codes
 
 | Status code | Description                                                                                             |
@@ -796,7 +601,7 @@ curl "https://papi-staging.dynamic-environment.mydaytrip.net/partners/v3/trip/se
 
 ## Trip Customize
 
-This endpoint is used to customize a trip option returned by the Search endpoint. The result is a new trip option with a new id that can be booked or customized again. The format of the response body is the same as for the Search endpoint. Currently the only supported customization operation is selection of stops for private trips. Selected stops will appear in `includedStops` of the returned option. In case of repeated calls, previously selected stops will be replaced, so if you selected one stop and want to change it to two stops, you need to send both stops in `selectedStops`. `totalPrice` and `travelTimeMinutes` will be automatically updated to reflect the selected stops.
+This endpoint is used to customize a trip option returned by the Search endpoint. The result is a new trip option with a new id that can be booked or customized again. The option you customized stays valid and can still be booked. The format of the response body is the same as for the Search endpoint, with the new option as the only item of `options`. Currently the only supported customization operation is selection of stops for private trips. The stops you send are added to the stops already included in the option you customize, and all of them appear in `includedStops` of the returned option. To change or reduce a selection, customize the original option from the Search endpoint again and send the complete list of stops you want: if you selected one stop and want two, send both stops in `selectedStops` with the id of the original option. To remove all stops, book the original option. `totalPrice` and `travelTimeMinutes` of the returned option reflect the selected stops. Always read the price from the returned option: it can differ slightly from the original price plus the prices of the stops.
 
 > To add the Mikulov stop to the sedan vehicle type private trip option from the Search endpoint example above, use the following call:
 
@@ -952,7 +757,7 @@ curl -d '{
 | Property      | Type           | Description                                                                                                                    |
 | ------------- | -------------- | ------------------------------------------------------------------------------------------------------------------------------ |
 | optionId      | string         | Id of the option you want to customize. Taken from [/search](#trip-search) or [/customize](#trip-customize) endpoint response. |
-| selectedStops | list of string | List of ids of stops to include in the trip. Will replace currently included stops.                                            |
+| selectedStops | list of string | List of ids of stops to add to the trip. Each id must be one of the `possibleStops` of the option you are customizing.         |
 
 ### Response body
 
@@ -964,9 +769,8 @@ Same format as for the [Search endpoint](#search)
 | ----------- | -------------------------------------------------------------------------------------------- |
 | 400         | Invalid request - missing mandatory property, property has a wrong type or not a valid json. |
 | 401         | API key missing or invalid.                                                                  |
-| 403         | Forbidden request - trying to customize a trip option owned by someone else.                 |
-| 404         | Trip option not found or expired. Stop not found.                                            |
-| 409         | Trip option has already been booked.                                                         |
+| 403         | Forbidden request - trying to customize a trip option owned by someone else, or the option cannot be customized. |
+| 404         | Trip option not found or expired. Stop not found: an id in `selectedStops` is not among the `possibleStops` of the option, or is sent twice. |
 
 ## Trip Book
 
@@ -1230,10 +1034,10 @@ curl -d '{
 | departureTimeLocal | integer                                     | Optional. The same as `departureTime` but the local departure time is not converted to UTC. If `departureTime` is specified, this parameter cannot be sent, and vice versa.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
 | pickUpAddressNote  | string                                      | Pickup address or a note describing the pickup point. Optional, but should be provided if available at the booking time; otherwise, it should be provided via the [/update](#trip-update) endpoint. Applicable only for the private trip. It will be ignored if the selected trip option already has a predefined meeting position that cannot be changed (immutable), i.e. the meeting position outside of a restricted area.                                                                                                                                                                                                                                                                                                                                         |
 | dropOffAddressNote | string                                      | Dropoff address or a note describing the dropoff point. Optional, but should be provided if available at the booking time; otherwise, it should be provided via the [/update](#trip-update) endpoint. Applicable only for the private trip. It will be ignored if the selected trip option already has a predefined meeting position that cannot be changed (immutable), i.e. the meeting position outside of a restricted area.                                                                                                                                                                                                                                                                                                                                       |
-| customerNote       | string                                      | Optional note for the driver not related to pickup or dropoff. Applicable only for the private trip.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
-| flightNumber       | string                                      | Optional flight number in case this is an airport pickup. Applicable only for the private trip.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
-| passengerDetails   | list of [PassengerDetail](#passengerdetail) | List of passengers that will go on this trip. For trips with "Private" type the number of passengers must be below or equal to `maxPassengers` of the `vehicle` in the trip option. For trips with "Shared" type the number of passengers must match the `passengersCount` query parameter from the Search endpoint. There must always be exactly one passenger of type "Lead" with contact details filled and adulthood confirmed via `over18: true` (or the deprecated `birthday`). For passenger of type "Child" you must specify a child seat of proper type offered in the trip option's [availableChildSeatTypes](#tripoption). For older children that do not need any child seat use `Adult` passenger type.                                                                                                                             |
-| externalId         | string                                      | Optional. You can send us the id of the booking in your system to help with communication when our support team needs to identify a booking and you are not able to provide our own `bookingReference`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| customerNote       | string                                      | Optional note for the driver not related to pickup or dropoff. Applicable only for the private trip. A note longer than 1024 characters is cut to that length. Send a flight number in `flightNumber`, not in the note.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| flightNumber       | string                                      | Optional flight number in case this is an airport pickup. Applicable only for the private trip. A flight number sent for a trip that ends at an airport is passed to the driver as a note and is not returned in `flightNumber` by the [/details](#trip-details) endpoint.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| passengerDetails   | list of [PassengerDetail](#passengerdetail) | List of passengers that will go on this trip. The number of passengers must be below or equal to `maxPassengers` of the `vehicle` in the trip option, or to the sum of `maxPassengers` of its `vehicles`. For an option with several vehicles there must be at least one passenger of type "Lead" or "Adult" per vehicle. There must always be exactly one passenger of type "Lead" with contact details filled and adulthood confirmed via `over18: true` (or the deprecated `birthday`). For passenger of type "Child" you must specify a child seat of proper type offered in the trip option's [availableChildSeatTypes](#tripoption). For older children that do not need any child seat use `Adult` passenger type.                                                                                                                        |
+| externalId         | string                                      | Optional. You can send us the id of the booking in your system to help with communication when our support team needs to identify a booking and you are not able to provide our own `bookingReference`. Use a value that is unique for each booking: it can be used to retrieve the booking later.                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
 
 ### Response body
 
@@ -1252,7 +1056,7 @@ curl -d '{
 
 | Status code | Description                                                                                                                                                               |
 | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 400         | Invalid request - missing mandatory property, property has wrong type, mismatch in passenger count, missing lead passenger, multiple lead passengers, lead passenger not confirmed as over 18 or not a valid json. |
+| 400         | Invalid request - missing mandatory property, property has wrong type, mismatch in passenger count, missing lead passenger, multiple lead passengers, lead passenger not confirmed as over 18, fewer adult passengers than vehicles or not a valid json. |
 | 401         | API key missing or invalid.                                                                                                                                               |
 | 403         | Forbidden request - trying to book a trip option owned by someone else. Departure too soon. Departure time change not allowed.                                            |
 | 404         | Trip option not found or expired.                                                                                                                                         |
@@ -1260,7 +1064,7 @@ curl -d '{
 
 ## Trip Cancel
 
-This endpoint is used to cancel a booked trip. For private trips only trips that have departure more than 24 hours in the future can be cancelled - this threshold is a subject to change. The shared trips can be cancelled at any time before departure, and compensated according to the selected [cancellation policy](#cancellationpolicytype).
+This endpoint is used to cancel a booked trip. Only trips that have departure more than 24 hours in the future can be cancelled - this threshold is a subject to change. Such a cancellation is free of charge. A later cancellation is refused with the 403 HTTP status code and the booking stays confirmed; in that case please contact our customer support.
 
 > To cancel a booked trip, use the following call:
 
@@ -1319,7 +1123,7 @@ curl -d '{ "bookingId": "cb102778-a3d7-426e-8d18-6bd6b296f283" }' \
 
 This endpoint returns details of a booked trip. It provides the status of the booking, information about the trip option and the data that were provided when booking the trip.
 
-There are two versions of the endpoint: `/partners/v3/trip/details/boookingId` and `/partners/v3/trip/external/details/externalId`. The second version can be used to retrieve trip details by the `externalId` you provided when creating the booking. The response of both versions of the endpoint is exactly the same.
+There are two versions of the endpoint: `/partners/v3/trip/details/bookingId` and `/partners/v3/trip/external/details/externalId`. The second version can be used to retrieve trip details by the `externalId` you provided when creating the booking. If several bookings were created with the same `externalId`, the most recent one is returned. The response of both versions of the endpoint is exactly the same.
 
 > To get details of a booked trip by `bookingId`, use the following call:
 
@@ -1718,18 +1522,18 @@ curl -d '{
 
 ### Request body
 
-All properties except `bookingId` are optional. When a property is not included in the request it won't be updated and it will keep it's previous value. If you want to remove a property value like `customerNote` then send an empty string `""` as the value. If you want to make changes to any passenger you need to provide full `passengerDetails` array - it's not possible to send only details of the passenger you want to update.
+All properties except `bookingId` are optional, but the request must contain at least one of them with a non-empty value, otherwise it is rejected with the 400 HTTP status code. When a property is not included in the request it won't be updated and it will keep it's previous value. If you want to remove a property value like `customerNote` then send an empty string `""` as the value, together with at least one other property that has a value (for example the unchanged `passengerDetails`). `flightNumber` can be changed but not removed. If you want to make changes to any passenger you need to provide full `passengerDetails` array - it's not possible to send only details of the passenger you want to update.
 
-Disclaimer: in the last 24 hours before the departure the [/update](#trip-update) endpoint will no longer accept updates. For updates in the last 24 hours please contact our customer support at <daytrip@mydaytrip.com> or call [+44 20 3318 1119](tel:+442033181119).
+Disclaimer: in the last 24 hours before the departure the [/update](#trip-update) endpoint will no longer accept updates. For updates in the last 24 hours please contact our customer support at <daytrip@daytrip.com> or call [+44 20 3318 1119](tel:+442033181119).
 
 | Property           | Type                                        | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
 | ------------------ | ------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| bookingId          | string                                      | Id of the booking to cancel. Taken from [/book](#trip-book) endpoint response.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| bookingId          | string                                      | Id of the booking to update. Taken from [/book](#trip-book) endpoint response.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
 | pickUpAddressNote  | string                                      | Pickup address or a note describing the pickup point. Optional, but should be provided if it was not provided at the booking time. Applicable only for the private trip. It will be ignored if the selected trip option already has a predefined meeting position that cannot be changed (immutable), i.e. the meeting position outside of a restricted area.                                                                                                                                                                                                                                                                                        |
 | dropOffAddressNote | string                                      | Dropoff address or a note describing the dropoff point. Optional, but should be provided if it was not provided at the booking time. Applicable only for the private trip. It will be ignored if the selected trip option already has a predefined meeting position that cannot be changed (immutable), i.e. the meeting position outside of a restricted area.                                                                                                                                                                                                                                                                                      |
-| customerNote       | string                                      | Optional note for the driver not related to pickup or dropoff.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
-| flightNumber       | string                                      | Optional flight number in case this is an airport pickup.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
-| passengerDetails   | list of [PassengerDetail](#passengerdetail) | Optional. List of passengers that will go on this trip. For trips with "Private" type the number of passengers must be below or equal to `maxPassengers` of the `vehicle` in the trip option. For trips with "Shared" type the number of passengers must match the `passengersCount` query parameter from the Search endpoint. There must always be exactly one passenger of type "Lead" with contact details filled and adulthood confirmed via `over18: true` (or the deprecated `birthday`). For passenger of type "Child" you must specify a child seat of proper type offered in the trip option's [availableChildSeatTypes](#tripoption). For older children that do not need any child seat use `Adult` passenger type. |
+| customerNote       | string                                      | Optional note for the driver not related to pickup or dropoff. A note longer than 1024 characters is cut to that length.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| flightNumber       | string                                      | Optional flight number in case this is an airport pickup. A flight number sent for a trip that ends at an airport is passed to the driver as a note and is not returned in `flightNumber`.                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| passengerDetails   | list of [PassengerDetail](#passengerdetail) | Optional. List of passengers that will go on this trip. The number of passengers must be below or equal to `maxPassengers` of the `vehicle` in the trip option, or to the sum of `maxPassengers` of its `vehicles`. There must always be exactly one passenger of type "Lead" with contact details filled and adulthood confirmed via `over18: true` (or the deprecated `birthday`). For passenger of type "Child" you must specify a child seat of proper type offered in the trip option's [availableChildSeatTypes](#tripoption). For older children that do not need any child seat use `Adult` passenger type.                                                                                                            |
 
 ### Response body
 
@@ -1759,7 +1563,7 @@ Disclaimer: in the last 24 hours before the departure the [/update](#trip-update
 
 | Status code | Description                                                                                                                                                               |
 | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 400         | Invalid request - missing mandatory property, property has wrong type, mismatch in passenger count, missing lead passenger, multiple lead passengers, lead passenger not confirmed as over 18 or not a valid json. |
+| 400         | Invalid request - missing mandatory property, nothing to update, property has wrong type, mismatch in passenger count, missing lead passenger, multiple lead passengers, lead passenger not confirmed as over 18 or not a valid json. |
 | 401         | API key missing or invalid.                                                                                                                                               |
 | 403         | Forbidden request - trying to update details of a booking owned by someone else or trying to update a trip in the last 24 hours before departure.                         |
 | 404         | Booking not found.                                                                                                                                                        |
@@ -1963,12 +1767,14 @@ Replace `bookingId` with the id of the booking you want to retrieve drivers and 
 
 Below is a documentation of all object entities returned by the Daytrip API endpoints.
 
+Properties described as being for shared trips only are not returned at the moment, because shared trips are no longer offered.
+
 ### TripOption
 
 | Property                | Type                                                     | Description                                                                                                                   |
 | ----------------------- | -------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
 | id                      | string                                                   | Unique id of the trip option. Used to customize or book this option.                                                          |
-| type                    | string                                                   | Type of this option. "Private" or "Shared" (predefined shuttle trips).                                                        |
+| type                    | string                                                   | Type of this option. Always "Private": shared trips ("Shared") are no longer offered.                                         |
 | englishSpeakingDriver   | boolean                                                  | Specifies if this option includes an English speaking driver.                                                                 |
 | distanceKm              | number                                                   | Length of the trip.                                                                                                           |
 | travelTimeMinutes       | number                                                   | Expected duration of the trip in minutes.                                                                                     |
@@ -2020,7 +1826,7 @@ Below is a documentation of all object entities returned by the Daytrip API endp
 
 | Property         | Type    | Description                                                                                                           |
 | ---------------- | ------- | --------------------------------------------------------------------------------------------------------------------- |
-| type             | string  | Type of vehicle. "Sedan", "MPV", "Van", "PremiumVan", "Luxury" or "Shuttle"                                                         |
+| type             | string  | Type of vehicle. "Sedan", "MPV", "Van", "PremiumVan" or "Luxury". "Shuttle" was used for shared trips only.                         |
 | maxPassengers    | integer | Maximum number of passengers that can take a trip in this vehicle.                                                    |
 | description      | string  | Complete description of the vehicle type.                                                                             |
 | modelDescription | string  | Models that the vehicle is similar to.                                                                                |
@@ -2077,7 +1883,7 @@ Below is a documentation of all object entities returned by the Daytrip API endp
 | type          | string  | Type of the passenger. "Lead", "Adult" or "Child"                                                                                                                                     |
 | firstName     | string  | First name of the passenger - required the for lead passenger.                                                                                                                        |
 | lastName      | string  | Last name of the passenger - required for the lead passenger.                                                                                                                         |
-| phone         | string  | Phone number of the passenger - required for the lead passenger. Include country prefix in the `+<country_code>` format.                                                              |
+| phone         | string  | Phone number of the passenger - required for the lead passenger. Include country prefix in the `+<country_code>` format. It must start with `+` and be 8 to 20 characters long.       |
 | email         | string  | Email of the passenger - required for the lead passenger.                                                                                                                             |
 | over18        | boolean | Confirmation that the lead passenger is 18 years old or older - required for the lead passenger unless the deprecated `birthday` is sent. Must be `true`; a booking with `over18: false` is rejected (400 HTTP status code). In responses it is always `true` for the lead passenger, as adulthood is validated at booking time.                                                                                                                  |
 | birthday      | integer | **Deprecated.** Use `over18` instead. Birthday of the lead passenger as a UNIX epoch timestamp in seconds. Still accepted and still required when `over18` is not sent, so existing integrations keep working. In responses this property is always returned for the lead passenger; for bookings made with `over18` it holds a placeholder date (1990-01-01) instead of a real birthday. |
@@ -2087,10 +1893,10 @@ Below is a documentation of all object entities returned by the Daytrip API endp
 
 | Property     | Type   | Description                                 |
 | ------------ | ------ | ------------------------------------------- |
-| lat          | number | Latitude in degrees.                        |
-| lon          | number | Longitude in degrees.                       |
-| description  | string | Description of the position.                |
-| instructions | string | Meeting instructions for the customer.      |
+| lat          | number | Latitude in degrees. Optional.              |
+| lon          | number | Longitude in degrees. Optional.             |
+| description  | string | Description of the position. Optional.      |
+| instructions | string | Meeting instructions for the customer. When there is no predefined meeting position, this can be the only property of the object. |
 | address      | string | Address of the position. Optional.          |
 | image        | string | Link to an image of the position. Optional. |
 
@@ -2101,6 +1907,7 @@ Below is a documentation of all object entities returned by the Daytrip API endp
 | lat         | number | Latitude in degrees.                        |
 | lon         | number | Longitude in degrees.                       |
 | description | string | Description of the position.                |
+| instructions | string | Dropoff instructions for the customer. Can be an empty string. |
 | address     | string | Address of the position. Optional.          |
 | image       | string | Link to an image of the position. Optional. |
 

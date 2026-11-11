@@ -13,7 +13,6 @@ The Trip API, Hourly Ride API, and Day Trips API are organized around REST. Our 
 ### What can our TRIP API do?
 
 - Return quotes for point-to-point transfers ranging from short airport transfers to long trips between countries.
-- Return quotes for shared transfers between predefined routes.
 - Offer sightseeing stops on selected routes (including visuals and descriptions so you can display them on your website).
 - Provide predefined pickup and drop-off locations for areas with restricted vehicle access.
 - Offer multiple vehicle options to accommodate larger groups of passengers.
@@ -37,6 +36,10 @@ The Trip API, Hourly Ride API, and Day Trips API are organized around REST. Our 
 - Retrieve detailed information about specific day trips, including itineraries and pricing.
 - Create bookings for day trips on behalf of customers.
 - Update or cancel existing day trip bookings.
+
+### Integrating with an AI coding agent
+
+If you build your integration with an AI coding agent such as Claude Code, give it the [Trip API integration guide for AI coding agents](trip-api-v3-agent-guide.md). It is a single Markdown file with the rules, types, error handling and test checklist an agent needs to implement a correct Trip API client. An index for agents is published at [llms.txt](llms.txt).
 
 ## Contacts
 
