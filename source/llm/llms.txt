@@ -1,0 +1,8 @@
+# Daytrip Partner API
+
+> REST API for selling Daytrip private car transfers with a driver: search, book, update, cancel and track trips. Also covers hourly rides and day trips.
+
+## Docs
+
+- [Trip API integration guide for AI coding agents](https://mydaytrip.github.io/partner-api/trip-api-v3-agent-guide.md): rules, types, error handling and a test checklist for implementing a Trip API v3 client. Self-contained.
+- [Daytrip API Reference](https://mydaytrip.github.io/partner-api/): the full human-readable reference for the Trip API, the Hourly Ride API and the Day Trips API.

@@ -5,6 +5,7 @@ language_tabs:
 
 includes:
     - introduction
+    - ai-agents
     - environments
     - authentication
     - errors
